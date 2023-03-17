@@ -1,0 +1,50 @@
+
+#2
+src/script/script.h:482: error: Memory Leak
+  Pulse found a potential memory leak. Memory dynamically allocated at line 461 by call to `prevector`, is not freed after the last access at line 482, column 41.
+  480.             insert(end(), _data, _data + sizeof(_data));
+  481.         }
+  482.         insert(end(), b.begin(), b.end());
+                                               ^
+  483.         return *this;
+  484.     }
+
+#3
+src/script/script.h:466: error: Memory Leak
+  Pulse found a potential memory leak. Memory dynamically allocated at line 465 by call to `prevector`, is not freed after the last access at line 466, column 50.
+  464.         {
+  465.             insert(end(), OP_PUSHDATA1);
+  466.             insert(end(), (unsigned char)b.size());
+                                                        ^
+  467.         }
+  468.         else if (b.size() <= 0xffff)
+
+#4
+src/script/script.h:482: error: Memory Leak
+  Pulse found a potential memory leak. Memory dynamically allocated at line 465 by call to `prevector`, is not freed after the last access at line 482, column 41.
+  480.             insert(end(), _data, _data + sizeof(_data));
+  481.         }
+  482.         insert(end(), b.begin(), b.end());
+                                               ^
+  483.         return *this;
+  484.     }
+
+#5
+src/script/script.h:473: error: Memory Leak
+  Pulse found a potential memory leak. Memory dynamically allocated at line 470 by call to `prevector`, is not freed after the last access at line 473, column 55.
+  471.             uint8_t _data[2];
+  472.             WriteLE16(_data, b.size());
+  473.             insert(end(), _data, _data + sizeof(_data));
+                                                             ^
+  474.         }
+  475.         else
+
+#6
+src/script/script.h:480: error: Memory Leak
+  Pulse found a potential memory leak. Memory dynamically allocated at line 477 by call to `prevector`, is not freed after the last access at line 480, column 55.
+  478.             uint8_t _data[4];
+  479.             WriteLE32(_data, b.size());
+  480.             insert(end(), _data, _data + sizeof(_data));
+                                                             ^
+  481.         }
+  482.         insert(end(), b.begin(), b.end());

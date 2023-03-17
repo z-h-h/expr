@@ -1,0 +1,130 @@
+
+<html>
+<head>
+<title>Canalyze++ Analysis Results</title>
+
+<link type="text/css" rel="stylesheet" href="scanview.css"/>
+<script src="sorttable.js"></script>
+<script language='javascript' type="text/javascript">
+function SetDisplay(RowClass, DisplayVal)
+{
+  var Rows = document.getElementsByTagName("tr");
+  for ( var i = 0 ; i < Rows.length; ++i ) {
+    if (Rows[i].className == RowClass) {
+      Rows[i].style.display = DisplayVal;
+    }
+  }
+}
+
+function CopyCheckedStateToCheckButtons(SummaryCheckButton) {
+  var Inputs = document.getElementsByTagName("input");
+  for ( var i = 0 ; i < Inputs.length; ++i ) {
+    if (Inputs[i].type == "checkbox") {
+      if(Inputs[i] != SummaryCheckButton) {
+        Inputs[i].checked = SummaryCheckButton.checked;
+        Inputs[i].onclick();
+          }
+    }
+  }
+}
+
+function returnObjById( id ) {
+    if (document.getElementById)
+        var returnVar = document.getElementById(id);
+    else if (document.all)
+        var returnVar = document.all[id];
+    else if (document.layers)
+        var returnVar = document.layers[id];
+    return returnVar;
+}
+
+var NumUnchecked = 0;
+
+function ToggleDisplay(CheckButton, ClassName) {
+  if (CheckButton.checked) {
+    SetDisplay(ClassName, "");
+    if (--NumUnchecked == 0) {
+      returnObjById("AllBugsCheck").checked = true;
+    }
+  }
+  else {
+    SetDisplay(ClassName, "none");
+    NumUnchecked++;
+    returnObjById("AllBugsCheck").checked = false;
+  }
+}
+</script>
+<!-- SUMMARYENDHEAD -->
+</head>
+<body>
+
+<h1>Canalyze++ Analysis Results</h1>
+<h3>See Author </h3>
+<table>
+<tr><th>User:</th><td>zhh@iscas</td></tr>
+<tr><th>Working Directory:</th><td>/home/zhh/download/inject/leak/folly/eh-analyze</td></tr>
+<tr><th>Date:</th><td>2021-09-14 08:44</td></tr>
+</table><h2>Bug Summary</h2>
+<table>
+<thead><tr>
+<td>Bug Type</td><td>Quantity</td>
+<td class="sorttable_nosort">Display?</td>
+</tr></thead>
+<tr style="font-weight:bold">
+<td class="SUMM_DESC">All Bugs</td>
+<td class="Q">$TotalBugs</td>
+<td><center><input type="checkbox" id="AllBugsCheck"
+onClick="CopyCheckedStateToCheckButtons(this);" checked/></center></td>
+</tr>
+<tr>
+<td class="SUMM_DESC">Throw out of destructor</td><td class="Q">2</td>
+<td><center>
+<input type="checkbox"
+onClick="ToggleDisplay(this,'bt_throw_out_of_destructor');" checked/>
+</center></td>
+</tr>
+<tr>
+<td class="SUMM_DESC">Memory leak</td><td class="Q">9</td>
+<td><center>
+<input type="checkbox"
+onClick="ToggleDisplay(this,'bt_memory_leak');" checked/>
+</center></td>
+</tr></table>
+<h2>Reports</h2>
+
+<table class="sortable" style="table-layout:automatic">
+<thead><tr>
+  <td>No.</td>
+  <td>Bug Group</td>
+  <td class="sorttable_sorted">Bug Type<span id="sorttable_sortfwdind">&nbsp;&#x25BE;</span></td>
+  <td>File</td>
+  <td class="Q">Line</td>
+  <td class="Q">Path Length</td>
+  <td class="sorttable_nosort"></td>
+  <!-- REPORTBUGCOL -->
+</tr></thead>
+<tbody>
+<tr id="exceptional" class="bt_memory_leak"><td class="Q">1</td><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>AsyncServerSocket.cpp</td><td class="Q">568</td><td class="Q">27</td><td><a href="report-AsyncServerSocket.cpp-bind-131-1.html#EndPath">View Report</a></td>
+</tr>
+<tr id="exceptional" class="bt_memory_leak"><td class="Q">2</td><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>NestedCommandLineApp.cpp</td><td class="Q">234</td><td class="Q">22</td><td><a href="report-NestedCommandLineApp.cpp-run-5-1.html#EndPath">View Report</a></td>
+</tr>
+<tr id="exceptional" class="bt_memory_leak"><td class="Q">3</td><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>StandardLogHandlerFactory.cpp</td><td class="Q">109</td><td class="Q">22</td><td><a href="report-StandardLogHandlerFactory.cpp-createHandler-14-1.html#EndPath">View Report</a></td>
+</tr>
+<tr id="exceptional" class="bt_memory_leak"><td class="Q">4</td><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>AsyncSocket.cpp</td><td class="Q">563</td><td class="Q">33</td><td><a href="report-AsyncSocket.cpp-AsyncSocket-3-1.html#EndPath">View Report</a></td>
+</tr>
+<tr id="exceptional" class="bt_memory_leak"><td class="Q">5</td><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>TimeUtil.cpp</td><td class="Q">236</td><td class="Q">16</td><td><a href="report-TimeUtil.cpp-reset-11-1.html#EndPath">View Report</a></td>
+</tr>
+<tr id="exceptional" class="bt_memory_leak"><td class="Q">6</td><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>AsyncSignalHandler.cpp</td><td class="Q">80</td><td class="Q">9</td><td><a href="report-AsyncSignalHandler.cpp-registerSignalHandler-27-1.html#EndPath">View Report</a></td>
+</tr>
+<tr id="exceptional" class="bt_memory_leak"><td class="Q">7</td><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>AsyncServerSocket.cpp</td><td class="Q">568</td><td class="Q">39</td><td><a href="report-AsyncServerSocket.cpp-bind-131-2.html#EndPath">View Report</a></td>
+</tr>
+<tr id="exceptional" class="bt_memory_leak"><td class="Q">8</td><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>JSONSchema.cpp</td><td class="Q">844</td><td class="Q">10</td><td><a href="report-JSONSchema.cpp-try_validate-15-1.html#EndPath">View Report</a></td>
+</tr>
+<tr id="exceptional" class="bt_memory_leak"><td class="Q">9</td><td class="DESC">Memory error</td><td class="DESC">Memory leak</td><td>CacheLocality.cpp</td><td class="Q">79</td><td class="Q">17</td><td><a href="report-CacheLocality.cpp-system-12-1.html#EndPath">View Report</a></td>
+</tr>
+<tr id="exceptional" class="bt_throw_out_of_destructor"><td class="Q">10</td><td class="DESC">Exception</td><td class="DESC">Throw out of destructor</td><td>EventBaseAtomicNotificationQueue-inl.h</td><td class="Q">109</td><td class="Q">23</td><td><a href="report-AsyncServerSocket.cpp-~EventBaseAtomicNotificationQueue-34-1.html#EndPath">View Report</a></td>
+</tr>
+<tr id="exceptional" class="bt_throw_out_of_destructor"><td class="Q">11</td><td class="DESC">Exception</td><td class="DESC">Throw out of destructor</td><td>ScopeGuard.h</td><td class="Q">103</td><td class="Q">28</td><td><a href="report-AsyncServerSocket.cpp-~ScopeGuardImpl-4-1.html#EndPath">View Report</a></td>
+</tr>
+</tr></tbody></table>
+</body></html>

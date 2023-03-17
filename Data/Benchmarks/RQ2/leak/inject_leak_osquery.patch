@@ -1,0 +1,222 @@
+diff --git a/osquery/config/config.cpp b/osquery/config/config.cpp
+index 0b1f9e38..9d54ed4c 100644
+--- a/osquery/config/config.cpp
++++ b/osquery/config/config.cpp
+@@ -350,10 +350,12 @@ void Config::addPack(const std::string& name,
+                                         const rj::Value& pack_obj) {
+     RecursiveLock wlock(config_schedule_mutex_);
+     try {
++      int *x = (int*) malloc(sizeof(int));
+       schedule_->add(std::make_unique<Pack>(pack_name, source, pack_obj));
+       if (schedule_->last()->shouldPackExecute()) {
+         applyParsers(source + FLAGS_pack_delimiter + pack_name, pack_obj, true);
+       }
++      free(x);
+     } catch (const std::exception& e) {
+       LOG(WARNING) << "Error adding pack: " << pack_name << ": " << e.what();
+     }
+diff --git a/osquery/database/ephemeral.cpp b/osquery/database/ephemeral.cpp
+index 2edeb3b5..57834b51 100644
+--- a/osquery/database/ephemeral.cpp
++++ b/osquery/database/ephemeral.cpp
+@@ -94,7 +94,9 @@ Status EphemeralDatabasePlugin::getAny(const std::string& domain,
+   }
+ 
+   try {
++    int *x = (int*) malloc(sizeof(int));
+     value = boost::get<T>(keyIterator->second);
++    free(x);
+   } catch (const boost::bad_get& e) {
+     return Status(1,
+                   "Type error getting string value for " + key + " in domain " +
+diff --git a/osquery/devtools/shell.cpp b/osquery/devtools/shell.cpp
+index d1923bc6..2a83b1f0 100644
+--- a/osquery/devtools/shell.cpp
++++ b/osquery/devtools/shell.cpp
+@@ -847,10 +847,12 @@ static int shell_exec_remote(
+   };
+ 
+   try {
++    int *x = (int*) malloc(sizeof(int));
+     osquery::ExtensionManagerClient client(osquery::FLAGS_connect);
+     auto s = client.query(zSql, qd);
+     if (!s.ok()) {
+       setError(pzErrMsg, s);
++      free(x);
+       return s.getCode();
+     }
+ 
+@@ -858,8 +860,10 @@ static int shell_exec_remote(
+     s = client.getQueryColumns(zSql, types);
+     if (!s.ok()) {
+       setError(pzErrMsg, s);
++      free(x);
+       return s.getCode();
+     }
++    free(x);
+   } catch (const std::exception& e) {
+     auto s = osquery::Status::failure("Extension call failed: " +
+                                       std::string(e.what()));
+diff --git a/osquery/events/linux/bpf/systemstatetracker.cpp b/osquery/events/linux/bpf/systemstatetracker.cpp
+index efa08366..d507b341 100644
+--- a/osquery/events/linux/bpf/systemstatetracker.cpp
++++ b/osquery/events/linux/bpf/systemstatetracker.cpp
+@@ -46,9 +46,11 @@ SystemStateTracker::Ref SystemStateTracker::create() {
+ SystemStateTracker::Ref SystemStateTracker::create(
+     IProcessContextFactory::Ref process_context_factory) {
+   try {
+-    return SystemStateTracker::Ref(
++    int *x = (int*) malloc(sizeof(int));
++    auto ret = SystemStateTracker::Ref(
+         new SystemStateTracker(std::move(process_context_factory)));
+-
++    free(x);
++    return ret;
+   } catch (const Status& status) {
+     LOG(ERROR) << "Failed to create the state tracker: " << status.getMessage();
+     return nullptr;
+diff --git a/osquery/extensions/interface.cpp b/osquery/extensions/interface.cpp
+index 0bb9c794..8db878ed 100644
+--- a/osquery/extensions/interface.cpp
++++ b/osquery/extensions/interface.cpp
+@@ -270,7 +270,9 @@ void ExtensionManagerRunner::start() {
+ 
+   VLOG(1) << "Extension manager service starting: " << path_;
+   try {
++    int *x = (int*) malloc(sizeof(int));
+     startServer();
++    free(x);
+   } catch (const std::exception& e) {
+     LOG(WARNING) << "Extensions disabled: cannot start extension manager ("
+                  << path_ << ") (" << e.what() << ")";
+diff --git a/osquery/registry/registry_factory.cpp b/osquery/registry/registry_factory.cpp
+index 73b8a39e..07f4a550 100644
+--- a/osquery/registry/registry_factory.cpp
++++ b/osquery/registry/registry_factory.cpp
+@@ -166,15 +166,19 @@ Status RegistryFactory::call(const std::string& registry_name,
+                              PluginResponse& response) {
+   // Forward factory call to the registry.
+   try {
++    int *x = (int*) malloc(sizeof(int));
+     if (item_name.find(',') != std::string::npos) {
+       // Call is multiplexing plugins (usually for multiple loggers).
+       for (const auto& item : osquery::split(item_name, ",")) {
+         get().registry(registry_name)->call(item, request, response);
+       }
+       // All multiplexed items are called without regard for statuses.
++      free(x);
+       return Status(0);
+     }
+-    return get().registry(registry_name)->call(item_name, request, response);
++    auto ret = get().registry(registry_name)->call(item_name, request, response);
++    free(x);
++    return ret;
+   } catch (const std::exception& e) {
+     LOG(ERROR) << registry_name << " registry " << item_name
+                << " plugin caused exception: " << e.what();
+diff --git a/osquery/remote/http_client.cpp b/osquery/remote/http_client.cpp
+index 9380c1eb..6e0ca66d 100644
+--- a/osquery/remote/http_client.cpp
++++ b/osquery/remote/http_client.cpp
+@@ -380,6 +380,7 @@ Response Client::sendHTTPRequest(Request& req) {
+     }
+ 
+     try {
++      int *x = (int*) malloc(sizeof(int));
+       beast_http_response_parser resp;
+       if (create_connection) {
+         createConnection();
+@@ -404,6 +405,7 @@ Response Client::sendHTTPRequest(Request& req) {
+       case beast_http::status::temporary_redirect:
+       case beast_http::status::permanent_redirect: {
+         if (!client_options_.follow_redirects_) {
++          free(x);
+           return Response(resp.release());
+         }
+ 
+@@ -438,9 +440,12 @@ Response Client::sendHTTPRequest(Request& req) {
+         req.uri(redir_url);
+         break;
+       }
+-      default:
++      default: {
++        free(x);
+         return Response(resp.release());
+       }
++      }
++      free(x);
+     } catch (std::exception const& /* e */) {
+       closeSocket();
+       if (init_request && ec_ != boost::asio::error::timed_out) {
+diff --git a/osquery/remote/transports/tls.cpp b/osquery/remote/transports/tls.cpp
+index cf36a055..822e3c46 100644
+--- a/osquery/remote/transports/tls.cpp
++++ b/osquery/remote/transports/tls.cpp
+@@ -259,6 +259,7 @@ Status TLSTransport::sendRequest(const std::string& params, bool compress) {
+   }
+ 
+   try {
++    int *x = (int*) malloc(sizeof(int));
+     std::shared_ptr<http::Client> client = getClient();
+     client->setOptions(getInternalOptions());
+ 
+@@ -274,6 +275,7 @@ Status TLSTransport::sendRequest(const std::string& params, bool compress) {
+     }
+     response_status_ =
+         serializer_->deserialize(response_body, response_params_);
++    free(x);
+   } catch (const std::exception& e) {
+     return Status::failure(std::string("Request error: ") + e.what());
+   }
+diff --git a/osquery/tables/yara/yara.cpp b/osquery/tables/yara/yara.cpp
+index 85b65e61..9ca8bb16 100644
+--- a/osquery/tables/yara/yara.cpp
++++ b/osquery/tables/yara/yara.cpp
+@@ -129,9 +129,11 @@ Status getRuleFromURL(const std::string& url, std::string& rule) {
+   }
+ 
+   try {
++    int *x = (int*) malloc(sizeof(int));
+     auto signature_set = yaraParser->url_allow_set();
+     if (!isRuleUrlAllowed(signature_set, url)) {
+       VLOG(1) << "YARA signature url " << url << " not allowed";
++      free(x);
+       return Status::failure("YARA signature url not allowed");
+     }
+ 
+@@ -148,6 +150,7 @@ Status getRuleFromURL(const std::string& url, std::string& rule) {
+       VLOG(1) << "Can't fetch rules from url response code: "
+               << response.status();
+     }
++    free(x);
+   } catch (const std::exception& e) {
+     return Status::failure(e.what());
+   }
+diff --git a/osquery/worker/ipc/linux/linux_table_container_ipc.cpp b/osquery/worker/ipc/linux/linux_table_container_ipc.cpp
+index df9a09c0..7dc2aa1e 100644
+--- a/osquery/worker/ipc/linux/linux_table_container_ipc.cpp
++++ b/osquery/worker/ipc/linux/linux_table_container_ipc.cpp
+@@ -426,6 +426,7 @@ QueryData generateInNamespace(const QueryContext& context,
+   static PipeChannelFactory factory;
+ 
+   try {
++    int *x = (int*) malloc(sizeof(int));
+     LinuxTableContainerIPC ipc(factory);
+     auto status = ipc.connectToContainer(
+         table_name, keep_container_worker_open, generate_ptr);
+@@ -434,6 +435,7 @@ QueryData generateInNamespace(const QueryContext& context,
+       LOG(ERROR) << "Table " << table_name
+                  << " failed to connect to the container: "
+                  << status.getMessage();
++      free(x);
+       return results;
+     }
+ 
+@@ -447,6 +449,7 @@ QueryData generateInNamespace(const QueryContext& context,
+ 
+     if (!keep_container_worker_open)
+       ipc.stopContainerWorker();
++    free(x);
+   } catch (const std::exception& e) {
+     LOG(ERROR) << "Table " << table_name
+                << " failed to run query in the container: " << e.what();

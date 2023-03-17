@@ -1,0 +1,10 @@
+aria2:        https://github.com/aria2/aria2                             1.35.0
+aseprite:     https://github.com/aseprite/aseprite                       d13f102
+bitcoin:      https://github.com/bitcoin/bitcoin                         0.21.1
+faiss:        https://github.com/facebookresearch/faiss                  1.7.1
+folly:        https://github.com/facebook/folly                          b9f3d9b
+json:         https://github.com/nlohmann/json                           3.10.4
+mysql-server: https://github.com/mysql/mysql-server                      98b2ccb
+opencv:       https://github.com/opencv/opencv                           4.5.2
+openpose:     https://github.com/CMU-Perceptual-Computing-Lab/openpose   1.7.0
+osquery:      https://gothub.com/osquery/osquery                         880f367

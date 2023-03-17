@@ -1,0 +1,213 @@
+diff --git a/src/addrdb.cpp b/src/addrdb.cpp
+index 27f2282..aa94341 100644
+--- a/src/addrdb.cpp
++++ b/src/addrdb.cpp
+@@ -78,13 +78,16 @@ template <typename Stream, typename Data>
+ bool DeserializeDB(Stream& stream, Data& data, bool fCheckSum = true)
+ {
+     try {
++        int *x = new int();
+         CHashVerifier<Stream> verifier(&stream);
+         // de-serialize file header (network specific magic number) and ..
+         unsigned char pchMsgTmp[4];
+         verifier >> pchMsgTmp;
+         // ... verify the network matches ours
+-        if (memcmp(pchMsgTmp, Params().MessageStart(), sizeof(pchMsgTmp)))
++        if (memcmp(pchMsgTmp, Params().MessageStart(), sizeof(pchMsgTmp))) {
++            delete x;
+             return error("%s: Invalid network magic number", __func__);
++        }
+ 
+         // de-serialize data
+         verifier >> data;
+@@ -94,9 +97,11 @@ bool DeserializeDB(Stream& stream, Data& data, bool fCheckSum = true)
+             uint256 hashTmp;
+             stream >> hashTmp;
+             if (hashTmp != verifier.GetHash()) {
++                delete x;
+                 return error("%s: Checksum mismatch, data corrupted", __func__);
+             }
+         }
++        delete x;
+     }
+     catch (const std::exception& e) {
+         return error("%s: Deserialize or I/O error - %s", __func__, e.what());
+diff --git a/src/bitcoin-cli.cpp b/src/bitcoin-cli.cpp
+index ef4641c..428064b 100644
+--- a/src/bitcoin-cli.cpp
++++ b/src/bitcoin-cli.cpp
+@@ -754,6 +754,7 @@ static int CommandLineRPC(int argc, char *argv[])
+     std::string strPrint;
+     int nRet = 0;
+     try {
++        int *x = new int();
+         // Skip switches
+         while (argc > 1 && IsSwitchChar(argv[1][0])) {
+             argc--;
+@@ -844,6 +845,7 @@ static int CommandLineRPC(int argc, char *argv[])
+                 ParseError(error, strPrint, nRet);
+             }
+         }
++        delete x;
+     } catch (const std::exception& e) {
+         strPrint = std::string("error: ") + e.what();
+         nRet = EXIT_FAILURE;
+diff --git a/src/bitcoin-tx.cpp b/src/bitcoin-tx.cpp
+index e22b376..4472a43 100644
+--- a/src/bitcoin-tx.cpp
++++ b/src/bitcoin-tx.cpp
+@@ -774,6 +774,7 @@ static int CommandLineRawTx(int argc, char* argv[])
+     std::string strPrint;
+     int nRet = 0;
+     try {
++        int *x = new int();
+         // Skip switches; Permit common stdin convention "-"
+         while (argc > 1 && IsSwitchChar(argv[1][0]) &&
+                (argv[1][1] != 0)) {
+@@ -816,6 +817,7 @@ static int CommandLineRawTx(int argc, char* argv[])
+         }
+ 
+         OutputTx(CTransaction(tx));
++        delete x;
+     }
+     catch (const std::exception& e) {
+         strPrint = std::string("error: ") + e.what();
+diff --git a/src/bitcoind.cpp b/src/bitcoind.cpp
+index 455a82e..2d6334b 100644
+--- a/src/bitcoind.cpp
++++ b/src/bitcoind.cpp
+@@ -79,7 +79,9 @@ static bool AppInit(int argc, char* argv[])
+         }
+         // Check for chain settings (Params() calls are only valid after this clause)
+         try {
++            int *x = new int();
+             SelectParams(args.GetChainName());
++            delete x;
+         } catch (const std::exception& e) {
+             return InitError(Untranslated(strprintf("%s\n", e.what())));
+         }
+diff --git a/src/core_read.cpp b/src/core_read.cpp
+index fc02b1b..f35ca5b 100644
+--- a/src/core_read.cpp
++++ b/src/core_read.cpp
+@@ -158,8 +158,10 @@ static bool DecodeTx(CMutableTransaction& tx, const std::vector<unsigned char>&
+     if (try_no_witness) {
+         CDataStream ssData(tx_data, SER_NETWORK, PROTOCOL_VERSION | SERIALIZE_TRANSACTION_NO_WITNESS);
+         try {
++            int *x = new int();
+             ssData >> tx_legacy;
+             if (ssData.empty()) ok_legacy = true;
++            delete x;
+         } catch (const std::exception&) {
+             // Fall through.
+         }
+diff --git a/src/index/blockfilterindex.cpp b/src/index/blockfilterindex.cpp
+index 65a5f03..21d6234 100644
+--- a/src/index/blockfilterindex.cpp
++++ b/src/index/blockfilterindex.cpp
+@@ -152,8 +152,10 @@ bool BlockFilterIndex::ReadFilterFromDisk(const FlatFilePos& pos, BlockFilter& f
+     uint256 block_hash;
+     std::vector<unsigned char> encoded_filter;
+     try {
++        int *x = new int();
+         filein >> block_hash >> encoded_filter;
+         filter = BlockFilter(GetFilterType(), block_hash, std::move(encoded_filter));
++        delete x;
+     }
+     catch (const std::exception& e) {
+         return error("%s: Failed to deserialize block filter from disk: %s", __func__, e.what());
+diff --git a/src/policy/fees.cpp b/src/policy/fees.cpp
+index 0f31093..87f7ee4 100644
+--- a/src/policy/fees.cpp
++++ b/src/policy/fees.cpp
+@@ -885,11 +885,14 @@ bool CBlockPolicyEstimator::Write(CAutoFile& fileout) const
+ bool CBlockPolicyEstimator::Read(CAutoFile& filein)
+ {
+     try {
++        int *x = new int();
+         LOCK(m_cs_fee_estimator);
+         int nVersionRequired, nVersionThatWrote;
+         filein >> nVersionRequired >> nVersionThatWrote;
+-        if (nVersionRequired > CLIENT_VERSION)
++        if (nVersionRequired > CLIENT_VERSION) {
++            delete x;
+             return error("CBlockPolicyEstimator::Read(): up-version (%d) fee estimate file", nVersionRequired);
++        }
+ 
+         // Read fee estimates file into temporary variables so existing data
+         // structures aren't corrupted if there is an exception.
+@@ -934,6 +937,7 @@ bool CBlockPolicyEstimator::Read(CAutoFile& filein)
+             historicalFirst = nFileHistoricalFirst;
+             historicalBest = nFileHistoricalBest;
+         }
++        delete x;
+     }
+     catch (const std::exception& e) {
+         LogPrintf("CBlockPolicyEstimator::Read(): unable to read policy estimator data (non-fatal): %s\n",e.what());
+diff --git a/src/rest.cpp b/src/rest.cpp
+index 949cc9d..bd39d0b 100644
+--- a/src/rest.cpp
++++ b/src/rest.cpp
+@@ -494,17 +494,21 @@ static bool rest_getutxos(const util::Ref& context, HTTPRequest* req, const std:
+ 
+     case RetFormat::BINARY: {
+         try {
++            int *x = new int();
+             //deserialize only if user sent a request
+             if (strRequestMutable.size() > 0)
+             {
+-                if (fInputParsed) //don't allow sending input over URI and HTTP RAW DATA
++                if (fInputParsed) { //don't allow sending input over URI and HTTP RAW DATA
++                    delete x;
+                     return RESTERR(req, HTTP_BAD_REQUEST, "Combination of URI scheme inputs and raw post data is not allowed");
++                }
+ 
+                 CDataStream oss(SER_NETWORK, PROTOCOL_VERSION);
+                 oss << strRequestMutable;
+                 oss >> fCheckMemPool;
+                 oss >> vOutPoints;
+             }
++            delete x;
+         } catch (const std::ios_base::failure&) {
+             // abort in case of unreadable binary data
+             return RESTERR(req, HTTP_BAD_REQUEST, "Parse error");
+diff --git a/src/rpc/server.cpp b/src/rpc/server.cpp
+index f32d9ab..3f43776 100644
+--- a/src/rpc/server.cpp
++++ b/src/rpc/server.cpp
+@@ -458,11 +458,14 @@ static bool ExecuteCommand(const CRPCCommand& command, const JSONRPCRequest& req
+ {
+     try
+     {
++        int *x = new int();
+         RPCCommandExecution execution(request.strMethod);
+         // Execute, convert arguments to array if necessary
+         if (request.params.isObject()) {
++            delete x;
+             return command.actor(transformNamedArguments(request, command.argNames), result, last_handler);
+         } else {
++            delete x;
+             return command.actor(request, result, last_handler);
+         }
+     }
+diff --git a/src/signet.cpp b/src/signet.cpp
+index e68f031..d62192e 100644
+--- a/src/signet.cpp
++++ b/src/signet.cpp
+@@ -98,10 +98,15 @@ Optional<SignetTxs> SignetTxs::Create(const CBlock& block, const CScript& challe
+         // no signet solution -- allow this to support OP_TRUE as trivial block challenge
+     } else {
+         try {
++            int *x = new int();
+             VectorReader v(SER_NETWORK, INIT_PROTO_VERSION, signet_solution, 0);
+             v >> tx_spending.vin[0].scriptSig;
+             v >> tx_spending.vin[0].scriptWitness.stack;
+-            if (!v.empty()) return nullopt; // extraneous data encountered
++            if (!v.empty()) {
++                delete x;
++                return nullopt;
++            } // extraneous data encountered
++            delete x;
+         } catch (const std::exception&) {
+             return nullopt; // parsing error
+         }

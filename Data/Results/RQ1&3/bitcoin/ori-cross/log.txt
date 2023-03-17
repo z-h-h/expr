@@ -1,0 +1,28 @@
+2022-08-24 20:58:13 (Complete)
+args:
+  project: /home/zhh/projects/bitcoin-0.21.1/compile_commands.json
+  output: /home/zhh/projects/bitcoin-0.21.1/csa/ori-cross
+  clang: /home/zhh/llvm-origin/build/bin/clang-13
+  jobs: 16
+  solver: crosscheck
+  timeout: 600
+edm:
+  total: 490
+  total time: 925.611
+  done: 368
+  cached: 122
+  real time: 61.055
+ast:
+  total: 490
+  total time: 1174.791
+  done: 355
+  cached: 135
+  real time: 77.729
+csa:
+  total: 490
+  total time: 34242.149
+  done: 290
+  cached: 190
+  timeout: 10
+  real time: 2369.731
+------------------------

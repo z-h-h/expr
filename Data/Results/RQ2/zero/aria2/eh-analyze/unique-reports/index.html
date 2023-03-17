@@ -1,0 +1,121 @@
+
+<html>
+<head>
+<title>Canalyze++ Analysis Results</title>
+
+<link type="text/css" rel="stylesheet" href="scanview.css"/>
+<script src="sorttable.js"></script>
+<script language='javascript' type="text/javascript">
+function SetDisplay(RowClass, DisplayVal)
+{
+  var Rows = document.getElementsByTagName("tr");
+  for ( var i = 0 ; i < Rows.length; ++i ) {
+    if (Rows[i].className == RowClass) {
+      Rows[i].style.display = DisplayVal;
+    }
+  }
+}
+
+function CopyCheckedStateToCheckButtons(SummaryCheckButton) {
+  var Inputs = document.getElementsByTagName("input");
+  for ( var i = 0 ; i < Inputs.length; ++i ) {
+    if (Inputs[i].type == "checkbox") {
+      if(Inputs[i] != SummaryCheckButton) {
+        Inputs[i].checked = SummaryCheckButton.checked;
+        Inputs[i].onclick();
+          }
+    }
+  }
+}
+
+function returnObjById( id ) {
+    if (document.getElementById)
+        var returnVar = document.getElementById(id);
+    else if (document.all)
+        var returnVar = document.all[id];
+    else if (document.layers)
+        var returnVar = document.layers[id];
+    return returnVar;
+}
+
+var NumUnchecked = 0;
+
+function ToggleDisplay(CheckButton, ClassName) {
+  if (CheckButton.checked) {
+    SetDisplay(ClassName, "");
+    if (--NumUnchecked == 0) {
+      returnObjById("AllBugsCheck").checked = true;
+    }
+  }
+  else {
+    SetDisplay(ClassName, "none");
+    NumUnchecked++;
+    returnObjById("AllBugsCheck").checked = false;
+  }
+}
+</script>
+<!-- SUMMARYENDHEAD -->
+</head>
+<body>
+
+<h1>Canalyze++ Analysis Results</h1>
+<h3>See Author </h3>
+<table>
+<tr><th>User:</th><td>zhh@iscas</td></tr>
+<tr><th>Working Directory:</th><td>/home/zhh/download/inject/zero/aria2-1.35.0/eh-analyze</td></tr>
+<tr><th>Date:</th><td>2021-09-14 08:47</td></tr>
+</table><h2>Bug Summary</h2>
+<table>
+<thead><tr>
+<td>Bug Type</td><td>Quantity</td>
+<td class="sorttable_nosort">Display?</td>
+</tr></thead>
+<tr style="font-weight:bold">
+<td class="SUMM_DESC">All Bugs</td>
+<td class="Q">$TotalBugs</td>
+<td><center><input type="checkbox" id="AllBugsCheck"
+onClick="CopyCheckedStateToCheckButtons(this);" checked/></center></td>
+</tr>
+<tr>
+<td class="SUMM_DESC">Division by zero</td><td class="Q">10</td>
+<td><center>
+<input type="checkbox"
+onClick="ToggleDisplay(this,'bt_division_by_zero');" checked/>
+</center></td>
+</tr></table>
+<h2>Reports</h2>
+
+<table class="sortable" style="table-layout:automatic">
+<thead><tr>
+  <td>No.</td>
+  <td>Bug Group</td>
+  <td class="sorttable_sorted">Bug Type<span id="sorttable_sortfwdind">&nbsp;&#x25BE;</span></td>
+  <td>File</td>
+  <td class="Q">Line</td>
+  <td class="Q">Path Length</td>
+  <td class="sorttable_nosort"></td>
+  <!-- REPORTBUGCOL -->
+</tr></thead>
+<tbody>
+<tr id="exceptional" class="bt_division_by_zero"><td class="Q">1</td><td class="DESC">Logic error</td><td class="DESC">Division by zero</td><td>AbstractCommand.cc</td><td class="Q">364</td><td class="Q">63</td><td><a href="report-AbstractCommand.cc-execute-184-1.html#EndPath">View Report</a></td>
+</tr>
+<tr id="exceptional" class="bt_division_by_zero"><td class="Q">2</td><td class="DESC">Logic error</td><td class="DESC">Division by zero</td><td>main.cc</td><td class="Q">100</td><td class="Q">14</td><td><a href="report-main.cc-main-14-1.html#EndPath">View Report</a></td>
+</tr>
+<tr id="exceptional" class="bt_division_by_zero"><td class="Q">3</td><td class="DESC">Logic error</td><td class="DESC">Division by zero</td><td>AbstractCommand.cc</td><td class="Q">400</td><td class="Q">62</td><td><a href="report-AbstractCommand.cc-execute-220-1.html#EndPath">View Report</a></td>
+</tr>
+<tr id="exceptional" class="bt_division_by_zero"><td class="Q">4</td><td class="DESC">Logic error</td><td class="DESC">Division by zero</td><td>RpcMethodImpl.cc</td><td class="Q">1477</td><td class="Q">14</td><td><a href="report-RpcMethodImpl.cc-execute-55-1.html#EndPath">View Report</a></td>
+</tr>
+<tr id="exceptional" class="bt_division_by_zero"><td class="Q">5</td><td class="DESC">Logic error</td><td class="DESC">Division by zero</td><td>MetalinkPostDownloadHandler.cc</td><td class="Q">132</td><td class="Q">18</td><td><a href="report-MetalinkPostDownloadHandler.cc-getNextRequestGroups-38-1.html#EndPath">View Report</a></td>
+</tr>
+<tr id="exceptional" class="bt_division_by_zero"><td class="Q">6</td><td class="DESC">Logic error</td><td class="DESC">Division by zero</td><td>NameResolveCommand.cc</td><td class="Q">119</td><td class="Q">26</td><td><a href="report-NameResolveCommand.cc-execute-38-1.html#EndPath">View Report</a></td>
+</tr>
+<tr id="exceptional" class="bt_division_by_zero"><td class="Q">7</td><td class="DESC">Logic error</td><td class="DESC">Division by zero</td><td>PeerListenCommand.cc</td><td class="Q">126</td><td class="Q">29</td><td><a href="report-PeerListenCommand.cc-execute-25-1.html#EndPath">View Report</a></td>
+</tr>
+<tr id="exceptional" class="bt_division_by_zero"><td class="Q">8</td><td class="DESC">Logic error</td><td class="DESC">Division by zero</td><td>PeerAbstractCommand.cc</td><td class="Q">117</td><td class="Q">19</td><td><a href="report-PeerAbstractCommand.cc-execute-38-1.html#EndPath">View Report</a></td>
+</tr>
+<tr id="exceptional" class="bt_division_by_zero"><td class="Q">9</td><td class="DESC">Logic error</td><td class="DESC">Division by zero</td><td>AbstractCommand.cc</td><td class="Q">390</td><td class="Q">79</td><td><a href="report-AbstractCommand.cc-execute-210-1.html#EndPath">View Report</a></td>
+</tr>
+<tr id="exceptional" class="bt_division_by_zero"><td class="Q">10</td><td class="DESC">Logic error</td><td class="DESC">Division by zero</td><td>SftpFinishDownloadCommand.cc</td><td class="Q">110</td><td class="Q">34</td><td><a href="report-SftpFinishDownloadCommand.cc-execute-41-1.html#EndPath">View Report</a></td>
+</tr>
+</tr></tbody></table>
+</body></html>

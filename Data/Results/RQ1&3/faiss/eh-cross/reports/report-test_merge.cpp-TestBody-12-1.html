@@ -1,0 +1,928 @@
+<!doctype html>
+<html>
+<head>
+<title>/home/zhh/projects/faiss-1.7.1/tests/test_merge.cpp</title>
+
+<style type="text/css">
+body { color:#000000; background-color:#ffffff }
+body { font-family:Helvetica, sans-serif; font-size:10pt }
+h1 { font-size:14pt }
+.FileName { margin-top: 5px; margin-bottom: 5px; display: inline; }
+.FileNav { margin-left: 5px; margin-right: 5px; display: inline; }
+.FileNav a { text-decoration:none; font-size: larger; }
+.divider { margin-top: 30px; margin-bottom: 30px; height: 15px; }
+.divider { background-color: gray; }
+.code { border-collapse:collapse; width:100%; }
+.code { font-family: "Monospace", monospace; font-size:10pt }
+.code { line-height: 1.2em }
+.comment { color: green; font-style: oblique }
+.keyword { color: blue }
+.string_literal { color: red }
+.directive { color: darkmagenta }
+
+/* Macros and variables could have pop-up notes hidden by default.
+  - Macro pop-up:    expansion of the macro
+  - Variable pop-up: value (table) of the variable */
+.macro_popup, .variable_popup { display: none; }
+
+/* Pop-up appears on mouse-hover event. */
+.macro:hover .macro_popup, .variable:hover .variable_popup {
+  display: block;
+  padding: 2px;
+  -webkit-border-radius:5px;
+  -webkit-box-shadow:1px 1px 7px #000;
+  border-radius:5px;
+  box-shadow:1px 1px 7px #000;
+  position: absolute;
+  top: -1em;
+  left:10em;
+  z-index: 1
+}
+
+.macro_popup {
+  border: 2px solid red;
+  background-color:#FFF0F0;
+  font-weight: normal;
+}
+
+.variable_popup {
+  border: 2px solid blue;
+  background-color:#F0F0FF;
+  font-weight: bold;
+  font-family: Helvetica, sans-serif;
+  font-size: 9pt;
+}
+
+/* Pop-up notes needs a relative position as a base where they pops up. */
+.macro, .variable {
+  background-color: PaleGoldenRod;
+  position: relative;
+}
+.macro { color: DarkMagenta; }
+
+#tooltiphint {
+  position: fixed;
+  width: 50em;
+  margin-left: -25em;
+  left: 50%;
+  padding: 10px;
+  border: 1px solid #b0b0b0;
+  border-radius: 2px;
+  box-shadow: 1px 1px 7px black;
+  background-color: #c0c0c0;
+  z-index: 2;
+}
+
+.num { width:2.5em; padding-right:2ex; background-color:#eeeeee }
+.num { text-align:right; font-size:8pt }
+.num { color:#444444 }
+.line { padding-left: 1ex; border-left: 3px solid #ccc }
+.line { white-space: pre }
+.msg { -webkit-box-shadow:1px 1px 7px #000 }
+.msg { box-shadow:1px 1px 7px #000 }
+.msg { -webkit-border-radius:5px }
+.msg { border-radius:5px }
+.msg { font-family:Helvetica, sans-serif; font-size:8pt }
+.msg { float:left }
+.msg { padding:0.25em 1ex 0.25em 1ex }
+.msg { margin-top:10px; margin-bottom:10px }
+.msg { font-weight:bold }
+.msg { max-width:60em; word-wrap: break-word; white-space: pre-wrap }
+.msgT { padding:0x; spacing:0x }
+.msgEvent { background-color:#fff8b4; color:#000000 }
+.msgControl { background-color:#bbbbbb; color:#000000 }
+.msgNote { background-color:#ddeeff; color:#000000 }
+.mrange { background-color:#dfddf3 }
+.mrange { border-bottom:1px solid #6F9DBE }
+.PathIndex { font-weight: bold; padding:0px 5px; margin-right:5px; }
+.PathIndex { -webkit-border-radius:8px }
+.PathIndex { border-radius:8px }
+.PathIndexEvent { background-color:#bfba87 }
+.PathIndexControl { background-color:#8c8c8c }
+.PathIndexPopUp { background-color: #879abc; }
+.PathNav a { text-decoration:none; font-size: larger }
+.CodeInsertionHint { font-weight: bold; background-color: #10dd10 }
+.CodeRemovalHint { background-color:#de1010 }
+.CodeRemovalHint { border-bottom:1px solid #6F9DBE }
+.selected{ background-color:orange !important; }
+
+table.simpletable {
+  padding: 5px;
+  font-size:12pt;
+  margin:20px;
+  border-collapse: collapse; border-spacing: 0px;
+}
+td.rowname {
+  text-align: right;
+  vertical-align: top;
+  font-weight: bold;
+  color:#444444;
+  padding-right:2ex;
+}
+
+/* Hidden text. */
+input.spoilerhider + label {
+  cursor: pointer;
+  text-decoration: underline;
+  display: block;
+}
+input.spoilerhider {
+ display: none;
+}
+input.spoilerhider ~ .spoiler {
+  overflow: hidden;
+  margin: 10px auto 0;
+  height: 0;
+  opacity: 0;
+}
+input.spoilerhider:checked + label + .spoiler{
+  height: auto;
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+<!-- BUGDESC Potential memory leak -->
+
+<!-- BUGTYPE Memory leak -->
+
+<!-- BUGCATEGORY Memory error -->
+
+<!-- BUGFILE /home/zhh/projects/faiss-1.7.1/tests/test_merge.cpp -->
+
+<!-- FILENAME test_merge.cpp -->
+
+<!-- FUNCTIONNAME TestBody -->
+
+<!-- ISSUEHASHCONTENTOFLINEINCONTEXT 7251143acdce2db3a592a7e1452bf432 -->
+
+<!-- BUGLINE 247 -->
+
+<!-- BUGCOLUMN 1 -->
+
+<!-- EXCEPTIONAL -->
+
+<!-- BUGPATHLENGTH 14 -->
+
+<!-- BUGMETAEND -->
+<!-- REPORTHEADER -->
+<h3>Bug Summary [throw at :53:5]</h3>
+<table class="simpletable">
+<tr><td class="rowname">File:</td><td>/home/zhh/projects/faiss-1.7.1/tests/test_merge.cpp</td></tr>
+<tr><td class="rowname">Warning:</td><td><a href="#EndPath">line 247, column 1</a><br />Potential memory leak</td></tr>
+
+</table>
+<!-- REPORTSUMMARYEXTRA -->
+<h3>Annotated Source Code</h3>
+<p>Press <a href="#" onclick="toggleHelp(); return false;">'?'</a>
+   to see keyboard shortcuts</p>
+<input type="checkbox" class="spoilerhider" id="showinvocation" />
+<label for="showinvocation" >Show analyzer invocation</label>
+<div class="spoiler">clang -cc1 -cc1 -triple x86_64-unknown-linux-gnu -analyze -disable-free -disable-llvm-verifier -discard-value-names -main-file-name test_merge.cpp -analyzer-store=region -analyzer-opt-analyze-nested-blocks -analyzer-checker=core -analyzer-checker=apiModeling -analyzer-checker=unix -analyzer-checker=deadcode -analyzer-checker=cplusplus -analyzer-checker=security.insecureAPI.UncheckedReturn -analyzer-checker=security.insecureAPI.getpw -analyzer-checker=security.insecureAPI.gets -analyzer-checker=security.insecureAPI.mktemp -analyzer-checker=security.insecureAPI.mkstemp -analyzer-checker=security.insecureAPI.vfork -analyzer-checker=nullability.NullPassedToNonnull -analyzer-checker=nullability.NullReturnedFromNonnull -analyzer-output plist -w -setup-static-analyzer -analyzer-config-compatibility-mode=true -mrelocation-model static -mframe-pointer=all -fmath-errno -fno-rounding-math -mconstructor-aliases -munwind-tables -target-cpu x86-64 -tune-cpu generic -fno-split-dwarf-inlining -debugger-tuning=gdb -resource-dir /home/zhh/llvm/build/lib/clang/13.0.0 -isystem /home/zhh/projects/faiss-1.7.1/build/_deps/googletest-src/googletest/include -isystem /home/zhh/projects/faiss-1.7.1/build/_deps/googletest-src/googletest -I /home/zhh/projects/faiss-1.7.1 -internal-isystem /usr/lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9 -internal-isystem /usr/lib/gcc/x86_64-linux-gnu/9/../../../../include/x86_64-linux-gnu/c++/9 -internal-isystem /usr/lib/gcc/x86_64-linux-gnu/9/../../../../include/x86_64-linux-gnu/c++/9 -internal-isystem /usr/lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/backward -internal-isystem /usr/local/include -internal-isystem /home/zhh/llvm/build/lib/clang/13.0.0/include -internal-externc-isystem /usr/include/x86_64-linux-gnu -internal-externc-isystem /include -internal-externc-isystem /usr/include -std=gnu++11 -fdeprecated-macro -fdebug-compilation-dir=/home/zhh/projects/faiss-1.7.1/build/tests -ferror-limit 19 -fopenmp -fopenmp-cuda-parallel-target-regions -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -analyzer-checker=alpha.unix.Stream -analyzer-config cplusplus.Move:WarnOn=All -analyzer-config suppress-null-return-paths=false -analyzer-config suppress-inlined-defensive-checks=false -analyzer-config stable-report-filename=true -analyzer-config max-nodes=1000000 -stats-file=/home/zhh/projects/faiss-1.7.1/build/csa/eh-cross/cache/csa/home/zhh/projects/faiss-1.7.1/tests/test_merge.cpp.json -analyzer-output=html -analyzer-purge=none -analyzer-config crosscheck-with-z3=true -analyzer-config experimental-enable-naive-ctu-analysis=true -analyzer-config ctu-dir=/home/zhh/projects/faiss-1.7.1/build/csa/eh-cross/cache -faddrsig -o /home/zhh/projects/faiss-1.7.1/build/csa/eh-cross/reports/20220823-112231 -x c++ /home/zhh/projects/faiss-1.7.1/tests/test_merge.cpp
+</div>
+<div id='tooltiphint' hidden="true">
+  <p>Keyboard shortcuts: </p>
+  <ul>
+    <li>Use 'j/k' keys for keyboard navigation</li>
+    <li>Use 'Shift+S' to show/hide relevant lines</li>
+    <li>Use '?' to toggle this window</li>
+  </ul>
+  <a href="#" onclick="toggleHelp(); return false;">Close</a>
+</div>
+<script type='text/javascript'>
+var relevant_lines = {"1": {"235": 1, "236": 1, "237": 1, "239": 1, "240": 1, "241": 1, "247": 1}, "29091": {"63": 1}, "39332": {"68": 1, "69": 1, "70": 1, "71": 1, "72": 1, "73": 1, "74": 1}, "40008": {"45": 1, "48": 1, "53": 1}, "40091": {"20": 1, "59": 1, "60": 1}, "41582": {"21": 1, "22": 1, "23": 1, "24": 1, "25": 1, "26": 1, "30": 1, "31": 1, "32": 1, "33": 1, "34": 1, "35": 1, "36": 1, "37": 1, "39": 1, "40": 1, "41": 1, "42": 1}, "44749": {"30": 1, "31": 1, "32": 1, "33": 1, "34": 1, "35": 1, "36": 1}, "45106": {"36": 1, "37": 1, "38": 1, "39": 1, "40": 1, "41": 1, "45": 1, "153": 1, "154": 1, "155": 1, "156": 1, "157": 1, "158": 1, "159": 1, "160": 1, "161": 1, "162": 1, "163": 1, "164": 1, "165": 1, "166": 1, "167": 1, "168": 1, "170": 1}, "45701": {"29": 1, "30": 1, "31": 1, "32": 1, "33": 1, "34": 1, "35": 1, "36": 1, "37": 1, "38": 1, "39": 1, "40": 1}, "48526": {"23": 1, "24": 1, "126": 1, "127": 1, "128": 1, "129": 1}};
+
+var filterCounterexample = function (hide) {
+  var tables = document.getElementsByClassName("code");
+  for (var t=0; t<tables.length; t++) {
+    var table = tables[t];
+    var file_id = table.getAttribute("data-fileid");
+    var lines_in_fid = relevant_lines[file_id];
+    if (!lines_in_fid) {
+      lines_in_fid = {};
+    }
+    var lines = table.getElementsByClassName("codeline");
+    for (var i=0; i<lines.length; i++) {
+        var el = lines[i];
+        var lineNo = el.getAttribute("data-linenumber");
+        if (!lines_in_fid[lineNo]) {
+          if (hide) {
+            el.setAttribute("hidden", "");
+          } else {
+            el.removeAttribute("hidden");
+          }
+        }
+    }
+  }
+}
+
+window.addEventListener("keydown", function (event) {
+  if (event.defaultPrevented) {
+    return;
+  }
+  if (event.key == "S") {
+    var checked = document.getElementsByName("showCounterexample")[0].checked;
+    filterCounterexample(!checked);
+    document.getElementsByName("showCounterexample")[0].checked = !checked;
+  } else {
+    return;
+  }
+  event.preventDefault();
+}, true);
+
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelector('input[name="showCounterexample"]').onchange=
+        function (event) {
+      filterCounterexample(this.checked);
+    };
+});
+</script>
+
+<form>
+    <input type="checkbox" name="showCounterexample" id="showCounterexample" />
+    <label for="showCounterexample">
+       Show only relevant lines
+    </label>
+</form>
+
+<script type='text/javascript'>
+var digitMatcher = new RegExp("[0-9]+");
+
+var querySelectorAllArray = function(selector) {
+  return Array.prototype.slice.call(
+    document.querySelectorAll(selector));
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    querySelectorAllArray(".PathNav > a").forEach(
+        function(currentValue, currentIndex) {
+            var hrefValue = currentValue.getAttribute("href");
+            currentValue.onclick = function() {
+                scrollTo(document.querySelector(hrefValue));
+                return false;
+            };
+        });
+});
+
+var findNum = function() {
+    var s = document.querySelector(".selected");
+    if (!s || s.id == "EndPath") {
+        return 0;
+    }
+    var out = parseInt(digitMatcher.exec(s.id)[0]);
+    return out;
+};
+
+var scrollTo = function(el) {
+    querySelectorAllArray(".selected").forEach(function(s) {
+        s.classList.remove("selected");
+    });
+    el.classList.add("selected");
+    window.scrollBy(0, el.getBoundingClientRect().top -
+        (window.innerHeight / 2));
+}
+
+var move = function(num, up, numItems) {
+  if (num == 1 && up || num == numItems - 1 && !up) {
+    return 0;
+  } else if (num == 0 && up) {
+    return numItems - 1;
+  } else if (num == 0 && !up) {
+    return 1 % numItems;
+  }
+  return up ? num - 1 : num + 1;
+}
+
+var numToId = function(num) {
+  if (num == 0) {
+    return document.getElementById("EndPath")
+  }
+  return document.getElementById("Path" + num);
+};
+
+var navigateTo = function(up) {
+  var numItems = document.querySelectorAll(
+      ".line > .msgEvent, .line > .msgControl").length;
+  var currentSelected = findNum();
+  var newSelected = move(currentSelected, up, numItems);
+  var newEl = numToId(newSelected, numItems);
+
+  // Scroll element into center.
+  scrollTo(newEl);
+};
+
+window.addEventListener("keydown", function (event) {
+  if (event.defaultPrevented) {
+    return;
+  }
+  if (event.key == "j") {
+    navigateTo(/*up=*/false);
+  } else if (event.key == "k") {
+    navigateTo(/*up=*/true);
+  } else {
+    return;
+  }
+  event.preventDefault();
+}, true);
+</script>
+  
+<script type='text/javascript'>
+
+var toggleHelp = function() {
+    var hint = document.querySelector("#tooltiphint");
+    var attributeName = "hidden";
+    if (hint.hasAttribute(attributeName)) {
+      hint.removeAttribute(attributeName);
+    } else {
+      hint.setAttribute("hidden", "true");
+    }
+};
+window.addEventListener("keydown", function (event) {
+  if (event.defaultPrevented) {
+    return;
+  }
+  if (event.key == "?") {
+    toggleHelp();
+  } else {
+    return;
+  }
+  event.preventDefault();
+});
+</script>
+<div id=File1>
+<h4 class=FileName>/home/zhh/projects/faiss-1.7.1/tests/test_merge.cpp</h4>
+<div class=FileNav><a href="#File40091">&#x2192;</a></div></div>
+<table class="code" data-fileid="1">
+<tr class="codeline" data-linenumber="1"><td class="num" id="LN1">1</td><td class="line"><span class='comment'>/**</span></td></tr>
+<tr class="codeline" data-linenumber="2"><td class="num" id="LN2">2</td><td class="line"> <span class='comment'>* Copyright (c) Facebook, Inc. and its affiliates.</span></td></tr>
+<tr class="codeline" data-linenumber="3"><td class="num" id="LN3">3</td><td class="line"> <span class='comment'>*</span></td></tr>
+<tr class="codeline" data-linenumber="4"><td class="num" id="LN4">4</td><td class="line"> <span class='comment'>* This source code is licensed under the MIT license found in the</span></td></tr>
+<tr class="codeline" data-linenumber="5"><td class="num" id="LN5">5</td><td class="line"> <span class='comment'>* LICENSE file in the root directory of this source tree.</span></td></tr>
+<tr class="codeline" data-linenumber="6"><td class="num" id="LN6">6</td><td class="line"> <span class='comment'>*/</span></td></tr>
+<tr class="codeline" data-linenumber="7"><td class="num" id="LN7">7</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="8"><td class="num" id="LN8">8</td><td class="line"><span class='directive'>#include &lt;cstdio&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="9"><td class="num" id="LN9">9</td><td class="line"><span class='directive'>#include &lt;cstdlib&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="10"><td class="num" id="LN10">10</td><td class="line"><span class='directive'>#include &lt;random&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="11"><td class="num" id="LN11">11</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="12"><td class="num" id="LN12">12</td><td class="line"><span class='directive'>#include &lt;unistd.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="13"><td class="num" id="LN13">13</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="14"><td class="num" id="LN14">14</td><td class="line"><span class='directive'>#include &lt;gtest/gtest.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="15"><td class="num" id="LN15">15</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="16"><td class="num" id="LN16">16</td><td class="line"><span class='directive'>#include &lt;faiss/IVFlib.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="17"><td class="num" id="LN17">17</td><td class="line"><span class='directive'>#include &lt;faiss/IndexFlat.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="18"><td class="num" id="LN18">18</td><td class="line"><span class='directive'>#include &lt;faiss/IndexIVFFlat.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="19"><td class="num" id="LN19">19</td><td class="line"><span class='directive'>#include &lt;faiss/IndexIVFPQ.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="20"><td class="num" id="LN20">20</td><td class="line"><span class='directive'>#include &lt;faiss/IndexPreTransform.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="21"><td class="num" id="LN21">21</td><td class="line"><span class='directive'>#include &lt;faiss/MetaIndexes.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="22"><td class="num" id="LN22">22</td><td class="line"><span class='directive'>#include &lt;faiss/invlists/OnDiskInvertedLists.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="23"><td class="num" id="LN23">23</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="24"><td class="num" id="LN24">24</td><td class="line"><span class='keyword'>namespace</span> {</td></tr>
+<tr class="codeline" data-linenumber="25"><td class="num" id="LN25">25</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="26"><td class="num" id="LN26">26</td><td class="line"><span class='keyword'>struct</span> Tempfilename {</td></tr>
+<tr class="codeline" data-linenumber="27"><td class="num" id="LN27">27</td><td class="line">    <span class='keyword'>static</span> pthread_mutex_t mutex;</td></tr>
+<tr class="codeline" data-linenumber="28"><td class="num" id="LN28">28</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="29"><td class="num" id="LN29">29</td><td class="line">    std::string filename = <span class='string_literal'>"faiss_tmp_XXXXXX"</span>;</td></tr>
+<tr class="codeline" data-linenumber="30"><td class="num" id="LN30">30</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="31"><td class="num" id="LN31">31</td><td class="line">    Tempfilename() {</td></tr>
+<tr class="codeline" data-linenumber="32"><td class="num" id="LN32">32</td><td class="line">        pthread_mutex_lock(&amp;mutex);</td></tr>
+<tr class="codeline" data-linenumber="33"><td class="num" id="LN33">33</td><td class="line">        <span class='keyword'>int</span> fd = mkstemp(&amp;filename[0]);</td></tr>
+<tr class="codeline" data-linenumber="34"><td class="num" id="LN34">34</td><td class="line">        close(fd);</td></tr>
+<tr class="codeline" data-linenumber="35"><td class="num" id="LN35">35</td><td class="line">        pthread_mutex_unlock(&amp;mutex);</td></tr>
+<tr class="codeline" data-linenumber="36"><td class="num" id="LN36">36</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="37"><td class="num" id="LN37">37</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="38"><td class="num" id="LN38">38</td><td class="line">    ~Tempfilename() {</td></tr>
+<tr class="codeline" data-linenumber="39"><td class="num" id="LN39">39</td><td class="line">        <span class='keyword'>if</span> (access(filename.c_str(), <span class='macro'>F_OK<span class='macro_popup'>0</span></span>)) {</td></tr>
+<tr class="codeline" data-linenumber="40"><td class="num" id="LN40">40</td><td class="line">            unlink(filename.c_str());</td></tr>
+<tr class="codeline" data-linenumber="41"><td class="num" id="LN41">41</td><td class="line">        }</td></tr>
+<tr class="codeline" data-linenumber="42"><td class="num" id="LN42">42</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="43"><td class="num" id="LN43">43</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="44"><td class="num" id="LN44">44</td><td class="line">    <span class='keyword'>const</span> <span class='keyword'>char</span>* c_str() {</td></tr>
+<tr class="codeline" data-linenumber="45"><td class="num" id="LN45">45</td><td class="line">        <span class='keyword'>return</span> filename.c_str();</td></tr>
+<tr class="codeline" data-linenumber="46"><td class="num" id="LN46">46</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="47"><td class="num" id="LN47">47</td><td class="line">};</td></tr>
+<tr class="codeline" data-linenumber="48"><td class="num" id="LN48">48</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="49"><td class="num" id="LN49">49</td><td class="line">pthread_mutex_t Tempfilename::mutex = <span class='macro'>PTHREAD_MUTEX_INITIALIZER<span class='macro_popup'>{ { 0, 0, 0, 0, PTHREAD_MUTEX_TIMED_NP, 0, 0, { 0, 0 } } }</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="50"><td class="num" id="LN50">50</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="51"><td class="num" id="LN51">51</td><td class="line"><span class='keyword'>typedef</span> faiss::Index::idx_t idx_t;</td></tr>
+<tr class="codeline" data-linenumber="52"><td class="num" id="LN52">52</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="53"><td class="num" id="LN53">53</td><td class="line"><span class='comment'>// parameters to use for the test</span></td></tr>
+<tr class="codeline" data-linenumber="54"><td class="num" id="LN54">54</td><td class="line"><span class='keyword'>int</span> d = 64;</td></tr>
+<tr class="codeline" data-linenumber="55"><td class="num" id="LN55">55</td><td class="line">size_t nb = 1000;</td></tr>
+<tr class="codeline" data-linenumber="56"><td class="num" id="LN56">56</td><td class="line">size_t nq = 100;</td></tr>
+<tr class="codeline" data-linenumber="57"><td class="num" id="LN57">57</td><td class="line"><span class='keyword'>int</span> nindex = 4;</td></tr>
+<tr class="codeline" data-linenumber="58"><td class="num" id="LN58">58</td><td class="line"><span class='keyword'>int</span> k = 10;</td></tr>
+<tr class="codeline" data-linenumber="59"><td class="num" id="LN59">59</td><td class="line"><span class='keyword'>int</span> nlist = 40;</td></tr>
+<tr class="codeline" data-linenumber="60"><td class="num" id="LN60">60</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="61"><td class="num" id="LN61">61</td><td class="line"><span class='keyword'>struct</span> CommonData {</td></tr>
+<tr class="codeline" data-linenumber="62"><td class="num" id="LN62">62</td><td class="line">    std::vector&lt;<span class='keyword'>float</span>&gt; database;</td></tr>
+<tr class="codeline" data-linenumber="63"><td class="num" id="LN63">63</td><td class="line">    std::vector&lt;<span class='keyword'>float</span>&gt; queries;</td></tr>
+<tr class="codeline" data-linenumber="64"><td class="num" id="LN64">64</td><td class="line">    std::vector&lt;idx_t&gt; ids;</td></tr>
+<tr class="codeline" data-linenumber="65"><td class="num" id="LN65">65</td><td class="line">    faiss::IndexFlatL2 quantizer;</td></tr>
+<tr class="codeline" data-linenumber="66"><td class="num" id="LN66">66</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="67"><td class="num" id="LN67">67</td><td class="line">    CommonData() : database(nb * d), queries(nq * d), ids(nb), quantizer(d) {</td></tr>
+<tr class="codeline" data-linenumber="68"><td class="num" id="LN68">68</td><td class="line">        std::mt19937 rng;</td></tr>
+<tr class="codeline" data-linenumber="69"><td class="num" id="LN69">69</td><td class="line">        std::uniform_real_distribution&lt;&gt; distrib;</td></tr>
+<tr class="codeline" data-linenumber="70"><td class="num" id="LN70">70</td><td class="line">        <span class='keyword'>for</span> (size_t i = 0; i &lt; nb * d; i++) {</td></tr>
+<tr class="codeline" data-linenumber="71"><td class="num" id="LN71">71</td><td class="line">            database[i] = distrib(rng);</td></tr>
+<tr class="codeline" data-linenumber="72"><td class="num" id="LN72">72</td><td class="line">        }</td></tr>
+<tr class="codeline" data-linenumber="73"><td class="num" id="LN73">73</td><td class="line">        <span class='keyword'>for</span> (size_t i = 0; i &lt; nq * d; i++) {</td></tr>
+<tr class="codeline" data-linenumber="74"><td class="num" id="LN74">74</td><td class="line">            queries[i] = distrib(rng);</td></tr>
+<tr class="codeline" data-linenumber="75"><td class="num" id="LN75">75</td><td class="line">        }</td></tr>
+<tr class="codeline" data-linenumber="76"><td class="num" id="LN76">76</td><td class="line">        <span class='keyword'>for</span> (<span class='keyword'>int</span> i = 0; i &lt; nb; i++) {</td></tr>
+<tr class="codeline" data-linenumber="77"><td class="num" id="LN77">77</td><td class="line">            ids[i] = 123 + 456 * i;</td></tr>
+<tr class="codeline" data-linenumber="78"><td class="num" id="LN78">78</td><td class="line">        }</td></tr>
+<tr class="codeline" data-linenumber="79"><td class="num" id="LN79">79</td><td class="line">        { <span class='comment'>// just to train the quantizer</span></td></tr>
+<tr class="codeline" data-linenumber="80"><td class="num" id="LN80">80</td><td class="line">            faiss::IndexIVFFlat iflat(&amp;quantizer, d, nlist);</td></tr>
+<tr class="codeline" data-linenumber="81"><td class="num" id="LN81">81</td><td class="line">            iflat.train(nb, database.data());</td></tr>
+<tr class="codeline" data-linenumber="82"><td class="num" id="LN82">82</td><td class="line">        }</td></tr>
+<tr class="codeline" data-linenumber="83"><td class="num" id="LN83">83</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="84"><td class="num" id="LN84">84</td><td class="line">};</td></tr>
+<tr class="codeline" data-linenumber="85"><td class="num" id="LN85">85</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="86"><td class="num" id="LN86">86</td><td class="line">CommonData cd;</td></tr>
+<tr class="codeline" data-linenumber="87"><td class="num" id="LN87">87</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="88"><td class="num" id="LN88">88</td><td class="line"><span class='comment'>/// perform a search on shards, then merge and search again and</span></td></tr>
+<tr class="codeline" data-linenumber="89"><td class="num" id="LN89">89</td><td class="line"><span class='comment'>/// compare results.</span></td></tr>
+<tr class="codeline" data-linenumber="90"><td class="num" id="LN90">90</td><td class="line"><span class='keyword'>int</span> compare_merged(</td></tr>
+<tr class="codeline" data-linenumber="91"><td class="num" id="LN91">91</td><td class="line">        faiss::IndexShards* index_shards,</td></tr>
+<tr class="codeline" data-linenumber="92"><td class="num" id="LN92">92</td><td class="line">        <span class='keyword'>bool</span> shift_ids,</td></tr>
+<tr class="codeline" data-linenumber="93"><td class="num" id="LN93">93</td><td class="line">        <span class='keyword'>bool</span> standard_merge = <span class='keyword'>true</span>) {</td></tr>
+<tr class="codeline" data-linenumber="94"><td class="num" id="LN94">94</td><td class="line">    std::vector&lt;idx_t&gt; refI(k * nq);</td></tr>
+<tr class="codeline" data-linenumber="95"><td class="num" id="LN95">95</td><td class="line">    std::vector&lt;<span class='keyword'>float</span>&gt; refD(k * nq);</td></tr>
+<tr class="codeline" data-linenumber="96"><td class="num" id="LN96">96</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="97"><td class="num" id="LN97">97</td><td class="line">    index_shards-&gt;search(nq, cd.queries.data(), k, refD.data(), refI.data());</td></tr>
+<tr class="codeline" data-linenumber="98"><td class="num" id="LN98">98</td><td class="line">    Tempfilename filename;</td></tr>
+<tr class="codeline" data-linenumber="99"><td class="num" id="LN99">99</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="100"><td class="num" id="LN100">100</td><td class="line">    std::vector&lt;idx_t&gt; newI(k * nq);</td></tr>
+<tr class="codeline" data-linenumber="101"><td class="num" id="LN101">101</td><td class="line">    std::vector&lt;<span class='keyword'>float</span>&gt; newD(k * nq);</td></tr>
+<tr class="codeline" data-linenumber="102"><td class="num" id="LN102">102</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="103"><td class="num" id="LN103">103</td><td class="line">    <span class='keyword'>if</span> (standard_merge) {</td></tr>
+<tr class="codeline" data-linenumber="104"><td class="num" id="LN104">104</td><td class="line">        <span class='keyword'>for</span> (<span class='keyword'>int</span> i = 1; i &lt; nindex; i++) {</td></tr>
+<tr class="codeline" data-linenumber="105"><td class="num" id="LN105">105</td><td class="line">            faiss::ivflib::merge_into(</td></tr>
+<tr class="codeline" data-linenumber="106"><td class="num" id="LN106">106</td><td class="line">                    index_shards-&gt;at(0), index_shards-&gt;at(i), shift_ids);</td></tr>
+<tr class="codeline" data-linenumber="107"><td class="num" id="LN107">107</td><td class="line">        }</td></tr>
+<tr class="codeline" data-linenumber="108"><td class="num" id="LN108">108</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="109"><td class="num" id="LN109">109</td><td class="line">        index_shards-&gt;syncWithSubIndexes();</td></tr>
+<tr class="codeline" data-linenumber="110"><td class="num" id="LN110">110</td><td class="line">    } <span class='keyword'>else</span> {</td></tr>
+<tr class="codeline" data-linenumber="111"><td class="num" id="LN111">111</td><td class="line">        std::vector&lt;<span class='keyword'>const</span> faiss::InvertedLists*&gt; lists;</td></tr>
+<tr class="codeline" data-linenumber="112"><td class="num" id="LN112">112</td><td class="line">        faiss::IndexIVF* index0 = <span class='keyword'>nullptr</span>;</td></tr>
+<tr class="codeline" data-linenumber="113"><td class="num" id="LN113">113</td><td class="line">        size_t ntotal = 0;</td></tr>
+<tr class="codeline" data-linenumber="114"><td class="num" id="LN114">114</td><td class="line">        <span class='keyword'>for</span> (<span class='keyword'>int</span> i = 0; i &lt; nindex; i++) {</td></tr>
+<tr class="codeline" data-linenumber="115"><td class="num" id="LN115">115</td><td class="line">            <span class='keyword'>auto</span> index_ivf =</td></tr>
+<tr class="codeline" data-linenumber="116"><td class="num" id="LN116">116</td><td class="line">                    <span class='keyword'>dynamic_cast</span>&lt;faiss::IndexIVF*&gt;(index_shards-&gt;at(i));</td></tr>
+<tr class="codeline" data-linenumber="117"><td class="num" id="LN117">117</td><td class="line">            <span class='macro'>assert(index_ivf)<span class='macro_popup'>(static_cast &lt;bool&gt; (index_ivf) ? void (0) : __assert_fail<br> ("index_ivf", "/home/zhh/projects/faiss-1.7.1/tests/test_merge.cpp"<br>, 117, __extension__ __PRETTY_FUNCTION__))</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="118"><td class="num" id="LN118">118</td><td class="line">            <span class='keyword'>if</span> (i == 0) {</td></tr>
+<tr class="codeline" data-linenumber="119"><td class="num" id="LN119">119</td><td class="line">                index0 = index_ivf;</td></tr>
+<tr class="codeline" data-linenumber="120"><td class="num" id="LN120">120</td><td class="line">            }</td></tr>
+<tr class="codeline" data-linenumber="121"><td class="num" id="LN121">121</td><td class="line">            lists.push_back(index_ivf-&gt;invlists);</td></tr>
+<tr class="codeline" data-linenumber="122"><td class="num" id="LN122">122</td><td class="line">            ntotal += index_ivf-&gt;ntotal;</td></tr>
+<tr class="codeline" data-linenumber="123"><td class="num" id="LN123">123</td><td class="line">        }</td></tr>
+<tr class="codeline" data-linenumber="124"><td class="num" id="LN124">124</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="125"><td class="num" id="LN125">125</td><td class="line">        <span class='keyword'>auto</span> il = <span class='keyword'>new</span> faiss::OnDiskInvertedLists(</td></tr>
+<tr class="codeline" data-linenumber="126"><td class="num" id="LN126">126</td><td class="line">                index0-&gt;nlist, index0-&gt;code_size, filename.c_str());</td></tr>
+<tr class="codeline" data-linenumber="127"><td class="num" id="LN127">127</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="128"><td class="num" id="LN128">128</td><td class="line">        il-&gt;merge_from(lists.data(), lists.size());</td></tr>
+<tr class="codeline" data-linenumber="129"><td class="num" id="LN129">129</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="130"><td class="num" id="LN130">130</td><td class="line">        index0-&gt;replace_invlists(il, <span class='keyword'>true</span>);</td></tr>
+<tr class="codeline" data-linenumber="131"><td class="num" id="LN131">131</td><td class="line">        index0-&gt;ntotal = ntotal;</td></tr>
+<tr class="codeline" data-linenumber="132"><td class="num" id="LN132">132</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="133"><td class="num" id="LN133">133</td><td class="line">    <span class='comment'>// search only on first index</span></td></tr>
+<tr class="codeline" data-linenumber="134"><td class="num" id="LN134">134</td><td class="line">    index_shards-&gt;at(0)-&gt;search(</td></tr>
+<tr class="codeline" data-linenumber="135"><td class="num" id="LN135">135</td><td class="line">            nq, cd.queries.data(), k, newD.data(), newI.data());</td></tr>
+<tr class="codeline" data-linenumber="136"><td class="num" id="LN136">136</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="137"><td class="num" id="LN137">137</td><td class="line">    size_t ndiff = 0;</td></tr>
+<tr class="codeline" data-linenumber="138"><td class="num" id="LN138">138</td><td class="line">    <span class='keyword'>for</span> (size_t i = 0; i &lt; k * nq; i++) {</td></tr>
+<tr class="codeline" data-linenumber="139"><td class="num" id="LN139">139</td><td class="line">        <span class='keyword'>if</span> (refI[i] != newI[i]) {</td></tr>
+<tr class="codeline" data-linenumber="140"><td class="num" id="LN140">140</td><td class="line">            ndiff++;</td></tr>
+<tr class="codeline" data-linenumber="141"><td class="num" id="LN141">141</td><td class="line">        }</td></tr>
+<tr class="codeline" data-linenumber="142"><td class="num" id="LN142">142</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="143"><td class="num" id="LN143">143</td><td class="line">    <span class='keyword'>return</span> ndiff;</td></tr>
+<tr class="codeline" data-linenumber="144"><td class="num" id="LN144">144</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="145"><td class="num" id="LN145">145</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="146"><td class="num" id="LN146">146</td><td class="line">} <span class='comment'>// namespace</span></td></tr>
+<tr class="codeline" data-linenumber="147"><td class="num" id="LN147">147</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="148"><td class="num" id="LN148">148</td><td class="line"><span class='comment'>// test on IVFFlat with implicit numbering</span></td></tr>
+<tr class="codeline" data-linenumber="149"><td class="num" id="LN149">149</td><td class="line"><span class='macro'>TEST(MERGE, merge_flat_no_ids)<span class='macro_popup'>static_assert(sizeof("MERGE") &gt; 1, "test_suite_name must not be empty"<br>); static_assert(sizeof("merge_flat_no_ids") &gt; 1, "test_name must not be empty"<br>); class MERGE_merge_flat_no_ids_Test : public ::testing::Test<br> { public: MERGE_merge_flat_no_ids_Test() {} private: virtual<br> void TestBody(); static ::testing::TestInfo* const test_info_<br> __attribute__ ((unused)); MERGE_merge_flat_no_ids_Test(MERGE_merge_flat_no_ids_Test<br> const &amp;) = delete; void operator=(MERGE_merge_flat_no_ids_Test<br> const &amp;) = delete; }; ::testing::TestInfo* const MERGE_merge_flat_no_ids_Test<br>::test_info_ = ::testing::internal::MakeAndRegisterTestInfo( "MERGE"<br>, "merge_flat_no_ids", nullptr, nullptr, ::testing::internal::<br>CodeLocation("/home/zhh/projects/faiss-1.7.1/tests/test_merge.cpp"<br>, 149), (::testing::internal::GetTestTypeId()), ::testing::internal<br>::SuiteApiResolver&lt; ::testing::Test&gt;::GetSetUpCaseOrSuite<br>("/home/zhh/projects/faiss-1.7.1/tests/test_merge.cpp", 149),<br> ::testing::internal::SuiteApiResolver&lt; ::testing::Test&gt;<br>::GetTearDownCaseOrSuite("/home/zhh/projects/faiss-1.7.1/tests/test_merge.cpp"<br>, 149), new ::testing::internal::TestFactoryImpl&lt;MERGE_merge_flat_no_ids_Test<br>&gt;); void MERGE_merge_flat_no_ids_Test::TestBody()</span></span> {</td></tr>
+<tr class="codeline" data-linenumber="150"><td class="num" id="LN150">150</td><td class="line">    faiss::IndexShards index_shards(d);</td></tr>
+<tr class="codeline" data-linenumber="151"><td class="num" id="LN151">151</td><td class="line">    index_shards.own_fields = <span class='keyword'>true</span>;</td></tr>
+<tr class="codeline" data-linenumber="152"><td class="num" id="LN152">152</td><td class="line">    <span class='keyword'>for</span> (<span class='keyword'>int</span> i = 0; i &lt; nindex; i++) {</td></tr>
+<tr class="codeline" data-linenumber="153"><td class="num" id="LN153">153</td><td class="line">        index_shards.add_shard(</td></tr>
+<tr class="codeline" data-linenumber="154"><td class="num" id="LN154">154</td><td class="line">                <span class='keyword'>new</span> faiss::IndexIVFFlat(&amp;cd.quantizer, d, nlist));</td></tr>
+<tr class="codeline" data-linenumber="155"><td class="num" id="LN155">155</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="156"><td class="num" id="LN156">156</td><td class="line">    <span class='macro'>EXPECT_TRUE(index_shards.is_trained)<span class='macro_popup'>switch (0) case 0: default: if (const ::testing::AssertionResult<br> gtest_ar_ = ::testing::AssertionResult(index_shards.is_trained<br>)) ; else ::testing::internal::AssertHelper(::testing::TestPartResult<br>::kNonFatalFailure, "/home/zhh/projects/faiss-1.7.1/tests/test_merge.cpp"<br>, 156, ::testing::internal::GetBoolAssertionFailureMessage( gtest_ar_<br>, "index_shards.is_trained", "false", "true").c_str()) = ::testing<br>::Message()</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="157"><td class="num" id="LN157">157</td><td class="line">    index_shards.add(nb, cd.database.data());</td></tr>
+<tr class="codeline" data-linenumber="158"><td class="num" id="LN158">158</td><td class="line">    size_t prev_ntotal = index_shards.ntotal;</td></tr>
+<tr class="codeline" data-linenumber="159"><td class="num" id="LN159">159</td><td class="line">    <span class='keyword'>int</span> ndiff = compare_merged(&amp;index_shards, <span class='keyword'>true</span>);</td></tr>
+<tr class="codeline" data-linenumber="160"><td class="num" id="LN160">160</td><td class="line">    <span class='macro'>EXPECT_EQ(prev_ntotal, index_shards.ntotal)<span class='macro_popup'>switch (0) case 0: default: if (const ::testing::AssertionResult<br> gtest_ar = (::testing::internal::EqHelper::Compare("prev_ntotal"<br>, "index_shards.ntotal", prev_ntotal, index_shards.ntotal))) ;<br> else ::testing::internal::AssertHelper(::testing::TestPartResult<br>::kNonFatalFailure, "/home/zhh/projects/faiss-1.7.1/tests/test_merge.cpp"<br>, 160, gtest_ar.failure_message()) = ::testing::Message()</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="161"><td class="num" id="LN161">161</td><td class="line">    <span class='macro'>EXPECT_EQ(0, ndiff)<span class='macro_popup'>switch (0) case 0: default: if (const ::testing::AssertionResult<br> gtest_ar = (::testing::internal::EqHelper::Compare("0", "ndiff"<br>, 0, ndiff))) ; else ::testing::internal::AssertHelper(::testing<br>::TestPartResult::kNonFatalFailure, "/home/zhh/projects/faiss-1.7.1/tests/test_merge.cpp"<br>, 161, gtest_ar.failure_message()) = ::testing::Message()</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="162"><td class="num" id="LN162">162</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="163"><td class="num" id="LN163">163</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="164"><td class="num" id="LN164">164</td><td class="line"><span class='comment'>// test on IVFFlat, explicit ids</span></td></tr>
+<tr class="codeline" data-linenumber="165"><td class="num" id="LN165">165</td><td class="line"><span class='macro'>TEST(MERGE, merge_flat)<span class='macro_popup'>static_assert(sizeof("MERGE") &gt; 1, "test_suite_name must not be empty"<br>); static_assert(sizeof("merge_flat") &gt; 1, "test_name must not be empty"<br>); class MERGE_merge_flat_Test : public ::testing::Test { public<br>: MERGE_merge_flat_Test() {} private: virtual void TestBody()<br>; static ::testing::TestInfo* const test_info_ __attribute__ (<br>(unused)); MERGE_merge_flat_Test(MERGE_merge_flat_Test const &amp;<br>) = delete; void operator=(MERGE_merge_flat_Test const &amp;)<br> = delete; }; ::testing::TestInfo* const MERGE_merge_flat_Test<br>::test_info_ = ::testing::internal::MakeAndRegisterTestInfo( "MERGE"<br>, "merge_flat", nullptr, nullptr, ::testing::internal::CodeLocation<br>("/home/zhh/projects/faiss-1.7.1/tests/test_merge.cpp", 165),<br> (::testing::internal::GetTestTypeId()), ::testing::internal::<br>SuiteApiResolver&lt; ::testing::Test&gt;::GetSetUpCaseOrSuite<br>("/home/zhh/projects/faiss-1.7.1/tests/test_merge.cpp", 165),<br> ::testing::internal::SuiteApiResolver&lt; ::testing::Test&gt;<br>::GetTearDownCaseOrSuite("/home/zhh/projects/faiss-1.7.1/tests/test_merge.cpp"<br>, 165), new ::testing::internal::TestFactoryImpl&lt;MERGE_merge_flat_Test<br>&gt;); void MERGE_merge_flat_Test::TestBody()</span></span> {</td></tr>
+<tr class="codeline" data-linenumber="166"><td class="num" id="LN166">166</td><td class="line">    faiss::IndexShards index_shards(d, <span class='keyword'>false</span>, <span class='keyword'>false</span>);</td></tr>
+<tr class="codeline" data-linenumber="167"><td class="num" id="LN167">167</td><td class="line">    index_shards.own_fields = <span class='keyword'>true</span>;</td></tr>
+<tr class="codeline" data-linenumber="168"><td class="num" id="LN168">168</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="169"><td class="num" id="LN169">169</td><td class="line">    <span class='keyword'>for</span> (<span class='keyword'>int</span> i = 0; i &lt; nindex; i++) {</td></tr>
+<tr class="codeline" data-linenumber="170"><td class="num" id="LN170">170</td><td class="line">        index_shards.add_shard(</td></tr>
+<tr class="codeline" data-linenumber="171"><td class="num" id="LN171">171</td><td class="line">                <span class='keyword'>new</span> faiss::IndexIVFFlat(&amp;cd.quantizer, d, nlist));</td></tr>
+<tr class="codeline" data-linenumber="172"><td class="num" id="LN172">172</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="173"><td class="num" id="LN173">173</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="174"><td class="num" id="LN174">174</td><td class="line">    <span class='macro'>EXPECT_TRUE(index_shards.is_trained)<span class='macro_popup'>switch (0) case 0: default: if (const ::testing::AssertionResult<br> gtest_ar_ = ::testing::AssertionResult(index_shards.is_trained<br>)) ; else ::testing::internal::AssertHelper(::testing::TestPartResult<br>::kNonFatalFailure, "/home/zhh/projects/faiss-1.7.1/tests/test_merge.cpp"<br>, 174, ::testing::internal::GetBoolAssertionFailureMessage( gtest_ar_<br>, "index_shards.is_trained", "false", "true").c_str()) = ::testing<br>::Message()</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="175"><td class="num" id="LN175">175</td><td class="line">    index_shards.add_with_ids(nb, cd.database.data(), cd.ids.data());</td></tr>
+<tr class="codeline" data-linenumber="176"><td class="num" id="LN176">176</td><td class="line">    <span class='keyword'>int</span> ndiff = compare_merged(&amp;index_shards, <span class='keyword'>false</span>);</td></tr>
+<tr class="codeline" data-linenumber="177"><td class="num" id="LN177">177</td><td class="line">    <span class='macro'>EXPECT_GE(0, ndiff)<span class='macro_popup'>switch (0) case 0: default: if (const ::testing::AssertionResult<br> gtest_ar = (::testing::internal::CmpHelperGE("0", "ndiff", 0<br>, ndiff))) ; else ::testing::internal::AssertHelper(::testing<br>::TestPartResult::kNonFatalFailure, "/home/zhh/projects/faiss-1.7.1/tests/test_merge.cpp"<br>, 177, gtest_ar.failure_message()) = ::testing::Message()</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="178"><td class="num" id="LN178">178</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="179"><td class="num" id="LN179">179</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="180"><td class="num" id="LN180">180</td><td class="line"><span class='comment'>// test on IVFFlat and a VectorTransform</span></td></tr>
+<tr class="codeline" data-linenumber="181"><td class="num" id="LN181">181</td><td class="line"><span class='macro'>TEST(MERGE, merge_flat_vt)<span class='macro_popup'>static_assert(sizeof("MERGE") &gt; 1, "test_suite_name must not be empty"<br>); static_assert(sizeof("merge_flat_vt") &gt; 1, "test_name must not be empty"<br>); class MERGE_merge_flat_vt_Test : public ::testing::Test { public<br>: MERGE_merge_flat_vt_Test() {} private: virtual void TestBody<br>(); static ::testing::TestInfo* const test_info_ __attribute__<br> ((unused)); MERGE_merge_flat_vt_Test(MERGE_merge_flat_vt_Test<br> const &amp;) = delete; void operator=(MERGE_merge_flat_vt_Test<br> const &amp;) = delete; }; ::testing::TestInfo* const MERGE_merge_flat_vt_Test<br>::test_info_ = ::testing::internal::MakeAndRegisterTestInfo( "MERGE"<br>, "merge_flat_vt", nullptr, nullptr, ::testing::internal::CodeLocation<br>("/home/zhh/projects/faiss-1.7.1/tests/test_merge.cpp", 181),<br> (::testing::internal::GetTestTypeId()), ::testing::internal::<br>SuiteApiResolver&lt; ::testing::Test&gt;::GetSetUpCaseOrSuite<br>("/home/zhh/projects/faiss-1.7.1/tests/test_merge.cpp", 181),<br> ::testing::internal::SuiteApiResolver&lt; ::testing::Test&gt;<br>::GetTearDownCaseOrSuite("/home/zhh/projects/faiss-1.7.1/tests/test_merge.cpp"<br>, 181), new ::testing::internal::TestFactoryImpl&lt;MERGE_merge_flat_vt_Test<br>&gt;); void MERGE_merge_flat_vt_Test::TestBody()</span></span> {</td></tr>
+<tr class="codeline" data-linenumber="182"><td class="num" id="LN182">182</td><td class="line">    faiss::IndexShards index_shards(d, <span class='keyword'>false</span>, <span class='keyword'>false</span>);</td></tr>
+<tr class="codeline" data-linenumber="183"><td class="num" id="LN183">183</td><td class="line">    index_shards.own_fields = <span class='keyword'>true</span>;</td></tr>
+<tr class="codeline" data-linenumber="184"><td class="num" id="LN184">184</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="185"><td class="num" id="LN185">185</td><td class="line">    <span class='comment'>// here we have to retrain because of the vectorTransform</span></td></tr>
+<tr class="codeline" data-linenumber="186"><td class="num" id="LN186">186</td><td class="line">    faiss::RandomRotationMatrix rot(d, d);</td></tr>
+<tr class="codeline" data-linenumber="187"><td class="num" id="LN187">187</td><td class="line">    rot.init(1234);</td></tr>
+<tr class="codeline" data-linenumber="188"><td class="num" id="LN188">188</td><td class="line">    faiss::IndexFlatL2 quantizer(d);</td></tr>
+<tr class="codeline" data-linenumber="189"><td class="num" id="LN189">189</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="190"><td class="num" id="LN190">190</td><td class="line">    { <span class='comment'>// just to train the quantizer</span></td></tr>
+<tr class="codeline" data-linenumber="191"><td class="num" id="LN191">191</td><td class="line">        faiss::IndexIVFFlat iflat(&amp;quantizer, d, nlist);</td></tr>
+<tr class="codeline" data-linenumber="192"><td class="num" id="LN192">192</td><td class="line">        faiss::IndexPreTransform ipt(&amp;rot, &amp;iflat);</td></tr>
+<tr class="codeline" data-linenumber="193"><td class="num" id="LN193">193</td><td class="line">        ipt.train(nb, cd.database.data());</td></tr>
+<tr class="codeline" data-linenumber="194"><td class="num" id="LN194">194</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="195"><td class="num" id="LN195">195</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="196"><td class="num" id="LN196">196</td><td class="line">    <span class='keyword'>for</span> (<span class='keyword'>int</span> i = 0; i &lt; nindex; i++) {</td></tr>
+<tr class="codeline" data-linenumber="197"><td class="num" id="LN197">197</td><td class="line">        faiss::IndexPreTransform* ipt = <span class='keyword'>new</span> faiss::IndexPreTransform(</td></tr>
+<tr class="codeline" data-linenumber="198"><td class="num" id="LN198">198</td><td class="line">                <span class='keyword'>new</span> faiss::RandomRotationMatrix(rot),</td></tr>
+<tr class="codeline" data-linenumber="199"><td class="num" id="LN199">199</td><td class="line">                <span class='keyword'>new</span> faiss::IndexIVFFlat(&amp;quantizer, d, nlist));</td></tr>
+<tr class="codeline" data-linenumber="200"><td class="num" id="LN200">200</td><td class="line">        ipt-&gt;own_fields = <span class='keyword'>true</span>;</td></tr>
+<tr class="codeline" data-linenumber="201"><td class="num" id="LN201">201</td><td class="line">        index_shards.add_shard(ipt);</td></tr>
+<tr class="codeline" data-linenumber="202"><td class="num" id="LN202">202</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="203"><td class="num" id="LN203">203</td><td class="line">    <span class='macro'>EXPECT_TRUE(index_shards.is_trained)<span class='macro_popup'>switch (0) case 0: default: if (const ::testing::AssertionResult<br> gtest_ar_ = ::testing::AssertionResult(index_shards.is_trained<br>)) ; else ::testing::internal::AssertHelper(::testing::TestPartResult<br>::kNonFatalFailure, "/home/zhh/projects/faiss-1.7.1/tests/test_merge.cpp"<br>, 203, ::testing::internal::GetBoolAssertionFailureMessage( gtest_ar_<br>, "index_shards.is_trained", "false", "true").c_str()) = ::testing<br>::Message()</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="204"><td class="num" id="LN204">204</td><td class="line">    index_shards.add_with_ids(nb, cd.database.data(), cd.ids.data());</td></tr>
+<tr class="codeline" data-linenumber="205"><td class="num" id="LN205">205</td><td class="line">    size_t prev_ntotal = index_shards.ntotal;</td></tr>
+<tr class="codeline" data-linenumber="206"><td class="num" id="LN206">206</td><td class="line">    <span class='keyword'>int</span> ndiff = compare_merged(&amp;index_shards, <span class='keyword'>false</span>);</td></tr>
+<tr class="codeline" data-linenumber="207"><td class="num" id="LN207">207</td><td class="line">    <span class='macro'>EXPECT_EQ(prev_ntotal, index_shards.ntotal)<span class='macro_popup'>switch (0) case 0: default: if (const ::testing::AssertionResult<br> gtest_ar = (::testing::internal::EqHelper::Compare("prev_ntotal"<br>, "index_shards.ntotal", prev_ntotal, index_shards.ntotal))) ;<br> else ::testing::internal::AssertHelper(::testing::TestPartResult<br>::kNonFatalFailure, "/home/zhh/projects/faiss-1.7.1/tests/test_merge.cpp"<br>, 207, gtest_ar.failure_message()) = ::testing::Message()</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="208"><td class="num" id="LN208">208</td><td class="line">    <span class='macro'>EXPECT_GE(0, ndiff)<span class='macro_popup'>switch (0) case 0: default: if (const ::testing::AssertionResult<br> gtest_ar = (::testing::internal::CmpHelperGE("0", "ndiff", 0<br>, ndiff))) ; else ::testing::internal::AssertHelper(::testing<br>::TestPartResult::kNonFatalFailure, "/home/zhh/projects/faiss-1.7.1/tests/test_merge.cpp"<br>, 208, gtest_ar.failure_message()) = ::testing::Message()</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="209"><td class="num" id="LN209">209</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="210"><td class="num" id="LN210">210</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="211"><td class="num" id="LN211">211</td><td class="line"><span class='comment'>// put the merged invfile on disk</span></td></tr>
+<tr class="codeline" data-linenumber="212"><td class="num" id="LN212">212</td><td class="line"><span class='macro'>TEST(MERGE, merge_flat_ondisk)<span class='macro_popup'>static_assert(sizeof("MERGE") &gt; 1, "test_suite_name must not be empty"<br>); static_assert(sizeof("merge_flat_ondisk") &gt; 1, "test_name must not be empty"<br>); class MERGE_merge_flat_ondisk_Test : public ::testing::Test<br> { public: MERGE_merge_flat_ondisk_Test() {} private: virtual<br> void TestBody(); static ::testing::TestInfo* const test_info_<br> __attribute__ ((unused)); MERGE_merge_flat_ondisk_Test(MERGE_merge_flat_ondisk_Test<br> const &amp;) = delete; void operator=(MERGE_merge_flat_ondisk_Test<br> const &amp;) = delete; }; ::testing::TestInfo* const MERGE_merge_flat_ondisk_Test<br>::test_info_ = ::testing::internal::MakeAndRegisterTestInfo( "MERGE"<br>, "merge_flat_ondisk", nullptr, nullptr, ::testing::internal::<br>CodeLocation("/home/zhh/projects/faiss-1.7.1/tests/test_merge.cpp"<br>, 212), (::testing::internal::GetTestTypeId()), ::testing::internal<br>::SuiteApiResolver&lt; ::testing::Test&gt;::GetSetUpCaseOrSuite<br>("/home/zhh/projects/faiss-1.7.1/tests/test_merge.cpp", 212),<br> ::testing::internal::SuiteApiResolver&lt; ::testing::Test&gt;<br>::GetTearDownCaseOrSuite("/home/zhh/projects/faiss-1.7.1/tests/test_merge.cpp"<br>, 212), new ::testing::internal::TestFactoryImpl&lt;MERGE_merge_flat_ondisk_Test<br>&gt;); void MERGE_merge_flat_ondisk_Test::TestBody()</span></span> {</td></tr>
+<tr class="codeline" data-linenumber="213"><td class="num" id="LN213">213</td><td class="line">    faiss::IndexShards index_shards(d, <span class='keyword'>false</span>, <span class='keyword'>false</span>);</td></tr>
+<tr class="codeline" data-linenumber="214"><td class="num" id="LN214">214</td><td class="line">    index_shards.own_fields = <span class='keyword'>true</span>;</td></tr>
+<tr class="codeline" data-linenumber="215"><td class="num" id="LN215">215</td><td class="line">    Tempfilename filename;</td></tr>
+<tr class="codeline" data-linenumber="216"><td class="num" id="LN216">216</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="217"><td class="num" id="LN217">217</td><td class="line">    <span class='keyword'>for</span> (<span class='keyword'>int</span> i = 0; i &lt; nindex; i++) {</td></tr>
+<tr class="codeline" data-linenumber="218"><td class="num" id="LN218">218</td><td class="line">        <span class='keyword'>auto</span> ivf = <span class='keyword'>new</span> faiss::IndexIVFFlat(&amp;cd.quantizer, d, nlist);</td></tr>
+<tr class="codeline" data-linenumber="219"><td class="num" id="LN219">219</td><td class="line">        <span class='keyword'>if</span> (i == 0) {</td></tr>
+<tr class="codeline" data-linenumber="220"><td class="num" id="LN220">220</td><td class="line">            <span class='keyword'>auto</span> il = <span class='keyword'>new</span> faiss::OnDiskInvertedLists(</td></tr>
+<tr class="codeline" data-linenumber="221"><td class="num" id="LN221">221</td><td class="line">                    ivf-&gt;nlist, ivf-&gt;code_size, filename.c_str());</td></tr>
+<tr class="codeline" data-linenumber="222"><td class="num" id="LN222">222</td><td class="line">            ivf-&gt;replace_invlists(il, <span class='keyword'>true</span>);</td></tr>
+<tr class="codeline" data-linenumber="223"><td class="num" id="LN223">223</td><td class="line">        }</td></tr>
+<tr class="codeline" data-linenumber="224"><td class="num" id="LN224">224</td><td class="line">        index_shards.add_shard(ivf);</td></tr>
+<tr class="codeline" data-linenumber="225"><td class="num" id="LN225">225</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="226"><td class="num" id="LN226">226</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="227"><td class="num" id="LN227">227</td><td class="line">    <span class='macro'>EXPECT_TRUE(index_shards.is_trained)<span class='macro_popup'>switch (0) case 0: default: if (const ::testing::AssertionResult<br> gtest_ar_ = ::testing::AssertionResult(index_shards.is_trained<br>)) ; else ::testing::internal::AssertHelper(::testing::TestPartResult<br>::kNonFatalFailure, "/home/zhh/projects/faiss-1.7.1/tests/test_merge.cpp"<br>, 227, ::testing::internal::GetBoolAssertionFailureMessage( gtest_ar_<br>, "index_shards.is_trained", "false", "true").c_str()) = ::testing<br>::Message()</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="228"><td class="num" id="LN228">228</td><td class="line">    index_shards.add_with_ids(nb, cd.database.data(), cd.ids.data());</td></tr>
+<tr class="codeline" data-linenumber="229"><td class="num" id="LN229">229</td><td class="line">    <span class='keyword'>int</span> ndiff = compare_merged(&amp;index_shards, <span class='keyword'>false</span>);</td></tr>
+<tr class="codeline" data-linenumber="230"><td class="num" id="LN230">230</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="231"><td class="num" id="LN231">231</td><td class="line">    <span class='macro'>EXPECT_EQ(ndiff, 0)<span class='macro_popup'>switch (0) case 0: default: if (const ::testing::AssertionResult<br> gtest_ar = (::testing::internal::EqHelper::Compare("ndiff", "0"<br>, ndiff, 0))) ; else ::testing::internal::AssertHelper(::testing<br>::TestPartResult::kNonFatalFailure, "/home/zhh/projects/faiss-1.7.1/tests/test_merge.cpp"<br>, 231, gtest_ar.failure_message()) = ::testing::Message()</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="232"><td class="num" id="LN232">232</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="233"><td class="num" id="LN233">233</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="234"><td class="num" id="LN234">234</td><td class="line"><span class='comment'>// now use ondisk specific merge</span></td></tr>
+<tr class="codeline" data-linenumber="235"><td class="num" id="LN235">235</td><td class="line"><span class='macro'>TEST(MERGE, merge_flat_ondisk_2)<span class='macro_popup'>static_assert(sizeof("MERGE") &gt; 1, "test_suite_name must not be empty"<br>); static_assert(sizeof("merge_flat_ondisk_2") &gt; 1, "test_name must not be empty"<br>); class MERGE_merge_flat_ondisk_2_Test : public ::testing::Test<br> { public: MERGE_merge_flat_ondisk_2_Test() {} private: virtual<br> void TestBody(); static ::testing::TestInfo* const test_info_<br> __attribute__ ((unused)); MERGE_merge_flat_ondisk_2_Test(MERGE_merge_flat_ondisk_2_Test<br> const &amp;) = delete; void operator=(MERGE_merge_flat_ondisk_2_Test<br> const &amp;) = delete; }; ::testing::TestInfo* const MERGE_merge_flat_ondisk_2_Test<br>::test_info_ = ::testing::internal::MakeAndRegisterTestInfo( "MERGE"<br>, "merge_flat_ondisk_2", nullptr, nullptr, ::testing::internal<br>::CodeLocation("/home/zhh/projects/faiss-1.7.1/tests/test_merge.cpp"<br>, 235), (::testing::internal::GetTestTypeId()), ::testing::internal<br>::SuiteApiResolver&lt; ::testing::Test&gt;::GetSetUpCaseOrSuite<br>("/home/zhh/projects/faiss-1.7.1/tests/test_merge.cpp", 235),<br> ::testing::internal::SuiteApiResolver&lt; ::testing::Test&gt;<br>::GetTearDownCaseOrSuite("/home/zhh/projects/faiss-1.7.1/tests/test_merge.cpp"<br>, 235), new ::testing::internal::TestFactoryImpl&lt;MERGE_merge_flat_ondisk_2_Test<br>&gt;); void MERGE_merge_flat_ondisk_2_Test::TestBody()</span></span> {</td></tr>
+<tr class="codeline" data-linenumber="236"><td class="num" id="LN236">236</td><td class="line">    faiss::IndexShards index_shards(d, <span class='keyword'>false</span>, <span class='keyword'>false</span>);</td></tr>
+<tr class="codeline" data-linenumber="237"><td class="num" id="LN237">237</td><td class="line">    index_shards.own_fields = <span class='keyword'>true</span>;</td></tr>
+<tr class="codeline" data-linenumber="238"><td class="num" id="LN238">238</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="239"><td class="num" id="LN239">239</td><td class="line">    <span class='keyword'>for</span> (<span class='keyword'>int</span> i = 0; <span class="mrange">i &lt; nindex</span>; i++) {</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path1" class="msg msgEvent" style="margin-left:21ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">1</div></td><td>Assuming 'i' is &lt; 'nindex'</td><td><div class="PathNav"><a href="#Path2" title="Next event (2)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path2" class="msg msgControl" style="margin-left:5ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexControl">2</div></td><td><div class="PathNav"><a href="#Path1" title="Previous event (1)">&#x2190;</a></div></td><td>Loop condition is true.  Entering loop body</td><td><div class="PathNav"><a href="#Path3" title="Next event (3)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="240"><td class="num" id="LN240">240</td><td class="line">        <span class="mrange"><span class="mrange">index_shards.add_shard(</td></tr></span>
+<tr><td class="num"></td><td class="line"><div id="Path4" class="msg msgEvent" style="margin-left:9ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">4</div></td><td><div class="PathNav"><a href="#Path3" title="Previous event (3)">&#x2190;</a></div></td><td>Calling 'IndexShardsTemplate::add_shard'</td><td><div class="PathNav"><a href="#Path5" title="Next event (5)">&#x2192;</a></div></td></tr></table></div></td></tr></span>
+<tr><td class="num"></td><td class="line"><div id="Path13" class="msg msgEvent" style="margin-left:9ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">13</div></td><td><div class="PathNav"><a href="#Path12" title="Previous event (12)">&#x2190;</a></div></td><td>Returning from 'IndexShardsTemplate::add_shard'</td><td><div class="PathNav"><a href="#EndPath" title="Next event (14)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="241"><td class="num" id="LN241">241</td><td class="line">                <span class="mrange"><span class="mrange"><span class="mrange"><span class='keyword'>new</span> faiss::IndexIVFFlat(&amp;cd.quantizer, d, nlist)</span>)</span></span>;</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path3" class="msg msgEvent" style="margin-left:17ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">3</div></td><td><div class="PathNav"><a href="#Path2" title="Previous event (2)">&#x2190;</a></div></td><td>Memory is allocated</td><td><div class="PathNav"><a href="#Path4" title="Next event (4)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="242"><td class="num" id="LN242">242</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="243"><td class="num" id="LN243">243</td><td class="line">    <span class='macro'>EXPECT_TRUE(index_shards.is_trained)<span class='macro_popup'>switch (0) case 0: default: if (const ::testing::AssertionResult<br> gtest_ar_ = ::testing::AssertionResult(index_shards.is_trained<br>)) ; else ::testing::internal::AssertHelper(::testing::TestPartResult<br>::kNonFatalFailure, "/home/zhh/projects/faiss-1.7.1/tests/test_merge.cpp"<br>, 243, ::testing::internal::GetBoolAssertionFailureMessage( gtest_ar_<br>, "index_shards.is_trained", "false", "true").c_str()) = ::testing<br>::Message()</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="244"><td class="num" id="LN244">244</td><td class="line">    index_shards.add_with_ids(nb, cd.database.data(), cd.ids.data());</td></tr>
+<tr class="codeline" data-linenumber="245"><td class="num" id="LN245">245</td><td class="line">    <span class='keyword'>int</span> ndiff = compare_merged(&amp;index_shards, <span class='keyword'>false</span>, <span class='keyword'>false</span>);</td></tr>
+<tr class="codeline" data-linenumber="246"><td class="num" id="LN246">246</td><td class="line">    <span class='macro'>EXPECT_GE(0, ndiff)<span class='macro_popup'>switch (0) case 0: default: if (const ::testing::AssertionResult<br> gtest_ar = (::testing::internal::CmpHelperGE("0", "ndiff", 0<br>, ndiff))) ; else ::testing::internal::AssertHelper(::testing<br>::TestPartResult::kNonFatalFailure, "/home/zhh/projects/faiss-1.7.1/tests/test_merge.cpp"<br>, 246, gtest_ar.failure_message()) = ::testing::Message()</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="247"><td class="num" id="LN247">247</td><td class="line">}</td></tr>
+<tr><td class="num"></td><td class="line"><div id="EndPath" class="msg msgEvent" style="margin-left:1ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">14</div></td><td><div class="PathNav"><a href="#Path13" title="Previous event (13)">&#x2190;</a></div></td><td>Potential memory leak</td></tr></table></div></td></tr>
+</table><hr class=divider>
+<div id=File40091>
+<div class=FileNav><a href="#File1">&#x2190;</a></div><h4 class=FileName>/home/zhh/projects/faiss-1.7.1/faiss/IndexShards.h</h4>
+<div class=FileNav><a href="#File40008">&#x2192;</a></div></div>
+<table class="code" data-fileid="40091">
+<tr class="codeline" data-linenumber="1"><td class="num" id="LN1">1</td><td class="line"><span class='comment'>/**</span></td></tr>
+<tr class="codeline" data-linenumber="2"><td class="num" id="LN2">2</td><td class="line"> <span class='comment'>* Copyright (c) Facebook, Inc. and its affiliates.</span></td></tr>
+<tr class="codeline" data-linenumber="3"><td class="num" id="LN3">3</td><td class="line"> <span class='comment'>*</span></td></tr>
+<tr class="codeline" data-linenumber="4"><td class="num" id="LN4">4</td><td class="line"> <span class='comment'>* This source code is licensed under the MIT license found in the</span></td></tr>
+<tr class="codeline" data-linenumber="5"><td class="num" id="LN5">5</td><td class="line"> <span class='comment'>* LICENSE file in the root directory of this source tree.</span></td></tr>
+<tr class="codeline" data-linenumber="6"><td class="num" id="LN6">6</td><td class="line"> <span class='comment'>*/</span></td></tr>
+<tr class="codeline" data-linenumber="7"><td class="num" id="LN7">7</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="8"><td class="num" id="LN8">8</td><td class="line"><span class='directive'>#pragma once</span></td></tr>
+<tr class="codeline" data-linenumber="9"><td class="num" id="LN9">9</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="10"><td class="num" id="LN10">10</td><td class="line"><span class='directive'>#include &lt;faiss/Index.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="11"><td class="num" id="LN11">11</td><td class="line"><span class='directive'>#include &lt;faiss/IndexBinary.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="12"><td class="num" id="LN12">12</td><td class="line"><span class='directive'>#include &lt;faiss/impl/ThreadedIndex.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="13"><td class="num" id="LN13">13</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="14"><td class="num" id="LN14">14</td><td class="line"><span class='keyword'>namespace</span> faiss {</td></tr>
+<tr class="codeline" data-linenumber="15"><td class="num" id="LN15">15</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="16"><td class="num" id="LN16">16</td><td class="line"><span class='comment'>/**</span></td></tr>
+<tr class="codeline" data-linenumber="17"><td class="num" id="LN17">17</td><td class="line"> <span class='comment'>* Index that concatenates the results from several sub-indexes</span></td></tr>
+<tr class="codeline" data-linenumber="18"><td class="num" id="LN18">18</td><td class="line"> <span class='comment'>*/</span></td></tr>
+<tr class="codeline" data-linenumber="19"><td class="num" id="LN19">19</td><td class="line"><span class='keyword'>template</span> &lt;<span class='keyword'>typename</span> IndexT&gt;</td></tr>
+<tr class="codeline" data-linenumber="20"><td class="num" id="LN20">20</td><td class="line"><span class='keyword'>struct</span> IndexShardsTemplate : <span class='keyword'>public</span> ThreadedIndex&lt;IndexT&gt; {</td></tr>
+<tr class="codeline" data-linenumber="21"><td class="num" id="LN21">21</td><td class="line">    <span class='keyword'>using</span> idx_t = <span class='keyword'>typename</span> IndexT::idx_t;</td></tr>
+<tr class="codeline" data-linenumber="22"><td class="num" id="LN22">22</td><td class="line">    <span class='keyword'>using</span> component_t = <span class='keyword'>typename</span> IndexT::component_t;</td></tr>
+<tr class="codeline" data-linenumber="23"><td class="num" id="LN23">23</td><td class="line">    <span class='keyword'>using</span> distance_t = <span class='keyword'>typename</span> IndexT::distance_t;</td></tr>
+<tr class="codeline" data-linenumber="24"><td class="num" id="LN24">24</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="25"><td class="num" id="LN25">25</td><td class="line">    <span class='comment'>/**</span></td></tr>
+<tr class="codeline" data-linenumber="26"><td class="num" id="LN26">26</td><td class="line">     <span class='comment'>* The dimension that all sub-indices must share will be the dimension of</span></td></tr>
+<tr class="codeline" data-linenumber="27"><td class="num" id="LN27">27</td><td class="line">     <span class='comment'>* the first sub-index added</span></td></tr>
+<tr class="codeline" data-linenumber="28"><td class="num" id="LN28">28</td><td class="line">     <span class='comment'>*</span></td></tr>
+<tr class="codeline" data-linenumber="29"><td class="num" id="LN29">29</td><td class="line">     <span class='comment'>* @param threaded     do we use one thread per sub_index or do</span></td></tr>
+<tr class="codeline" data-linenumber="30"><td class="num" id="LN30">30</td><td class="line">     <span class='comment'>*                     queries sequentially?</span></td></tr>
+<tr class="codeline" data-linenumber="31"><td class="num" id="LN31">31</td><td class="line">     <span class='comment'>* @param successive_ids should we shift the returned ids by</span></td></tr>
+<tr class="codeline" data-linenumber="32"><td class="num" id="LN32">32</td><td class="line">     <span class='comment'>*                     the size of each sub-index or return them</span></td></tr>
+<tr class="codeline" data-linenumber="33"><td class="num" id="LN33">33</td><td class="line">     <span class='comment'>*                     as they are?</span></td></tr>
+<tr class="codeline" data-linenumber="34"><td class="num" id="LN34">34</td><td class="line">     <span class='comment'>*/</span></td></tr>
+<tr class="codeline" data-linenumber="35"><td class="num" id="LN35">35</td><td class="line">    <span class='keyword'>explicit</span> IndexShardsTemplate(</td></tr>
+<tr class="codeline" data-linenumber="36"><td class="num" id="LN36">36</td><td class="line">            <span class='keyword'>bool</span> threaded = <span class='keyword'>false</span>,</td></tr>
+<tr class="codeline" data-linenumber="37"><td class="num" id="LN37">37</td><td class="line">            <span class='keyword'>bool</span> successive_ids = <span class='keyword'>true</span>);</td></tr>
+<tr class="codeline" data-linenumber="38"><td class="num" id="LN38">38</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="39"><td class="num" id="LN39">39</td><td class="line">    <span class='comment'>/**</span></td></tr>
+<tr class="codeline" data-linenumber="40"><td class="num" id="LN40">40</td><td class="line">     <span class='comment'>* @param threaded     do we use one thread per sub_index or do</span></td></tr>
+<tr class="codeline" data-linenumber="41"><td class="num" id="LN41">41</td><td class="line">     <span class='comment'>*                     queries sequentially?</span></td></tr>
+<tr class="codeline" data-linenumber="42"><td class="num" id="LN42">42</td><td class="line">     <span class='comment'>* @param successive_ids should we shift the returned ids by</span></td></tr>
+<tr class="codeline" data-linenumber="43"><td class="num" id="LN43">43</td><td class="line">     <span class='comment'>*                     the size of each sub-index or return them</span></td></tr>
+<tr class="codeline" data-linenumber="44"><td class="num" id="LN44">44</td><td class="line">     <span class='comment'>*                     as they are?</span></td></tr>
+<tr class="codeline" data-linenumber="45"><td class="num" id="LN45">45</td><td class="line">     <span class='comment'>*/</span></td></tr>
+<tr class="codeline" data-linenumber="46"><td class="num" id="LN46">46</td><td class="line">    <span class='keyword'>explicit</span> IndexShardsTemplate(</td></tr>
+<tr class="codeline" data-linenumber="47"><td class="num" id="LN47">47</td><td class="line">            idx_t d,</td></tr>
+<tr class="codeline" data-linenumber="48"><td class="num" id="LN48">48</td><td class="line">            <span class='keyword'>bool</span> threaded = <span class='keyword'>false</span>,</td></tr>
+<tr class="codeline" data-linenumber="49"><td class="num" id="LN49">49</td><td class="line">            <span class='keyword'>bool</span> successive_ids = <span class='keyword'>true</span>);</td></tr>
+<tr class="codeline" data-linenumber="50"><td class="num" id="LN50">50</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="51"><td class="num" id="LN51">51</td><td class="line">    <span class='comment'>/// int version due to the implicit bool conversion ambiguity of int as</span></td></tr>
+<tr class="codeline" data-linenumber="52"><td class="num" id="LN52">52</td><td class="line">    <span class='comment'>/// dimension</span></td></tr>
+<tr class="codeline" data-linenumber="53"><td class="num" id="LN53">53</td><td class="line">    <span class='keyword'>explicit</span> IndexShardsTemplate(</td></tr>
+<tr class="codeline" data-linenumber="54"><td class="num" id="LN54">54</td><td class="line">            <span class='keyword'>int</span> d,</td></tr>
+<tr class="codeline" data-linenumber="55"><td class="num" id="LN55">55</td><td class="line">            <span class='keyword'>bool</span> threaded = <span class='keyword'>false</span>,</td></tr>
+<tr class="codeline" data-linenumber="56"><td class="num" id="LN56">56</td><td class="line">            <span class='keyword'>bool</span> successive_ids = <span class='keyword'>true</span>);</td></tr>
+<tr class="codeline" data-linenumber="57"><td class="num" id="LN57">57</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="58"><td class="num" id="LN58">58</td><td class="line">    <span class='comment'>/// Alias for addIndex()</span></td></tr>
+<tr class="codeline" data-linenumber="59"><td class="num" id="LN59">59</td><td class="line">    <span class='keyword'>void</span> add_shard(IndexT* index) {</td></tr>
+<tr class="codeline" data-linenumber="60"><td class="num" id="LN60">60</td><td class="line">        <span class="mrange"><span class="mrange"><span class='keyword'>this</span>-&gt;addIndex(index)</span></span>;</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path5" class="msg msgEvent" style="margin-left:9ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">5</div></td><td><div class="PathNav"><a href="#Path4" title="Previous event (4)">&#x2190;</a></div></td><td>Calling 'ThreadedIndex::addIndex'</td><td><div class="PathNav"><a href="#Path6" title="Next event (6)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path12" class="msg msgEvent" style="margin-left:9ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">12</div></td><td><div class="PathNav"><a href="#Path11" title="Previous event (11)">&#x2190;</a></div></td><td>Returning from 'ThreadedIndex::addIndex'</td><td><div class="PathNav"><a href="#Path13" title="Next event (13)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="61"><td class="num" id="LN61">61</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="62"><td class="num" id="LN62">62</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="63"><td class="num" id="LN63">63</td><td class="line">    <span class='comment'>/// Alias for removeIndex()</span></td></tr>
+<tr class="codeline" data-linenumber="64"><td class="num" id="LN64">64</td><td class="line">    <span class='keyword'>void</span> remove_shard(IndexT* index) {</td></tr>
+<tr class="codeline" data-linenumber="65"><td class="num" id="LN65">65</td><td class="line">        <span class='keyword'>this</span>-&gt;removeIndex(index);</td></tr>
+<tr class="codeline" data-linenumber="66"><td class="num" id="LN66">66</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="67"><td class="num" id="LN67">67</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="68"><td class="num" id="LN68">68</td><td class="line">    <span class='comment'>/// supported only for sub-indices that implement add_with_ids</span></td></tr>
+<tr class="codeline" data-linenumber="69"><td class="num" id="LN69">69</td><td class="line">    <span class='keyword'>void</span> add(idx_t n, <span class='keyword'>const</span> component_t* x) override;</td></tr>
+<tr class="codeline" data-linenumber="70"><td class="num" id="LN70">70</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="71"><td class="num" id="LN71">71</td><td class="line">    <span class='comment'>/**</span></td></tr>
+<tr class="codeline" data-linenumber="72"><td class="num" id="LN72">72</td><td class="line">     <span class='comment'>* Cases (successive_ids, xids):</span></td></tr>
+<tr class="codeline" data-linenumber="73"><td class="num" id="LN73">73</td><td class="line">     <span class='comment'>* - true, non-NULL       ERROR: it makes no sense to pass in ids and</span></td></tr>
+<tr class="codeline" data-linenumber="74"><td class="num" id="LN74">74</td><td class="line">     <span class='comment'>*                        request them to be shifted</span></td></tr>
+<tr class="codeline" data-linenumber="75"><td class="num" id="LN75">75</td><td class="line">     <span class='comment'>* - true, NULL           OK, but should be called only once (calls add()</span></td></tr>
+<tr class="codeline" data-linenumber="76"><td class="num" id="LN76">76</td><td class="line">     <span class='comment'>*                        on sub-indexes).</span></td></tr>
+<tr class="codeline" data-linenumber="77"><td class="num" id="LN77">77</td><td class="line">     <span class='comment'>* - false, non-NULL      OK: will call add_with_ids with passed in xids</span></td></tr>
+<tr class="codeline" data-linenumber="78"><td class="num" id="LN78">78</td><td class="line">     <span class='comment'>*                        distributed evenly over shards</span></td></tr>
+<tr class="codeline" data-linenumber="79"><td class="num" id="LN79">79</td><td class="line">     <span class='comment'>* - false, NULL          OK: will call add_with_ids on each sub-index,</span></td></tr>
+<tr class="codeline" data-linenumber="80"><td class="num" id="LN80">80</td><td class="line">     <span class='comment'>*                        starting at ntotal</span></td></tr>
+<tr class="codeline" data-linenumber="81"><td class="num" id="LN81">81</td><td class="line">     <span class='comment'>*/</span></td></tr>
+<tr class="codeline" data-linenumber="82"><td class="num" id="LN82">82</td><td class="line">    <span class='keyword'>void</span> add_with_ids(idx_t n, <span class='keyword'>const</span> component_t* x, <span class='keyword'>const</span> idx_t* xids)</td></tr>
+<tr class="codeline" data-linenumber="83"><td class="num" id="LN83">83</td><td class="line">            override;</td></tr>
+<tr class="codeline" data-linenumber="84"><td class="num" id="LN84">84</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="85"><td class="num" id="LN85">85</td><td class="line">    <span class='keyword'>void</span> search(</td></tr>
+<tr class="codeline" data-linenumber="86"><td class="num" id="LN86">86</td><td class="line">            idx_t n,</td></tr>
+<tr class="codeline" data-linenumber="87"><td class="num" id="LN87">87</td><td class="line">            <span class='keyword'>const</span> component_t* x,</td></tr>
+<tr class="codeline" data-linenumber="88"><td class="num" id="LN88">88</td><td class="line">            idx_t k,</td></tr>
+<tr class="codeline" data-linenumber="89"><td class="num" id="LN89">89</td><td class="line">            distance_t* distances,</td></tr>
+<tr class="codeline" data-linenumber="90"><td class="num" id="LN90">90</td><td class="line">            idx_t* labels) <span class='keyword'>const</span> override;</td></tr>
+<tr class="codeline" data-linenumber="91"><td class="num" id="LN91">91</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="92"><td class="num" id="LN92">92</td><td class="line">    <span class='keyword'>void</span> train(idx_t n, <span class='keyword'>const</span> component_t* x) override;</td></tr>
+<tr class="codeline" data-linenumber="93"><td class="num" id="LN93">93</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="94"><td class="num" id="LN94">94</td><td class="line">    <span class='keyword'>bool</span> successive_ids;</td></tr>
+<tr class="codeline" data-linenumber="95"><td class="num" id="LN95">95</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="96"><td class="num" id="LN96">96</td><td class="line">    <span class='comment'>/// Synchronize the top-level index (IndexShards) with data in the</span></td></tr>
+<tr class="codeline" data-linenumber="97"><td class="num" id="LN97">97</td><td class="line">    <span class='comment'>/// sub-indices</span></td></tr>
+<tr class="codeline" data-linenumber="98"><td class="num" id="LN98">98</td><td class="line">    <span class='keyword'>void</span> syncWithSubIndexes();</td></tr>
+<tr class="codeline" data-linenumber="99"><td class="num" id="LN99">99</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="100"><td class="num" id="LN100">100</td><td class="line">   <span class='keyword'>protected</span>:</td></tr>
+<tr class="codeline" data-linenumber="101"><td class="num" id="LN101">101</td><td class="line">    <span class='comment'>/// Called just after an index is added</span></td></tr>
+<tr class="codeline" data-linenumber="102"><td class="num" id="LN102">102</td><td class="line">    <span class='keyword'>void</span> onAfterAddIndex(IndexT* index) override;</td></tr>
+<tr class="codeline" data-linenumber="103"><td class="num" id="LN103">103</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="104"><td class="num" id="LN104">104</td><td class="line">    <span class='comment'>/// Called just after an index is removed</span></td></tr>
+<tr class="codeline" data-linenumber="105"><td class="num" id="LN105">105</td><td class="line">    <span class='keyword'>void</span> onAfterRemoveIndex(IndexT* index) override;</td></tr>
+<tr class="codeline" data-linenumber="106"><td class="num" id="LN106">106</td><td class="line">};</td></tr>
+<tr class="codeline" data-linenumber="107"><td class="num" id="LN107">107</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="108"><td class="num" id="LN108">108</td><td class="line"><span class='keyword'>using</span> IndexShards = IndexShardsTemplate&lt;Index&gt;;</td></tr>
+<tr class="codeline" data-linenumber="109"><td class="num" id="LN109">109</td><td class="line"><span class='keyword'>using</span> IndexBinaryShards = IndexShardsTemplate&lt;IndexBinary&gt;;</td></tr>
+<tr class="codeline" data-linenumber="110"><td class="num" id="LN110">110</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="111"><td class="num" id="LN111">111</td><td class="line">} <span class='comment'>// namespace faiss</span></td></tr>
+</table><hr class=divider>
+<div id=File40008>
+<div class=FileNav><a href="#File40091">&#x2190;</a></div><h4 class=FileName>/home/zhh/projects/faiss-1.7.1/faiss/impl/ThreadedIndex-inl.h</h4>
+</div>
+<table class="code" data-fileid="40008">
+<tr class="codeline" data-linenumber="1"><td class="num" id="LN1">1</td><td class="line"><span class='comment'>/**</span></td></tr>
+<tr class="codeline" data-linenumber="2"><td class="num" id="LN2">2</td><td class="line"> <span class='comment'>* Copyright (c) Facebook, Inc. and its affiliates.</span></td></tr>
+<tr class="codeline" data-linenumber="3"><td class="num" id="LN3">3</td><td class="line"> <span class='comment'>*</span></td></tr>
+<tr class="codeline" data-linenumber="4"><td class="num" id="LN4">4</td><td class="line"> <span class='comment'>* This source code is licensed under the MIT license found in the</span></td></tr>
+<tr class="codeline" data-linenumber="5"><td class="num" id="LN5">5</td><td class="line"> <span class='comment'>* LICENSE file in the root directory of this source tree.</span></td></tr>
+<tr class="codeline" data-linenumber="6"><td class="num" id="LN6">6</td><td class="line"> <span class='comment'>*/</span></td></tr>
+<tr class="codeline" data-linenumber="7"><td class="num" id="LN7">7</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="8"><td class="num" id="LN8">8</td><td class="line"><span class='directive'>#include &lt;faiss/impl/FaissAssert.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="9"><td class="num" id="LN9">9</td><td class="line"><span class='directive'>#include &lt;exception&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="10"><td class="num" id="LN10">10</td><td class="line"><span class='directive'>#include &lt;iostream&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="11"><td class="num" id="LN11">11</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="12"><td class="num" id="LN12">12</td><td class="line"><span class='keyword'>namespace</span> faiss {</td></tr>
+<tr class="codeline" data-linenumber="13"><td class="num" id="LN13">13</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="14"><td class="num" id="LN14">14</td><td class="line"><span class='keyword'>template</span> &lt;<span class='keyword'>typename</span> IndexT&gt;</td></tr>
+<tr class="codeline" data-linenumber="15"><td class="num" id="LN15">15</td><td class="line">ThreadedIndex&lt;IndexT&gt;::ThreadedIndex(<span class='keyword'>bool</span> threaded)</td></tr>
+<tr class="codeline" data-linenumber="16"><td class="num" id="LN16">16</td><td class="line">        <span class='comment'>// 0 is default dimension</span></td></tr>
+<tr class="codeline" data-linenumber="17"><td class="num" id="LN17">17</td><td class="line">        : ThreadedIndex(0, threaded) {}</td></tr>
+<tr class="codeline" data-linenumber="18"><td class="num" id="LN18">18</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="19"><td class="num" id="LN19">19</td><td class="line"><span class='keyword'>template</span> &lt;<span class='keyword'>typename</span> IndexT&gt;</td></tr>
+<tr class="codeline" data-linenumber="20"><td class="num" id="LN20">20</td><td class="line">ThreadedIndex&lt;IndexT&gt;::ThreadedIndex(<span class='keyword'>int</span> d, <span class='keyword'>bool</span> threaded)</td></tr>
+<tr class="codeline" data-linenumber="21"><td class="num" id="LN21">21</td><td class="line">        : IndexT(d), own_fields(<span class='keyword'>false</span>), isThreaded_(threaded) {}</td></tr>
+<tr class="codeline" data-linenumber="22"><td class="num" id="LN22">22</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="23"><td class="num" id="LN23">23</td><td class="line"><span class='keyword'>template</span> &lt;<span class='keyword'>typename</span> IndexT&gt;</td></tr>
+<tr class="codeline" data-linenumber="24"><td class="num" id="LN24">24</td><td class="line">ThreadedIndex&lt;IndexT&gt;::~ThreadedIndex() {</td></tr>
+<tr class="codeline" data-linenumber="25"><td class="num" id="LN25">25</td><td class="line">    <span class='keyword'>for</span> (<span class='keyword'>auto</span>&amp; p : indices_) {</td></tr>
+<tr class="codeline" data-linenumber="26"><td class="num" id="LN26">26</td><td class="line">        <span class='keyword'>if</span> (isThreaded_) {</td></tr>
+<tr class="codeline" data-linenumber="27"><td class="num" id="LN27">27</td><td class="line">            <span class='comment'>// should have worker thread</span></td></tr>
+<tr class="codeline" data-linenumber="28"><td class="num" id="LN28">28</td><td class="line">            <span class='macro'>FAISS_ASSERT((<span class='keyword'>bool</span>)p.second)<span class='macro_popup'>do { if (!((bool)p.second)) { fprintf(stderr, "Faiss assertion '%s' failed in %s "<br> "at %s:%d\n", "(bool)p.second", __PRETTY_FUNCTION__, "/home/zhh/projects/faiss-1.7.1/faiss/impl/ThreadedIndex-inl.h"<br>, 28); abort(); } } while (false)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="29"><td class="num" id="LN29">29</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="30"><td class="num" id="LN30">30</td><td class="line">            <span class='comment'>// This will also flush all pending work</span></td></tr>
+<tr class="codeline" data-linenumber="31"><td class="num" id="LN31">31</td><td class="line">            p.second-&gt;stop();</td></tr>
+<tr class="codeline" data-linenumber="32"><td class="num" id="LN32">32</td><td class="line">            p.second-&gt;waitForThreadExit();</td></tr>
+<tr class="codeline" data-linenumber="33"><td class="num" id="LN33">33</td><td class="line">        } <span class='keyword'>else</span> {</td></tr>
+<tr class="codeline" data-linenumber="34"><td class="num" id="LN34">34</td><td class="line">            <span class='comment'>// should not have worker thread</span></td></tr>
+<tr class="codeline" data-linenumber="35"><td class="num" id="LN35">35</td><td class="line">            <span class='macro'>FAISS_ASSERT(!(<span class='keyword'>bool</span>)p.second)<span class='macro_popup'>do { if (!(!(bool)p.second)) { fprintf(stderr, "Faiss assertion '%s' failed in %s "<br> "at %s:%d\n", "!(bool)p.second", __PRETTY_FUNCTION__, "/home/zhh/projects/faiss-1.7.1/faiss/impl/ThreadedIndex-inl.h"<br>, 35); abort(); } } while (false)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="36"><td class="num" id="LN36">36</td><td class="line">        }</td></tr>
+<tr class="codeline" data-linenumber="37"><td class="num" id="LN37">37</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="38"><td class="num" id="LN38">38</td><td class="line">        <span class='keyword'>if</span> (own_fields) {</td></tr>
+<tr class="codeline" data-linenumber="39"><td class="num" id="LN39">39</td><td class="line">            <span class='keyword'>delete</span> p.first;</td></tr>
+<tr class="codeline" data-linenumber="40"><td class="num" id="LN40">40</td><td class="line">        }</td></tr>
+<tr class="codeline" data-linenumber="41"><td class="num" id="LN41">41</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="42"><td class="num" id="LN42">42</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="43"><td class="num" id="LN43">43</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="44"><td class="num" id="LN44">44</td><td class="line"><span class='keyword'>template</span> &lt;<span class='keyword'>typename</span> IndexT&gt;</td></tr>
+<tr class="codeline" data-linenumber="45"><td class="num" id="LN45">45</td><td class="line"><span class='keyword'>void</span> ThreadedIndex&lt;IndexT&gt;::addIndex(IndexT* index) {</td></tr>
+<tr class="codeline" data-linenumber="46"><td class="num" id="LN46">46</td><td class="line">    <span class='comment'>// We inherit the dimension from the first index added to us if we don't</span></td></tr>
+<tr class="codeline" data-linenumber="47"><td class="num" id="LN47">47</td><td class="line">    <span class='comment'>// have a set dimension</span></td></tr>
+<tr class="codeline" data-linenumber="48"><td class="num" id="LN48">48</td><td class="line">    <span class='keyword'>if</span> (<span class="mrange">indices_.empty()</span> &amp;&amp; <span class="mrange"><span class='keyword'>this</span>-&gt;d == 0</span>) {</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path6" class="msg msgEvent" style="margin-left:9ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">6</div></td><td><div class="PathNav"><a href="#Path5" title="Previous event (5)">&#x2190;</a></div></td><td>Assuming the condition is true</td><td><div class="PathNav"><a href="#Path7" title="Next event (7)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path7" class="msg msgEvent" style="margin-left:29ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">7</div></td><td><div class="PathNav"><a href="#Path6" title="Previous event (6)">&#x2190;</a></div></td><td>Assuming field 'd' is not equal to 0</td><td><div class="PathNav"><a href="#Path8" title="Next event (8)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path8" class="msg msgControl" style="margin-left:5ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexControl">8</div></td><td><div class="PathNav"><a href="#Path7" title="Previous event (7)">&#x2190;</a></div></td><td>Taking false branch</td><td><div class="PathNav"><a href="#Path9" title="Next event (9)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="49"><td class="num" id="LN49">49</td><td class="line">        <span class='keyword'>this</span>-&gt;d = index-&gt;d;</td></tr>
+<tr class="codeline" data-linenumber="50"><td class="num" id="LN50">50</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="51"><td class="num" id="LN51">51</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="52"><td class="num" id="LN52">52</td><td class="line">    <span class='comment'>// The new index must match our set dimension</span></td></tr>
+<tr class="codeline" data-linenumber="53"><td class="num" id="LN53">53</td><td class="line">    <span class="mrange"><span class='macro'>FAISS_THROW_IF_NOT_FMT</span>(<span class='macro_popup'>do { if (!(this-&gt;d == index-&gt;d)) { do { std::string __s<br>; int __size = snprintf(nullptr, 0, "Error: '%s' failed: " "addIndex: dimension mismatch for "<br> "newly added index; expecting dim %d, " "new index has dim %d"<br>, "this-&gt;d == index-&gt;d", this-&gt;d, index-&gt;d); __s.<br>resize(__size + 1); snprintf(&amp;__s[0], __s.size(), "Error: '%s' failed: "<br> "addIndex: dimension mismatch for " "newly added index; expecting dim %d, "<br> "new index has dim %d", "this-&gt;d == index-&gt;d", this-&gt;<br>d, index-&gt;d); throw faiss::FaissException( __s, __PRETTY_FUNCTION__<br>, "/home/zhh/projects/faiss-1.7.1/faiss/impl/ThreadedIndex-inl.h"<br>, 59); } while (false); } } while (false)</span></span></td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path9" class="msg msgEvent" style="margin-left:5ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">9</div></td><td><div class="PathNav"><a href="#Path8" title="Previous event (8)">&#x2190;</a></div></td><td>Assuming 'this-&gt;d' is not equal to 'index-&gt;d'</td><td><div class="PathNav"><a href="#Path10" title="Next event (10)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path10" class="msg msgControl" style="margin-left:5ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexControl">10</div></td><td><div class="PathNav"><a href="#Path9" title="Previous event (9)">&#x2190;</a></div></td><td>Taking true branch</td><td><div class="PathNav"><a href="#Path11" title="Next event (11)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path11" class="msg msgEvent" style="margin-left:5ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">11</div></td><td><div class="PathNav"><a href="#Path10" title="Previous event (10)">&#x2190;</a></div></td><td>Throwing exception</td><td><div class="PathNav"><a href="#Path12" title="Next event (12)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="54"><td class="num" id="LN54">54</td><td class="line">            <span class='keyword'><span class='macro'>this</span>-&gt;d == index-&gt;d,<span class='macro_popup'>do { if (!(this-&gt;d == index-&gt;d)) { do { std::string __s<br>; int __size = snprintf(nullptr, 0, "Error: '%s' failed: " "addIndex: dimension mismatch for "<br> "newly added index; expecting dim %d, " "new index has dim %d"<br>, "this-&gt;d == index-&gt;d", this-&gt;d, index-&gt;d); __s.<br>resize(__size + 1); snprintf(&amp;__s[0], __s.size(), "Error: '%s' failed: "<br> "addIndex: dimension mismatch for " "newly added index; expecting dim %d, "<br> "new index has dim %d", "this-&gt;d == index-&gt;d", this-&gt;<br>d, index-&gt;d); throw faiss::FaissException( __s, __PRETTY_FUNCTION__<br>, "/home/zhh/projects/faiss-1.7.1/faiss/impl/ThreadedIndex-inl.h"<br>, 59); } while (false); } } while (false)</span></span></td></tr>
+<tr class="codeline" data-linenumber="55"><td class="num" id="LN55">55</td><td class="line">            <span class='string_literal'><span class='macro'>"addIndex: dimension mismatch for "<span class='macro_popup'>do { if (!(this-&gt;d == index-&gt;d)) { do { std::string __s<br>; int __size = snprintf(nullptr, 0, "Error: '%s' failed: " "addIndex: dimension mismatch for "<br> "newly added index; expecting dim %d, " "new index has dim %d"<br>, "this-&gt;d == index-&gt;d", this-&gt;d, index-&gt;d); __s.<br>resize(__size + 1); snprintf(&amp;__s[0], __s.size(), "Error: '%s' failed: "<br> "addIndex: dimension mismatch for " "newly added index; expecting dim %d, "<br> "new index has dim %d", "this-&gt;d == index-&gt;d", this-&gt;<br>d, index-&gt;d); throw faiss::FaissException( __s, __PRETTY_FUNCTION__<br>, "/home/zhh/projects/faiss-1.7.1/faiss/impl/ThreadedIndex-inl.h"<br>, 59); } while (false); } } while (false)</span></span></span></td></tr>
+<tr class="codeline" data-linenumber="56"><td class="num" id="LN56">56</td><td class="line">            <span class='string_literal'><span class='macro'>"newly added index; expecting dim %d, "<span class='macro_popup'>do { if (!(this-&gt;d == index-&gt;d)) { do { std::string __s<br>; int __size = snprintf(nullptr, 0, "Error: '%s' failed: " "addIndex: dimension mismatch for "<br> "newly added index; expecting dim %d, " "new index has dim %d"<br>, "this-&gt;d == index-&gt;d", this-&gt;d, index-&gt;d); __s.<br>resize(__size + 1); snprintf(&amp;__s[0], __s.size(), "Error: '%s' failed: "<br> "addIndex: dimension mismatch for " "newly added index; expecting dim %d, "<br> "new index has dim %d", "this-&gt;d == index-&gt;d", this-&gt;<br>d, index-&gt;d); throw faiss::FaissException( __s, __PRETTY_FUNCTION__<br>, "/home/zhh/projects/faiss-1.7.1/faiss/impl/ThreadedIndex-inl.h"<br>, 59); } while (false); } } while (false)</span></span></span></td></tr>
+<tr class="codeline" data-linenumber="57"><td class="num" id="LN57">57</td><td class="line">            <span class='string_literal'><span class='macro'>"new index has dim %d"</span>,<span class='macro_popup'>do { if (!(this-&gt;d == index-&gt;d)) { do { std::string __s<br>; int __size = snprintf(nullptr, 0, "Error: '%s' failed: " "addIndex: dimension mismatch for "<br> "newly added index; expecting dim %d, " "new index has dim %d"<br>, "this-&gt;d == index-&gt;d", this-&gt;d, index-&gt;d); __s.<br>resize(__size + 1); snprintf(&amp;__s[0], __s.size(), "Error: '%s' failed: "<br> "addIndex: dimension mismatch for " "newly added index; expecting dim %d, "<br> "new index has dim %d", "this-&gt;d == index-&gt;d", this-&gt;<br>d, index-&gt;d); throw faiss::FaissException( __s, __PRETTY_FUNCTION__<br>, "/home/zhh/projects/faiss-1.7.1/faiss/impl/ThreadedIndex-inl.h"<br>, 59); } while (false); } } while (false)</span></span></td></tr>
+<tr class="codeline" data-linenumber="58"><td class="num" id="LN58">58</td><td class="line">            <span class='keyword'><span class='macro'>this</span>-&gt;d,<span class='macro_popup'>do { if (!(this-&gt;d == index-&gt;d)) { do { std::string __s<br>; int __size = snprintf(nullptr, 0, "Error: '%s' failed: " "addIndex: dimension mismatch for "<br> "newly added index; expecting dim %d, " "new index has dim %d"<br>, "this-&gt;d == index-&gt;d", this-&gt;d, index-&gt;d); __s.<br>resize(__size + 1); snprintf(&amp;__s[0], __s.size(), "Error: '%s' failed: "<br> "addIndex: dimension mismatch for " "newly added index; expecting dim %d, "<br> "new index has dim %d", "this-&gt;d == index-&gt;d", this-&gt;<br>d, index-&gt;d); throw faiss::FaissException( __s, __PRETTY_FUNCTION__<br>, "/home/zhh/projects/faiss-1.7.1/faiss/impl/ThreadedIndex-inl.h"<br>, 59); } while (false); } } while (false)</span></span></td></tr>
+<tr class="codeline" data-linenumber="59"><td class="num" id="LN59">59</td><td class="line">            <span class='macro'>index-&gt;d)<span class='macro_popup'>do { if (!(this-&gt;d == index-&gt;d)) { do { std::string __s<br>; int __size = snprintf(nullptr, 0, "Error: '%s' failed: " "addIndex: dimension mismatch for "<br> "newly added index; expecting dim %d, " "new index has dim %d"<br>, "this-&gt;d == index-&gt;d", this-&gt;d, index-&gt;d); __s.<br>resize(__size + 1); snprintf(&amp;__s[0], __s.size(), "Error: '%s' failed: "<br> "addIndex: dimension mismatch for " "newly added index; expecting dim %d, "<br> "new index has dim %d", "this-&gt;d == index-&gt;d", this-&gt;<br>d, index-&gt;d); throw faiss::FaissException( __s, __PRETTY_FUNCTION__<br>, "/home/zhh/projects/faiss-1.7.1/faiss/impl/ThreadedIndex-inl.h"<br>, 59); } while (false); } } while (false)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="60"><td class="num" id="LN60">60</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="61"><td class="num" id="LN61">61</td><td class="line">    <span class='keyword'>if</span> (!indices_.empty()) {</td></tr>
+<tr class="codeline" data-linenumber="62"><td class="num" id="LN62">62</td><td class="line">        <span class='keyword'>auto</span>&amp; existing = indices_.front().first;</td></tr>
+<tr class="codeline" data-linenumber="63"><td class="num" id="LN63">63</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="64"><td class="num" id="LN64">64</td><td class="line">        <span class='macro'>FAISS_THROW_IF_NOT_MSG(<span class='macro_popup'>do { if (!(index-&gt;metric_type == existing-&gt;metric_type)<br>) { do { std::string __s; int __size = snprintf(nullptr, 0, "Error: '%s' failed: "<br> "addIndex: newly added index is " "of different metric type than old index"<br>, "index-&gt;metric_type == existing-&gt;metric_type"); __s.resize<br>(__size + 1); snprintf(&amp;__s[0], __s.size(), "Error: '%s' failed: "<br> "addIndex: newly added index is " "of different metric type than old index"<br>, "index-&gt;metric_type == existing-&gt;metric_type"); throw<br> faiss::FaissException( __s, __PRETTY_FUNCTION__, "/home/zhh/projects/faiss-1.7.1/faiss/impl/ThreadedIndex-inl.h"<br>, 67); } while (false); } } while (false)</span></span></td></tr>
+<tr class="codeline" data-linenumber="65"><td class="num" id="LN65">65</td><td class="line">                <span class='macro'>index-&gt;metric_type == existing-&gt;metric_type,<span class='macro_popup'>do { if (!(index-&gt;metric_type == existing-&gt;metric_type)<br>) { do { std::string __s; int __size = snprintf(nullptr, 0, "Error: '%s' failed: "<br> "addIndex: newly added index is " "of different metric type than old index"<br>, "index-&gt;metric_type == existing-&gt;metric_type"); __s.resize<br>(__size + 1); snprintf(&amp;__s[0], __s.size(), "Error: '%s' failed: "<br> "addIndex: newly added index is " "of different metric type than old index"<br>, "index-&gt;metric_type == existing-&gt;metric_type"); throw<br> faiss::FaissException( __s, __PRETTY_FUNCTION__, "/home/zhh/projects/faiss-1.7.1/faiss/impl/ThreadedIndex-inl.h"<br>, 67); } while (false); } } while (false)</span></span></td></tr>
+<tr class="codeline" data-linenumber="66"><td class="num" id="LN66">66</td><td class="line">                <span class='string_literal'><span class='macro'>"addIndex: newly added index is "<span class='macro_popup'>do { if (!(index-&gt;metric_type == existing-&gt;metric_type)<br>) { do { std::string __s; int __size = snprintf(nullptr, 0, "Error: '%s' failed: "<br> "addIndex: newly added index is " "of different metric type than old index"<br>, "index-&gt;metric_type == existing-&gt;metric_type"); __s.resize<br>(__size + 1); snprintf(&amp;__s[0], __s.size(), "Error: '%s' failed: "<br> "addIndex: newly added index is " "of different metric type than old index"<br>, "index-&gt;metric_type == existing-&gt;metric_type"); throw<br> faiss::FaissException( __s, __PRETTY_FUNCTION__, "/home/zhh/projects/faiss-1.7.1/faiss/impl/ThreadedIndex-inl.h"<br>, 67); } while (false); } } while (false)</span></span></span></td></tr>
+<tr class="codeline" data-linenumber="67"><td class="num" id="LN67">67</td><td class="line">                <span class='string_literal'><span class='macro'>"of different metric type than old index"</span>)<span class='macro_popup'>do { if (!(index-&gt;metric_type == existing-&gt;metric_type)<br>) { do { std::string __s; int __size = snprintf(nullptr, 0, "Error: '%s' failed: "<br> "addIndex: newly added index is " "of different metric type than old index"<br>, "index-&gt;metric_type == existing-&gt;metric_type"); __s.resize<br>(__size + 1); snprintf(&amp;__s[0], __s.size(), "Error: '%s' failed: "<br> "addIndex: newly added index is " "of different metric type than old index"<br>, "index-&gt;metric_type == existing-&gt;metric_type"); throw<br> faiss::FaissException( __s, __PRETTY_FUNCTION__, "/home/zhh/projects/faiss-1.7.1/faiss/impl/ThreadedIndex-inl.h"<br>, 67); } while (false); } } while (false)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="68"><td class="num" id="LN68">68</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="69"><td class="num" id="LN69">69</td><td class="line">        <span class='comment'>// Make sure this index is not duplicated</span></td></tr>
+<tr class="codeline" data-linenumber="70"><td class="num" id="LN70">70</td><td class="line">        <span class='keyword'>for</span> (<span class='keyword'>auto</span>&amp; p : indices_) {</td></tr>
+<tr class="codeline" data-linenumber="71"><td class="num" id="LN71">71</td><td class="line">            <span class='macro'>FAISS_THROW_IF_NOT_MSG(<span class='macro_popup'>do { if (!(p.first != index)) { do { std::string __s; int __size<br> = snprintf(nullptr, 0, "Error: '%s' failed: " "addIndex: attempting to add index "<br> "that is already in the collection", "p.first != index"); __s<br>.resize(__size + 1); snprintf(&amp;__s[0], __s.size(), "Error: '%s' failed: "<br> "addIndex: attempting to add index " "that is already in the collection"<br>, "p.first != index"); throw faiss::FaissException( __s, __PRETTY_FUNCTION__<br>, "/home/zhh/projects/faiss-1.7.1/faiss/impl/ThreadedIndex-inl.h"<br>, 74); } while (false); } } while (false)</span></span></td></tr>
+<tr class="codeline" data-linenumber="72"><td class="num" id="LN72">72</td><td class="line">                    <span class='macro'>p.first != index,<span class='macro_popup'>do { if (!(p.first != index)) { do { std::string __s; int __size<br> = snprintf(nullptr, 0, "Error: '%s' failed: " "addIndex: attempting to add index "<br> "that is already in the collection", "p.first != index"); __s<br>.resize(__size + 1); snprintf(&amp;__s[0], __s.size(), "Error: '%s' failed: "<br> "addIndex: attempting to add index " "that is already in the collection"<br>, "p.first != index"); throw faiss::FaissException( __s, __PRETTY_FUNCTION__<br>, "/home/zhh/projects/faiss-1.7.1/faiss/impl/ThreadedIndex-inl.h"<br>, 74); } while (false); } } while (false)</span></span></td></tr>
+<tr class="codeline" data-linenumber="73"><td class="num" id="LN73">73</td><td class="line">                    <span class='string_literal'><span class='macro'>"addIndex: attempting to add index "<span class='macro_popup'>do { if (!(p.first != index)) { do { std::string __s; int __size<br> = snprintf(nullptr, 0, "Error: '%s' failed: " "addIndex: attempting to add index "<br> "that is already in the collection", "p.first != index"); __s<br>.resize(__size + 1); snprintf(&amp;__s[0], __s.size(), "Error: '%s' failed: "<br> "addIndex: attempting to add index " "that is already in the collection"<br>, "p.first != index"); throw faiss::FaissException( __s, __PRETTY_FUNCTION__<br>, "/home/zhh/projects/faiss-1.7.1/faiss/impl/ThreadedIndex-inl.h"<br>, 74); } while (false); } } while (false)</span></span></span></td></tr>
+<tr class="codeline" data-linenumber="74"><td class="num" id="LN74">74</td><td class="line">                    <span class='string_literal'><span class='macro'>"that is already in the collection"</span>)<span class='macro_popup'>do { if (!(p.first != index)) { do { std::string __s; int __size<br> = snprintf(nullptr, 0, "Error: '%s' failed: " "addIndex: attempting to add index "<br> "that is already in the collection", "p.first != index"); __s<br>.resize(__size + 1); snprintf(&amp;__s[0], __s.size(), "Error: '%s' failed: "<br> "addIndex: attempting to add index " "that is already in the collection"<br>, "p.first != index"); throw faiss::FaissException( __s, __PRETTY_FUNCTION__<br>, "/home/zhh/projects/faiss-1.7.1/faiss/impl/ThreadedIndex-inl.h"<br>, 74); } while (false); } } while (false)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="75"><td class="num" id="LN75">75</td><td class="line">        }</td></tr>
+<tr class="codeline" data-linenumber="76"><td class="num" id="LN76">76</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="77"><td class="num" id="LN77">77</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="78"><td class="num" id="LN78">78</td><td class="line">    indices_.emplace_back(std::make_pair(</td></tr>
+<tr class="codeline" data-linenumber="79"><td class="num" id="LN79">79</td><td class="line">            index,</td></tr>
+<tr class="codeline" data-linenumber="80"><td class="num" id="LN80">80</td><td class="line">            std::unique_ptr&lt;WorkerThread&gt;(</td></tr>
+<tr class="codeline" data-linenumber="81"><td class="num" id="LN81">81</td><td class="line">                    isThreaded_ ? <span class='keyword'>new</span> WorkerThread : <span class='keyword'>nullptr</span>)));</td></tr>
+<tr class="codeline" data-linenumber="82"><td class="num" id="LN82">82</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="83"><td class="num" id="LN83">83</td><td class="line">    onAfterAddIndex(index);</td></tr>
+<tr class="codeline" data-linenumber="84"><td class="num" id="LN84">84</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="85"><td class="num" id="LN85">85</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="86"><td class="num" id="LN86">86</td><td class="line"><span class='keyword'>template</span> &lt;<span class='keyword'>typename</span> IndexT&gt;</td></tr>
+<tr class="codeline" data-linenumber="87"><td class="num" id="LN87">87</td><td class="line"><span class='keyword'>void</span> ThreadedIndex&lt;IndexT&gt;::removeIndex(IndexT* index) {</td></tr>
+<tr class="codeline" data-linenumber="88"><td class="num" id="LN88">88</td><td class="line">    <span class='keyword'>for</span> (<span class='keyword'>auto</span> it = indices_.begin(); it != indices_.end(); ++it) {</td></tr>
+<tr class="codeline" data-linenumber="89"><td class="num" id="LN89">89</td><td class="line">        <span class='keyword'>if</span> (it-&gt;first == index) {</td></tr>
+<tr class="codeline" data-linenumber="90"><td class="num" id="LN90">90</td><td class="line">            <span class='comment'>// This is our index; stop the worker thread before removing it,</span></td></tr>
+<tr class="codeline" data-linenumber="91"><td class="num" id="LN91">91</td><td class="line">            <span class='comment'>// to ensure that it has finished before function exit</span></td></tr>
+<tr class="codeline" data-linenumber="92"><td class="num" id="LN92">92</td><td class="line">            <span class='keyword'>if</span> (isThreaded_) {</td></tr>
+<tr class="codeline" data-linenumber="93"><td class="num" id="LN93">93</td><td class="line">                <span class='comment'>// should have worker thread</span></td></tr>
+<tr class="codeline" data-linenumber="94"><td class="num" id="LN94">94</td><td class="line">                <span class='macro'>FAISS_ASSERT((<span class='keyword'>bool</span>)it-&gt;second)<span class='macro_popup'>do { if (!((bool)it-&gt;second)) { fprintf(stderr, "Faiss assertion '%s' failed in %s "<br> "at %s:%d\n", "(bool)it-&gt;second", __PRETTY_FUNCTION__, "/home/zhh/projects/faiss-1.7.1/faiss/impl/ThreadedIndex-inl.h"<br>, 94); abort(); } } while (false)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="95"><td class="num" id="LN95">95</td><td class="line">                it-&gt;second-&gt;stop();</td></tr>
+<tr class="codeline" data-linenumber="96"><td class="num" id="LN96">96</td><td class="line">                it-&gt;second-&gt;waitForThreadExit();</td></tr>
+<tr class="codeline" data-linenumber="97"><td class="num" id="LN97">97</td><td class="line">            } <span class='keyword'>else</span> {</td></tr>
+<tr class="codeline" data-linenumber="98"><td class="num" id="LN98">98</td><td class="line">                <span class='comment'>// should not have worker thread</span></td></tr>
+<tr class="codeline" data-linenumber="99"><td class="num" id="LN99">99</td><td class="line">                <span class='macro'>FAISS_ASSERT(!(<span class='keyword'>bool</span>)it-&gt;second)<span class='macro_popup'>do { if (!(!(bool)it-&gt;second)) { fprintf(stderr, "Faiss assertion '%s' failed in %s "<br> "at %s:%d\n", "!(bool)it-&gt;second", __PRETTY_FUNCTION__, "/home/zhh/projects/faiss-1.7.1/faiss/impl/ThreadedIndex-inl.h"<br>, 99); abort(); } } while (false)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="100"><td class="num" id="LN100">100</td><td class="line">            }</td></tr>
+<tr class="codeline" data-linenumber="101"><td class="num" id="LN101">101</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="102"><td class="num" id="LN102">102</td><td class="line">            indices_.erase(it);</td></tr>
+<tr class="codeline" data-linenumber="103"><td class="num" id="LN103">103</td><td class="line">            onAfterRemoveIndex(index);</td></tr>
+<tr class="codeline" data-linenumber="104"><td class="num" id="LN104">104</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="105"><td class="num" id="LN105">105</td><td class="line">            <span class='keyword'>if</span> (own_fields) {</td></tr>
+<tr class="codeline" data-linenumber="106"><td class="num" id="LN106">106</td><td class="line">                <span class='keyword'>delete</span> index;</td></tr>
+<tr class="codeline" data-linenumber="107"><td class="num" id="LN107">107</td><td class="line">            }</td></tr>
+<tr class="codeline" data-linenumber="108"><td class="num" id="LN108">108</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="109"><td class="num" id="LN109">109</td><td class="line">            <span class='keyword'>return</span>;</td></tr>
+<tr class="codeline" data-linenumber="110"><td class="num" id="LN110">110</td><td class="line">        }</td></tr>
+<tr class="codeline" data-linenumber="111"><td class="num" id="LN111">111</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="112"><td class="num" id="LN112">112</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="113"><td class="num" id="LN113">113</td><td class="line">    <span class='comment'>// could not find our index</span></td></tr>
+<tr class="codeline" data-linenumber="114"><td class="num" id="LN114">114</td><td class="line">    <span class='macro'>FAISS_THROW_MSG(<span class='string_literal'>"IndexReplicas::removeIndex: index not found"</span>)<span class='macro_popup'>do { throw faiss::FaissException( "IndexReplicas::removeIndex: index not found"<br>, __PRETTY_FUNCTION__, "/home/zhh/projects/faiss-1.7.1/faiss/impl/ThreadedIndex-inl.h"<br>, 114); } while (false)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="115"><td class="num" id="LN115">115</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="116"><td class="num" id="LN116">116</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="117"><td class="num" id="LN117">117</td><td class="line"><span class='keyword'>template</span> &lt;<span class='keyword'>typename</span> IndexT&gt;</td></tr>
+<tr class="codeline" data-linenumber="118"><td class="num" id="LN118">118</td><td class="line"><span class='keyword'>void</span> ThreadedIndex&lt;IndexT&gt;::runOnIndex(std::function&lt;<span class='keyword'>void</span>(<span class='keyword'>int</span>, IndexT*)&gt; f) {</td></tr>
+<tr class="codeline" data-linenumber="119"><td class="num" id="LN119">119</td><td class="line">    <span class='keyword'>if</span> (isThreaded_) {</td></tr>
+<tr class="codeline" data-linenumber="120"><td class="num" id="LN120">120</td><td class="line">        std::vector&lt;std::future&lt;<span class='keyword'>bool</span>&gt;&gt; v;</td></tr>
+<tr class="codeline" data-linenumber="121"><td class="num" id="LN121">121</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="122"><td class="num" id="LN122">122</td><td class="line">        <span class='keyword'>for</span> (<span class='keyword'>int</span> i = 0; i &lt; <span class='keyword'>this</span>-&gt;indices_.size(); ++i) {</td></tr>
+<tr class="codeline" data-linenumber="123"><td class="num" id="LN123">123</td><td class="line">            <span class='keyword'>auto</span>&amp; p = <span class='keyword'>this</span>-&gt;indices_[i];</td></tr>
+<tr class="codeline" data-linenumber="124"><td class="num" id="LN124">124</td><td class="line">            <span class='keyword'>auto</span> indexPtr = p.first;</td></tr>
+<tr class="codeline" data-linenumber="125"><td class="num" id="LN125">125</td><td class="line">            v.emplace_back(</td></tr>
+<tr class="codeline" data-linenumber="126"><td class="num" id="LN126">126</td><td class="line">                    p.second-&gt;add([f, i, indexPtr]() { f(i, indexPtr); }));</td></tr>
+<tr class="codeline" data-linenumber="127"><td class="num" id="LN127">127</td><td class="line">        }</td></tr>
+<tr class="codeline" data-linenumber="128"><td class="num" id="LN128">128</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="129"><td class="num" id="LN129">129</td><td class="line">        waitAndHandleFutures(v);</td></tr>
+<tr class="codeline" data-linenumber="130"><td class="num" id="LN130">130</td><td class="line">    } <span class='keyword'>else</span> {</td></tr>
+<tr class="codeline" data-linenumber="131"><td class="num" id="LN131">131</td><td class="line">        <span class='comment'>// Multiple exceptions may be thrown; gather them as we encounter them,</span></td></tr>
+<tr class="codeline" data-linenumber="132"><td class="num" id="LN132">132</td><td class="line">        <span class='comment'>// while letting everything else run to completion</span></td></tr>
+<tr class="codeline" data-linenumber="133"><td class="num" id="LN133">133</td><td class="line">        std::vector&lt;std::pair&lt;<span class='keyword'>int</span>, std::exception_ptr&gt;&gt; exceptions;</td></tr>
+<tr class="codeline" data-linenumber="134"><td class="num" id="LN134">134</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="135"><td class="num" id="LN135">135</td><td class="line">        <span class='keyword'>for</span> (<span class='keyword'>int</span> i = 0; i &lt; <span class='keyword'>this</span>-&gt;indices_.size(); ++i) {</td></tr>
+<tr class="codeline" data-linenumber="136"><td class="num" id="LN136">136</td><td class="line">            <span class='keyword'>auto</span>&amp; p = <span class='keyword'>this</span>-&gt;indices_[i];</td></tr>
+<tr class="codeline" data-linenumber="137"><td class="num" id="LN137">137</td><td class="line">            <span class='keyword'>try</span> {</td></tr>
+<tr class="codeline" data-linenumber="138"><td class="num" id="LN138">138</td><td class="line">                f(i, p.first);</td></tr>
+<tr class="codeline" data-linenumber="139"><td class="num" id="LN139">139</td><td class="line">            } <span class='keyword'>catch</span> (...) {</td></tr>
+<tr class="codeline" data-linenumber="140"><td class="num" id="LN140">140</td><td class="line">                exceptions.emplace_back(</td></tr>
+<tr class="codeline" data-linenumber="141"><td class="num" id="LN141">141</td><td class="line">                        std::make_pair(i, std::current_exception()));</td></tr>
+<tr class="codeline" data-linenumber="142"><td class="num" id="LN142">142</td><td class="line">            }</td></tr>
+<tr class="codeline" data-linenumber="143"><td class="num" id="LN143">143</td><td class="line">        }</td></tr>
+<tr class="codeline" data-linenumber="144"><td class="num" id="LN144">144</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="145"><td class="num" id="LN145">145</td><td class="line">        handleExceptions(exceptions);</td></tr>
+<tr class="codeline" data-linenumber="146"><td class="num" id="LN146">146</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="147"><td class="num" id="LN147">147</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="148"><td class="num" id="LN148">148</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="149"><td class="num" id="LN149">149</td><td class="line"><span class='keyword'>template</span> &lt;<span class='keyword'>typename</span> IndexT&gt;</td></tr>
+<tr class="codeline" data-linenumber="150"><td class="num" id="LN150">150</td><td class="line"><span class='keyword'>void</span> ThreadedIndex&lt;IndexT&gt;::runOnIndex(</td></tr>
+<tr class="codeline" data-linenumber="151"><td class="num" id="LN151">151</td><td class="line">        std::function&lt;<span class='keyword'>void</span>(<span class='keyword'>int</span>, <span class='keyword'>const</span> IndexT*)&gt; f) <span class='keyword'>const</span> {</td></tr>
+<tr class="codeline" data-linenumber="152"><td class="num" id="LN152">152</td><td class="line">    <span class='keyword'>const_cast</span>&lt;ThreadedIndex&lt;IndexT&gt;*&gt;(<span class='keyword'>this</span>)-&gt;runOnIndex(</td></tr>
+<tr class="codeline" data-linenumber="153"><td class="num" id="LN153">153</td><td class="line">            [f](<span class='keyword'>int</span> i, IndexT* idx) { f(i, idx); });</td></tr>
+<tr class="codeline" data-linenumber="154"><td class="num" id="LN154">154</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="155"><td class="num" id="LN155">155</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="156"><td class="num" id="LN156">156</td><td class="line"><span class='keyword'>template</span> &lt;<span class='keyword'>typename</span> IndexT&gt;</td></tr>
+<tr class="codeline" data-linenumber="157"><td class="num" id="LN157">157</td><td class="line"><span class='keyword'>void</span> ThreadedIndex&lt;IndexT&gt;::reset() {</td></tr>
+<tr class="codeline" data-linenumber="158"><td class="num" id="LN158">158</td><td class="line">    runOnIndex([](<span class='keyword'>int</span>, IndexT* index) { index-&gt;reset(); });</td></tr>
+<tr class="codeline" data-linenumber="159"><td class="num" id="LN159">159</td><td class="line">    <span class='keyword'>this</span>-&gt;ntotal = 0;</td></tr>
+<tr class="codeline" data-linenumber="160"><td class="num" id="LN160">160</td><td class="line">    <span class='keyword'>this</span>-&gt;is_trained = <span class='keyword'>false</span>;</td></tr>
+<tr class="codeline" data-linenumber="161"><td class="num" id="LN161">161</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="162"><td class="num" id="LN162">162</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="163"><td class="num" id="LN163">163</td><td class="line"><span class='keyword'>template</span> &lt;<span class='keyword'>typename</span> IndexT&gt;</td></tr>
+<tr class="codeline" data-linenumber="164"><td class="num" id="LN164">164</td><td class="line"><span class='keyword'>void</span> ThreadedIndex&lt;IndexT&gt;::onAfterAddIndex(IndexT* index) {}</td></tr>
+<tr class="codeline" data-linenumber="165"><td class="num" id="LN165">165</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="166"><td class="num" id="LN166">166</td><td class="line"><span class='keyword'>template</span> &lt;<span class='keyword'>typename</span> IndexT&gt;</td></tr>
+<tr class="codeline" data-linenumber="167"><td class="num" id="LN167">167</td><td class="line"><span class='keyword'>void</span> ThreadedIndex&lt;IndexT&gt;::onAfterRemoveIndex(IndexT* index) {}</td></tr>
+<tr class="codeline" data-linenumber="168"><td class="num" id="LN168">168</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="169"><td class="num" id="LN169">169</td><td class="line"><span class='keyword'>template</span> &lt;<span class='keyword'>typename</span> IndexT&gt;</td></tr>
+<tr class="codeline" data-linenumber="170"><td class="num" id="LN170">170</td><td class="line"><span class='keyword'>void</span> ThreadedIndex&lt;IndexT&gt;::waitAndHandleFutures(</td></tr>
+<tr class="codeline" data-linenumber="171"><td class="num" id="LN171">171</td><td class="line">        std::vector&lt;std::future&lt;<span class='keyword'>bool</span>&gt;&gt;&amp; v) {</td></tr>
+<tr class="codeline" data-linenumber="172"><td class="num" id="LN172">172</td><td class="line">    <span class='comment'>// Blocking wait for completion for all of the indices, capturing any</span></td></tr>
+<tr class="codeline" data-linenumber="173"><td class="num" id="LN173">173</td><td class="line">    <span class='comment'>// exceptions that are generated</span></td></tr>
+<tr class="codeline" data-linenumber="174"><td class="num" id="LN174">174</td><td class="line">    std::vector&lt;std::pair&lt;<span class='keyword'>int</span>, std::exception_ptr&gt;&gt; exceptions;</td></tr>
+<tr class="codeline" data-linenumber="175"><td class="num" id="LN175">175</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="176"><td class="num" id="LN176">176</td><td class="line">    <span class='keyword'>for</span> (<span class='keyword'>int</span> i = 0; i &lt; v.size(); ++i) {</td></tr>
+<tr class="codeline" data-linenumber="177"><td class="num" id="LN177">177</td><td class="line">        <span class='keyword'>auto</span>&amp; fut = v[i];</td></tr>
+<tr class="codeline" data-linenumber="178"><td class="num" id="LN178">178</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="179"><td class="num" id="LN179">179</td><td class="line">        <span class='keyword'>try</span> {</td></tr>
+<tr class="codeline" data-linenumber="180"><td class="num" id="LN180">180</td><td class="line">            fut.get();</td></tr>
+<tr class="codeline" data-linenumber="181"><td class="num" id="LN181">181</td><td class="line">        } <span class='keyword'>catch</span> (...) {</td></tr>
+<tr class="codeline" data-linenumber="182"><td class="num" id="LN182">182</td><td class="line">            exceptions.emplace_back(</td></tr>
+<tr class="codeline" data-linenumber="183"><td class="num" id="LN183">183</td><td class="line">                    std::make_pair(i, std::current_exception()));</td></tr>
+<tr class="codeline" data-linenumber="184"><td class="num" id="LN184">184</td><td class="line">        }</td></tr>
+<tr class="codeline" data-linenumber="185"><td class="num" id="LN185">185</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="186"><td class="num" id="LN186">186</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="187"><td class="num" id="LN187">187</td><td class="line">    handleExceptions(exceptions);</td></tr>
+<tr class="codeline" data-linenumber="188"><td class="num" id="LN188">188</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="189"><td class="num" id="LN189">189</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="190"><td class="num" id="LN190">190</td><td class="line">} <span class='comment'>// namespace faiss</span></td></tr>
+</table></body></html>

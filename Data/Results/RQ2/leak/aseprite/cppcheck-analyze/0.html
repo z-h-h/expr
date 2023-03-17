@@ -1,0 +1,1604 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Cppcheck - HTML report - [project name]</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+.highlight .hll { background-color: #ffffcc }
+.highlight  { background: #ffffff; }
+.highlight .c { color: #888888 } /* Comment */
+.highlight .err { color: #FF0000; background-color: #FFAAAA } /* Error */
+.highlight .k { color: #008800; font-weight: bold } /* Keyword */
+.highlight .o { color: #333333 } /* Operator */
+.highlight .ch { color: #888888 } /* Comment.Hashbang */
+.highlight .cm { color: #888888 } /* Comment.Multiline */
+.highlight .cp { color: #557799 } /* Comment.Preproc */
+.highlight .cpf { color: #888888 } /* Comment.PreprocFile */
+.highlight .c1 { color: #888888 } /* Comment.Single */
+.highlight .cs { color: #cc0000; font-weight: bold } /* Comment.Special */
+.highlight .gd { color: #A00000 } /* Generic.Deleted */
+.highlight .ge { font-style: italic } /* Generic.Emph */
+.highlight .gr { color: #FF0000 } /* Generic.Error */
+.highlight .gh { color: #000080; font-weight: bold } /* Generic.Heading */
+.highlight .gi { color: #00A000 } /* Generic.Inserted */
+.highlight .go { color: #888888 } /* Generic.Output */
+.highlight .gp { color: #c65d09; font-weight: bold } /* Generic.Prompt */
+.highlight .gs { font-weight: bold } /* Generic.Strong */
+.highlight .gu { color: #800080; font-weight: bold } /* Generic.Subheading */
+.highlight .gt { color: #0044DD } /* Generic.Traceback */
+.highlight .kc { color: #008800; font-weight: bold } /* Keyword.Constant */
+.highlight .kd { color: #008800; font-weight: bold } /* Keyword.Declaration */
+.highlight .kn { color: #008800; font-weight: bold } /* Keyword.Namespace */
+.highlight .kp { color: #003388; font-weight: bold } /* Keyword.Pseudo */
+.highlight .kr { color: #008800; font-weight: bold } /* Keyword.Reserved */
+.highlight .kt { color: #333399; font-weight: bold } /* Keyword.Type */
+.highlight .m { color: #6600EE; font-weight: bold } /* Literal.Number */
+.highlight .s { background-color: #fff0f0 } /* Literal.String */
+.highlight .na { color: #0000CC } /* Name.Attribute */
+.highlight .nb { color: #007020 } /* Name.Builtin */
+.highlight .nc { color: #BB0066; font-weight: bold } /* Name.Class */
+.highlight .no { color: #003366; font-weight: bold } /* Name.Constant */
+.highlight .nd { color: #555555; font-weight: bold } /* Name.Decorator */
+.highlight .ni { color: #880000; font-weight: bold } /* Name.Entity */
+.highlight .ne { color: #FF0000; font-weight: bold } /* Name.Exception */
+.highlight .nf { color: #0066BB; font-weight: bold } /* Name.Function */
+.highlight .nl { color: #997700; font-weight: bold } /* Name.Label */
+.highlight .nn { color: #0e84b5; font-weight: bold } /* Name.Namespace */
+.highlight .nt { color: #007700 } /* Name.Tag */
+.highlight .nv { color: #996633 } /* Name.Variable */
+.highlight .ow { color: #000000; font-weight: bold } /* Operator.Word */
+.highlight .w { color: #bbbbbb } /* Text.Whitespace */
+.highlight .mb { color: #6600EE; font-weight: bold } /* Literal.Number.Bin */
+.highlight .mf { color: #6600EE; font-weight: bold } /* Literal.Number.Float */
+.highlight .mh { color: #005588; font-weight: bold } /* Literal.Number.Hex */
+.highlight .mi { color: #0000DD; font-weight: bold } /* Literal.Number.Integer */
+.highlight .mo { color: #4400EE; font-weight: bold } /* Literal.Number.Oct */
+.highlight .sa { background-color: #fff0f0 } /* Literal.String.Affix */
+.highlight .sb { background-color: #fff0f0 } /* Literal.String.Backtick */
+.highlight .sc { color: #0044DD } /* Literal.String.Char */
+.highlight .dl { background-color: #fff0f0 } /* Literal.String.Delimiter */
+.highlight .sd { color: #DD4422 } /* Literal.String.Doc */
+.highlight .s2 { background-color: #fff0f0 } /* Literal.String.Double */
+.highlight .se { color: #666666; font-weight: bold; background-color: #fff0f0 } /* Literal.String.Escape */
+.highlight .sh { background-color: #fff0f0 } /* Literal.String.Heredoc */
+.highlight .si { background-color: #eeeeee } /* Literal.String.Interpol */
+.highlight .sx { color: #DD2200; background-color: #fff0f0 } /* Literal.String.Other */
+.highlight .sr { color: #000000; background-color: #fff0ff } /* Literal.String.Regex */
+.highlight .s1 { background-color: #fff0f0 } /* Literal.String.Single */
+.highlight .ss { color: #AA6600 } /* Literal.String.Symbol */
+.highlight .bp { color: #007020 } /* Name.Builtin.Pseudo */
+.highlight .fm { color: #0066BB; font-weight: bold } /* Name.Function.Magic */
+.highlight .vc { color: #336699 } /* Name.Variable.Class */
+.highlight .vg { color: #dd7700; font-weight: bold } /* Name.Variable.Global */
+.highlight .vi { color: #3333BB } /* Name.Variable.Instance */
+.highlight .vm { color: #996633 } /* Name.Variable.Magic */
+.highlight .il { color: #0000DD; font-weight: bold } /* Literal.Number.Integer.Long */
+    </style>
+    <script language="javascript">
+      function getStyle(el,styleProp) {
+        if (el.currentStyle)
+          var y = el.currentStyle[styleProp];
+        else if (window.getComputedStyle)
+          var y = document.defaultView.getComputedStyle(el,null).getPropertyValue(styleProp);
+        return y;
+      }
+      function toggle() {
+        var el = this.expandable_content;
+        var mark = this.expandable_marker;
+        if (el.style.display == "block") {
+          el.style.display = "none";
+          mark.innerHTML = "[+]";
+        } else {
+          el.style.display = "block";
+          mark.innerHTML = "[-]";
+        }
+      }
+      function init_expandables() {
+        var elts = document.getElementsByClassName("expandable");
+        for (var i = 0; i < elts.length; i++) {
+          var el = elts[i];
+          var clickable = el.getElementsByTagName("span")[0];
+          var marker = clickable.getElementsByClassName("marker")[0];
+          var content = el.getElementsByClassName("content")[0];
+          var width = clickable.clientWidth - parseInt(getStyle(content, "padding-left")) - parseInt(getStyle(content, "padding-right"));
+          content.style.width = width + "px";
+          clickable.expandable_content = content;
+          clickable.expandable_marker = marker;
+          clickable.onclick = toggle;
+        }
+      }
+      function set_class_display(c, st) {
+        var elements = document.querySelectorAll('.' + c),
+            len = elements.length;
+        for (i = 0; i < len; i++) {
+            elements[i].style.display = st;
+        }
+      }
+      function toggle_class_visibility(id) {
+        var box = document.getElementById(id);
+        set_class_display(id, box.checked ? '' : 'none');
+      }
+      function toggle_all(){
+        var elts = document.getElementsByTagName("input");
+        for (var i = 1; i < elts.length; i++) {           
+          var el = elts[i];
+          el.checked ? el.checked=false : el.checked=true;
+          toggle_class_visibility(el.id);        
+        }            
+      }
+
+    </script>
+  </head>
+  <body onload="init_expandables()">
+      <div id="header">
+        <h1>Cppcheck report - [project name]: /home/zhh/inject/leak/aseprite/third_party/lua/luaconf.h </h1>
+      </div>
+      <div id="menu" dir="rtl">
+       <p id="filename"><a href="index.html">Defects:</a> luaconf.h</p>
+<a href='0.html#line-518'> preprocessorErrorDirective 518</a>
+      </div>
+      <div id="content">
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>  1
+  2
+  3
+  4
+  5
+  6
+  7
+  8
+  9
+ 10
+ 11
+ 12
+ 13
+ 14
+ 15
+ 16
+ 17
+ 18
+ 19
+ 20
+ 21
+ 22
+ 23
+ 24
+ 25
+ 26
+ 27
+ 28
+ 29
+ 30
+ 31
+ 32
+ 33
+ 34
+ 35
+ 36
+ 37
+ 38
+ 39
+ 40
+ 41
+ 42
+ 43
+ 44
+ 45
+ 46
+ 47
+ 48
+ 49
+ 50
+ 51
+ 52
+ 53
+ 54
+ 55
+ 56
+ 57
+ 58
+ 59
+ 60
+ 61
+ 62
+ 63
+ 64
+ 65
+ 66
+ 67
+ 68
+ 69
+ 70
+ 71
+ 72
+ 73
+ 74
+ 75
+ 76
+ 77
+ 78
+ 79
+ 80
+ 81
+ 82
+ 83
+ 84
+ 85
+ 86
+ 87
+ 88
+ 89
+ 90
+ 91
+ 92
+ 93
+ 94
+ 95
+ 96
+ 97
+ 98
+ 99
+100
+101
+102
+103
+104
+105
+106
+107
+108
+109
+110
+111
+112
+113
+114
+115
+116
+117
+118
+119
+120
+121
+122
+123
+124
+125
+126
+127
+128
+129
+130
+131
+132
+133
+134
+135
+136
+137
+138
+139
+140
+141
+142
+143
+144
+145
+146
+147
+148
+149
+150
+151
+152
+153
+154
+155
+156
+157
+158
+159
+160
+161
+162
+163
+164
+165
+166
+167
+168
+169
+170
+171
+172
+173
+174
+175
+176
+177
+178
+179
+180
+181
+182
+183
+184
+185
+186
+187
+188
+189
+190
+191
+192
+193
+194
+195
+196
+197
+198
+199
+200
+201
+202
+203
+204
+205
+206
+207
+208
+209
+210
+211
+212
+213
+214
+215
+216
+217
+218
+219
+220
+221
+222
+223
+224
+225
+226
+227
+228
+229
+230
+231
+232
+233
+234
+235
+236
+237
+238
+239
+240
+241
+242
+243
+244
+245
+246
+247
+248
+249
+250
+251
+252
+253
+254
+255
+256
+257
+258
+259
+260
+261
+262
+263
+264
+265
+266
+267
+268
+269
+270
+271
+272
+273
+274
+275
+276
+277
+278
+279
+280
+281
+282
+283
+284
+285
+286
+287
+288
+289
+290
+291
+292
+293
+294
+295
+296
+297
+298
+299
+300
+301
+302
+303
+304
+305
+306
+307
+308
+309
+310
+311
+312
+313
+314
+315
+316
+317
+318
+319
+320
+321
+322
+323
+324
+325
+326
+327
+328
+329
+330
+331
+332
+333
+334
+335
+336
+337
+338
+339
+340
+341
+342
+343
+344
+345
+346
+347
+348
+349
+350
+351
+352
+353
+354
+355
+356
+357
+358
+359
+360
+361
+362
+363
+364
+365
+366
+367
+368
+369
+370
+371
+372
+373
+374
+375
+376
+377
+378
+379
+380
+381
+382
+383
+384
+385
+386
+387
+388
+389
+390
+391
+392
+393
+394
+395
+396
+397
+398
+399
+400
+401
+402
+403
+404
+405
+406
+407
+408
+409
+410
+411
+412
+413
+414
+415
+416
+417
+418
+419
+420
+421
+422
+423
+424
+425
+426
+427
+428
+429
+430
+431
+432
+433
+434
+435
+436
+437
+438
+439
+440
+441
+442
+443
+444
+445
+446
+447
+448
+449
+450
+451
+452
+453
+454
+455
+456
+457
+458
+459
+460
+461
+462
+463
+464
+465
+466
+467
+468
+469
+470
+471
+472
+473
+474
+475
+476
+477
+478
+479
+480
+481
+482
+483
+484
+485
+486
+487
+488
+489
+490
+491
+492
+493
+494
+495
+496
+497
+498
+499
+500
+501
+502
+503
+504
+505
+506
+507
+508
+509
+510
+511
+512
+513
+514
+515
+516
+517
+518
+519
+520
+521
+522
+523
+524
+525
+526
+527
+528
+529
+530
+531
+532
+533
+534
+535
+536
+537
+538
+539
+540
+541
+542
+543
+544
+545
+546
+547
+548
+549
+550
+551
+552
+553
+554
+555
+556
+557
+558
+559
+560
+561
+562
+563
+564
+565
+566
+567
+568
+569
+570
+571
+572
+573
+574
+575
+576
+577
+578
+579
+580
+581
+582
+583
+584
+585
+586
+587
+588
+589
+590
+591
+592
+593
+594
+595
+596
+597
+598
+599
+600
+601
+602
+603
+604
+605
+606
+607
+608
+609
+610
+611
+612
+613
+614
+615
+616
+617
+618
+619
+620
+621
+622
+623
+624
+625
+626
+627
+628
+629
+630
+631
+632
+633
+634
+635
+636
+637
+638
+639
+640
+641
+642
+643
+644
+645
+646
+647
+648
+649
+650
+651
+652
+653
+654
+655
+656
+657
+658
+659
+660
+661
+662
+663
+664
+665
+666
+667
+668
+669
+670
+671
+672
+673
+674
+675
+676
+677
+678
+679
+680
+681
+682
+683
+684
+685
+686
+687
+688
+689
+690
+691
+692
+693
+694
+695
+696
+697
+698
+699
+700
+701
+702
+703
+704
+705
+706
+707
+708
+709
+710
+711
+712
+713
+714
+715
+716
+717
+718
+719
+720
+721
+722
+723
+724
+725</pre></div></td><td class="code"><div class="highlight"><pre><span></span><a name="line-1"></a><span class="cm">/*</span>
+<a name="line-2"></a><span class="cm">** $Id: luaconf.h,v 1.270 2018/06/18 12:51:05 roberto Exp roberto $</span>
+<a name="line-3"></a><span class="cm">** Configuration file for Lua</span>
+<a name="line-4"></a><span class="cm">** See Copyright Notice in lua.h</span>
+<a name="line-5"></a><span class="cm">*/</span>
+<a name="line-6"></a>
+<a name="line-7"></a>
+<a name="line-8"></a><span class="cp">#ifndef luaconf_h</span>
+<a name="line-9"></a><span class="cp">#define luaconf_h</span>
+<a name="line-10"></a>
+<a name="line-11"></a><span class="cp">#include</span> <span class="cpf">&lt;limits.h&gt;</span><span class="cp"></span>
+<a name="line-12"></a><span class="cp">#include</span> <span class="cpf">&lt;stddef.h&gt;</span><span class="cp"></span>
+<a name="line-13"></a>
+<a name="line-14"></a>
+<a name="line-15"></a><span class="cm">/*</span>
+<a name="line-16"></a><span class="cm">** ===================================================================</span>
+<a name="line-17"></a><span class="cm">** Search for &quot;@@&quot; to find all configurable definitions.</span>
+<a name="line-18"></a><span class="cm">** ===================================================================</span>
+<a name="line-19"></a><span class="cm">*/</span>
+<a name="line-20"></a>
+<a name="line-21"></a>
+<a name="line-22"></a><span class="cm">/*</span>
+<a name="line-23"></a><span class="cm">** {====================================================================</span>
+<a name="line-24"></a><span class="cm">** System Configuration: macros to adapt (if needed) Lua to some</span>
+<a name="line-25"></a><span class="cm">** particular platform, for instance compiling it with 32-bit numbers or</span>
+<a name="line-26"></a><span class="cm">** restricting it to C89.</span>
+<a name="line-27"></a><span class="cm">** =====================================================================</span>
+<a name="line-28"></a><span class="cm">*/</span>
+<a name="line-29"></a>
+<a name="line-30"></a><span class="cm">/*</span>
+<a name="line-31"></a><span class="cm">@@ LUA_32BITS enables Lua with 32-bit integers and 32-bit floats. You</span>
+<a name="line-32"></a><span class="cm">** can also define LUA_32BITS in the make file, but changing here you</span>
+<a name="line-33"></a><span class="cm">** ensure that all software connected to Lua will be compiled with the</span>
+<a name="line-34"></a><span class="cm">** same configuration.</span>
+<a name="line-35"></a><span class="cm">*/</span>
+<a name="line-36"></a><span class="cm">/* #define LUA_32BITS */</span>
+<a name="line-37"></a>
+<a name="line-38"></a>
+<a name="line-39"></a><span class="cm">/*</span>
+<a name="line-40"></a><span class="cm">@@ LUA_USE_C89 controls the use of non-ISO-C89 features.</span>
+<a name="line-41"></a><span class="cm">** Define it if you want Lua to avoid the use of a few C99 features</span>
+<a name="line-42"></a><span class="cm">** or Windows-specific features on Windows.</span>
+<a name="line-43"></a><span class="cm">*/</span>
+<a name="line-44"></a><span class="cm">/* #define LUA_USE_C89 */</span>
+<a name="line-45"></a>
+<a name="line-46"></a>
+<a name="line-47"></a><span class="cm">/*</span>
+<a name="line-48"></a><span class="cm">** By default, Lua on Windows use (some) specific Windows features</span>
+<a name="line-49"></a><span class="cm">*/</span>
+<a name="line-50"></a><span class="cp">#if !defined(LUA_USE_C89) &amp;&amp; defined(_WIN32) &amp;&amp; !defined(_WIN32_WCE)</span>
+<a name="line-51"></a><span class="cp">#define LUA_USE_WINDOWS  </span><span class="cm">/* enable goodies for regular Windows */</span><span class="cp"></span>
+<a name="line-52"></a><span class="cp">#endif</span>
+<a name="line-53"></a>
+<a name="line-54"></a>
+<a name="line-55"></a><span class="cp">#if defined(LUA_USE_WINDOWS)</span>
+<a name="line-56"></a><span class="cp">#define LUA_DL_DLL	</span><span class="cm">/* enable support for DLL */</span><span class="cp"></span>
+<a name="line-57"></a><span class="cp">#define LUA_USE_C89	</span><span class="cm">/* broadly, Windows is C89 */</span><span class="cp"></span>
+<a name="line-58"></a><span class="cp">#endif</span>
+<a name="line-59"></a>
+<a name="line-60"></a>
+<a name="line-61"></a><span class="cp">#if defined(LUA_USE_LINUX)</span>
+<a name="line-62"></a><span class="cp">#define LUA_USE_POSIX</span>
+<a name="line-63"></a><span class="cp">#define LUA_USE_DLOPEN		</span><span class="cm">/* needs an extra library: -ldl */</span><span class="cp"></span>
+<a name="line-64"></a><span class="cp">#endif</span>
+<a name="line-65"></a>
+<a name="line-66"></a>
+<a name="line-67"></a><span class="cp">#if defined(LUA_USE_MACOSX)</span>
+<a name="line-68"></a><span class="cp">#define LUA_USE_POSIX</span>
+<a name="line-69"></a><span class="cp">#define LUA_USE_DLOPEN		</span><span class="cm">/* MacOS does not need -ldl */</span><span class="cp"></span>
+<a name="line-70"></a><span class="cp">#endif</span>
+<a name="line-71"></a>
+<a name="line-72"></a>
+<a name="line-73"></a><span class="cm">/*</span>
+<a name="line-74"></a><span class="cm">@@ LUA_C89_NUMBERS ensures that Lua uses the largest types available for</span>
+<a name="line-75"></a><span class="cm">** C89 (&#39;long&#39; and &#39;double&#39;); Windows always has &#39;__int64&#39;, so it does</span>
+<a name="line-76"></a><span class="cm">** not need to use this case.</span>
+<a name="line-77"></a><span class="cm">*/</span>
+<a name="line-78"></a><span class="cp">#if defined(LUA_USE_C89) &amp;&amp; !defined(LUA_USE_WINDOWS)</span>
+<a name="line-79"></a><span class="cp">#define LUA_C89_NUMBERS</span>
+<a name="line-80"></a><span class="cp">#endif</span>
+<a name="line-81"></a>
+<a name="line-82"></a>
+<a name="line-83"></a>
+<a name="line-84"></a><span class="cm">/*</span>
+<a name="line-85"></a><span class="cm">@@ LUAI_BITSINT defines the (minimum) number of bits in an &#39;int&#39;.</span>
+<a name="line-86"></a><span class="cm">*/</span>
+<a name="line-87"></a><span class="cm">/* avoid undefined shifts */</span>
+<a name="line-88"></a><span class="cp">#if ((INT_MAX &gt;&gt; 15) &gt;&gt; 15) &gt;= 1</span>
+<a name="line-89"></a><span class="cp">#define LUAI_BITSINT	32</span>
+<a name="line-90"></a><span class="cp">#else</span>
+<a name="line-91"></a><span class="cm">/* &#39;int&#39; always must have at least 16 bits */</span>
+<a name="line-92"></a><span class="cp">#define LUAI_BITSINT	16</span>
+<a name="line-93"></a><span class="cp">#endif</span>
+<a name="line-94"></a>
+<a name="line-95"></a>
+<a name="line-96"></a><span class="cm">/*</span>
+<a name="line-97"></a><span class="cm">@@ LUA_INT_TYPE defines the type for Lua integers.</span>
+<a name="line-98"></a><span class="cm">@@ LUA_FLOAT_TYPE defines the type for Lua floats.</span>
+<a name="line-99"></a><span class="cm">** Lua should work fine with any mix of these options (if supported</span>
+<a name="line-100"></a><span class="cm">** by your C compiler). The usual configurations are 64-bit integers</span>
+<a name="line-101"></a><span class="cm">** and &#39;double&#39; (the default), 32-bit integers and &#39;float&#39; (for</span>
+<a name="line-102"></a><span class="cm">** restricted platforms), and &#39;long&#39;/&#39;double&#39; (for C compilers not</span>
+<a name="line-103"></a><span class="cm">** compliant with C99, which may not have support for &#39;long long&#39;).</span>
+<a name="line-104"></a><span class="cm">*/</span>
+<a name="line-105"></a>
+<a name="line-106"></a><span class="cm">/* predefined options for LUA_INT_TYPE */</span>
+<a name="line-107"></a><span class="cp">#define LUA_INT_INT		1</span>
+<a name="line-108"></a><span class="cp">#define LUA_INT_LONG		2</span>
+<a name="line-109"></a><span class="cp">#define LUA_INT_LONGLONG	3</span>
+<a name="line-110"></a>
+<a name="line-111"></a><span class="cm">/* predefined options for LUA_FLOAT_TYPE */</span>
+<a name="line-112"></a><span class="cp">#define LUA_FLOAT_FLOAT		1</span>
+<a name="line-113"></a><span class="cp">#define LUA_FLOAT_DOUBLE	2</span>
+<a name="line-114"></a><span class="cp">#define LUA_FLOAT_LONGDOUBLE	3</span>
+<a name="line-115"></a>
+<a name="line-116"></a><span class="cp">#if defined(LUA_32BITS)		</span><span class="cm">/* { */</span><span class="cp"></span>
+<a name="line-117"></a><span class="cm">/*</span>
+<a name="line-118"></a><span class="cm">** 32-bit integers and &#39;float&#39;</span>
+<a name="line-119"></a><span class="cm">*/</span>
+<a name="line-120"></a><span class="cp">#if LUAI_BITSINT &gt;= 32  </span><span class="cm">/* use &#39;int&#39; if big enough */</span><span class="cp"></span>
+<a name="line-121"></a><span class="cp">#define LUA_INT_TYPE	LUA_INT_INT</span>
+<a name="line-122"></a><span class="cp">#else  </span><span class="cm">/* otherwise use &#39;long&#39; */</span><span class="cp"></span>
+<a name="line-123"></a><span class="cp">#define LUA_INT_TYPE	LUA_INT_LONG</span>
+<a name="line-124"></a><span class="cp">#endif</span>
+<a name="line-125"></a><span class="cp">#define LUA_FLOAT_TYPE	LUA_FLOAT_FLOAT</span>
+<a name="line-126"></a>
+<a name="line-127"></a><span class="cp">#elif defined(LUA_C89_NUMBERS)	</span><span class="cm">/* }{ */</span><span class="cp"></span>
+<a name="line-128"></a><span class="cm">/*</span>
+<a name="line-129"></a><span class="cm">** largest types available for C89 (&#39;long&#39; and &#39;double&#39;)</span>
+<a name="line-130"></a><span class="cm">*/</span>
+<a name="line-131"></a><span class="cp">#define LUA_INT_TYPE	LUA_INT_LONG</span>
+<a name="line-132"></a><span class="cp">#define LUA_FLOAT_TYPE	LUA_FLOAT_DOUBLE</span>
+<a name="line-133"></a>
+<a name="line-134"></a><span class="cp">#endif				</span><span class="cm">/* } */</span><span class="cp"></span>
+<a name="line-135"></a>
+<a name="line-136"></a>
+<a name="line-137"></a><span class="cm">/*</span>
+<a name="line-138"></a><span class="cm">** default configuration for 64-bit Lua (&#39;long long&#39; and &#39;double&#39;)</span>
+<a name="line-139"></a><span class="cm">*/</span>
+<a name="line-140"></a><span class="cp">#if !defined(LUA_INT_TYPE)</span>
+<a name="line-141"></a><span class="cp">#define LUA_INT_TYPE	LUA_INT_LONGLONG</span>
+<a name="line-142"></a><span class="cp">#endif</span>
+<a name="line-143"></a>
+<a name="line-144"></a><span class="cp">#if !defined(LUA_FLOAT_TYPE)</span>
+<a name="line-145"></a><span class="cp">#define LUA_FLOAT_TYPE	LUA_FLOAT_DOUBLE</span>
+<a name="line-146"></a><span class="cp">#endif</span>
+<a name="line-147"></a>
+<a name="line-148"></a><span class="cm">/* }================================================================== */</span>
+<a name="line-149"></a>
+<a name="line-150"></a>
+<a name="line-151"></a>
+<a name="line-152"></a>
+<a name="line-153"></a><span class="cm">/*</span>
+<a name="line-154"></a><span class="cm">** {==================================================================</span>
+<a name="line-155"></a><span class="cm">** Configuration for Paths.</span>
+<a name="line-156"></a><span class="cm">** ===================================================================</span>
+<a name="line-157"></a><span class="cm">*/</span>
+<a name="line-158"></a>
+<a name="line-159"></a><span class="cm">/*</span>
+<a name="line-160"></a><span class="cm">** LUA_PATH_SEP is the character that separates templates in a path.</span>
+<a name="line-161"></a><span class="cm">** LUA_PATH_MARK is the string that marks the substitution points in a</span>
+<a name="line-162"></a><span class="cm">** template.</span>
+<a name="line-163"></a><span class="cm">** LUA_EXEC_DIR in a Windows path is replaced by the executable&#39;s</span>
+<a name="line-164"></a><span class="cm">** directory.</span>
+<a name="line-165"></a><span class="cm">*/</span>
+<a name="line-166"></a><span class="cp">#define LUA_PATH_SEP            &quot;;&quot;</span>
+<a name="line-167"></a><span class="cp">#define LUA_PATH_MARK           &quot;?&quot;</span>
+<a name="line-168"></a><span class="cp">#define LUA_EXEC_DIR            &quot;!&quot;</span>
+<a name="line-169"></a>
+<a name="line-170"></a>
+<a name="line-171"></a><span class="cm">/*</span>
+<a name="line-172"></a><span class="cm">@@ LUA_PATH_DEFAULT is the default path that Lua uses to look for</span>
+<a name="line-173"></a><span class="cm">** Lua libraries.</span>
+<a name="line-174"></a><span class="cm">@@ LUA_CPATH_DEFAULT is the default path that Lua uses to look for</span>
+<a name="line-175"></a><span class="cm">** C libraries.</span>
+<a name="line-176"></a><span class="cm">** CHANGE them if your machine has a non-conventional directory</span>
+<a name="line-177"></a><span class="cm">** hierarchy or if you want to install your libraries in</span>
+<a name="line-178"></a><span class="cm">** non-conventional directories.</span>
+<a name="line-179"></a><span class="cm">*/</span>
+<a name="line-180"></a><span class="cp">#define LUA_VDIR	LUA_VERSION_MAJOR &quot;.&quot; LUA_VERSION_MINOR</span>
+<a name="line-181"></a><span class="cp">#if defined(_WIN32)	</span><span class="cm">/* { */</span><span class="cp"></span>
+<a name="line-182"></a><span class="cm">/*</span>
+<a name="line-183"></a><span class="cm">** In Windows, any exclamation mark (&#39;!&#39;) in the path is replaced by the</span>
+<a name="line-184"></a><span class="cm">** path of the directory of the executable file of the current process.</span>
+<a name="line-185"></a><span class="cm">*/</span>
+<a name="line-186"></a><span class="cp">#define LUA_LDIR	&quot;!\\lua\\&quot;</span>
+<a name="line-187"></a><span class="cp">#define LUA_CDIR	&quot;!\\&quot;</span>
+<a name="line-188"></a><span class="cp">#define LUA_SHRDIR	&quot;!\\..\\share\\lua\\&quot; LUA_VDIR &quot;\\&quot;</span>
+<a name="line-189"></a><span class="cp">#define LUA_PATH_DEFAULT  \</span>
+<a name="line-190"></a><span class="cp">		LUA_LDIR&quot;?.lua;&quot;  LUA_LDIR&quot;?\\init.lua;&quot; \</span>
+<a name="line-191"></a><span class="cp">		LUA_CDIR&quot;?.lua;&quot;  LUA_CDIR&quot;?\\init.lua;&quot; \</span>
+<a name="line-192"></a><span class="cp">		LUA_SHRDIR&quot;?.lua;&quot; LUA_SHRDIR&quot;?\\init.lua;&quot; \</span>
+<a name="line-193"></a><span class="cp">		&quot;.\\?.lua;&quot; &quot;.\\?\\init.lua&quot;</span>
+<a name="line-194"></a><span class="cp">#define LUA_CPATH_DEFAULT \</span>
+<a name="line-195"></a><span class="cp">		LUA_CDIR&quot;?.dll;&quot; \</span>
+<a name="line-196"></a><span class="cp">		LUA_CDIR&quot;..\\lib\\lua\\&quot; LUA_VDIR &quot;\\?.dll;&quot; \</span>
+<a name="line-197"></a><span class="cp">		LUA_CDIR&quot;loadall.dll;&quot; &quot;.\\?.dll&quot;</span>
+<a name="line-198"></a>
+<a name="line-199"></a><span class="cp">#else			</span><span class="cm">/* }{ */</span><span class="cp"></span>
+<a name="line-200"></a>
+<a name="line-201"></a><span class="cp">#define LUA_ROOT	&quot;/usr/local/&quot;</span>
+<a name="line-202"></a><span class="cp">#define LUA_LDIR	LUA_ROOT &quot;share/lua/&quot; LUA_VDIR &quot;/&quot;</span>
+<a name="line-203"></a><span class="cp">#define LUA_CDIR	LUA_ROOT &quot;lib/lua/&quot; LUA_VDIR &quot;/&quot;</span>
+<a name="line-204"></a><span class="cp">#define LUA_PATH_DEFAULT  \</span>
+<a name="line-205"></a><span class="cp">		LUA_LDIR&quot;?.lua;&quot;  LUA_LDIR&quot;?/init.lua;&quot; \</span>
+<a name="line-206"></a><span class="cp">		LUA_CDIR&quot;?.lua;&quot;  LUA_CDIR&quot;?/init.lua;&quot; \</span>
+<a name="line-207"></a><span class="cp">		&quot;./?.lua;&quot; &quot;./?/init.lua&quot;</span>
+<a name="line-208"></a><span class="cp">#define LUA_CPATH_DEFAULT \</span>
+<a name="line-209"></a><span class="cp">		LUA_CDIR&quot;?.so;&quot; LUA_CDIR&quot;loadall.so;&quot; &quot;./?.so&quot;</span>
+<a name="line-210"></a><span class="cp">#endif			</span><span class="cm">/* } */</span><span class="cp"></span>
+<a name="line-211"></a>
+<a name="line-212"></a>
+<a name="line-213"></a><span class="cm">/*</span>
+<a name="line-214"></a><span class="cm">@@ LUA_DIRSEP is the directory separator (for submodules).</span>
+<a name="line-215"></a><span class="cm">** CHANGE it if your machine does not use &quot;/&quot; as the directory separator</span>
+<a name="line-216"></a><span class="cm">** and is not Windows. (On Windows Lua automatically uses &quot;\&quot;.)</span>
+<a name="line-217"></a><span class="cm">*/</span>
+<a name="line-218"></a><span class="cp">#if defined(_WIN32)</span>
+<a name="line-219"></a><span class="cp">#define LUA_DIRSEP	&quot;\\&quot;</span>
+<a name="line-220"></a><span class="cp">#else</span>
+<a name="line-221"></a><span class="cp">#define LUA_DIRSEP	&quot;/&quot;</span>
+<a name="line-222"></a><span class="cp">#endif</span>
+<a name="line-223"></a>
+<a name="line-224"></a><span class="cm">/* }================================================================== */</span>
+<a name="line-225"></a>
+<a name="line-226"></a>
+<a name="line-227"></a><span class="cm">/*</span>
+<a name="line-228"></a><span class="cm">** {==================================================================</span>
+<a name="line-229"></a><span class="cm">** Marks for exported symbols in the C code</span>
+<a name="line-230"></a><span class="cm">** ===================================================================</span>
+<a name="line-231"></a><span class="cm">*/</span>
+<a name="line-232"></a>
+<a name="line-233"></a><span class="cm">/*</span>
+<a name="line-234"></a><span class="cm">@@ LUA_API is a mark for all core API functions.</span>
+<a name="line-235"></a><span class="cm">@@ LUALIB_API is a mark for all auxiliary library functions.</span>
+<a name="line-236"></a><span class="cm">@@ LUAMOD_API is a mark for all standard library opening functions.</span>
+<a name="line-237"></a><span class="cm">** CHANGE them if you need to define those functions in some special way.</span>
+<a name="line-238"></a><span class="cm">** For instance, if you want to create one Windows DLL with the core and</span>
+<a name="line-239"></a><span class="cm">** the libraries, you may want to use the following definition (define</span>
+<a name="line-240"></a><span class="cm">** LUA_BUILD_AS_DLL to get it).</span>
+<a name="line-241"></a><span class="cm">*/</span>
+<a name="line-242"></a><span class="cp">#if defined(LUA_BUILD_AS_DLL)	</span><span class="cm">/* { */</span><span class="cp"></span>
+<a name="line-243"></a>
+<a name="line-244"></a><span class="cp">#if defined(LUA_CORE) || defined(LUA_LIB)	</span><span class="cm">/* { */</span><span class="cp"></span>
+<a name="line-245"></a><span class="cp">#define LUA_API __declspec(dllexport)</span>
+<a name="line-246"></a><span class="cp">#else						</span><span class="cm">/* }{ */</span><span class="cp"></span>
+<a name="line-247"></a><span class="cp">#define LUA_API __declspec(dllimport)</span>
+<a name="line-248"></a><span class="cp">#endif						</span><span class="cm">/* } */</span><span class="cp"></span>
+<a name="line-249"></a>
+<a name="line-250"></a><span class="cp">#else				</span><span class="cm">/* }{ */</span><span class="cp"></span>
+<a name="line-251"></a>
+<a name="line-252"></a><span class="cp">#define LUA_API		extern</span>
+<a name="line-253"></a>
+<a name="line-254"></a><span class="cp">#endif				</span><span class="cm">/* } */</span><span class="cp"></span>
+<a name="line-255"></a>
+<a name="line-256"></a>
+<a name="line-257"></a><span class="cm">/*</span>
+<a name="line-258"></a><span class="cm">** More often than not the libs go together with the core.</span>
+<a name="line-259"></a><span class="cm">*/</span>
+<a name="line-260"></a><span class="cp">#define LUALIB_API	LUA_API</span>
+<a name="line-261"></a><span class="cp">#define LUAMOD_API	LUA_API</span>
+<a name="line-262"></a>
+<a name="line-263"></a>
+<a name="line-264"></a><span class="cm">/*</span>
+<a name="line-265"></a><span class="cm">@@ LUAI_FUNC is a mark for all extern functions that are not to be</span>
+<a name="line-266"></a><span class="cm">** exported to outside modules.</span>
+<a name="line-267"></a><span class="cm">@@ LUAI_DDEF and LUAI_DDEC are marks for all extern (const) variables,</span>
+<a name="line-268"></a><span class="cm">** none of which to be exported to outside modules (LUAI_DDEF for</span>
+<a name="line-269"></a><span class="cm">** definitions and LUAI_DDEC for declarations).</span>
+<a name="line-270"></a><span class="cm">** CHANGE them if you need to mark them in some special way. Elf/gcc</span>
+<a name="line-271"></a><span class="cm">** (versions 3.2 and later) mark them as &quot;hidden&quot; to optimize access</span>
+<a name="line-272"></a><span class="cm">** when Lua is compiled as a shared library. Not all elf targets support</span>
+<a name="line-273"></a><span class="cm">** this attribute. Unfortunately, gcc does not offer a way to check</span>
+<a name="line-274"></a><span class="cm">** whether the target offers that support, and those without support</span>
+<a name="line-275"></a><span class="cm">** give a warning about it. To avoid these warnings, change to the</span>
+<a name="line-276"></a><span class="cm">** default definition.</span>
+<a name="line-277"></a><span class="cm">*/</span>
+<a name="line-278"></a><span class="cp">#if defined(__GNUC__) &amp;&amp; ((__GNUC__*100 + __GNUC_MINOR__) &gt;= 302) &amp;&amp; \</span>
+<a name="line-279"></a><span class="cp">    defined(__ELF__)		</span><span class="cm">/* { */</span><span class="cp"></span>
+<a name="line-280"></a><span class="cp">#define LUAI_FUNC	__attribute__((visibility(&quot;hidden&quot;))) extern</span>
+<a name="line-281"></a><span class="cp">#else				</span><span class="cm">/* }{ */</span><span class="cp"></span>
+<a name="line-282"></a><span class="cp">#define LUAI_FUNC	extern</span>
+<a name="line-283"></a><span class="cp">#endif				</span><span class="cm">/* } */</span><span class="cp"></span>
+<a name="line-284"></a>
+<a name="line-285"></a><span class="cp">#define LUAI_DDEC(dec)	LUAI_FUNC dec</span>
+<a name="line-286"></a><span class="cp">#define LUAI_DDEF	</span><span class="cm">/* empty */</span><span class="cp"></span>
+<a name="line-287"></a>
+<a name="line-288"></a><span class="cm">/* }================================================================== */</span>
+<a name="line-289"></a>
+<a name="line-290"></a>
+<a name="line-291"></a><span class="cm">/*</span>
+<a name="line-292"></a><span class="cm">** {==================================================================</span>
+<a name="line-293"></a><span class="cm">** Compatibility with previous versions</span>
+<a name="line-294"></a><span class="cm">** ===================================================================</span>
+<a name="line-295"></a><span class="cm">*/</span>
+<a name="line-296"></a>
+<a name="line-297"></a><span class="cm">/*</span>
+<a name="line-298"></a><span class="cm">@@ LUA_COMPAT_5_3 controls other macros for compatibility with Lua 5.2.</span>
+<a name="line-299"></a><span class="cm">** You can define it to get all options, or change specific options</span>
+<a name="line-300"></a><span class="cm">** to fit your specific needs.</span>
+<a name="line-301"></a><span class="cm">*/</span>
+<a name="line-302"></a><span class="cp">#if defined(LUA_COMPAT_5_3)	</span><span class="cm">/* { */</span><span class="cp"></span>
+<a name="line-303"></a>
+<a name="line-304"></a><span class="cm">/*</span>
+<a name="line-305"></a><span class="cm">@@ LUA_COMPAT_MATHLIB controls the presence of several deprecated</span>
+<a name="line-306"></a><span class="cm">** functions in the mathematical library.</span>
+<a name="line-307"></a><span class="cm">** (These functions were already officially removed in 5.3, but</span>
+<a name="line-308"></a><span class="cm">** nevertheless they are available by default there.)</span>
+<a name="line-309"></a><span class="cm">*/</span>
+<a name="line-310"></a><span class="cp">#define LUA_COMPAT_MATHLIB</span>
+<a name="line-311"></a>
+<a name="line-312"></a><span class="cm">/*</span>
+<a name="line-313"></a><span class="cm">@@ LUA_COMPAT_APIINTCASTS controls the presence of macros for</span>
+<a name="line-314"></a><span class="cm">** manipulating other integer types (lua_pushunsigned, lua_tounsigned,</span>
+<a name="line-315"></a><span class="cm">** luaL_checkint, luaL_checklong, etc.)</span>
+<a name="line-316"></a><span class="cm">*/</span>
+<a name="line-317"></a><span class="cp">#define LUA_COMPAT_APIINTCASTS</span>
+<a name="line-318"></a>
+<a name="line-319"></a><span class="cp">#endif				</span><span class="cm">/* } */</span><span class="cp"></span>
+<a name="line-320"></a>
+<a name="line-321"></a>
+<a name="line-322"></a>
+<a name="line-323"></a><span class="cm">/*</span>
+<a name="line-324"></a><span class="cm">@@ The following macros supply trivial compatibility for some</span>
+<a name="line-325"></a><span class="cm">** changes in the API. The macros themselves document how to</span>
+<a name="line-326"></a><span class="cm">** change your code to avoid using them.</span>
+<a name="line-327"></a><span class="cm">*/</span>
+<a name="line-328"></a><span class="cp">#define lua_strlen(L,i)		lua_rawlen(L, (i))</span>
+<a name="line-329"></a>
+<a name="line-330"></a><span class="cp">#define lua_objlen(L,i)		lua_rawlen(L, (i))</span>
+<a name="line-331"></a>
+<a name="line-332"></a><span class="cp">#define lua_equal(L,idx1,idx2)		lua_compare(L,(idx1),(idx2),LUA_OPEQ)</span>
+<a name="line-333"></a><span class="cp">#define lua_lessthan(L,idx1,idx2)	lua_compare(L,(idx1),(idx2),LUA_OPLT)</span>
+<a name="line-334"></a>
+<a name="line-335"></a><span class="cm">/* }================================================================== */</span>
+<a name="line-336"></a>
+<a name="line-337"></a>
+<a name="line-338"></a>
+<a name="line-339"></a><span class="cm">/*</span>
+<a name="line-340"></a><span class="cm">** {==================================================================</span>
+<a name="line-341"></a><span class="cm">** Configuration for Numbers.</span>
+<a name="line-342"></a><span class="cm">** Change these definitions if no predefined LUA_FLOAT_* / LUA_INT_*</span>
+<a name="line-343"></a><span class="cm">** satisfy your needs.</span>
+<a name="line-344"></a><span class="cm">** ===================================================================</span>
+<a name="line-345"></a><span class="cm">*/</span>
+<a name="line-346"></a>
+<a name="line-347"></a><span class="cm">/*</span>
+<a name="line-348"></a><span class="cm">@@ LUA_NUMBER is the floating-point type used by Lua.</span>
+<a name="line-349"></a><span class="cm">@@ LUAI_UACNUMBER is the result of a &#39;default argument promotion&#39;</span>
+<a name="line-350"></a><span class="cm">@@ over a floating number.</span>
+<a name="line-351"></a><span class="cm">@@ l_mathlim(x) corrects limit name &#39;x&#39; to the proper float type</span>
+<a name="line-352"></a><span class="cm">** by prefixing it with one of FLT/DBL/LDBL.</span>
+<a name="line-353"></a><span class="cm">@@ LUA_NUMBER_FRMLEN is the length modifier for writing floats.</span>
+<a name="line-354"></a><span class="cm">@@ LUA_NUMBER_FMT is the format for writing floats.</span>
+<a name="line-355"></a><span class="cm">@@ lua_number2str converts a float to a string.</span>
+<a name="line-356"></a><span class="cm">@@ l_mathop allows the addition of an &#39;l&#39; or &#39;f&#39; to all math operations.</span>
+<a name="line-357"></a><span class="cm">@@ l_floor takes the floor of a float.</span>
+<a name="line-358"></a><span class="cm">@@ lua_str2number converts a decimal numeric string to a number.</span>
+<a name="line-359"></a><span class="cm">*/</span>
+<a name="line-360"></a>
+<a name="line-361"></a>
+<a name="line-362"></a><span class="cm">/* The following definitions are good for most cases here */</span>
+<a name="line-363"></a>
+<a name="line-364"></a><span class="cp">#define l_floor(x)		(l_mathop(floor)(x))</span>
+<a name="line-365"></a>
+<a name="line-366"></a><span class="cp">#define lua_number2str(s,sz,n)  \</span>
+<a name="line-367"></a><span class="cp">	l_sprintf((s), sz, LUA_NUMBER_FMT, (LUAI_UACNUMBER)(n))</span>
+<a name="line-368"></a>
+<a name="line-369"></a><span class="cm">/*</span>
+<a name="line-370"></a><span class="cm">@@ lua_numbertointeger converts a float number with an integral value</span>
+<a name="line-371"></a><span class="cm">** to an integer, or returns 0 if float is not within the range of</span>
+<a name="line-372"></a><span class="cm">** a lua_Integer.  (The range comparisons are tricky because of</span>
+<a name="line-373"></a><span class="cm">** rounding. The tests here assume a two-complement representation,</span>
+<a name="line-374"></a><span class="cm">** where MININTEGER always has an exact representation as a float;</span>
+<a name="line-375"></a><span class="cm">** MAXINTEGER may not have one, and therefore its conversion to float</span>
+<a name="line-376"></a><span class="cm">** may have an ill-defined value.)</span>
+<a name="line-377"></a><span class="cm">*/</span>
+<a name="line-378"></a><span class="cp">#define lua_numbertointeger(n,p) \</span>
+<a name="line-379"></a><span class="cp">  ((n) &gt;= (LUA_NUMBER)(LUA_MININTEGER) &amp;&amp; \</span>
+<a name="line-380"></a><span class="cp">   (n) &lt; -(LUA_NUMBER)(LUA_MININTEGER) &amp;&amp; \</span>
+<a name="line-381"></a><span class="cp">      (*(p) = (LUA_INTEGER)(n), 1))</span>
+<a name="line-382"></a>
+<a name="line-383"></a>
+<a name="line-384"></a><span class="cm">/* now the variable definitions */</span>
+<a name="line-385"></a>
+<a name="line-386"></a><span class="cp">#if LUA_FLOAT_TYPE == LUA_FLOAT_FLOAT		</span><span class="cm">/* { single float */</span><span class="cp"></span>
+<a name="line-387"></a>
+<a name="line-388"></a><span class="cp">#define LUA_NUMBER	float</span>
+<a name="line-389"></a>
+<a name="line-390"></a><span class="cp">#define l_mathlim(n)		(FLT_##n)</span>
+<a name="line-391"></a>
+<a name="line-392"></a><span class="cp">#define LUAI_UACNUMBER	double</span>
+<a name="line-393"></a>
+<a name="line-394"></a><span class="cp">#define LUA_NUMBER_FRMLEN	&quot;&quot;</span>
+<a name="line-395"></a><span class="cp">#define LUA_NUMBER_FMT		&quot;%.7g&quot;</span>
+<a name="line-396"></a>
+<a name="line-397"></a><span class="cp">#define l_mathop(op)		op##f</span>
+<a name="line-398"></a>
+<a name="line-399"></a><span class="cp">#define lua_str2number(s,p)	strtof((s), (p))</span>
+<a name="line-400"></a>
+<a name="line-401"></a>
+<a name="line-402"></a><span class="cp">#elif LUA_FLOAT_TYPE == LUA_FLOAT_LONGDOUBLE	</span><span class="cm">/* }{ long double */</span><span class="cp"></span>
+<a name="line-403"></a>
+<a name="line-404"></a><span class="cp">#define LUA_NUMBER	long double</span>
+<a name="line-405"></a>
+<a name="line-406"></a><span class="cp">#define l_mathlim(n)		(LDBL_##n)</span>
+<a name="line-407"></a>
+<a name="line-408"></a><span class="cp">#define LUAI_UACNUMBER	long double</span>
+<a name="line-409"></a>
+<a name="line-410"></a><span class="cp">#define LUA_NUMBER_FRMLEN	&quot;L&quot;</span>
+<a name="line-411"></a><span class="cp">#define LUA_NUMBER_FMT		&quot;%.19Lg&quot;</span>
+<a name="line-412"></a>
+<a name="line-413"></a><span class="cp">#define l_mathop(op)		op##l</span>
+<a name="line-414"></a>
+<a name="line-415"></a><span class="cp">#define lua_str2number(s,p)	strtold((s), (p))</span>
+<a name="line-416"></a>
+<a name="line-417"></a><span class="cp">#elif LUA_FLOAT_TYPE == LUA_FLOAT_DOUBLE	</span><span class="cm">/* }{ double */</span><span class="cp"></span>
+<a name="line-418"></a>
+<a name="line-419"></a><span class="cp">#define LUA_NUMBER	double</span>
+<a name="line-420"></a>
+<a name="line-421"></a><span class="cp">#define l_mathlim(n)		(DBL_##n)</span>
+<a name="line-422"></a>
+<a name="line-423"></a><span class="cp">#define LUAI_UACNUMBER	double</span>
+<a name="line-424"></a>
+<a name="line-425"></a><span class="cp">#define LUA_NUMBER_FRMLEN	&quot;&quot;</span>
+<a name="line-426"></a><span class="cp">#define LUA_NUMBER_FMT		&quot;%.14g&quot;</span>
+<a name="line-427"></a>
+<a name="line-428"></a><span class="cp">#define l_mathop(op)		op</span>
+<a name="line-429"></a>
+<a name="line-430"></a><span class="cp">#define lua_str2number(s,p)	strtod((s), (p))</span>
+<a name="line-431"></a>
+<a name="line-432"></a><span class="cp">#else						</span><span class="cm">/* }{ */</span><span class="cp"></span>
+<a name="line-433"></a>
+<a name="line-434"></a><span class="cp">#error &quot;numeric float type not defined&quot;</span>
+<a name="line-435"></a>
+<a name="line-436"></a><span class="cp">#endif					</span><span class="cm">/* } */</span><span class="cp"></span>
+<a name="line-437"></a>
+<a name="line-438"></a>
+<a name="line-439"></a>
+<a name="line-440"></a><span class="cm">/*</span>
+<a name="line-441"></a><span class="cm">@@ LUA_INTEGER is the integer type used by Lua.</span>
+<a name="line-442"></a><span class="cm">**</span>
+<a name="line-443"></a><span class="cm">@@ LUA_UNSIGNED is the unsigned version of LUA_INTEGER.</span>
+<a name="line-444"></a><span class="cm">**</span>
+<a name="line-445"></a><span class="cm">@@ LUAI_UACINT is the result of a &#39;default argument promotion&#39;</span>
+<a name="line-446"></a><span class="cm">@@ over a lUA_INTEGER.</span>
+<a name="line-447"></a><span class="cm">@@ LUA_INTEGER_FRMLEN is the length modifier for reading/writing integers.</span>
+<a name="line-448"></a><span class="cm">@@ LUA_INTEGER_FMT is the format for writing integers.</span>
+<a name="line-449"></a><span class="cm">@@ LUA_MAXINTEGER is the maximum value for a LUA_INTEGER.</span>
+<a name="line-450"></a><span class="cm">@@ LUA_MININTEGER is the minimum value for a LUA_INTEGER.</span>
+<a name="line-451"></a><span class="cm">@@ LUA_MAXUNSIGNED is the maximum value for a LUA_UNSIGNED.</span>
+<a name="line-452"></a><span class="cm">@@ LUA_UNSIGNEDBITS is the number of bits in a LUA_UNSIGNED.</span>
+<a name="line-453"></a><span class="cm">@@ lua_integer2str converts an integer to a string.</span>
+<a name="line-454"></a><span class="cm">*/</span>
+<a name="line-455"></a>
+<a name="line-456"></a>
+<a name="line-457"></a><span class="cm">/* The following definitions are good for most cases here */</span>
+<a name="line-458"></a>
+<a name="line-459"></a><span class="cp">#define LUA_INTEGER_FMT		&quot;%&quot; LUA_INTEGER_FRMLEN &quot;d&quot;</span>
+<a name="line-460"></a>
+<a name="line-461"></a><span class="cp">#define LUAI_UACINT		LUA_INTEGER</span>
+<a name="line-462"></a>
+<a name="line-463"></a><span class="cp">#define lua_integer2str(s,sz,n)  \</span>
+<a name="line-464"></a><span class="cp">	l_sprintf((s), sz, LUA_INTEGER_FMT, (LUAI_UACINT)(n))</span>
+<a name="line-465"></a>
+<a name="line-466"></a><span class="cm">/*</span>
+<a name="line-467"></a><span class="cm">** use LUAI_UACINT here to avoid problems with promotions (which</span>
+<a name="line-468"></a><span class="cm">** can turn a comparison between unsigneds into a signed comparison)</span>
+<a name="line-469"></a><span class="cm">*/</span>
+<a name="line-470"></a><span class="cp">#define LUA_UNSIGNED		unsigned LUAI_UACINT</span>
+<a name="line-471"></a>
+<a name="line-472"></a><span class="cp">#define LUA_MAXUNSIGNED		(~(lua_Unsigned)0)</span>
+<a name="line-473"></a>
+<a name="line-474"></a><span class="cp">#define LUA_UNSIGNEDBITS	(sizeof(LUA_UNSIGNED) * CHAR_BIT)</span>
+<a name="line-475"></a>
+<a name="line-476"></a>
+<a name="line-477"></a><span class="cm">/* now the variable definitions */</span>
+<a name="line-478"></a>
+<a name="line-479"></a><span class="cp">#if LUA_INT_TYPE == LUA_INT_INT		</span><span class="cm">/* { int */</span><span class="cp"></span>
+<a name="line-480"></a>
+<a name="line-481"></a><span class="cp">#define LUA_INTEGER		int</span>
+<a name="line-482"></a><span class="cp">#define LUA_INTEGER_FRMLEN	&quot;&quot;</span>
+<a name="line-483"></a>
+<a name="line-484"></a><span class="cp">#define LUA_MAXINTEGER		INT_MAX</span>
+<a name="line-485"></a><span class="cp">#define LUA_MININTEGER		INT_MIN</span>
+<a name="line-486"></a>
+<a name="line-487"></a><span class="cp">#elif LUA_INT_TYPE == LUA_INT_LONG	</span><span class="cm">/* }{ long */</span><span class="cp"></span>
+<a name="line-488"></a>
+<a name="line-489"></a><span class="cp">#define LUA_INTEGER		long</span>
+<a name="line-490"></a><span class="cp">#define LUA_INTEGER_FRMLEN	&quot;l&quot;</span>
+<a name="line-491"></a>
+<a name="line-492"></a><span class="cp">#define LUA_MAXINTEGER		LONG_MAX</span>
+<a name="line-493"></a><span class="cp">#define LUA_MININTEGER		LONG_MIN</span>
+<a name="line-494"></a>
+<a name="line-495"></a><span class="cp">#elif LUA_INT_TYPE == LUA_INT_LONGLONG	</span><span class="cm">/* }{ long long */</span><span class="cp"></span>
+<a name="line-496"></a>
+<a name="line-497"></a><span class="cm">/* use presence of macro LLONG_MAX as proxy for C99 compliance */</span>
+<a name="line-498"></a><span class="cp">#if defined(LLONG_MAX)		</span><span class="cm">/* { */</span><span class="cp"></span>
+<a name="line-499"></a><span class="cm">/* use ISO C99 stuff */</span>
+<a name="line-500"></a>
+<a name="line-501"></a><span class="cp">#define LUA_INTEGER		long long</span>
+<a name="line-502"></a><span class="cp">#define LUA_INTEGER_FRMLEN	&quot;ll&quot;</span>
+<a name="line-503"></a>
+<a name="line-504"></a><span class="cp">#define LUA_MAXINTEGER		LLONG_MAX</span>
+<a name="line-505"></a><span class="cp">#define LUA_MININTEGER		LLONG_MIN</span>
+<a name="line-506"></a>
+<a name="line-507"></a><span class="cp">#elif defined(LUA_USE_WINDOWS) </span><span class="cm">/* }{ */</span><span class="cp"></span>
+<a name="line-508"></a><span class="cm">/* in Windows, can use specific Windows types */</span>
+<a name="line-509"></a>
+<a name="line-510"></a><span class="cp">#define LUA_INTEGER		__int64</span>
+<a name="line-511"></a><span class="cp">#define LUA_INTEGER_FRMLEN	&quot;I64&quot;</span>
+<a name="line-512"></a>
+<a name="line-513"></a><span class="cp">#define LUA_MAXINTEGER		_I64_MAX</span>
+<a name="line-514"></a><span class="cp">#define LUA_MININTEGER		_I64_MIN</span>
+<a name="line-515"></a>
+<a name="line-516"></a><span class="cp">#else				</span><span class="cm">/* }{ */</span><span class="cp"></span>
+<a name="line-517"></a>
+<a name="line-518"></a><span class="hll"><span class="cp">#error &quot;Compiler does not support &#39;long long&#39;. Use option &#39;-DLUA_32BITS&#39; \</span><div class='verbose expandable'><span class='error2'>&lt;--- #error "Compiler does not support 'long long'. Use option '-DLUA_32BITS' \ <span class='marker'>[+]</span></span><div class='content'>  or &apos;-DLUA_C89_NUMBERS&apos; (see file &apos;luaconf.h&apos; for details)&quot;</div></div>
+</span><a name="line-519"></a><span class="cp">  or &#39;-DLUA_C89_NUMBERS&#39; (see file &#39;luaconf.h&#39; for details)&quot;</span>
+<a name="line-520"></a>
+<a name="line-521"></a><span class="cp">#endif				</span><span class="cm">/* } */</span><span class="cp"></span>
+<a name="line-522"></a>
+<a name="line-523"></a><span class="cp">#else				</span><span class="cm">/* }{ */</span><span class="cp"></span>
+<a name="line-524"></a>
+<a name="line-525"></a><span class="cp">#error &quot;numeric integer type not defined&quot;</span>
+<a name="line-526"></a>
+<a name="line-527"></a><span class="cp">#endif				</span><span class="cm">/* } */</span><span class="cp"></span>
+<a name="line-528"></a>
+<a name="line-529"></a><span class="cm">/* }================================================================== */</span>
+<a name="line-530"></a>
+<a name="line-531"></a>
+<a name="line-532"></a><span class="cm">/*</span>
+<a name="line-533"></a><span class="cm">** {==================================================================</span>
+<a name="line-534"></a><span class="cm">** Dependencies with C99 and other C details</span>
+<a name="line-535"></a><span class="cm">** ===================================================================</span>
+<a name="line-536"></a><span class="cm">*/</span>
+<a name="line-537"></a>
+<a name="line-538"></a><span class="cm">/*</span>
+<a name="line-539"></a><span class="cm">@@ l_sprintf is equivalent to &#39;snprintf&#39; or &#39;sprintf&#39; in C89.</span>
+<a name="line-540"></a><span class="cm">** (All uses in Lua have only one format item.)</span>
+<a name="line-541"></a><span class="cm">*/</span>
+<a name="line-542"></a><span class="cp">#if !defined(LUA_USE_C89)</span>
+<a name="line-543"></a><span class="cp">#define l_sprintf(s,sz,f,i)	snprintf(s,sz,f,i)</span>
+<a name="line-544"></a><span class="cp">#else</span>
+<a name="line-545"></a><span class="cp">#define l_sprintf(s,sz,f,i)	((void)(sz), sprintf(s,f,i))</span>
+<a name="line-546"></a><span class="cp">#endif</span>
+<a name="line-547"></a>
+<a name="line-548"></a>
+<a name="line-549"></a><span class="cm">/*</span>
+<a name="line-550"></a><span class="cm">@@ lua_strx2number converts a hexadecimal numeric string to a number.</span>
+<a name="line-551"></a><span class="cm">** In C99, &#39;strtod&#39; does that conversion. Otherwise, you can</span>
+<a name="line-552"></a><span class="cm">** leave &#39;lua_strx2number&#39; undefined and Lua will provide its own</span>
+<a name="line-553"></a><span class="cm">** implementation.</span>
+<a name="line-554"></a><span class="cm">*/</span>
+<a name="line-555"></a><span class="cp">#if !defined(LUA_USE_C89)</span>
+<a name="line-556"></a><span class="cp">#define lua_strx2number(s,p)		lua_str2number(s,p)</span>
+<a name="line-557"></a><span class="cp">#endif</span>
+<a name="line-558"></a>
+<a name="line-559"></a>
+<a name="line-560"></a><span class="cm">/*</span>
+<a name="line-561"></a><span class="cm">@@ lua_pointer2str converts a pointer to a readable string in a</span>
+<a name="line-562"></a><span class="cm">** non-specified way.</span>
+<a name="line-563"></a><span class="cm">*/</span>
+<a name="line-564"></a><span class="cp">#define lua_pointer2str(buff,sz,p)	l_sprintf(buff,sz,&quot;%p&quot;,p)</span>
+<a name="line-565"></a>
+<a name="line-566"></a>
+<a name="line-567"></a><span class="cm">/*</span>
+<a name="line-568"></a><span class="cm">@@ lua_number2strx converts a float to a hexadecimal numeric string.</span>
+<a name="line-569"></a><span class="cm">** In C99, &#39;sprintf&#39; (with format specifiers &#39;%a&#39;/&#39;%A&#39;) does that.</span>
+<a name="line-570"></a><span class="cm">** Otherwise, you can leave &#39;lua_number2strx&#39; undefined and Lua will</span>
+<a name="line-571"></a><span class="cm">** provide its own implementation.</span>
+<a name="line-572"></a><span class="cm">*/</span>
+<a name="line-573"></a><span class="cp">#if !defined(LUA_USE_C89)</span>
+<a name="line-574"></a><span class="cp">#define lua_number2strx(L,b,sz,f,n)  \</span>
+<a name="line-575"></a><span class="cp">	((void)L, l_sprintf(b,sz,f,(LUAI_UACNUMBER)(n)))</span>
+<a name="line-576"></a><span class="cp">#endif</span>
+<a name="line-577"></a>
+<a name="line-578"></a>
+<a name="line-579"></a><span class="cm">/*</span>
+<a name="line-580"></a><span class="cm">** &#39;strtof&#39; and &#39;opf&#39; variants for math functions are not valid in</span>
+<a name="line-581"></a><span class="cm">** C89. Otherwise, the macro &#39;HUGE_VALF&#39; is a good proxy for testing the</span>
+<a name="line-582"></a><span class="cm">** availability of these variants. (&#39;math.h&#39; is already included in</span>
+<a name="line-583"></a><span class="cm">** all files that use these macros.)</span>
+<a name="line-584"></a><span class="cm">*/</span>
+<a name="line-585"></a><span class="cp">#if defined(LUA_USE_C89) || (defined(HUGE_VAL) &amp;&amp; !defined(HUGE_VALF))</span>
+<a name="line-586"></a><span class="cp">#undef l_mathop  </span><span class="cm">/* variants not available */</span><span class="cp"></span>
+<a name="line-587"></a><span class="cp">#undef lua_str2number</span>
+<a name="line-588"></a><span class="cp">#define l_mathop(op)		(lua_Number)op  </span><span class="cm">/* no variant */</span><span class="cp"></span>
+<a name="line-589"></a><span class="cp">#define lua_str2number(s,p)	((lua_Number)strtod((s), (p)))</span>
+<a name="line-590"></a><span class="cp">#endif</span>
+<a name="line-591"></a>
+<a name="line-592"></a>
+<a name="line-593"></a><span class="cm">/*</span>
+<a name="line-594"></a><span class="cm">@@ LUA_KCONTEXT is the type of the context (&#39;ctx&#39;) for continuation</span>
+<a name="line-595"></a><span class="cm">** functions.  It must be a numerical type; Lua will use &#39;intptr_t&#39; if</span>
+<a name="line-596"></a><span class="cm">** available, otherwise it will use &#39;ptrdiff_t&#39; (the nearest thing to</span>
+<a name="line-597"></a><span class="cm">** &#39;intptr_t&#39; in C89)</span>
+<a name="line-598"></a><span class="cm">*/</span>
+<a name="line-599"></a><span class="cp">#define LUA_KCONTEXT	ptrdiff_t</span>
+<a name="line-600"></a>
+<a name="line-601"></a><span class="cp">#if !defined(LUA_USE_C89) &amp;&amp; defined(__STDC_VERSION__) &amp;&amp; \</span>
+<a name="line-602"></a><span class="cp">    __STDC_VERSION__ &gt;= 199901L</span>
+<a name="line-603"></a><span class="cp">#include</span> <span class="cpf">&lt;stdint.h&gt;</span><span class="cp"></span>
+<a name="line-604"></a><span class="cp">#if defined(INTPTR_MAX)  </span><span class="cm">/* even in C99 this type is optional */</span><span class="cp"></span>
+<a name="line-605"></a><span class="cp">#undef LUA_KCONTEXT</span>
+<a name="line-606"></a><span class="cp">#define LUA_KCONTEXT	intptr_t</span>
+<a name="line-607"></a><span class="cp">#endif</span>
+<a name="line-608"></a><span class="cp">#endif</span>
+<a name="line-609"></a>
+<a name="line-610"></a>
+<a name="line-611"></a><span class="cm">/*</span>
+<a name="line-612"></a><span class="cm">@@ lua_getlocaledecpoint gets the locale &quot;radix character&quot; (decimal point).</span>
+<a name="line-613"></a><span class="cm">** Change that if you do not want to use C locales. (Code using this</span>
+<a name="line-614"></a><span class="cm">** macro must include header &#39;locale.h&#39;.)</span>
+<a name="line-615"></a><span class="cm">*/</span>
+<a name="line-616"></a><span class="cp">#if !defined(lua_getlocaledecpoint)</span>
+<a name="line-617"></a><span class="cp">#define lua_getlocaledecpoint()		(localeconv()-&gt;decimal_point[0])</span>
+<a name="line-618"></a><span class="cp">#endif</span>
+<a name="line-619"></a>
+<a name="line-620"></a><span class="cm">/* }================================================================== */</span>
+<a name="line-621"></a>
+<a name="line-622"></a>
+<a name="line-623"></a><span class="cm">/*</span>
+<a name="line-624"></a><span class="cm">** {==================================================================</span>
+<a name="line-625"></a><span class="cm">** Language Variations</span>
+<a name="line-626"></a><span class="cm">** =====================================================================</span>
+<a name="line-627"></a><span class="cm">*/</span>
+<a name="line-628"></a>
+<a name="line-629"></a><span class="cm">/*</span>
+<a name="line-630"></a><span class="cm">@@ LUA_NOCVTN2S/LUA_NOCVTS2N control how Lua performs some</span>
+<a name="line-631"></a><span class="cm">** coercions. Define LUA_NOCVTN2S to turn off automatic coercion from</span>
+<a name="line-632"></a><span class="cm">** numbers to strings. Define LUA_NOCVTS2N to turn off automatic</span>
+<a name="line-633"></a><span class="cm">** coercion from strings to numbers.</span>
+<a name="line-634"></a><span class="cm">*/</span>
+<a name="line-635"></a><span class="cm">/* #define LUA_NOCVTN2S */</span>
+<a name="line-636"></a><span class="cm">/* #define LUA_NOCVTS2N */</span>
+<a name="line-637"></a>
+<a name="line-638"></a>
+<a name="line-639"></a><span class="cm">/*</span>
+<a name="line-640"></a><span class="cm">@@ LUA_USE_APICHECK turns on several consistency checks on the C API.</span>
+<a name="line-641"></a><span class="cm">** Define it as a help when debugging C code.</span>
+<a name="line-642"></a><span class="cm">*/</span>
+<a name="line-643"></a><span class="cp">#if defined(LUA_USE_APICHECK)</span>
+<a name="line-644"></a><span class="cp">#include</span> <span class="cpf">&lt;assert.h&gt;</span><span class="cp"></span>
+<a name="line-645"></a><span class="cp">#define luai_apicheck(l,e)	assert(e)</span>
+<a name="line-646"></a><span class="cp">#endif</span>
+<a name="line-647"></a>
+<a name="line-648"></a><span class="cm">/* }================================================================== */</span>
+<a name="line-649"></a>
+<a name="line-650"></a>
+<a name="line-651"></a><span class="cm">/*</span>
+<a name="line-652"></a><span class="cm">** {==================================================================</span>
+<a name="line-653"></a><span class="cm">** Macros that affect the API and must be stable (that is, must be the</span>
+<a name="line-654"></a><span class="cm">** same when you compile Lua and when you compile code that links to</span>
+<a name="line-655"></a><span class="cm">** Lua). You probably do not want/need to change them.</span>
+<a name="line-656"></a><span class="cm">** =====================================================================</span>
+<a name="line-657"></a><span class="cm">*/</span>
+<a name="line-658"></a>
+<a name="line-659"></a><span class="cm">/*</span>
+<a name="line-660"></a><span class="cm">@@ LUAI_MAXSTACK limits the size of the Lua stack.</span>
+<a name="line-661"></a><span class="cm">** CHANGE it if you need a different limit. This limit is arbitrary;</span>
+<a name="line-662"></a><span class="cm">** its only purpose is to stop Lua from consuming unlimited stack</span>
+<a name="line-663"></a><span class="cm">** space (and to reserve some numbers for pseudo-indices).</span>
+<a name="line-664"></a><span class="cm">** (It must fit into max(size_t)/32.)</span>
+<a name="line-665"></a><span class="cm">*/</span>
+<a name="line-666"></a><span class="cp">#if LUAI_BITSINT &gt;= 32</span>
+<a name="line-667"></a><span class="cp">#define LUAI_MAXSTACK		1000000</span>
+<a name="line-668"></a><span class="cp">#else</span>
+<a name="line-669"></a><span class="cp">#define LUAI_MAXSTACK		15000</span>
+<a name="line-670"></a><span class="cp">#endif</span>
+<a name="line-671"></a>
+<a name="line-672"></a>
+<a name="line-673"></a><span class="cm">/*</span>
+<a name="line-674"></a><span class="cm">@@ LUA_EXTRASPACE defines the size of a raw memory area associated with</span>
+<a name="line-675"></a><span class="cm">** a Lua state with very fast access.</span>
+<a name="line-676"></a><span class="cm">** CHANGE it if you need a different size.</span>
+<a name="line-677"></a><span class="cm">*/</span>
+<a name="line-678"></a><span class="cp">#define LUA_EXTRASPACE		(sizeof(void *))</span>
+<a name="line-679"></a>
+<a name="line-680"></a>
+<a name="line-681"></a><span class="cm">/*</span>
+<a name="line-682"></a><span class="cm">@@ LUA_IDSIZE gives the maximum size for the description of the source</span>
+<a name="line-683"></a><span class="cm">@@ of a function in debug information.</span>
+<a name="line-684"></a><span class="cm">** CHANGE it if you want a different size.</span>
+<a name="line-685"></a><span class="cm">*/</span>
+<a name="line-686"></a><span class="cp">#define LUA_IDSIZE	256</span>
+<a name="line-687"></a>
+<a name="line-688"></a>
+<a name="line-689"></a><span class="cm">/*</span>
+<a name="line-690"></a><span class="cm">@@ LUAL_BUFFERSIZE is the buffer size used by the lauxlib buffer system.</span>
+<a name="line-691"></a><span class="cm">** CHANGE it if it uses too much C-stack space. (For long double,</span>
+<a name="line-692"></a><span class="cm">** &#39;string.format(&quot;%.99f&quot;, -1e4932)&#39; needs 5034 bytes, so a</span>
+<a name="line-693"></a><span class="cm">** smaller buffer would force a memory allocation for each call to</span>
+<a name="line-694"></a><span class="cm">** &#39;string.format&#39;.)</span>
+<a name="line-695"></a><span class="cm">*/</span>
+<a name="line-696"></a><span class="cp">#if LUA_FLOAT_TYPE == LUA_FLOAT_LONGDOUBLE</span>
+<a name="line-697"></a><span class="cp">#define LUAL_BUFFERSIZE		8192</span>
+<a name="line-698"></a><span class="cp">#else</span>
+<a name="line-699"></a><span class="cp">#define LUAL_BUFFERSIZE   ((int)(0x80 * sizeof(void*) * sizeof(lua_Integer)))</span>
+<a name="line-700"></a><span class="cp">#endif</span>
+<a name="line-701"></a>
+<a name="line-702"></a><span class="cm">/*</span>
+<a name="line-703"></a><span class="cm">@@ LUAI_MAXALIGN defines fields that, when used in a union, ensure</span>
+<a name="line-704"></a><span class="cm">** maximum alignment for the other items in that union.</span>
+<a name="line-705"></a><span class="cm">*/</span>
+<a name="line-706"></a><span class="cp">#define LUAI_MAXALIGN  lua_Number n; double u; void *s; lua_Integer i; long l</span>
+<a name="line-707"></a>
+<a name="line-708"></a><span class="cm">/* }================================================================== */</span>
+<a name="line-709"></a>
+<a name="line-710"></a>
+<a name="line-711"></a>
+<a name="line-712"></a>
+<a name="line-713"></a>
+<a name="line-714"></a><span class="cm">/* =================================================================== */</span>
+<a name="line-715"></a>
+<a name="line-716"></a><span class="cm">/*</span>
+<a name="line-717"></a><span class="cm">** Local configuration. You can use this space to add your redefinitions</span>
+<a name="line-718"></a><span class="cm">** without modifying the main part of the file.</span>
+<a name="line-719"></a><span class="cm">*/</span>
+<a name="line-720"></a>
+<a name="line-721"></a>
+<a name="line-722"></a>
+<a name="line-723"></a>
+<a name="line-724"></a>
+<a name="line-725"></a><span class="cp">#endif</span>
+</pre></div>
+</td></tr></table>
+      </div>
+      <div id="footer">
+        <p>
+         Cppcheck 1.90 - a tool for static C/C++ code analysis</br>
+         </br>
+         Internet: <a href="http://cppcheck.net">http://cppcheck.net</a></br>
+         IRC: <a href="irc://irc.freenode.net/cppcheck">irc://irc.freenode.net/cppcheck</a></br>
+        </p>
+      </div>
+  </body>
+</html>

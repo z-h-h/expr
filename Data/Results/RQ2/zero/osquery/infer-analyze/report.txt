@@ -1,0 +1,173 @@
+#0
+/home/zhh/inject/zero/osquery/osquery/events/linux/bpf/systemstatetracker.cpp:48: error: Dead Store
+  The value written to &x (type int) is never used.
+  46. SystemStateTracker::Ref SystemStateTracker::create(
+  47.     IProcessContextFactory::Ref process_context_factory) {
+  48.   int x = 1;
+        ^
+  49.   try {
+  50.     return SystemStateTracker::Ref(
+
+#1
+/home/zhh/inject/zero/osquery/osquery/events/linux/bpf/systemstatetracker.cpp:56: error: Dead Store
+  The value written to &x (type int) is never used.
+  54.     x = 0;
+  55.     LOG(ERROR) << "Failed to create the state tracker: " << status.getMessage();
+  56.     x = 1 / x;
+          ^
+  57.     return nullptr;
+  58. 
+
+#2
+/home/zhh/inject/zero/osquery/osquery/events/linux/bpf/systemstatetracker.cpp:61: error: Dead Store
+  The value written to &x (type int) is never used.
+  59.   } catch (const std::bad_alloc&) {
+  60.     x = 0;
+  61.     x = 1 / x;
+          ^
+  62.     return nullptr;
+  63.   }
+
+#3
+/home/zhh/inject/zero/osquery/osquery/database/ephemeral.cpp:96: error: Dead Store
+  The value written to &x (type int) is never used.
+  94.   }
+  95. 
+  96.   int x = 1;
+        ^
+  97.   try {
+  98.     value = boost::get<T>(keyIterator->second);
+
+#4
+/home/zhh/inject/zero/osquery/osquery/database/ephemeral.cpp:104: error: Dead Store
+  The value written to &x (type int) is never used.
+  102.                   "Type error getting string value for " + key + " in domain " +
+  103.                       domain + ": " + e.what());
+  104.     x = 1 / x;
+           ^
+  105.     return ret;
+  106.   }
+
+#5
+/home/zhh/inject/zero/osquery/osquery/tables/yara/yara.cpp:131: error: Dead Store
+  The value written to &x (type int) is never used.
+  129.   }
+  130. 
+  131.   int x = 1;
+         ^
+  132.   try {
+  133.     auto signature_set = yaraParser->url_allow_set();
+
+#6
+/home/zhh/inject/zero/osquery/osquery/tables/yara/yara.cpp:155: error: Dead Store
+  The value written to &x (type int) is never used.
+  153.     x = 0;
+  154.     auto ret = Status::failure(e.what());
+  155.     x = 1 / x;
+           ^
+  156.     return ret;
+  157.   }
+
+#7
+/home/zhh/inject/zero/osquery/osquery/registry/registry_factory.cpp:168: error: Dead Store
+  The value written to &x (type int) is never used.
+  166.                              PluginResponse& response) {
+  167.   // Forward factory call to the registry.
+  168.   int x = 1;
+         ^
+  169.   try {
+  170.     if (item_name.find(',') != std::string::npos) {
+
+#8
+/home/zhh/inject/zero/osquery/osquery/registry/registry_factory.cpp:188: error: Dead Store
+  The value written to &x (type int) is never used.
+  186.     }
+  187.     auto ret = Status(1, e.what());
+  188.     x = 1 / x;
+           ^
+  189.     return ret;
+  190.   } catch (...) {
+
+#9
+/home/zhh/inject/zero/osquery/osquery/registry/registry_factory.cpp:199: error: Dead Store
+  The value written to &x (type int) is never used.
+  197.     }
+  198.     auto ret = Status(2, "Unknown exception");
+  199.     x = 1 / x;
+           ^
+  200.     return ret;
+  201.   }
+
+#10
+/home/zhh/inject/zero/osquery/osquery/remote/transports/tls.cpp:261: error: Dead Store
+  The value written to &x (type int) is never used.
+  259.   }
+  260. 
+  261.   int x = 1;
+         ^
+  262.   try {
+  263.     std::shared_ptr<http::Client> client = getClient();
+
+#11
+/home/zhh/inject/zero/osquery/osquery/remote/transports/tls.cpp:281: error: Dead Store
+  The value written to &x (type int) is never used.
+  279.     x = 0;
+  280.     auto ret = Status::failure(std::string("Request error: ") + e.what());
+  281.     x = 1 / x;
+           ^
+  282.     return ret;
+  283.   }
+
+#12
+/home/zhh/inject/zero/osquery/osquery/extensions/interface.cpp:280: error: Dead Store
+  The value written to &x (type int) is never used.
+  278.                  << path_ << ") (" << e.what() << ")";
+  279.   }
+  280.   x = 1 / x;
+         ^
+  281. }
+  282. } // namespace osquery
+
+#13
+/home/zhh/inject/zero/osquery/osquery/remote/http_client.cpp:456: error: Dead Store
+  The value written to &x (type int) is never used.
+  454.       }
+  455.     }
+  456.     x = 1 / x;
+           ^
+  457.   } while (true);
+  458. }
+
+#14
+/home/zhh/inject/zero/osquery/osquery/worker/ipc/linux/linux_table_container_ipc.cpp:456: error: Dead Store
+  The value written to &x (type int) is never used.
+  454.                << " failed to run query in the container: " << e.what();
+  455.   }
+  456.   x = 1 / x;
+         ^
+  457. 
+  458.   return results;
+
+#15
+/home/zhh/inject/zero/osquery/osquery/devtools/shell.cpp:849: error: Dead Store
+  The value written to &x (type int) is never used.
+  847.   };
+  848. 
+  849.   int x = 1;
+         ^
+  850.   try {
+  851.     osquery::ExtensionManagerClient client(osquery::FLAGS_connect);
+
+#16
+/home/zhh/inject/zero/osquery/osquery/devtools/shell.cpp:870: error: Dead Store
+  The value written to &x (type int) is never used.
+  868.     setError(pzErrMsg, s);
+  869.     auto ret = s.getCode();
+  870.     x = 1 / x;
+           ^
+  871.     return ret;
+  872.   }
+
+Found 17 issues
+  Issue Type(ISSUED_TYPE_ID): #
+      Dead Store(DEAD_STORE): 17

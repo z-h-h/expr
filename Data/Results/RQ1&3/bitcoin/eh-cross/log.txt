@@ -1,0 +1,28 @@
+2022-08-22 22:28:09 (Complete)
+args:
+  project: /home/zhh/projects/bitcoin-0.21.1/compile_commands.json
+  output: /home/zhh/projects/bitcoin-0.21.1/csa/eh-cross
+  clang: /home/zhh/llvm/build/bin/clang-13
+  jobs: 16
+  solver: crosscheck
+  timeout: 600
+edm:
+  total: 490
+  total time: 940.534
+  done: 367
+  cached: 123
+  real time: 61.872
+ast:
+  total: 490
+  total time: 1166.862
+  done: 356
+  cached: 134
+  real time: 76.722
+csa:
+  total: 490
+  total time: 36939.917
+  done: 293
+  cached: 187
+  timeout: 10
+  real time: 2556.011
+------------------------

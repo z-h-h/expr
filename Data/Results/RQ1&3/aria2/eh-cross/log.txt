@@ -1,0 +1,27 @@
+2022-08-23 13:51:31 (Complete)
+args:
+  project: /home/zhh/projects/aria2-1.35.0/compile_commands.json
+  output: /home/zhh/projects/aria2-1.35.0/csa/eh-cross
+  clang: /home/zhh/llvm/build/bin/clang-13
+  jobs: 16
+  solver: crosscheck
+  timeout: 600
+edm:
+  total: 397
+  total time: 278.946
+  done: 393
+  cached: 4
+  real time: 17.942
+ast:
+  total: 397
+  total time: 362.377
+  done: 393
+  cached: 4
+  real time: 23.300
+csa:
+  total: 397
+  total time: 6493.723
+  done: 393
+  cached: 4
+  real time: 476.967
+------------------------

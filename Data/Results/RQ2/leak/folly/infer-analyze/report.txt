@@ -1,0 +1,24 @@
+#0
+/home/zhh/inject/leak/folly/folly/io/async/test/TimeUtil.cpp:173: error: Dead Store
+  The value written to &fd (type int) is never used.
+  171.   }
+  172. 
+  173.   int fd = -1;
+         ^
+  174.   try {
+  175.     int *x = (int*) malloc(sizeof(int));
+
+#1
+/home/zhh/inject/leak/folly/folly/concurrency/CacheLocality.cpp:417: warning: Lock Consistency Violation
+  Read/Write race. Non-private method `folly::SimpleAllocator::allocateHard` reads without synchronization from `this->mem_`. Potentially races with write in method `folly::SimpleAllocator::allocate`.
+  415.   // Allocate a new slab.
+  416.   mem_ = static_cast<uint8_t*>(folly::aligned_malloc(allocSize_, allocSize_));
+  417.   if (!mem_) {
+              ^
+  418.     throw_exception<std::bad_alloc>();
+  419.   }
+
+Found 2 issues
+                              Issue Type(ISSUED_TYPE_ID): #
+  Lock Consistency Violation(LOCK_CONSISTENCY_VIOLATION): 1
+                                  Dead Store(DEAD_STORE): 1

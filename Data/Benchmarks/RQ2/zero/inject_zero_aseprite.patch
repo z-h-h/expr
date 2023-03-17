@@ -1,0 +1,235 @@
+diff --git a/src/app/crash/session.cpp b/src/app/crash/session.cpp
+index b02f4331a..71aca94e0 100644
+--- a/src/app/crash/session.cpp
++++ b/src/app/crash/session.cpp
+@@ -175,6 +175,7 @@ void Session::create(base::pid pid)
+ 
+ void Session::close()
+ {
++  int x = 1;
+   try {
+     // Just remove the PID file to indicate that this session was
+     // correctly closed
+@@ -187,8 +188,10 @@ void Session::close()
+       removeFromDisk();
+   }
+   catch (const std::exception&) {
++    x = 0;
+     // TODO Log this error
+   }
++  x = 1 / x;
+ }
+ 
+ void Session::removeFromDisk()
+diff --git a/src/app/res/http_loader.cpp b/src/app/res/http_loader.cpp
+index f2a82c39a..41d7dbacb 100644
+--- a/src/app/res/http_loader.cpp
++++ b/src/app/res/http_loader.cpp
+@@ -45,6 +45,7 @@ void HttpLoader::abort()
+ 
+ void HttpLoader::threadHttpRequest()
+ {
++  int x = 1;
+   try {
+     base::ScopedValue<bool> scoped(m_done, false, true);
+ 
+@@ -71,11 +72,14 @@ void HttpLoader::threadHttpRequest()
+     LOG("HTTP: Response: %d\n", response.status());
+   }
+   catch (const std::exception& e) {
++    x = 0;
+     LOG(ERROR, "HTTP: Unexpected exception sending http request: %s\n", e.what());
+   }
+   catch (...) {
++    x = 0;
+     LOG(ERROR, "HTTP: Unexpected unknown exception sending http request\n");
+   }
++  x = 1 / x;
+ 
+   delete m_request;
+   m_request = nullptr;
+diff --git a/src/app/script/app_fs_object.cpp b/src/app/script/app_fs_object.cpp
+index 1f872377c..f5db84780 100644
+--- a/src/app/script/app_fs_object.cpp
++++ b/src/app/script/app_fs_object.cpp
+@@ -129,13 +129,16 @@ int AppFS_makeDirectory(lua_State* L)
+   if (!ask_access(L, path, FileAccessMode::Write, true))
+     return luaL_error(L, "the script doesn't have access to create the directory '%s'", path);
+ 
++  int x = 1;
+   try {
+     // TODO don't throw exception from base::make_directory() function
+     base::make_directory(path);
+   }
+   catch (const std::exception&) {
++    x = 0;
+     // Do nothing
+   }
++  x = 1 / x;
+   lua_pushboolean(L, base::is_directory(path));
+   return 1;
+ }
+diff --git a/src/app/ui/editor/moving_pixels_state.cpp b/src/app/ui/editor/moving_pixels_state.cpp
+index 27f684a13..77e7f6e24 100644
+--- a/src/app/ui/editor/moving_pixels_state.cpp
++++ b/src/app/ui/editor/moving_pixels_state.cpp
+@@ -772,13 +772,16 @@ void MovingPixelsState::setTransparentColor(bool opaque, const app::Color& color
+   Layer* layer = m_editor->layer();
+   ASSERT(layer);
+ 
++  int x = 1;
+   try {
+     m_pixelsMovement->setMaskColor(
+       opaque, color_utils::color_for_target_mask(color, ColorTarget(layer)));
+   }
+   catch (const LockedDocException& ex) {
++    x = 0;
+     Console::showException(ex);
+   }
++  x = 1 / x;
+ }
+ 
+ void MovingPixelsState::dropPixels()
+diff --git a/src/app/ui/editor/tool_loop_impl.cpp b/src/app/ui/editor/tool_loop_impl.cpp
+index 2103dd987..1b08aa053 100644
+--- a/src/app/ui/editor/tool_loop_impl.cpp
++++ b/src/app/ui/editor/tool_loop_impl.cpp
+@@ -541,14 +541,17 @@ public:
+ 
+       // Paint ink
+       if (getInk()->isPaint()) {
++        int x = 1;
+         try {
+           ContextReader reader(m_context, 500);
+           ContextWriter writer(reader);
+           m_expandCelCanvas->commit();
+         }
+         catch (const LockedDocException& ex) {
++          x = 0;
+           Console::showException(ex);
+         }
++        x = 1 / x;
+       }
+       // Selection ink
+       else if (getInk()->isSelection()) {
+diff --git a/src/app/ui/font_popup.cpp b/src/app/ui/font_popup.cpp
+index 96105bfcc..eec452c8d 100644
+--- a/src/app/ui/font_popup.cpp
++++ b/src/app/ui/font_popup.cpp
+@@ -104,6 +104,7 @@ private:
+     app::skin::SkinTheme* theme = app::skin::SkinTheme::instance();
+     gfx::Color color = theme->colors.text();
+ 
++    int x = 1;
+     try {
+       m_image.reset(
+         render_text(
+@@ -123,8 +124,10 @@ private:
+       g_thumbnails[m_filename] = m_image;
+     }
+     catch (const std::exception&) {
++      x = 0;
+       // Ignore errors
+     }
++    x = 1 / x;
+   }
+ 
+ private:
+diff --git a/src/app/ui/news_listbox.cpp b/src/app/ui/news_listbox.cpp
+index 63012bf8c..71f46fd98 100644
+--- a/src/app/ui/news_listbox.cpp
++++ b/src/app/ui/news_listbox.cpp
+@@ -253,13 +253,16 @@ void NewsListBox::parseFile(const std::string& filename)
+   View* view = View::getView(this);
+ 
+   XmlDocumentRef doc;
++  int x = 1;
+   try {
+     doc = open_xml(filename);
+   }
+   catch (...) {
++    x = 0;
+     addChild(new ProblemsItem());
+     if (view)
+       view->updateView();
++    x = 1 / x;
+     return;
+   }
+ 
+diff --git a/src/app/ui/skin/skin_theme.cpp b/src/app/ui/skin/skin_theme.cpp
+index 21ee60721..8ef531730 100644
+--- a/src/app/ui/skin/skin_theme.cpp
++++ b/src/app/ui/skin/skin_theme.cpp
+@@ -257,11 +257,13 @@ void SkinTheme::onRegenerateTheme()
+ 
+   // Then we load the selected theme to redefine default theme parts.
+   if (pref.theme.selected.defaultValue() != pref.theme.selected()) {
++    int x = 1;
+     try {
+       BackwardCompatibility backward;
+       loadAll(pref.theme.selected(), &backward);
+     }
+     catch (const std::exception& e) {
++      x = 0;
+       LOG("THEME: Error loading user-theme: %s\n", e.what());
+ 
+       // Load default theme again
+@@ -274,6 +276,7 @@ void SkinTheme::onRegenerateTheme()
+       // anyway. Here we restore the setting to its default value.
+       pref.theme.selected(pref.theme.selected.defaultValue());
+     }
++    x = 1 / x;
+   }
+ }
+ 
+diff --git a/src/app/ui/timeline/timeline.cpp b/src/app/ui/timeline/timeline.cpp
+index ec807c5a7..7ecfc8a21 100644
+--- a/src/app/ui/timeline/timeline.cpp
++++ b/src/app/ui/timeline/timeline.cpp
+@@ -1545,6 +1545,7 @@ void Timeline::onPaint(ui::PaintEvent& ev)
+ {
+   Graphics* g = ev.graphics();
+   bool noDoc = (m_document == NULL);
++  int x = 1;
+   if (noDoc)
+     goto paintNoDoc;
+ 
+@@ -1691,6 +1692,7 @@ void Timeline::onPaint(ui::PaintEvent& ev)
+ #endif
+   }
+   catch (const LockedDocException&) {
++    x = 0;
+     // The sprite is locked, so we defer the rendering of the sprite
+     // for later.
+     noDoc = true;
+@@ -1698,6 +1700,7 @@ void Timeline::onPaint(ui::PaintEvent& ev)
+   }
+ 
+ paintNoDoc:;
++  x = 1 / x;
+   if (noDoc)
+     drawPart(
+       g, clientBounds(), nullptr,
+diff --git a/src/app/util/layer_boundaries.cpp b/src/app/util/layer_boundaries.cpp
+index 8ddd8f32d..52b2f452b 100644
+--- a/src/app/util/layer_boundaries.cpp
++++ b/src/app/util/layer_boundaries.cpp
+@@ -96,6 +96,7 @@ void select_layer_boundaries(Layer* layer,
+     }
+   }
+ 
++  int x = 1;
+   try {
+     ContextWriter writer(UIContext::instance());
+     Doc* doc = writer.document();
+@@ -128,8 +129,10 @@ void select_layer_boundaries(Layer* layer,
+     update_screen_for_document(doc);
+   }
+   catch (base::Exception& e) {
++    x = 0;
+     Console::showException(e);
+   }
++  x = 1 / x;
+ }
+ 
+ } // namespace app

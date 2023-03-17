@@ -1,0 +1,28 @@
+2022-08-23 08:03:46 (Complete)
+args:
+  project: /home/zhh/projects/bitcoin-0.21.1/compile_commands.json
+  output: /home/zhh/projects/bitcoin-0.21.1/csa/eh-range
+  clang: /home/zhh/llvm/build/bin/clang-13
+  jobs: 16
+  solver: range
+  timeout: 600
+edm:
+  total: 490
+  total time: 922.835
+  done: 368
+  cached: 122
+  real time: 60.785
+ast:
+  total: 490
+  total time: 1242.725
+  done: 358
+  cached: 132
+  real time: 81.784
+csa:
+  total: 490
+  total time: 36964.915
+  done: 291
+  cached: 189
+  timeout: 10
+  real time: 2558.000
+------------------------

@@ -1,0 +1,34 @@
+#0
+/home/zhh/inject/null/aseprite/src/app/ui/timeline/timeline.cpp:1912: error: Dead Store
+  The value written to &j (type int) is never used.
+  1910.   i = base::clamp(i, firstLayer(), lastLayer());
+  1911. 
+  1912.   layer_t j = lastLayer() - viewScroll().y / layerBoxHeight();;
+          ^
+  1913.   if (!m_rows.empty())
+  1914.     j = base::clamp(j, firstLayer(), lastLayer());
+
+#1
+/home/zhh/inject/null/aseprite/src/app/ui/timeline/timeline.cpp:2422: error: Dead Store
+  The value written to &band (type int) is never used.
+  2420.   for (int pass=0; pass<passes; ++pass) {
+  2421.     for (Tag* tag : m_sprite->tags()) {
+  2422.       int band = -1;
+              ^
+  2423.       if (m_tagFocusBand >= 0) {
+  2424.         auto it = m_tagBand.find(tag);
+
+#2
+/home/zhh/inject/null/aseprite/src/app/ui/timeline/timeline.cpp:2522: error: Uninitialized Value
+  The value read from info.styleFlags was never initialized.
+  2520.     PaintWidgetPartInfo info;
+  2521.     if (m_hot.part == PART_TAG_SWITCH_BAND_BUTTON) {
+  2522.       info.styleFlags |= ui::Style::Layer::kMouse;
+              ^
+  2523.       if (hasCapture())
+  2524.         info.styleFlags |= ui::Style::Layer::kSelected;
+
+Found 3 issues
+                Issue Type(ISSUED_TYPE_ID): #
+                    Dead Store(DEAD_STORE): 2
+  Uninitialized Value(UNINITIALIZED_VALUE): 1

@@ -1,0 +1,25 @@
+2022-08-23 15:33:44 (Complete)
+args:
+  project: /home/zhh/projects/folly/_build/compile_commands.json
+  output: /home/zhh/projects/folly/_build/csa/eh-cross
+  clang: /home/zhh/llvm/build/bin/clang-13
+  jobs: 16
+  solver: crosscheck
+  timeout: 600
+edm:
+  total: 270
+  total time: 385.158
+  done: 270
+  real time: 25.778
+ast:
+  total: 270
+  total time: 454.514
+  done: 270
+  real time: 30.172
+csa:
+  total: 270
+  total time: 6079.235
+  done: 254
+  terminated: 16
+  real time: 433.354
+------------------------

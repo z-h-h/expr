@@ -1,0 +1,29 @@
+2022-08-22 12:01:40 (Complete)
+args:
+  project: /home/zhh/projects/osquery/build/compile_commands.json
+  output: /home/zhh/projects/osquery/build/csa/eh-range
+  clang: /home/zhh/llvm/build/bin/clang-13
+  jobs: 16
+  solver: range
+  timeout: 600
+edm:
+  total: 3664
+  total time: 3657.783
+  done: 3654
+  error: 10
+  real time: 234.369
+ast:
+  total: 3664
+  total time: 4214.882
+  done: 3654
+  error: 10
+  real time: 266.511
+csa:
+  total: 3664
+  total time: 94225.670
+  done: 3542
+  error: 10
+  terminated: 108
+  timeout: 4
+  real time: 5928.639
+------------------------

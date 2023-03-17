@@ -1,0 +1,29 @@
+2022-08-25 14:24:04 (Complete)
+args:
+  project: /home/zhh/workplace/ehtest/mysql-server/build/compile_commands.json
+  output: /home/zhh/workplace/ehtest/mysql-server/CSA/ori-range
+  clang: /home/zhh/workplace/llvm-origin/build/bin/clang-13
+  jobs: 16
+  solver: range
+  timeout: 600
+edm:
+  total: 2933
+  total time: 6125.765
+  done: 2825
+  cached: 108
+  real time: 384.376
+ast:
+  total: 2933
+  total time: 6937.463
+  done: 2812
+  cached: 121
+  real time: 435.043
+csa:
+  total: 2933
+  total time: 94262.328
+  done: 2759
+  cached: 132
+  terminated: 33
+  timeout: 9
+  real time: 6201.209
+------------------------

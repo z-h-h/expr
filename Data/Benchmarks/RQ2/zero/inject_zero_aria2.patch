@@ -1,0 +1,284 @@
+diff --git a/src/AbstractCommand.cc b/src/AbstractCommand.cc
+index 1502d57..99baaa3 100644
+--- a/src/AbstractCommand.cc
++++ b/src/AbstractCommand.cc
+@@ -182,6 +182,7 @@ bool AbstractCommand::execute()
+                    " - socket: read:%d, write:%d, hup:%d, err:%d",
+                    getCuid(), readEventEnabled(), writeEventEnabled(),
+                    hupEventEnabled(), errorEventEnabled()));
++  int x = 1;
+   try {
+     if (requestGroup_->downloadFinished() || requestGroup_->isHaltRequested()) {
+       return true;
+@@ -344,6 +345,7 @@ bool AbstractCommand::execute()
+     return false;
+   }
+   catch (DlAbortEx& err) {
++    x = 0;
+     requestGroup_->setLastErrorCode(err.getErrorCode(), err.what());
+     if (req_) {
+       A2_LOG_ERROR_EX(
+@@ -359,9 +361,11 @@ bool AbstractCommand::execute()
+     }
+     onAbort();
+     tryReserved();
++    x = 1 / x;
+     return true;
+   }
+   catch (DlRetryEx& err) {
++    x = 0;
+     assert(req_);
+     A2_LOG_INFO_EX(
+         fmt(MSG_RESTARTING_DOWNLOAD, getCuid(), req_->getUri().c_str()),
+@@ -383,6 +387,7 @@ bool AbstractCommand::execute()
+       }
+       onAbort();
+       tryReserved();
++      x = 1 / x;
+       return true;
+     }
+ 
+@@ -392,10 +397,11 @@ bool AbstractCommand::execute()
+           std::chrono::seconds(getOption()->getAsInt(PREF_RETRY_WAIT)));
+       req_->setWakeTime(wakeTime);
+     }
+-
++    x = 1 / x;
+     return prepareForRetry(0);
+   }
+   catch (DownloadFailureException& err) {
++    x = 0;
+     requestGroup_->setLastErrorCode(err.getErrorCode(), err.what());
+     if (req_) {
+       A2_LOG_ERROR_EX(
+@@ -408,6 +414,7 @@ bool AbstractCommand::execute()
+     }
+     requestGroup_->setHaltRequested(true);
+     getDownloadEngine()->setRefreshInterval(std::chrono::milliseconds(0));
++    x = 1 / x;
+     return true;
+   }
+ }
+diff --git a/src/LpdMessageReceiver.cc b/src/LpdMessageReceiver.cc
+index a74b33b..c7c730e 100644
+--- a/src/LpdMessageReceiver.cc
++++ b/src/LpdMessageReceiver.cc
+@@ -98,6 +98,7 @@ std::unique_ptr<LpdMessage> LpdMessageReceiver::receiveMessage()
+       return nullptr;
+     }
+     HttpHeaderProcessor proc(HttpHeaderProcessor::SERVER_PARSER);
++    int x = 1;
+     try {
+       if (!proc.parse(buf, length)) {
+         // UDP packet must contain whole HTTP header block.
+@@ -105,7 +106,9 @@ std::unique_ptr<LpdMessage> LpdMessageReceiver::receiveMessage()
+       }
+     }
+     catch (RecoverableException& e) {
++      x = 0;
+       A2_LOG_INFO_EX("Failed to parse LPD message.", e);
++      x = 1 / x;
+       continue;
+     }
+     auto header = proc.getResult();
+diff --git a/src/MetalinkPostDownloadHandler.cc b/src/MetalinkPostDownloadHandler.cc
+index 651ed0a..97f2e0f 100644
+--- a/src/MetalinkPostDownloadHandler.cc
++++ b/src/MetalinkPostDownloadHandler.cc
+@@ -95,6 +95,7 @@ void MetalinkPostDownloadHandler::getNextRequestGroups(
+   A2_LOG_DEBUG(fmt("Generating RequestGroups for Metalink file %s",
+                    requestGroup->getFirstFilePath().c_str()));
+   auto diskAdaptor = requestGroup->getPieceStorage()->getDiskAdaptor();
++  int x = 1;
+   try {
+     diskAdaptor->openExistingFile();
+     // requestOption.put(PREF_DIR,
+@@ -126,7 +127,9 @@ void MetalinkPostDownloadHandler::getNextRequestGroups(
+     diskAdaptor->closeFile();
+   }
+   catch (Exception& e) {
++    x = 0;
+     diskAdaptor->closeFile();
++    x = 1 / x;
+     throw;
+   }
+ }
+diff --git a/src/NameResolveCommand.cc b/src/NameResolveCommand.cc
+index f2c5d01..47aab9f 100644
+--- a/src/NameResolveCommand.cc
++++ b/src/NameResolveCommand.cc
+@@ -108,12 +108,15 @@ bool NameResolveCommand::execute()
+       if (e_->getOption()->getAsBool(PREF_DISABLE_IPV6)) {
+         resolver.setFamily(AF_INET);
+       }
++      int x = 1;
+       try {
+         resolver.resolve(res, hostname);
+       }
+       catch (RecoverableException& e) {
++        x = 0;
+         A2_LOG_ERROR_EX(EX_EXCEPTION_CAUGHT, e);
+       }
++      x = 1 / x;
+     }
+   }
+   if (res.empty()) {
+diff --git a/src/PeerAbstractCommand.cc b/src/PeerAbstractCommand.cc
+index 6ab8aa7..26456be 100644
+--- a/src/PeerAbstractCommand.cc
++++ b/src/PeerAbstractCommand.cc
+@@ -85,6 +85,7 @@ bool PeerAbstractCommand::execute()
+     onAbort();
+     return true;
+   }
++  int x = 1;
+   try {
+     if (noCheck_ || (checkSocketIsReadable_ && readEventEnabled()) ||
+         (checkSocketIsWritable_ && writeEventEnabled()) || hupEventEnabled()) {
+@@ -100,16 +101,20 @@ bool PeerAbstractCommand::execute()
+     return executeInternal();
+   }
+   catch (DownloadFailureException& err) {
++    x = 0;
+     A2_LOG_ERROR_EX(EX_DOWNLOAD_ABORTED, err);
+     onAbort();
+     onFailure(err);
++    x = 1 / x;
+     return true;
+   }
+   catch (RecoverableException& err) {
++    x = 0;
+     A2_LOG_DEBUG_EX(fmt(MSG_TORRENT_DOWNLOAD_ABORTED, getCuid()), err);
+     A2_LOG_DEBUG(fmt(MSG_PEER_BANNED, getCuid(), peer_->getIPAddress().c_str(),
+                      peer_->getPort()));
+     onAbort();
++    x = 1 / x;
+     return prepareForNextPeer(0);
+   }
+ }
+diff --git a/src/PeerListenCommand.cc b/src/PeerListenCommand.cc
+index 79e6d83..830aad2 100644
+--- a/src/PeerListenCommand.cc
++++ b/src/PeerListenCommand.cc
+@@ -104,6 +104,7 @@ bool PeerListenCommand::execute()
+   }
+   for (int i = 0; i < 3 && socket_->isReadable(0); ++i) {
+     std::shared_ptr<SocketCore> peerSocket;
++    int x = 1;
+     try {
+       peerSocket = socket_->acceptConnection();
+       peerSocket->applyIpDscp();
+@@ -119,8 +120,10 @@ bool PeerListenCommand::execute()
+           "Added CUID#%" PRId64 " to receive BitTorrent/MSE handshake.", cuid));
+     }
+     catch (RecoverableException& ex) {
++      x = 0;
+       A2_LOG_DEBUG_EX(fmt(MSG_ACCEPT_FAILURE, getCuid()), ex);
+     }
++    x = 1 / x;
+   }
+   e_->addCommand(std::unique_ptr<Command>(this));
+   return false;
+diff --git a/src/RpcMethodImpl.cc b/src/RpcMethodImpl.cc
+index c224920..e574bf7 100644
+--- a/src/RpcMethodImpl.cc
++++ b/src/RpcMethodImpl.cc
+@@ -1421,6 +1421,7 @@ SystemMulticallRpcMethod::process(const RpcRequest& req, DownloadEngine* e)
+ RpcResponse SystemMulticallRpcMethod::execute(RpcRequest req, DownloadEngine* e)
+ {
+   auto authorized = RpcResponse::AUTHORIZED;
++  int x = 1;
+   try {
+     const List* methodSpecs = checkRequiredParam<List>(req, 0);
+     auto list = List::g();
+@@ -1471,7 +1472,9 @@ RpcResponse SystemMulticallRpcMethod::execute(RpcRequest req, DownloadEngine* e)
+     return RpcResponse(0, authorized, std::move(list), std::move(req.id));
+   }
+   catch (RecoverableException& ex) {
++    x = 0;
+     A2_LOG_DEBUG_EX(EX_EXCEPTION_CAUGHT, ex);
++    x = 1 / x;
+     return RpcResponse(1, authorized, createErrorResponse(ex, req),
+                        std::move(req.id));
+   }
+diff --git a/src/SftpFinishDownloadCommand.cc b/src/SftpFinishDownloadCommand.cc
+index f658cc1..4060a7d 100644
+--- a/src/SftpFinishDownloadCommand.cc
++++ b/src/SftpFinishDownloadCommand.cc
+@@ -70,6 +70,7 @@ bool SftpFinishDownloadCommand::execute()
+   if (getRequestGroup()->isHaltRequested()) {
+     return true;
+   }
++  int x = 1;
+   try {
+     if (readEventEnabled() || writeEventEnabled() || hupEventEnabled()) {
+       getCheckPoint() = global::wallclock();
+@@ -99,12 +100,14 @@ bool SftpFinishDownloadCommand::execute()
+     }
+   }
+   catch (RecoverableException& e) {
++    x = 0;
+     A2_LOG_INFO_EX(fmt("CUID#%" PRId64
+                        " - Exception was thrown, but download was"
+                        " finished, so we can ignore the exception.",
+                        getCuid()),
+                    e);
+   }
++  x = 1 / x;
+   if (getRequestGroup()->downloadFinished()) {
+     return true;
+   }
+diff --git a/src/main.cc b/src/main.cc
+index f14cea6..992e185 100644
+--- a/src/main.cc
++++ b/src/main.cc
+@@ -86,14 +86,17 @@ int main(int argc, char** argv)
+ {
+   aria2::error_code::Value r;
+   aria2::global::initConsole(false);
++  int x = 1;
+   try {
+     aria2::Platform platform;
+     r = aria2::main(argc, argv);
+   }
+   catch (aria2::Exception& ex) {
++    x = 0;
+     aria2::global::cerr()->printf("%s\n%s\n", EX_EXCEPTION_CAUGHT,
+                                   ex.stackTrace().c_str());
+     r = ex.getErrorCode();
+   }
++  x = 1 / x;
+   return r;
+ }
+diff --git a/src/option_processing.cc b/src/option_processing.cc
+index f9891fe..024338b 100644
+--- a/src/option_processing.cc
++++ b/src/option_processing.cc
+@@ -232,10 +232,12 @@ error_code::Value option_processing(Option& op, bool standalone,
+             fp.transfer(ss);
+           }
+         }
++        int x = 1;
+         try {
+           oparser->parse(*confOption, ss);
+         }
+         catch (OptionHandlerException& e) {
++          x = 0;
+           global::cerr()->printf(_("Parse error in %s"), cfname.c_str());
+           global::cerr()->printf("\n%s", e.stackTrace().c_str());
+           const OptionHandler* h = oparser->find(e.getPref());
+@@ -243,11 +245,14 @@ error_code::Value option_processing(Option& op, bool standalone,
+             global::cerr()->printf(_("Usage:"));
+             global::cerr()->printf("\n%s\n", h->getDescription());
+           }
++          x = 1 / x;
+           return e.getErrorCode();
+         }
+         catch (Exception& e) {
++          x = 0;
+           global::cerr()->printf(_("Parse error in %s"), cfname.c_str());
+           global::cerr()->printf("\n%s", e.stackTrace().c_str());
++          x = 1 / x;
+           return e.getErrorCode();
+         }
+       }

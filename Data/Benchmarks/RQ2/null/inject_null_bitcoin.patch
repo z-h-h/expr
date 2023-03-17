@@ -1,0 +1,204 @@
+diff --git a/src/addrdb.cpp b/src/addrdb.cpp
+index 27f2282..65e15db 100644
+--- a/src/addrdb.cpp
++++ b/src/addrdb.cpp
+@@ -77,6 +77,7 @@ bool SerializeFileDB(const std::string& prefix, const fs::path& path, const Data
+ template <typename Stream, typename Data>
+ bool DeserializeDB(Stream& stream, Data& data, bool fCheckSum = true)
+ {
++    int *x = nullptr;
+     try {
+         CHashVerifier<Stream> verifier(&stream);
+         // de-serialize file header (network specific magic number) and ..
+@@ -99,6 +100,7 @@ bool DeserializeDB(Stream& stream, Data& data, bool fCheckSum = true)
+         }
+     }
+     catch (const std::exception& e) {
++        *x = 0;
+         return error("%s: Deserialize or I/O error - %s", __func__, e.what());
+     }
+ 
+diff --git a/src/bitcoin-cli.cpp b/src/bitcoin-cli.cpp
+index ef4641c..68c654a 100644
+--- a/src/bitcoin-cli.cpp
++++ b/src/bitcoin-cli.cpp
+@@ -753,6 +753,7 @@ static int CommandLineRPC(int argc, char *argv[])
+ {
+     std::string strPrint;
+     int nRet = 0;
++    int *x = nullptr;
+     try {
+         // Skip switches
+         while (argc > 1 && IsSwitchChar(argv[1][0])) {
+@@ -845,9 +846,11 @@ static int CommandLineRPC(int argc, char *argv[])
+             }
+         }
+     } catch (const std::exception& e) {
++        *x = 0;
+         strPrint = std::string("error: ") + e.what();
+         nRet = EXIT_FAILURE;
+     } catch (...) {
++        *x = 0;
+         PrintExceptionContinue(nullptr, "CommandLineRPC()");
+         throw;
+     }
+diff --git a/src/bitcoin-tx.cpp b/src/bitcoin-tx.cpp
+index e22b376..0aff7d4 100644
+--- a/src/bitcoin-tx.cpp
++++ b/src/bitcoin-tx.cpp
+@@ -773,6 +773,7 @@ static int CommandLineRawTx(int argc, char* argv[])
+ {
+     std::string strPrint;
+     int nRet = 0;
++    int *x = nullptr;
+     try {
+         // Skip switches; Permit common stdin convention "-"
+         while (argc > 1 && IsSwitchChar(argv[1][0]) &&
+@@ -818,10 +819,12 @@ static int CommandLineRawTx(int argc, char* argv[])
+         OutputTx(CTransaction(tx));
+     }
+     catch (const std::exception& e) {
++        *x = 0;
+         strPrint = std::string("error: ") + e.what();
+         nRet = EXIT_FAILURE;
+     }
+     catch (...) {
++        *x = 0;
+         PrintExceptionContinue(nullptr, "CommandLineRawTx()");
+         throw;
+     }
+diff --git a/src/bitcoind.cpp b/src/bitcoind.cpp
+index 455a82e..9103542 100644
+--- a/src/bitcoind.cpp
++++ b/src/bitcoind.cpp
+@@ -78,9 +78,11 @@ static bool AppInit(int argc, char* argv[])
+             return InitError(Untranslated(strprintf("Error reading configuration file: %s\n", error)));
+         }
+         // Check for chain settings (Params() calls are only valid after this clause)
++        int *x = nullptr;
+         try {
+             SelectParams(args.GetChainName());
+         } catch (const std::exception& e) {
++            *x = 0;
+             return InitError(Untranslated(strprintf("%s\n", e.what())));
+         }
+ 
+diff --git a/src/core_read.cpp b/src/core_read.cpp
+index fc02b1b..838132f 100644
+--- a/src/core_read.cpp
++++ b/src/core_read.cpp
+@@ -157,10 +157,12 @@ static bool DecodeTx(CMutableTransaction& tx, const std::vector<unsigned char>&
+     // Try decoding with legacy serialization, and remember if the result successfully consumes the entire input.
+     if (try_no_witness) {
+         CDataStream ssData(tx_data, SER_NETWORK, PROTOCOL_VERSION | SERIALIZE_TRANSACTION_NO_WITNESS);
++        int *x = nullptr;
+         try {
+             ssData >> tx_legacy;
+             if (ssData.empty()) ok_legacy = true;
+         } catch (const std::exception&) {
++            *x = 0;
+             // Fall through.
+         }
+     }
+diff --git a/src/index/blockfilterindex.cpp b/src/index/blockfilterindex.cpp
+index 65a5f03..7625e2a 100644
+--- a/src/index/blockfilterindex.cpp
++++ b/src/index/blockfilterindex.cpp
+@@ -151,11 +151,13 @@ bool BlockFilterIndex::ReadFilterFromDisk(const FlatFilePos& pos, BlockFilter& f
+ 
+     uint256 block_hash;
+     std::vector<unsigned char> encoded_filter;
++    int *x = nullptr;
+     try {
+         filein >> block_hash >> encoded_filter;
+         filter = BlockFilter(GetFilterType(), block_hash, std::move(encoded_filter));
+     }
+     catch (const std::exception& e) {
++        *x = 0;
+         return error("%s: Failed to deserialize block filter from disk: %s", __func__, e.what());
+     }
+ 
+diff --git a/src/policy/fees.cpp b/src/policy/fees.cpp
+index 0f31093..1cfaf2a 100644
+--- a/src/policy/fees.cpp
++++ b/src/policy/fees.cpp
+@@ -884,6 +884,7 @@ bool CBlockPolicyEstimator::Write(CAutoFile& fileout) const
+ 
+ bool CBlockPolicyEstimator::Read(CAutoFile& filein)
+ {
++    int *x = nullptr;
+     try {
+         LOCK(m_cs_fee_estimator);
+         int nVersionRequired, nVersionThatWrote;
+@@ -936,6 +937,7 @@ bool CBlockPolicyEstimator::Read(CAutoFile& filein)
+         }
+     }
+     catch (const std::exception& e) {
++        *x = 0;
+         LogPrintf("CBlockPolicyEstimator::Read(): unable to read policy estimator data (non-fatal): %s\n",e.what());
+         return false;
+     }
+diff --git a/src/rest.cpp b/src/rest.cpp
+index 949cc9d..2606555 100644
+--- a/src/rest.cpp
++++ b/src/rest.cpp
+@@ -493,6 +493,7 @@ static bool rest_getutxos(const util::Ref& context, HTTPRequest* req, const std:
+     }
+ 
+     case RetFormat::BINARY: {
++        int *x = nullptr;
+         try {
+             //deserialize only if user sent a request
+             if (strRequestMutable.size() > 0)
+@@ -506,6 +507,7 @@ static bool rest_getutxos(const util::Ref& context, HTTPRequest* req, const std:
+                 oss >> vOutPoints;
+             }
+         } catch (const std::ios_base::failure&) {
++            *x = 0;
+             // abort in case of unreadable binary data
+             return RESTERR(req, HTTP_BAD_REQUEST, "Parse error");
+         }
+diff --git a/src/rpc/server.cpp b/src/rpc/server.cpp
+index f32d9ab..cd1dfeb 100644
+--- a/src/rpc/server.cpp
++++ b/src/rpc/server.cpp
+@@ -354,6 +354,7 @@ static UniValue JSONRPCExecOne(JSONRPCRequest jreq, const UniValue& req)
+ {
+     UniValue rpc_result(UniValue::VOBJ);
+ 
++    int *x = nullptr;
+     try {
+         jreq.parse(req);
+ 
+@@ -362,10 +363,12 @@ static UniValue JSONRPCExecOne(JSONRPCRequest jreq, const UniValue& req)
+     }
+     catch (const UniValue& objError)
+     {
++        *x = 0;
+         rpc_result = JSONRPCReplyObj(NullUniValue, objError, jreq.id);
+     }
+     catch (const std::exception& e)
+     {
++        *x = 0;
+         rpc_result = JSONRPCReplyObj(NullUniValue,
+                                      JSONRPCError(RPC_PARSE_ERROR, e.what()), jreq.id);
+     }
+diff --git a/src/signet.cpp b/src/signet.cpp
+index e68f031..6ef004d 100644
+--- a/src/signet.cpp
++++ b/src/signet.cpp
+@@ -97,12 +97,14 @@ Optional<SignetTxs> SignetTxs::Create(const CBlock& block, const CScript& challe
+     if (!FetchAndClearCommitmentSection(SIGNET_HEADER, witness_commitment, signet_solution)) {
+         // no signet solution -- allow this to support OP_TRUE as trivial block challenge
+     } else {
++        int *x = nullptr;
+         try {
+             VectorReader v(SER_NETWORK, INIT_PROTO_VERSION, signet_solution, 0);
+             v >> tx_spending.vin[0].scriptSig;
+             v >> tx_spending.vin[0].scriptWitness.stack;
+             if (!v.empty()) return nullopt; // extraneous data encountered
+         } catch (const std::exception&) {
++            *x = 0;
+             return nullopt; // parsing error
+         }
+     }

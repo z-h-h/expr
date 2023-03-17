@@ -1,0 +1,194 @@
+diff --git a/src/app/crash/session.cpp b/src/app/crash/session.cpp
+index b02f4331a..8e14da2a5 100644
+--- a/src/app/crash/session.cpp
++++ b/src/app/crash/session.cpp
+@@ -175,6 +175,7 @@ void Session::create(base::pid pid)
+ 
+ void Session::close()
+ {
++  int *x = nullptr;
+   try {
+     // Just remove the PID file to indicate that this session was
+     // correctly closed
+@@ -187,6 +188,7 @@ void Session::close()
+       removeFromDisk();
+   }
+   catch (const std::exception&) {
++    *x = 0;
+     // TODO Log this error
+   }
+ }
+diff --git a/src/app/res/http_loader.cpp b/src/app/res/http_loader.cpp
+index f2a82c39a..d8034c412 100644
+--- a/src/app/res/http_loader.cpp
++++ b/src/app/res/http_loader.cpp
+@@ -45,6 +45,7 @@ void HttpLoader::abort()
+ 
+ void HttpLoader::threadHttpRequest()
+ {
++  int *x = nullptr;
+   try {
+     base::ScopedValue<bool> scoped(m_done, false, true);
+ 
+@@ -71,9 +72,11 @@ void HttpLoader::threadHttpRequest()
+     LOG("HTTP: Response: %d\n", response.status());
+   }
+   catch (const std::exception& e) {
++    *x = 0;
+     LOG(ERROR, "HTTP: Unexpected exception sending http request: %s\n", e.what());
+   }
+   catch (...) {
++    *x = 0;
+     LOG(ERROR, "HTTP: Unexpected unknown exception sending http request\n");
+   }
+ 
+diff --git a/src/app/script/app_fs_object.cpp b/src/app/script/app_fs_object.cpp
+index 1f872377c..29d847f09 100644
+--- a/src/app/script/app_fs_object.cpp
++++ b/src/app/script/app_fs_object.cpp
+@@ -129,11 +129,13 @@ int AppFS_makeDirectory(lua_State* L)
+   if (!ask_access(L, path, FileAccessMode::Write, true))
+     return luaL_error(L, "the script doesn't have access to create the directory '%s'", path);
+ 
++  int *x = nullptr;
+   try {
+     // TODO don't throw exception from base::make_directory() function
+     base::make_directory(path);
+   }
+   catch (const std::exception&) {
++    *x = 0;
+     // Do nothing
+   }
+   lua_pushboolean(L, base::is_directory(path));
+diff --git a/src/app/ui/editor/moving_pixels_state.cpp b/src/app/ui/editor/moving_pixels_state.cpp
+index 27f684a13..d28734a94 100644
+--- a/src/app/ui/editor/moving_pixels_state.cpp
++++ b/src/app/ui/editor/moving_pixels_state.cpp
+@@ -772,11 +772,13 @@ void MovingPixelsState::setTransparentColor(bool opaque, const app::Color& color
+   Layer* layer = m_editor->layer();
+   ASSERT(layer);
+ 
++  int *x = nullptr;
+   try {
+     m_pixelsMovement->setMaskColor(
+       opaque, color_utils::color_for_target_mask(color, ColorTarget(layer)));
+   }
+   catch (const LockedDocException& ex) {
++    *x = 0;
+     Console::showException(ex);
+   }
+ }
+diff --git a/src/app/ui/editor/tool_loop_impl.cpp b/src/app/ui/editor/tool_loop_impl.cpp
+index 2103dd987..fdf25b9bf 100644
+--- a/src/app/ui/editor/tool_loop_impl.cpp
++++ b/src/app/ui/editor/tool_loop_impl.cpp
+@@ -541,12 +541,14 @@ public:
+ 
+       // Paint ink
+       if (getInk()->isPaint()) {
++        int *x = nullptr;
+         try {
+           ContextReader reader(m_context, 500);
+           ContextWriter writer(reader);
+           m_expandCelCanvas->commit();
+         }
+         catch (const LockedDocException& ex) {
++          *x = 0;
+           Console::showException(ex);
+         }
+       }
+diff --git a/src/app/ui/font_popup.cpp b/src/app/ui/font_popup.cpp
+index 96105bfcc..f7082df80 100644
+--- a/src/app/ui/font_popup.cpp
++++ b/src/app/ui/font_popup.cpp
+@@ -104,6 +104,7 @@ private:
+     app::skin::SkinTheme* theme = app::skin::SkinTheme::instance();
+     gfx::Color color = theme->colors.text();
+ 
++    int *x = nullptr;
+     try {
+       m_image.reset(
+         render_text(
+@@ -123,6 +124,7 @@ private:
+       g_thumbnails[m_filename] = m_image;
+     }
+     catch (const std::exception&) {
++      *x = 0;
+       // Ignore errors
+     }
+   }
+diff --git a/src/app/ui/news_listbox.cpp b/src/app/ui/news_listbox.cpp
+index 63012bf8c..3705f3d2e 100644
+--- a/src/app/ui/news_listbox.cpp
++++ b/src/app/ui/news_listbox.cpp
+@@ -253,10 +253,12 @@ void NewsListBox::parseFile(const std::string& filename)
+   View* view = View::getView(this);
+ 
+   XmlDocumentRef doc;
++  int *x = nullptr;
+   try {
+     doc = open_xml(filename);
+   }
+   catch (...) {
++    *x = 0;
+     addChild(new ProblemsItem());
+     if (view)
+       view->updateView();
+diff --git a/src/app/ui/skin/skin_theme.cpp b/src/app/ui/skin/skin_theme.cpp
+index 21ee60721..a83aafd3f 100644
+--- a/src/app/ui/skin/skin_theme.cpp
++++ b/src/app/ui/skin/skin_theme.cpp
+@@ -257,11 +257,13 @@ void SkinTheme::onRegenerateTheme()
+ 
+   // Then we load the selected theme to redefine default theme parts.
+   if (pref.theme.selected.defaultValue() != pref.theme.selected()) {
++    int *x = nullptr;
+     try {
+       BackwardCompatibility backward;
+       loadAll(pref.theme.selected(), &backward);
+     }
+     catch (const std::exception& e) {
++      *x = 0;
+       LOG("THEME: Error loading user-theme: %s\n", e.what());
+ 
+       // Load default theme again
+diff --git a/src/app/ui/timeline/timeline.cpp b/src/app/ui/timeline/timeline.cpp
+index ec807c5a7..44fafd9c4 100644
+--- a/src/app/ui/timeline/timeline.cpp
++++ b/src/app/ui/timeline/timeline.cpp
+@@ -1544,6 +1544,7 @@ void Timeline::onResize(ui::ResizeEvent& ev)
+ void Timeline::onPaint(ui::PaintEvent& ev)
+ {
+   Graphics* g = ev.graphics();
++  int *x = nullptr;
+   bool noDoc = (m_document == NULL);
+   if (noDoc)
+     goto paintNoDoc;
+@@ -1691,6 +1692,7 @@ void Timeline::onPaint(ui::PaintEvent& ev)
+ #endif
+   }
+   catch (const LockedDocException&) {
++    *x = 0;
+     // The sprite is locked, so we defer the rendering of the sprite
+     // for later.
+     noDoc = true;
+diff --git a/src/app/util/layer_boundaries.cpp b/src/app/util/layer_boundaries.cpp
+index 8ddd8f32d..6247fb192 100644
+--- a/src/app/util/layer_boundaries.cpp
++++ b/src/app/util/layer_boundaries.cpp
+@@ -96,6 +96,7 @@ void select_layer_boundaries(Layer* layer,
+     }
+   }
+ 
++  int *x = nullptr;
+   try {
+     ContextWriter writer(UIContext::instance());
+     Doc* doc = writer.document();
+@@ -128,6 +129,7 @@ void select_layer_boundaries(Layer* layer,
+     update_screen_for_document(doc);
+   }
+   catch (base::Exception& e) {
++    *x = 0;
+     Console::showException(e);
+   }
+ }

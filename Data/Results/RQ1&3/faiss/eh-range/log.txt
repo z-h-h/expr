@@ -1,0 +1,30 @@
+2022-08-23 10:35:15 (Complete)
+args:
+  project: /home/zhh/projects/faiss-1.7.1/build/compile_commands.json
+  output: /home/zhh/projects/faiss-1.7.1/build/csa/eh-range
+  clang: /home/zhh/llvm/build/bin/clang-13
+  jobs: 16
+  solver: range
+  timeout: 600
+edm:
+  total: 168
+  total time: 137.840
+  done: 106
+  cached: 59
+  error: 3
+  real time: 10.924
+ast:
+  total: 168
+  total time: 160.080
+  done: 100
+  cached: 65
+  error: 3
+  real time: 12.272
+csa:
+  total: 168
+  total time: 7388.958
+  done: 101
+  cached: 64
+  error: 3
+  real time: 819.627
+------------------------

@@ -1,0 +1,29 @@
+2022-08-22 09:21:53 (Complete)
+args:
+  project: /home/zhh/projects/osquery/build/compile_commands.json
+  output: /home/zhh/projects/osquery/build/csa/eh-cross
+  clang: /home/zhh/llvm/build/bin/clang-13
+  jobs: 16
+  solver: crosscheck
+  timeout: 600
+edm:
+  total: 3664
+  total time: 3693.216
+  done: 3654
+  error: 10
+  real time: 236.600
+ast:
+  total: 3664
+  total time: 4254.805
+  done: 3654
+  error: 10
+  real time: 269.441
+csa:
+  total: 3664
+  total time: 95678.840
+  done: 3540
+  error: 10
+  terminated: 109
+  timeout: 5
+  real time: 6017.168
+------------------------

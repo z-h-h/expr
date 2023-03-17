@@ -1,0 +1,105 @@
+#0
+src/bitcoin-tx.cpp:285: error: Memory Leak
+  Pulse found a potential memory leak. Memory dynamically allocated at line 285 by call to `CScript::CScript`, is not freed after the last access at line 285, column 12.
+  283. 
+  284.     // construct TxOut, append to transaction output list
+  285.     CTxOut txout(value, scriptPubKey);
+                  ^
+  286.     tx.vout.push_back(txout);
+  287. }
+
+#1
+src/serialize.h:426: error: Uninitialized Value
+  The value read from tmp[_] was never initialized.
+  424.     }
+  425.     do {
+  426.         ser_writedata8(os, tmp[len]);
+               ^
+  427.     } while(len--);
+  428. }
+
+#2
+src/script/script.h:482: error: Memory Leak
+  Pulse found a potential memory leak. Memory dynamically allocated at line 461 by call to `prevector`, is not freed after the last access at line 482, column 41.
+  480.             insert(end(), _data, _data + sizeof(_data));
+  481.         }
+  482.         insert(end(), b.begin(), b.end());
+                                               ^
+  483.         return *this;
+  484.     }
+
+#3
+src/script/script.h:466: error: Memory Leak
+  Pulse found a potential memory leak. Memory dynamically allocated at line 465 by call to `prevector`, is not freed after the last access at line 466, column 50.
+  464.         {
+  465.             insert(end(), OP_PUSHDATA1);
+  466.             insert(end(), (unsigned char)b.size());
+                                                        ^
+  467.         }
+  468.         else if (b.size() <= 0xffff)
+
+#4
+src/script/script.h:482: error: Memory Leak
+  Pulse found a potential memory leak. Memory dynamically allocated at line 465 by call to `prevector`, is not freed after the last access at line 482, column 41.
+  480.             insert(end(), _data, _data + sizeof(_data));
+  481.         }
+  482.         insert(end(), b.begin(), b.end());
+                                               ^
+  483.         return *this;
+  484.     }
+
+#5
+src/script/script.h:473: error: Memory Leak
+  Pulse found a potential memory leak. Memory dynamically allocated at line 470 by call to `prevector`, is not freed after the last access at line 473, column 55.
+  471.             uint8_t _data[2];
+  472.             WriteLE16(_data, b.size());
+  473.             insert(end(), _data, _data + sizeof(_data));
+                                                             ^
+  474.         }
+  475.         else
+
+#6
+src/script/script.h:480: error: Memory Leak
+  Pulse found a potential memory leak. Memory dynamically allocated at line 477 by call to `prevector`, is not freed after the last access at line 480, column 55.
+  478.             uint8_t _data[4];
+  479.             WriteLE32(_data, b.size());
+  480.             insert(end(), _data, _data + sizeof(_data));
+                                                             ^
+  481.         }
+  482.         insert(end(), b.begin(), b.end());
+
+#7
+src/serialize.h:606: error: Dead Store
+  The value written to &formatter (type DefaultFormatter*) is never used.
+  604.     void Ser(Stream& s, const V& v)
+  605.     {
+  606.         Formatter formatter;
+                         ^
+  607.         WriteCompactSize(s, v.size());
+  608.         for (const typename V::value_type& elem : v) {
+
+#8
+src/serialize.h:616: error: Dead Store
+  The value written to &formatter (type DefaultFormatter*) is never used.
+  614.     void Unser(Stream& s, V& v)
+  615.     {
+  616.         Formatter formatter;
+                         ^
+  617.         v.clear();
+  618.         size_t size = ReadCompactSize(s);
+
+#9
+src/policy/fees.cpp:790: error: Dead Store
+  The value written to &median (type double) is never used.
+  788.     }
+  789. 
+  790.     double median = -1;
+           ^
+  791.     EstimationResult tempResult;
+  792. 
+
+Found 10 issues
+                Issue Type(ISSUED_TYPE_ID): #
+                  Memory Leak(MEMORY_LEAK): 6
+                    Dead Store(DEAD_STORE): 3
+  Uninitialized Value(UNINITIALIZED_VALUE): 1

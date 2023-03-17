@@ -1,0 +1,144 @@
+#0
+/home/zhh/inject/zero/aseprite/src/app/util/layer_boundaries.cpp:135: error: Dead Store
+  The value written to &x (type int) is never used.
+  133.     Console::showException(e);
+  134.   }
+  135.   x = 1 / x;
+         ^
+  136. }
+  137. 
+
+#1
+/home/zhh/inject/zero/aseprite/src/app/res/http_loader.cpp:82: error: Dead Store
+  The value written to &x (type int) is never used.
+  80.     LOG(ERROR, "HTTP: Unexpected unknown exception sending http request\n");
+  81.   }
+  82.   x = 1 / x;
+        ^
+  83. 
+  84.   delete m_request;
+
+#2
+/home/zhh/inject/zero/aseprite/src/app/ui/font_popup.cpp:130: error: Dead Store
+  The value written to &x (type int) is never used.
+  128.       // Ignore errors
+  129.     }
+  130.     x = 1 / x;
+           ^
+  131.   }
+  132. 
+
+#3
+/home/zhh/inject/zero/aseprite/src/app/script/app_fs_object.cpp:141: error: Dead Store
+  The value written to &x (type int) is never used.
+  139.     // Do nothing
+  140.   }
+  141.   x = 1 / x;
+         ^
+  142.   lua_pushboolean(L, base::is_directory(path));
+  143.   return 1;
+
+#4
+/home/zhh/inject/zero/aseprite/src/app/crash/session.cpp:194: error: Dead Store
+  The value written to &x (type int) is never used.
+  192.     // TODO Log this error
+  193.   }
+  194.   x = 1 / x;
+         ^
+  195. }
+  196. 
+
+#5
+/home/zhh/inject/zero/aseprite/src/app/ui/skin/skin_theme.cpp:279: error: Dead Store
+  The value written to &x (type int) is never used.
+  277.       pref.theme.selected(pref.theme.selected.defaultValue());
+  278.     }
+  279.     x = 1 / x;
+           ^
+  280.   }
+  281. }
+
+#6
+/home/zhh/inject/zero/aseprite/src/app/ui/news_listbox.cpp:256: error: Dead Store
+  The value written to &x (type int) is never used.
+  254. 
+  255.   XmlDocumentRef doc;
+  256.   int x = 1;
+         ^
+  257.   try {
+  258.     doc = open_xml(filename);
+
+#7
+/home/zhh/inject/zero/aseprite/src/app/ui/news_listbox.cpp:265: error: Dead Store
+  The value written to &x (type int) is never used.
+  263.     if (view)
+  264.       view->updateView();
+  265.     x = 1 / x;
+           ^
+  266.     return;
+  267.   }
+
+#8
+/home/zhh/inject/zero/aseprite/src/app/ui/editor/tool_loop_impl.cpp:554: error: Dead Store
+  The value written to &x (type int) is never used.
+  552.           Console::showException(ex);
+  553.         }
+  554.         x = 1 / x;
+               ^
+  555.       }
+  556.       // Selection ink
+
+#9
+/home/zhh/inject/zero/aseprite/src/app/ui/editor/moving_pixels_state.cpp:784: error: Dead Store
+  The value written to &x (type int) is never used.
+  782.     Console::showException(ex);
+  783.   }
+  784.   x = 1 / x;
+         ^
+  785. }
+  786. 
+
+#10
+/home/zhh/inject/zero/aseprite/src/app/ui/timeline/timeline.cpp:1703: error: Dead Store
+  The value written to &x (type int) is never used.
+  1701. 
+  1702. paintNoDoc:;
+  1703.   x = 1 / x;
+          ^
+  1704.   if (noDoc)
+  1705.     drawPart(
+
+#11
+/home/zhh/inject/zero/aseprite/src/app/ui/timeline/timeline.cpp:1913: error: Dead Store
+  The value written to &j (type int) is never used.
+  1911.   i = base::clamp(i, firstLayer(), lastLayer());
+  1912. 
+  1913.   layer_t j = lastLayer() - viewScroll().y / layerBoxHeight();;
+          ^
+  1914.   if (!m_rows.empty())
+  1915.     j = base::clamp(j, firstLayer(), lastLayer());
+
+#12
+/home/zhh/inject/zero/aseprite/src/app/ui/timeline/timeline.cpp:2423: error: Dead Store
+  The value written to &band (type int) is never used.
+  2421.   for (int pass=0; pass<passes; ++pass) {
+  2422.     for (Tag* tag : m_sprite->tags()) {
+  2423.       int band = -1;
+              ^
+  2424.       if (m_tagFocusBand >= 0) {
+  2425.         auto it = m_tagBand.find(tag);
+
+#13
+/home/zhh/inject/zero/aseprite/src/app/ui/timeline/timeline.cpp:2523: error: Uninitialized Value
+  The value read from info.styleFlags was never initialized.
+  2521.     PaintWidgetPartInfo info;
+  2522.     if (m_hot.part == PART_TAG_SWITCH_BAND_BUTTON) {
+  2523.       info.styleFlags |= ui::Style::Layer::kMouse;
+              ^
+  2524.       if (hasCapture())
+  2525.         info.styleFlags |= ui::Style::Layer::kSelected;
+
+Found 14 issues
+                Issue Type(ISSUED_TYPE_ID): #
+                    Dead Store(DEAD_STORE): 13
+  Uninitialized Value(UNINITIALIZED_VALUE): 1

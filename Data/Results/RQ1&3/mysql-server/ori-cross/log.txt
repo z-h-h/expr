@@ -1,0 +1,29 @@
+2022-08-25 16:43:39 (Complete)
+args:
+  project: /home/zhh/workplace/ehtest/mysql-server/build/compile_commands.json
+  output: /home/zhh/workplace/ehtest/mysql-server/CSA/ori-cross
+  clang: /home/zhh/workplace/llvm-origin/build/bin/clang-13
+  jobs: 16
+  solver: crosscheck
+  timeout: 600
+edm:
+  total: 2933
+  total time: 3285.990
+  done: 2825
+  cached: 108
+  real time: 206.556
+ast:
+  total: 2933
+  total time: 4119.206
+  done: 2809
+  cached: 124
+  real time: 258.654
+csa:
+  total: 2933
+  total time: 95137.517
+  done: 2759
+  cached: 132
+  terminated: 33
+  timeout: 9
+  real time: 6281.896
+------------------------

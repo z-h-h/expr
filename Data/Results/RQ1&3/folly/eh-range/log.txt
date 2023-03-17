@@ -1,0 +1,25 @@
+2022-08-23 14:51:28 (Complete)
+args:
+  project: /home/zhh/projects/folly/_build/compile_commands.json
+  output: /home/zhh/projects/folly/_build/csa/eh-range
+  clang: /home/zhh/llvm/build/bin/clang-13
+  jobs: 16
+  solver: range
+  timeout: 600
+edm:
+  total: 270
+  total time: 390.811
+  done: 270
+  real time: 26.124
+ast:
+  total: 270
+  total time: 454.099
+  done: 270
+  real time: 30.185
+csa:
+  total: 270
+  total time: 6097.465
+  done: 261
+  terminated: 9
+  real time: 433.288
+------------------------

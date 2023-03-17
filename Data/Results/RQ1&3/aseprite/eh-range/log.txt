@@ -1,0 +1,27 @@
+2022-08-22 16:18:30 (Complete)
+args:
+  project: /home/zhh/projects/aseprite/build/compile_commands.json
+  output: /home/zhh/projects/aseprite/build/csa/eh-range
+  clang: /home/zhh/llvm/build/bin/clang-13
+  jobs: 16
+  solver: range
+  timeout: 600
+edm:
+  total: 1342
+  total time: 619.362
+  done: 1296
+  cached: 46
+  real time: 39.560
+ast:
+  total: 1342
+  total time: 769.942
+  done: 1290
+  cached: 52
+  real time: 48.803
+csa:
+  total: 1342
+  total time: 40867.018
+  done: 1284
+  cached: 58
+  real time: 2733.459
+------------------------

@@ -1,0 +1,26 @@
+2022-08-25 10:10:53 (Complete)
+args:
+  project: /home/zhh/projects/opencv-4.5.2/build/compile_commands.json
+  output: /home/zhh/projects/opencv-4.5.2/build/csa/ori-range
+  clang: /home/zhh/llvm-origin/build/bin/clang-13
+  jobs: 16
+  solver: range
+  timeout: 600
+edm:
+  total: 1305
+  total time: 1857.419
+  done: 1305
+  real time: 117.533
+ast:
+  total: 1305
+  total time: 2176.379
+  done: 1305
+  real time: 137.184
+csa:
+  total: 1305
+  total time: 54791.898
+  done: 907
+  timeout: 9
+  terminated: 389
+  real time: 3896.677
+------------------------

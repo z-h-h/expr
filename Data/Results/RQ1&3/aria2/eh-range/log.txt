@@ -1,0 +1,27 @@
+2022-08-23 12:49:10 (Complete)
+args:
+  project: /home/zhh/projects/aria2-1.35.0/compile_commands.json
+  output: /home/zhh/projects/aria2-1.35.0/csa/eh-range
+  clang: /home/zhh/llvm/build/bin/clang-13
+  jobs: 16
+  solver: range
+  timeout: 600
+edm:
+  total: 397
+  total time: 283.406
+  done: 393
+  cached: 4
+  real time: 18.153
+ast:
+  total: 397
+  total time: 362.219
+  done: 393
+  cached: 4
+  real time: 23.271
+csa:
+  total: 397
+  total time: 6503.697
+  done: 393
+  cached: 4
+  real time: 480.423
+------------------------

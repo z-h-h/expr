@@ -1,0 +1,778 @@
+<!doctype html>
+<html>
+<head>
+<title>/home/zhh/projects/faiss-1.7.1/tests/test_sliding_ivf.cpp</title>
+
+<style type="text/css">
+body { color:#000000; background-color:#ffffff }
+body { font-family:Helvetica, sans-serif; font-size:10pt }
+h1 { font-size:14pt }
+.FileName { margin-top: 5px; margin-bottom: 5px; display: inline; }
+.FileNav { margin-left: 5px; margin-right: 5px; display: inline; }
+.FileNav a { text-decoration:none; font-size: larger; }
+.divider { margin-top: 30px; margin-bottom: 30px; height: 15px; }
+.divider { background-color: gray; }
+.code { border-collapse:collapse; width:100%; }
+.code { font-family: "Monospace", monospace; font-size:10pt }
+.code { line-height: 1.2em }
+.comment { color: green; font-style: oblique }
+.keyword { color: blue }
+.string_literal { color: red }
+.directive { color: darkmagenta }
+
+/* Macros and variables could have pop-up notes hidden by default.
+  - Macro pop-up:    expansion of the macro
+  - Variable pop-up: value (table) of the variable */
+.macro_popup, .variable_popup { display: none; }
+
+/* Pop-up appears on mouse-hover event. */
+.macro:hover .macro_popup, .variable:hover .variable_popup {
+  display: block;
+  padding: 2px;
+  -webkit-border-radius:5px;
+  -webkit-box-shadow:1px 1px 7px #000;
+  border-radius:5px;
+  box-shadow:1px 1px 7px #000;
+  position: absolute;
+  top: -1em;
+  left:10em;
+  z-index: 1
+}
+
+.macro_popup {
+  border: 2px solid red;
+  background-color:#FFF0F0;
+  font-weight: normal;
+}
+
+.variable_popup {
+  border: 2px solid blue;
+  background-color:#F0F0FF;
+  font-weight: bold;
+  font-family: Helvetica, sans-serif;
+  font-size: 9pt;
+}
+
+/* Pop-up notes needs a relative position as a base where they pops up. */
+.macro, .variable {
+  background-color: PaleGoldenRod;
+  position: relative;
+}
+.macro { color: DarkMagenta; }
+
+#tooltiphint {
+  position: fixed;
+  width: 50em;
+  margin-left: -25em;
+  left: 50%;
+  padding: 10px;
+  border: 1px solid #b0b0b0;
+  border-radius: 2px;
+  box-shadow: 1px 1px 7px black;
+  background-color: #c0c0c0;
+  z-index: 2;
+}
+
+.num { width:2.5em; padding-right:2ex; background-color:#eeeeee }
+.num { text-align:right; font-size:8pt }
+.num { color:#444444 }
+.line { padding-left: 1ex; border-left: 3px solid #ccc }
+.line { white-space: pre }
+.msg { -webkit-box-shadow:1px 1px 7px #000 }
+.msg { box-shadow:1px 1px 7px #000 }
+.msg { -webkit-border-radius:5px }
+.msg { border-radius:5px }
+.msg { font-family:Helvetica, sans-serif; font-size:8pt }
+.msg { float:left }
+.msg { padding:0.25em 1ex 0.25em 1ex }
+.msg { margin-top:10px; margin-bottom:10px }
+.msg { font-weight:bold }
+.msg { max-width:60em; word-wrap: break-word; white-space: pre-wrap }
+.msgT { padding:0x; spacing:0x }
+.msgEvent { background-color:#fff8b4; color:#000000 }
+.msgControl { background-color:#bbbbbb; color:#000000 }
+.msgNote { background-color:#ddeeff; color:#000000 }
+.mrange { background-color:#dfddf3 }
+.mrange { border-bottom:1px solid #6F9DBE }
+.PathIndex { font-weight: bold; padding:0px 5px; margin-right:5px; }
+.PathIndex { -webkit-border-radius:8px }
+.PathIndex { border-radius:8px }
+.PathIndexEvent { background-color:#bfba87 }
+.PathIndexControl { background-color:#8c8c8c }
+.PathIndexPopUp { background-color: #879abc; }
+.PathNav a { text-decoration:none; font-size: larger }
+.CodeInsertionHint { font-weight: bold; background-color: #10dd10 }
+.CodeRemovalHint { background-color:#de1010 }
+.CodeRemovalHint { border-bottom:1px solid #6F9DBE }
+.selected{ background-color:orange !important; }
+
+table.simpletable {
+  padding: 5px;
+  font-size:12pt;
+  margin:20px;
+  border-collapse: collapse; border-spacing: 0px;
+}
+td.rowname {
+  text-align: right;
+  vertical-align: top;
+  font-weight: bold;
+  color:#444444;
+  padding-right:2ex;
+}
+
+/* Hidden text. */
+input.spoilerhider + label {
+  cursor: pointer;
+  text-decoration: underline;
+  display: block;
+}
+input.spoilerhider {
+ display: none;
+}
+input.spoilerhider ~ .spoiler {
+  overflow: hidden;
+  margin: 10px auto 0;
+  height: 0;
+  opacity: 0;
+}
+input.spoilerhider:checked + label + .spoiler{
+  height: auto;
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+<!-- BUGDESC Potential memory leak -->
+
+<!-- BUGTYPE Memory leak -->
+
+<!-- BUGCATEGORY Memory error -->
+
+<!-- BUGFILE /home/zhh/projects/faiss-1.7.1/tests/test_sliding_ivf.cpp -->
+
+<!-- FILENAME test_sliding_ivf.cpp -->
+
+<!-- FUNCTIONNAME TestBody -->
+
+<!-- ISSUEHASHCONTENTOFLINEINCONTEXT 7b8bf905892d733985b61df2ea20c7c5 -->
+
+<!-- BUGLINE 223 -->
+
+<!-- BUGCOLUMN 1 -->
+
+<!-- EXCEPTIONAL -->
+
+<!-- BUGPATHLENGTH 58 -->
+
+<!-- BUGMETAEND -->
+<!-- REPORTHEADER -->
+<h3>Bug Summary [throw at :146:9]</h3>
+<table class="simpletable">
+<tr><td class="rowname">File:</td><td>/home/zhh/projects/faiss-1.7.1/tests/test_sliding_ivf.cpp</td></tr>
+<tr><td class="rowname">Warning:</td><td><a href="#EndPath">line 223, column 1</a><br />Potential memory leak</td></tr>
+
+</table>
+<!-- REPORTSUMMARYEXTRA -->
+<h3>Annotated Source Code</h3>
+<p>Press <a href="#" onclick="toggleHelp(); return false;">'?'</a>
+   to see keyboard shortcuts</p>
+<input type="checkbox" class="spoilerhider" id="showinvocation" />
+<label for="showinvocation" >Show analyzer invocation</label>
+<div class="spoiler">clang -cc1 -cc1 -triple x86_64-unknown-linux-gnu -analyze -disable-free -disable-llvm-verifier -discard-value-names -main-file-name test_sliding_ivf.cpp -analyzer-store=region -analyzer-opt-analyze-nested-blocks -analyzer-checker=core -analyzer-checker=apiModeling -analyzer-checker=unix -analyzer-checker=deadcode -analyzer-checker=cplusplus -analyzer-checker=security.insecureAPI.UncheckedReturn -analyzer-checker=security.insecureAPI.getpw -analyzer-checker=security.insecureAPI.gets -analyzer-checker=security.insecureAPI.mktemp -analyzer-checker=security.insecureAPI.mkstemp -analyzer-checker=security.insecureAPI.vfork -analyzer-checker=nullability.NullPassedToNonnull -analyzer-checker=nullability.NullReturnedFromNonnull -analyzer-output plist -w -setup-static-analyzer -analyzer-config-compatibility-mode=true -mrelocation-model static -mframe-pointer=all -fmath-errno -fno-rounding-math -mconstructor-aliases -munwind-tables -target-cpu x86-64 -tune-cpu generic -fno-split-dwarf-inlining -debugger-tuning=gdb -resource-dir /home/zhh/llvm/build/lib/clang/13.0.0 -isystem /home/zhh/projects/faiss-1.7.1/build/_deps/googletest-src/googletest/include -isystem /home/zhh/projects/faiss-1.7.1/build/_deps/googletest-src/googletest -I /home/zhh/projects/faiss-1.7.1 -internal-isystem /usr/lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9 -internal-isystem /usr/lib/gcc/x86_64-linux-gnu/9/../../../../include/x86_64-linux-gnu/c++/9 -internal-isystem /usr/lib/gcc/x86_64-linux-gnu/9/../../../../include/x86_64-linux-gnu/c++/9 -internal-isystem /usr/lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/backward -internal-isystem /usr/local/include -internal-isystem /home/zhh/llvm/build/lib/clang/13.0.0/include -internal-externc-isystem /usr/include/x86_64-linux-gnu -internal-externc-isystem /include -internal-externc-isystem /usr/include -std=gnu++11 -fdeprecated-macro -fdebug-compilation-dir=/home/zhh/projects/faiss-1.7.1/build/tests -ferror-limit 19 -fopenmp -fopenmp-cuda-parallel-target-regions -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -analyzer-checker=alpha.unix.Stream -analyzer-config cplusplus.Move:WarnOn=All -analyzer-config suppress-null-return-paths=false -analyzer-config suppress-inlined-defensive-checks=false -analyzer-config stable-report-filename=true -analyzer-config max-nodes=1000000 -stats-file=/home/zhh/projects/faiss-1.7.1/build/csa/eh-cross/cache/csa/home/zhh/projects/faiss-1.7.1/tests/test_sliding_ivf.cpp.json -analyzer-output=html -analyzer-purge=none -analyzer-config crosscheck-with-z3=true -analyzer-config experimental-enable-naive-ctu-analysis=true -analyzer-config ctu-dir=/home/zhh/projects/faiss-1.7.1/build/csa/eh-cross/cache -faddrsig -o /home/zhh/projects/faiss-1.7.1/build/csa/eh-cross/reports/20220823-112231 -x c++ /home/zhh/projects/faiss-1.7.1/tests/test_sliding_ivf.cpp
+</div>
+<div id='tooltiphint' hidden="true">
+  <p>Keyboard shortcuts: </p>
+  <ul>
+    <li>Use 'j/k' keys for keyboard navigation</li>
+    <li>Use 'Shift+S' to show/hide relevant lines</li>
+    <li>Use '?' to toggle this window</li>
+  </ul>
+  <a href="#" onclick="toggleHelp(); return false;">Close</a>
+</div>
+<script type='text/javascript'>
+var relevant_lines = {"1": {"42": 1, "43": 1, "44": 1, "45": 1, "46": 1, "49": 1, "52": 1, "53": 1, "54": 1, "55": 1, "56": 1, "57": 1, "60": 1, "61": 1, "62": 1, "63": 1, "64": 1, "65": 1, "73": 1, "74": 1, "75": 1, "76": 1, "95": 1, "96": 1, "97": 1, "98": 1, "99": 1, "100": 1, "101": 1, "103": 1, "149": 1, "150": 1, "153": 1, "155": 1, "158": 1, "159": 1, "161": 1, "163": 1, "164": 1, "167": 1, "168": 1, "174": 1, "177": 1, "178": 1, "181": 1, "183": 1, "185": 1, "188": 1, "192": 1, "202": 1, "221": 1, "222": 1, "223": 1}, "1312": {"73": 1, "74": 1, "75": 1, "98": 1, "99": 1, "100": 1}, "1609": {"63": 1}, "3090": {"74": 1, "75": 1, "76": 1, "81": 1, "147": 1, "150": 1, "151": 1, "153": 1, "154": 1, "155": 1, "210": 1, "211": 1, "212": 1, "213": 1, "257": 1, "258": 1, "286": 1, "287": 1, "290": 1, "291": 1, "292": 1, "293": 1, "351": 1, "352": 1, "353": 1, "355": 1, "359": 1, "360": 1, "361": 1, "364": 1, "365": 1, "366": 1, "380": 1, "381": 1, "382": 1, "383": 1, "384": 1, "385": 1}, "3120": {"76": 1, "77": 1, "86": 1, "87": 1, "112": 1, "113": 1, "122": 1, "123": 1, "132": 1, "133": 1, "159": 1, "160": 1, "162": 1, "163": 1, "194": 1, "195": 1, "197": 1, "198": 1, "206": 1, "207": 1, "215": 1, "216": 1, "217": 1, "218": 1, "333": 1, "334": 1, "339": 1, "340": 1, "347": 1, "348": 1, "349": 1, "918": 1, "919": 1, "968": 1, "969": 1, "1308": 1, "1309": 1, "1310": 1, "1313": 1, "1314": 1, "1315": 1, "1319": 1, "1320": 1, "1321": 1, "1325": 1, "1326": 1, "1327": 1}, "3438": {"525": 1}, "33123": {"516": 1, "518": 1, "519": 1, "520": 1, "1750": 1, "1751": 1, "1752": 1, "1753": 1, "1784": 1, "1792": 1, "1793": 1, "1794": 1, "1795": 1}, "33126": {"507": 1}, "39239": {"209": 1}, "39355": {"228": 1, "229": 1}, "39448": {"30": 1}, "41176": {"255": 1, "256": 1, "257": 1, "258": 1, "259": 1, "260": 1, "444": 1, "445": 1, "446": 1, "447": 1, "448": 1, "452": 1, "456": 1, "457": 1, "458": 1}, "44340": {"21": 1, "22": 1, "23": 1, "24": 1, "25": 1, "26": 1, "30": 1, "31": 1, "32": 1, "33": 1, "34": 1, "35": 1, "36": 1, "37": 1, "39": 1, "40": 1, "41": 1, "42": 1}, "44473": {"41": 1, "42": 1, "43": 1, "76": 1, "77": 1, "78": 1, "79": 1, "80": 1, "81": 1, "82": 1, "83": 1, "84": 1, "85": 1, "86": 1, "102": 1, "103": 1, "104": 1, "117": 1, "118": 1, "123": 1, "128": 1, "139": 1, "140": 1, "146": 1}, "44474": {"26": 1}, "44478": {"51": 1}, "44509": {"24": 1}, "44510": {"115": 1}, "44511": {"23": 1}, "44899": {"56": 1, "57": 1, "58": 1, "61": 1, "62": 1, "64": 1, "65": 1, "68": 1, "70": 1, "77": 1, "78": 1, "79": 1, "80": 1, "83": 1, "84": 1}, "45369": {"20": 1}, "48073": {"23": 1, "24": 1, "211": 1, "212": 1, "213": 1, "214": 1, "215": 1, "216": 1, "217": 1, "218": 1}, "48399": {"980": 1, "981": 1, "986": 1, "987": 1, "988": 1, "992": 1, "993": 1}};
+
+var filterCounterexample = function (hide) {
+  var tables = document.getElementsByClassName("code");
+  for (var t=0; t<tables.length; t++) {
+    var table = tables[t];
+    var file_id = table.getAttribute("data-fileid");
+    var lines_in_fid = relevant_lines[file_id];
+    if (!lines_in_fid) {
+      lines_in_fid = {};
+    }
+    var lines = table.getElementsByClassName("codeline");
+    for (var i=0; i<lines.length; i++) {
+        var el = lines[i];
+        var lineNo = el.getAttribute("data-linenumber");
+        if (!lines_in_fid[lineNo]) {
+          if (hide) {
+            el.setAttribute("hidden", "");
+          } else {
+            el.removeAttribute("hidden");
+          }
+        }
+    }
+  }
+}
+
+window.addEventListener("keydown", function (event) {
+  if (event.defaultPrevented) {
+    return;
+  }
+  if (event.key == "S") {
+    var checked = document.getElementsByName("showCounterexample")[0].checked;
+    filterCounterexample(!checked);
+    document.getElementsByName("showCounterexample")[0].checked = !checked;
+  } else {
+    return;
+  }
+  event.preventDefault();
+}, true);
+
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelector('input[name="showCounterexample"]').onchange=
+        function (event) {
+      filterCounterexample(this.checked);
+    };
+});
+</script>
+
+<form>
+    <input type="checkbox" name="showCounterexample" id="showCounterexample" />
+    <label for="showCounterexample">
+       Show only relevant lines
+    </label>
+</form>
+
+<script type='text/javascript'>
+var digitMatcher = new RegExp("[0-9]+");
+
+var querySelectorAllArray = function(selector) {
+  return Array.prototype.slice.call(
+    document.querySelectorAll(selector));
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    querySelectorAllArray(".PathNav > a").forEach(
+        function(currentValue, currentIndex) {
+            var hrefValue = currentValue.getAttribute("href");
+            currentValue.onclick = function() {
+                scrollTo(document.querySelector(hrefValue));
+                return false;
+            };
+        });
+});
+
+var findNum = function() {
+    var s = document.querySelector(".selected");
+    if (!s || s.id == "EndPath") {
+        return 0;
+    }
+    var out = parseInt(digitMatcher.exec(s.id)[0]);
+    return out;
+};
+
+var scrollTo = function(el) {
+    querySelectorAllArray(".selected").forEach(function(s) {
+        s.classList.remove("selected");
+    });
+    el.classList.add("selected");
+    window.scrollBy(0, el.getBoundingClientRect().top -
+        (window.innerHeight / 2));
+}
+
+var move = function(num, up, numItems) {
+  if (num == 1 && up || num == numItems - 1 && !up) {
+    return 0;
+  } else if (num == 0 && up) {
+    return numItems - 1;
+  } else if (num == 0 && !up) {
+    return 1 % numItems;
+  }
+  return up ? num - 1 : num + 1;
+}
+
+var numToId = function(num) {
+  if (num == 0) {
+    return document.getElementById("EndPath")
+  }
+  return document.getElementById("Path" + num);
+};
+
+var navigateTo = function(up) {
+  var numItems = document.querySelectorAll(
+      ".line > .msgEvent, .line > .msgControl").length;
+  var currentSelected = findNum();
+  var newSelected = move(currentSelected, up, numItems);
+  var newEl = numToId(newSelected, numItems);
+
+  // Scroll element into center.
+  scrollTo(newEl);
+};
+
+window.addEventListener("keydown", function (event) {
+  if (event.defaultPrevented) {
+    return;
+  }
+  if (event.key == "j") {
+    navigateTo(/*up=*/false);
+  } else if (event.key == "k") {
+    navigateTo(/*up=*/true);
+  } else {
+    return;
+  }
+  event.preventDefault();
+}, true);
+</script>
+  
+<script type='text/javascript'>
+
+var toggleHelp = function() {
+    var hint = document.querySelector("#tooltiphint");
+    var attributeName = "hidden";
+    if (hint.hasAttribute(attributeName)) {
+      hint.removeAttribute(attributeName);
+    } else {
+      hint.setAttribute("hidden", "true");
+    }
+};
+window.addEventListener("keydown", function (event) {
+  if (event.defaultPrevented) {
+    return;
+  }
+  if (event.key == "?") {
+    toggleHelp();
+  } else {
+    return;
+  }
+  event.preventDefault();
+});
+</script>
+<div id=File1>
+<h4 class=FileName>/home/zhh/projects/faiss-1.7.1/tests/test_sliding_ivf.cpp</h4>
+<div class=FileNav><a href="#File44473">&#x2192;</a></div></div>
+<table class="code" data-fileid="1">
+<tr class="codeline" data-linenumber="1"><td class="num" id="LN1">1</td><td class="line"><span class='comment'>/**</span></td></tr>
+<tr class="codeline" data-linenumber="2"><td class="num" id="LN2">2</td><td class="line"> <span class='comment'>* Copyright (c) Facebook, Inc. and its affiliates.</span></td></tr>
+<tr class="codeline" data-linenumber="3"><td class="num" id="LN3">3</td><td class="line"> <span class='comment'>*</span></td></tr>
+<tr class="codeline" data-linenumber="4"><td class="num" id="LN4">4</td><td class="line"> <span class='comment'>* This source code is licensed under the MIT license found in the</span></td></tr>
+<tr class="codeline" data-linenumber="5"><td class="num" id="LN5">5</td><td class="line"> <span class='comment'>* LICENSE file in the root directory of this source tree.</span></td></tr>
+<tr class="codeline" data-linenumber="6"><td class="num" id="LN6">6</td><td class="line"> <span class='comment'>*/</span></td></tr>
+<tr class="codeline" data-linenumber="7"><td class="num" id="LN7">7</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="8"><td class="num" id="LN8">8</td><td class="line"><span class='directive'>#include &lt;cstdio&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="9"><td class="num" id="LN9">9</td><td class="line"><span class='directive'>#include &lt;cstdlib&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="10"><td class="num" id="LN10">10</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="11"><td class="num" id="LN11">11</td><td class="line"><span class='directive'>#include &lt;memory&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="12"><td class="num" id="LN12">12</td><td class="line"><span class='directive'>#include &lt;random&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="13"><td class="num" id="LN13">13</td><td class="line"><span class='directive'>#include &lt;vector&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="14"><td class="num" id="LN14">14</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="15"><td class="num" id="LN15">15</td><td class="line"><span class='directive'>#include &lt;gtest/gtest.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="16"><td class="num" id="LN16">16</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="17"><td class="num" id="LN17">17</td><td class="line"><span class='directive'>#include &lt;faiss/AutoTune.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="18"><td class="num" id="LN18">18</td><td class="line"><span class='directive'>#include &lt;faiss/IVFlib.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="19"><td class="num" id="LN19">19</td><td class="line"><span class='directive'>#include &lt;faiss/IndexIVF.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="20"><td class="num" id="LN20">20</td><td class="line"><span class='directive'>#include &lt;faiss/clone_index.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="21"><td class="num" id="LN21">21</td><td class="line"><span class='directive'>#include &lt;faiss/index_factory.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="22"><td class="num" id="LN22">22</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="23"><td class="num" id="LN23">23</td><td class="line"><span class='keyword'>using</span> <span class='keyword'>namespace</span> faiss;</td></tr>
+<tr class="codeline" data-linenumber="24"><td class="num" id="LN24">24</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="25"><td class="num" id="LN25">25</td><td class="line"><span class='keyword'>typedef</span> Index::idx_t idx_t;</td></tr>
+<tr class="codeline" data-linenumber="26"><td class="num" id="LN26">26</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="27"><td class="num" id="LN27">27</td><td class="line"><span class='comment'>// dimension of the vectors to index</span></td></tr>
+<tr class="codeline" data-linenumber="28"><td class="num" id="LN28">28</td><td class="line"><span class='keyword'>int</span> d = 32;</td></tr>
+<tr class="codeline" data-linenumber="29"><td class="num" id="LN29">29</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="30"><td class="num" id="LN30">30</td><td class="line"><span class='comment'>// nb of training vectors</span></td></tr>
+<tr class="codeline" data-linenumber="31"><td class="num" id="LN31">31</td><td class="line">size_t nt = 5000;</td></tr>
+<tr class="codeline" data-linenumber="32"><td class="num" id="LN32">32</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="33"><td class="num" id="LN33">33</td><td class="line"><span class='comment'>// size of the database points per window step</span></td></tr>
+<tr class="codeline" data-linenumber="34"><td class="num" id="LN34">34</td><td class="line">size_t nb = 1000;</td></tr>
+<tr class="codeline" data-linenumber="35"><td class="num" id="LN35">35</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="36"><td class="num" id="LN36">36</td><td class="line"><span class='comment'>// nb of queries</span></td></tr>
+<tr class="codeline" data-linenumber="37"><td class="num" id="LN37">37</td><td class="line">size_t nq = 200;</td></tr>
+<tr class="codeline" data-linenumber="38"><td class="num" id="LN38">38</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="39"><td class="num" id="LN39">39</td><td class="line"><span class='keyword'>int</span> total_size = 40;</td></tr>
+<tr class="codeline" data-linenumber="40"><td class="num" id="LN40">40</td><td class="line"><span class='keyword'>int</span> window_size = 10;</td></tr>
+<tr class="codeline" data-linenumber="41"><td class="num" id="LN41">41</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="42"><td class="num" id="LN42">42</td><td class="line">std::vector&lt;<span class='keyword'>float</span>&gt; make_data(size_t n) {</td></tr>
+<tr class="codeline" data-linenumber="43"><td class="num" id="LN43">43</td><td class="line">    std::vector&lt;<span class='keyword'>float</span>&gt; database(n * d);</td></tr>
+<tr class="codeline" data-linenumber="44"><td class="num" id="LN44">44</td><td class="line">    std::mt19937 rng;</td></tr>
+<tr class="codeline" data-linenumber="45"><td class="num" id="LN45">45</td><td class="line">    std::uniform_real_distribution&lt;&gt; distrib;</td></tr>
+<tr class="codeline" data-linenumber="46"><td class="num" id="LN46">46</td><td class="line">    <span class='keyword'>for</span> (size_t i = 0; i &lt; n * d; i++) {</td></tr>
+<tr class="codeline" data-linenumber="47"><td class="num" id="LN47">47</td><td class="line">        database[i] = distrib(rng);</td></tr>
+<tr class="codeline" data-linenumber="48"><td class="num" id="LN48">48</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="49"><td class="num" id="LN49">49</td><td class="line">    <span class='keyword'>return</span> database;</td></tr>
+<tr class="codeline" data-linenumber="50"><td class="num" id="LN50">50</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="51"><td class="num" id="LN51">51</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="52"><td class="num" id="LN52">52</td><td class="line">std::unique_ptr&lt;Index&gt; make_trained_index(<span class='keyword'>const</span> <span class='keyword'>char</span>* index_type) {</td></tr>
+<tr class="codeline" data-linenumber="53"><td class="num" id="LN53">53</td><td class="line">    <span class='keyword'>auto</span> index = std::unique_ptr&lt;Index&gt;(index_factory(d, index_type));</td></tr>
+<tr class="codeline" data-linenumber="54"><td class="num" id="LN54">54</td><td class="line">    <span class='keyword'>auto</span> xt = make_data(nt * d);</td></tr>
+<tr class="codeline" data-linenumber="55"><td class="num" id="LN55">55</td><td class="line">    index-&gt;train(nt, xt.data());</td></tr>
+<tr class="codeline" data-linenumber="56"><td class="num" id="LN56">56</td><td class="line">    ParameterSpace().set_index_parameter(index.get(), <span class='string_literal'>"nprobe"</span>, 4);</td></tr>
+<tr class="codeline" data-linenumber="57"><td class="num" id="LN57">57</td><td class="line">    <span class='keyword'>return</span> index;</td></tr>
+<tr class="codeline" data-linenumber="58"><td class="num" id="LN58">58</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="59"><td class="num" id="LN59">59</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="60"><td class="num" id="LN60">60</td><td class="line">std::vector&lt;idx_t&gt; search_index(Index* index, <span class='keyword'>const</span> <span class='keyword'>float</span>* xq) {</td></tr>
+<tr class="codeline" data-linenumber="61"><td class="num" id="LN61">61</td><td class="line">    <span class='keyword'>int</span> k = 10;</td></tr>
+<tr class="codeline" data-linenumber="62"><td class="num" id="LN62">62</td><td class="line">    std::vector&lt;idx_t&gt; I(k * nq);</td></tr>
+<tr class="codeline" data-linenumber="63"><td class="num" id="LN63">63</td><td class="line">    std::vector&lt;<span class='keyword'>float</span>&gt; D(k * nq);</td></tr>
+<tr class="codeline" data-linenumber="64"><td class="num" id="LN64">64</td><td class="line">    index-&gt;search(nq, xq, k, D.data(), I.data());</td></tr>
+<tr class="codeline" data-linenumber="65"><td class="num" id="LN65">65</td><td class="line">    <span class='keyword'>return</span> I;</td></tr>
+<tr class="codeline" data-linenumber="66"><td class="num" id="LN66">66</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="67"><td class="num" id="LN67">67</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="68"><td class="num" id="LN68">68</td><td class="line"><span class='comment'>/*************************************************************</span></td></tr>
+<tr class="codeline" data-linenumber="69"><td class="num" id="LN69">69</td><td class="line"> <span class='comment'>* Test functions for a given index type</span></td></tr>
+<tr class="codeline" data-linenumber="70"><td class="num" id="LN70">70</td><td class="line"> <span class='comment'>*************************************************************/</span></td></tr>
+<tr class="codeline" data-linenumber="71"><td class="num" id="LN71">71</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="72"><td class="num" id="LN72">72</td><td class="line"><span class='comment'>// make a few slices of indexes that can be merged</span></td></tr>
+<tr class="codeline" data-linenumber="73"><td class="num" id="LN73">73</td><td class="line"><span class='keyword'>void</span> make_index_slices(</td></tr>
+<tr class="codeline" data-linenumber="74"><td class="num" id="LN74">74</td><td class="line">        <span class='keyword'>const</span> Index* trained_index,</td></tr>
+<tr class="codeline" data-linenumber="75"><td class="num" id="LN75">75</td><td class="line">        std::vector&lt;std::unique_ptr&lt;Index&gt;&gt;&amp; sub_indexes) {</td></tr>
+<tr class="codeline" data-linenumber="76"><td class="num" id="LN76">76</td><td class="line">    <span class='keyword'>for</span> (<span class='keyword'>int</span> i = 0; i &lt; total_size; i++) {</td></tr>
+<tr class="codeline" data-linenumber="77"><td class="num" id="LN77">77</td><td class="line">        sub_indexes.emplace_back(clone_index(trained_index));</td></tr>
+<tr class="codeline" data-linenumber="78"><td class="num" id="LN78">78</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="79"><td class="num" id="LN79">79</td><td class="line">        printf(<span class='string_literal'>"preparing sub-index # %d\n"</span>, i);</td></tr>
+<tr class="codeline" data-linenumber="80"><td class="num" id="LN80">80</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="81"><td class="num" id="LN81">81</td><td class="line">        Index* index = sub_indexes.back().get();</td></tr>
+<tr class="codeline" data-linenumber="82"><td class="num" id="LN82">82</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="83"><td class="num" id="LN83">83</td><td class="line">        <span class='keyword'>auto</span> xb = make_data(nb * d);</td></tr>
+<tr class="codeline" data-linenumber="84"><td class="num" id="LN84">84</td><td class="line">        std::vector&lt;faiss::Index::idx_t&gt; ids(nb);</td></tr>
+<tr class="codeline" data-linenumber="85"><td class="num" id="LN85">85</td><td class="line">        std::mt19937 rng;</td></tr>
+<tr class="codeline" data-linenumber="86"><td class="num" id="LN86">86</td><td class="line">        std::uniform_int_distribution&lt;&gt; distrib;</td></tr>
+<tr class="codeline" data-linenumber="87"><td class="num" id="LN87">87</td><td class="line">        <span class='keyword'>for</span> (<span class='keyword'>int</span> j = 0; j &lt; nb; j++) {</td></tr>
+<tr class="codeline" data-linenumber="88"><td class="num" id="LN88">88</td><td class="line">            ids[j] = distrib(rng);</td></tr>
+<tr class="codeline" data-linenumber="89"><td class="num" id="LN89">89</td><td class="line">        }</td></tr>
+<tr class="codeline" data-linenumber="90"><td class="num" id="LN90">90</td><td class="line">        index-&gt;add_with_ids(nb, xb.data(), ids.data());</td></tr>
+<tr class="codeline" data-linenumber="91"><td class="num" id="LN91">91</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="92"><td class="num" id="LN92">92</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="93"><td class="num" id="LN93">93</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="94"><td class="num" id="LN94">94</td><td class="line"><span class='comment'>// build merged index explicitly at sliding window position i</span></td></tr>
+<tr class="codeline" data-linenumber="95"><td class="num" id="LN95">95</td><td class="line">Index* make_merged_index(</td></tr>
+<tr class="codeline" data-linenumber="96"><td class="num" id="LN96">96</td><td class="line">        <span class='keyword'>const</span> Index* trained_index,</td></tr>
+<tr class="codeline" data-linenumber="97"><td class="num" id="LN97">97</td><td class="line">        <span class='keyword'>const</span> std::vector&lt;std::unique_ptr&lt;Index&gt;&gt;&amp; sub_indexes,</td></tr>
+<tr class="codeline" data-linenumber="98"><td class="num" id="LN98">98</td><td class="line">        <span class='keyword'>int</span> i) {</td></tr>
+<tr class="codeline" data-linenumber="99"><td class="num" id="LN99">99</td><td class="line">    Index* merged_index = <span class="mrange"><span class="mrange">clone_index(trained_index)</span></span>;</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path9" class="msg msgEvent" style="margin-left:27ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">9</div></td><td><div class="PathNav"><a href="#Path8" title="Previous event (8)">&#x2190;</a></div></td><td>Calling 'clone_index'</td><td><div class="PathNav"><a href="#Path10" title="Next event (10)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path14" class="msg msgEvent" style="margin-left:27ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">14</div></td><td><div class="PathNav"><a href="#Path13" title="Previous event (13)">&#x2190;</a></div></td><td>Returned allocated memory</td><td><div class="PathNav"><a href="#Path15" title="Next event (15)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="100"><td class="num" id="LN100">100</td><td class="line">    <span class='keyword'>for</span> (<span class='keyword'>int</span> j = i - window_size + 1; <span class="mrange">j &lt;= i</span>; j++) {</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path15" class="msg msgEvent" style="margin-left:39ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">15</div></td><td><div class="PathNav"><a href="#Path14" title="Previous event (14)">&#x2190;</a></div></td><td>Assuming 'j' is &lt;= 'i'</td><td><div class="PathNav"><a href="#Path16" title="Next event (16)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path16" class="msg msgControl" style="margin-left:5ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexControl">16</div></td><td><div class="PathNav"><a href="#Path15" title="Previous event (15)">&#x2190;</a></div></td><td>Loop condition is true.  Entering loop body</td><td><div class="PathNav"><a href="#Path17" title="Next event (17)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="101"><td class="num" id="LN101">101</td><td class="line">        <span class='keyword'>if</span> (<span class="mrange">j &lt; 0</span> || <span class="mrange">j &gt;= total_size</span>)</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path17" class="msg msgEvent" style="margin-left:13ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">17</div></td><td><div class="PathNav"><a href="#Path16" title="Previous event (16)">&#x2190;</a></div></td><td>Assuming 'j' is &gt;= 0</td><td><div class="PathNav"><a href="#Path18" title="Next event (18)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path18" class="msg msgEvent" style="margin-left:22ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">18</div></td><td><div class="PathNav"><a href="#Path17" title="Previous event (17)">&#x2190;</a></div></td><td>Assuming 'j' is &lt; 'total_size'</td><td><div class="PathNav"><a href="#Path19" title="Next event (19)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path19" class="msg msgControl" style="margin-left:9ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexControl">19</div></td><td><div class="PathNav"><a href="#Path18" title="Previous event (18)">&#x2190;</a></div></td><td>Taking false branch</td><td><div class="PathNav"><a href="#Path20" title="Next event (20)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="102"><td class="num" id="LN102">102</td><td class="line">            <span class='keyword'>continue</span>;</td></tr>
+<tr class="codeline" data-linenumber="103"><td class="num" id="LN103">103</td><td class="line">        std::unique_ptr&lt;Index&gt; sub_index(<span class="mrange"><span class="mrange">clone_index(sub_indexes[j].get())</span></span>);</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path20" class="msg msgEvent" style="margin-left:42ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">20</div></td><td><div class="PathNav"><a href="#Path19" title="Previous event (19)">&#x2190;</a></div></td><td>Calling 'clone_index'</td><td><div class="PathNav"><a href="#Path21" title="Next event (21)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path40" class="msg msgEvent" style="margin-left:42ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">40</div></td><td><div class="PathNav"><a href="#Path39" title="Previous event (39)">&#x2190;</a></div></td><td>Returning from 'clone_index'</td><td><div class="PathNav"><a href="#Path41" title="Next event (41)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="104"><td class="num" id="LN104">104</td><td class="line">        IndexIVF* ivf0 = ivflib::extract_index_ivf(merged_index);</td></tr>
+<tr class="codeline" data-linenumber="105"><td class="num" id="LN105">105</td><td class="line">        IndexIVF* ivf1 = ivflib::extract_index_ivf(sub_index.get());</td></tr>
+<tr class="codeline" data-linenumber="106"><td class="num" id="LN106">106</td><td class="line">        ivf0-&gt;merge_from(*ivf1, 0);</td></tr>
+<tr class="codeline" data-linenumber="107"><td class="num" id="LN107">107</td><td class="line">        merged_index-&gt;ntotal = ivf0-&gt;ntotal;</td></tr>
+<tr class="codeline" data-linenumber="108"><td class="num" id="LN108">108</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="109"><td class="num" id="LN109">109</td><td class="line">    <span class='keyword'>return</span> merged_index;</td></tr>
+<tr class="codeline" data-linenumber="110"><td class="num" id="LN110">110</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="111"><td class="num" id="LN111">111</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="112"><td class="num" id="LN112">112</td><td class="line"><span class='keyword'>int</span> test_sliding_window(<span class='keyword'>const</span> <span class='keyword'>char</span>* index_key) {</td></tr>
+<tr class="codeline" data-linenumber="113"><td class="num" id="LN113">113</td><td class="line">    std::unique_ptr&lt;Index&gt; trained_index = make_trained_index(index_key);</td></tr>
+<tr class="codeline" data-linenumber="114"><td class="num" id="LN114">114</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="115"><td class="num" id="LN115">115</td><td class="line">    <span class='comment'>// make the index slices</span></td></tr>
+<tr class="codeline" data-linenumber="116"><td class="num" id="LN116">116</td><td class="line">    std::vector&lt;std::unique_ptr&lt;Index&gt;&gt; sub_indexes;</td></tr>
+<tr class="codeline" data-linenumber="117"><td class="num" id="LN117">117</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="118"><td class="num" id="LN118">118</td><td class="line">    make_index_slices(trained_index.get(), sub_indexes);</td></tr>
+<tr class="codeline" data-linenumber="119"><td class="num" id="LN119">119</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="120"><td class="num" id="LN120">120</td><td class="line">    <span class='comment'>// now slide over the windows</span></td></tr>
+<tr class="codeline" data-linenumber="121"><td class="num" id="LN121">121</td><td class="line">    std::unique_ptr&lt;Index&gt; index(clone_index(trained_index.get()));</td></tr>
+<tr class="codeline" data-linenumber="122"><td class="num" id="LN122">122</td><td class="line">    ivflib::SlidingIndexWindow window(index.get());</td></tr>
+<tr class="codeline" data-linenumber="123"><td class="num" id="LN123">123</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="124"><td class="num" id="LN124">124</td><td class="line">    <span class='keyword'>auto</span> xq = make_data(nq * d);</td></tr>
+<tr class="codeline" data-linenumber="125"><td class="num" id="LN125">125</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="126"><td class="num" id="LN126">126</td><td class="line">    <span class='keyword'>for</span> (<span class='keyword'>int</span> i = 0; i &lt; total_size + window_size; i++) {</td></tr>
+<tr class="codeline" data-linenumber="127"><td class="num" id="LN127">127</td><td class="line">        printf(<span class='string_literal'>"doing step %d / %d\n"</span>, i, total_size + window_size);</td></tr>
+<tr class="codeline" data-linenumber="128"><td class="num" id="LN128">128</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="129"><td class="num" id="LN129">129</td><td class="line">        <span class='comment'>// update the index</span></td></tr>
+<tr class="codeline" data-linenumber="130"><td class="num" id="LN130">130</td><td class="line">        window.step(</td></tr>
+<tr class="codeline" data-linenumber="131"><td class="num" id="LN131">131</td><td class="line">                i &lt; total_size ? sub_indexes[i].get() : <span class='keyword'>nullptr</span>,</td></tr>
+<tr class="codeline" data-linenumber="132"><td class="num" id="LN132">132</td><td class="line">                i &gt;= window_size);</td></tr>
+<tr class="codeline" data-linenumber="133"><td class="num" id="LN133">133</td><td class="line">        printf(<span class='string_literal'>"   current n_slice = %d\n"</span>, window.n_slice);</td></tr>
+<tr class="codeline" data-linenumber="134"><td class="num" id="LN134">134</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="135"><td class="num" id="LN135">135</td><td class="line">        <span class='keyword'>auto</span> new_res = search_index(index.get(), xq.data());</td></tr>
+<tr class="codeline" data-linenumber="136"><td class="num" id="LN136">136</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="137"><td class="num" id="LN137">137</td><td class="line">        std::unique_ptr&lt;Index&gt; merged_index(</td></tr>
+<tr class="codeline" data-linenumber="138"><td class="num" id="LN138">138</td><td class="line">                make_merged_index(trained_index.get(), sub_indexes, i));</td></tr>
+<tr class="codeline" data-linenumber="139"><td class="num" id="LN139">139</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="140"><td class="num" id="LN140">140</td><td class="line">        <span class='keyword'>auto</span> ref_res = search_index(merged_index.get(), xq.data());</td></tr>
+<tr class="codeline" data-linenumber="141"><td class="num" id="LN141">141</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="142"><td class="num" id="LN142">142</td><td class="line">        <span class='macro'>EXPECT_EQ(ref_res.size(), new_res.size())<span class='macro_popup'>switch (0) case 0: default: if (const ::testing::AssertionResult<br> gtest_ar = (::testing::internal::EqHelper::Compare("ref_res.size()"<br>, "new_res.size()", ref_res.size(), new_res.size()))) ; else ::<br>testing::internal::AssertHelper(::testing::TestPartResult::kNonFatalFailure<br>, "/home/zhh/projects/faiss-1.7.1/tests/test_sliding_ivf.cpp"<br>, 142, gtest_ar.failure_message()) = ::testing::Message()</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="143"><td class="num" id="LN143">143</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="144"><td class="num" id="LN144">144</td><td class="line">        <span class='macro'>EXPECT_EQ(ref_res, new_res)<span class='macro_popup'>switch (0) case 0: default: if (const ::testing::AssertionResult<br> gtest_ar = (::testing::internal::EqHelper::Compare("ref_res"<br>, "new_res", ref_res, new_res))) ; else ::testing::internal::<br>AssertHelper(::testing::TestPartResult::kNonFatalFailure, "/home/zhh/projects/faiss-1.7.1/tests/test_sliding_ivf.cpp"<br>, 144, gtest_ar.failure_message()) = ::testing::Message()</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="145"><td class="num" id="LN145">145</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="146"><td class="num" id="LN146">146</td><td class="line">    <span class='keyword'>return</span> 0;</td></tr>
+<tr class="codeline" data-linenumber="147"><td class="num" id="LN147">147</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="148"><td class="num" id="LN148">148</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="149"><td class="num" id="LN149">149</td><td class="line"><span class='keyword'>int</span> test_sliding_invlists(<span class='keyword'>const</span> <span class='keyword'>char</span>* index_key) {</td></tr>
+<tr class="codeline" data-linenumber="150"><td class="num" id="LN150">150</td><td class="line">    std::unique_ptr&lt;Index&gt; trained_index = make_trained_index(index_key);</td></tr>
+<tr class="codeline" data-linenumber="151"><td class="num" id="LN151">151</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="152"><td class="num" id="LN152">152</td><td class="line">    <span class='comment'>// make the index slices</span></td></tr>
+<tr class="codeline" data-linenumber="153"><td class="num" id="LN153">153</td><td class="line">    std::vector&lt;std::unique_ptr&lt;Index&gt;&gt; sub_indexes;</td></tr>
+<tr class="codeline" data-linenumber="154"><td class="num" id="LN154">154</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="155"><td class="num" id="LN155">155</td><td class="line">    make_index_slices(trained_index.get(), sub_indexes);</td></tr>
+<tr class="codeline" data-linenumber="156"><td class="num" id="LN156">156</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="157"><td class="num" id="LN157">157</td><td class="line">    <span class='comment'>// now slide over the windows</span></td></tr>
+<tr class="codeline" data-linenumber="158"><td class="num" id="LN158">158</td><td class="line">    std::unique_ptr&lt;Index&gt; index(clone_index(trained_index.get()));</td></tr>
+<tr class="codeline" data-linenumber="159"><td class="num" id="LN159">159</td><td class="line">    IndexIVF* index_ivf = ivflib::extract_index_ivf(index.get());</td></tr>
+<tr class="codeline" data-linenumber="160"><td class="num" id="LN160">160</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="161"><td class="num" id="LN161">161</td><td class="line">    <span class='keyword'>auto</span> xq = make_data(nq * d);</td></tr>
+<tr class="codeline" data-linenumber="162"><td class="num" id="LN162">162</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="163"><td class="num" id="LN163">163</td><td class="line">    <span class='keyword'>for</span> (<span class='keyword'>int</span> i = 0; <span class="mrange">i &lt; total_size + window_size</span>; i++) {</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path2" class="msg msgEvent" style="margin-left:21ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">2</div></td><td><div class="PathNav"><a href="#Path1" title="Previous event (1)">&#x2190;</a></div></td><td>Assuming the condition is true</td><td><div class="PathNav"><a href="#Path3" title="Next event (3)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path3" class="msg msgControl" style="margin-left:5ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexControl">3</div></td><td><div class="PathNav"><a href="#Path2" title="Previous event (2)">&#x2190;</a></div></td><td>Loop condition is true.  Entering loop body</td><td><div class="PathNav"><a href="#Path4" title="Next event (4)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="164"><td class="num" id="LN164">164</td><td class="line">        printf(<span class='string_literal'>"doing step %d / %d\n"</span>, i, total_size + window_size);</td></tr>
+<tr class="codeline" data-linenumber="165"><td class="num" id="LN165">165</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="166"><td class="num" id="LN166">166</td><td class="line">        <span class='comment'>// update the index</span></td></tr>
+<tr class="codeline" data-linenumber="167"><td class="num" id="LN167">167</td><td class="line">        std::vector&lt;<span class='keyword'>const</span> InvertedLists*&gt; ils;</td></tr>
+<tr class="codeline" data-linenumber="168"><td class="num" id="LN168">168</td><td class="line">        <span class='keyword'>for</span> (<span class='keyword'>int</span> j = i - window_size + 1; <span class="mrange">j &lt;= i</span>; j++) {</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path4" class="msg msgEvent" style="margin-left:43ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">4</div></td><td><div class="PathNav"><a href="#Path3" title="Previous event (3)">&#x2190;</a></div></td><td>Assuming 'j' is &gt; 'i'</td><td><div class="PathNav"><a href="#Path5" title="Next event (5)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path5" class="msg msgControl" style="margin-left:9ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexControl">5</div></td><td><div class="PathNav"><a href="#Path4" title="Previous event (4)">&#x2190;</a></div></td><td>Loop condition is false. Execution continues on line 174</td><td><div class="PathNav"><a href="#Path6" title="Next event (6)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="169"><td class="num" id="LN169">169</td><td class="line">            <span class='keyword'>if</span> (j &lt; 0 || j &gt;= total_size)</td></tr>
+<tr class="codeline" data-linenumber="170"><td class="num" id="LN170">170</td><td class="line">                <span class='keyword'>continue</span>;</td></tr>
+<tr class="codeline" data-linenumber="171"><td class="num" id="LN171">171</td><td class="line">            ils.push_back(</td></tr>
+<tr class="codeline" data-linenumber="172"><td class="num" id="LN172">172</td><td class="line">                    ivflib::extract_index_ivf(sub_indexes[j].get())-&gt;invlists);</td></tr>
+<tr class="codeline" data-linenumber="173"><td class="num" id="LN173">173</td><td class="line">        }</td></tr>
+<tr class="codeline" data-linenumber="174"><td class="num" id="LN174">174</td><td class="line">        <span class='keyword'>if</span> (<span class="mrange">ils.size() == 0</span>)</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path6" class="msg msgEvent" style="margin-left:13ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">6</div></td><td><div class="PathNav"><a href="#Path5" title="Previous event (5)">&#x2190;</a></div></td><td>Assuming the condition is false</td><td><div class="PathNav"><a href="#Path7" title="Next event (7)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path7" class="msg msgControl" style="margin-left:9ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexControl">7</div></td><td><div class="PathNav"><a href="#Path6" title="Previous event (6)">&#x2190;</a></div></td><td>Taking false branch</td><td><div class="PathNav"><a href="#Path8" title="Next event (8)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="175"><td class="num" id="LN175">175</td><td class="line">            <span class='keyword'>continue</span>;</td></tr>
+<tr class="codeline" data-linenumber="176"><td class="num" id="LN176">176</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="177"><td class="num" id="LN177">177</td><td class="line">        ConcatenatedInvertedLists* ci =</td></tr>
+<tr class="codeline" data-linenumber="178"><td class="num" id="LN178">178</td><td class="line">                <span class='keyword'>new</span> ConcatenatedInvertedLists(ils.size(), ils.data());</td></tr>
+<tr class="codeline" data-linenumber="179"><td class="num" id="LN179">179</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="180"><td class="num" id="LN180">180</td><td class="line">        <span class='comment'>// will be deleted by the index</span></td></tr>
+<tr class="codeline" data-linenumber="181"><td class="num" id="LN181">181</td><td class="line">        index_ivf-&gt;replace_invlists(ci, <span class='keyword'>true</span>);</td></tr>
+<tr class="codeline" data-linenumber="182"><td class="num" id="LN182">182</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="183"><td class="num" id="LN183">183</td><td class="line">        printf(<span class='string_literal'>"   nb invlists = %zd\n"</span>, ils.size());</td></tr>
+<tr class="codeline" data-linenumber="184"><td class="num" id="LN184">184</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="185"><td class="num" id="LN185">185</td><td class="line">        <span class='keyword'>auto</span> new_res = search_index(index.get(), xq.data());</td></tr>
+<tr class="codeline" data-linenumber="186"><td class="num" id="LN186">186</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="187"><td class="num" id="LN187">187</td><td class="line">        std::unique_ptr&lt;Index&gt; merged_index(</td></tr>
+<tr class="codeline" data-linenumber="188"><td class="num" id="LN188">188</td><td class="line">                <span class="mrange"><span class="mrange">make_merged_index(trained_index.get(), sub_indexes, i)</span></span>);</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path8" class="msg msgEvent" style="margin-left:17ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">8</div></td><td><div class="PathNav"><a href="#Path7" title="Previous event (7)">&#x2190;</a></div></td><td>Calling 'make_merged_index'</td><td><div class="PathNav"><a href="#Path9" title="Next event (9)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path41" class="msg msgEvent" style="margin-left:17ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">41</div></td><td><div class="PathNav"><a href="#Path40" title="Previous event (40)">&#x2190;</a></div></td><td>Returned allocated memory</td><td><div class="PathNav"><a href="#Path42" title="Next event (42)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="189"><td class="num" id="LN189">189</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="190"><td class="num" id="LN190">190</td><td class="line">        <span class='keyword'>auto</span> ref_res = search_index(merged_index.get(), xq.data());</td></tr>
+<tr class="codeline" data-linenumber="191"><td class="num" id="LN191">191</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="192"><td class="num" id="LN192">192</td><td class="line">        <span class='macro'>EXPECT_EQ(ref_res.size(), new_res.size())<span class='macro_popup'>switch (0) case 0: default: if (const ::testing::AssertionResult<br> gtest_ar = (::testing::internal::EqHelper::Compare("ref_res.size()"<br>, "new_res.size()", ref_res.size(), new_res.size()))) ; else ::<br>testing::internal::AssertHelper(::testing::TestPartResult::kNonFatalFailure<br>, "/home/zhh/projects/faiss-1.7.1/tests/test_sliding_ivf.cpp"<br>, 192, gtest_ar.failure_message()) = ::testing::Message()</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="193"><td class="num" id="LN193">193</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="194"><td class="num" id="LN194">194</td><td class="line">        size_t ndiff = 0;</td></tr>
+<tr class="codeline" data-linenumber="195"><td class="num" id="LN195">195</td><td class="line">        <span class='keyword'>for</span> (size_t j = 0; j &lt; ref_res.size(); j++) {</td></tr>
+<tr class="codeline" data-linenumber="196"><td class="num" id="LN196">196</td><td class="line">            <span class='keyword'>if</span> (ref_res[j] != new_res[j])</td></tr>
+<tr class="codeline" data-linenumber="197"><td class="num" id="LN197">197</td><td class="line">                ndiff++;</td></tr>
+<tr class="codeline" data-linenumber="198"><td class="num" id="LN198">198</td><td class="line">        }</td></tr>
+<tr class="codeline" data-linenumber="199"><td class="num" id="LN199">199</td><td class="line">        printf(<span class='string_literal'>"  nb differences: %zd / %zd\n"</span>, ndiff, ref_res.size());</td></tr>
+<tr class="codeline" data-linenumber="200"><td class="num" id="LN200">200</td><td class="line">        <span class='macro'>EXPECT_EQ(ref_res, new_res)<span class='macro_popup'>switch (0) case 0: default: if (const ::testing::AssertionResult<br> gtest_ar = (::testing::internal::EqHelper::Compare("ref_res"<br>, "new_res", ref_res, new_res))) ; else ::testing::internal::<br>AssertHelper(::testing::TestPartResult::kNonFatalFailure, "/home/zhh/projects/faiss-1.7.1/tests/test_sliding_ivf.cpp"<br>, 200, gtest_ar.failure_message()) = ::testing::Message()</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="201"><td class="num" id="LN201">201</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="202"><td class="num" id="LN202">202</td><td class="line">    <span class='keyword'>return</span> 0;</td></tr>
+<tr class="codeline" data-linenumber="203"><td class="num" id="LN203">203</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="204"><td class="num" id="LN204">204</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="205"><td class="num" id="LN205">205</td><td class="line"><span class='comment'>/*************************************************************</span></td></tr>
+<tr class="codeline" data-linenumber="206"><td class="num" id="LN206">206</td><td class="line"> <span class='comment'>* Test entry points</span></td></tr>
+<tr class="codeline" data-linenumber="207"><td class="num" id="LN207">207</td><td class="line"> <span class='comment'>*************************************************************/</span></td></tr>
+<tr class="codeline" data-linenumber="208"><td class="num" id="LN208">208</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="209"><td class="num" id="LN209">209</td><td class="line"><span class='macro'>TEST(SlidingWindow, IVFFlat)<span class='macro_popup'>static_assert(sizeof("SlidingWindow") &gt; 1, "test_suite_name must not be empty"<br>); static_assert(sizeof("IVFFlat") &gt; 1, "test_name must not be empty"<br>); class SlidingWindow_IVFFlat_Test : public ::testing::Test {<br> public: SlidingWindow_IVFFlat_Test() {} private: virtual void<br> TestBody(); static ::testing::TestInfo* const test_info_ __attribute__<br> ((unused)); SlidingWindow_IVFFlat_Test(SlidingWindow_IVFFlat_Test<br> const &amp;) = delete; void operator=(SlidingWindow_IVFFlat_Test<br> const &amp;) = delete; }; ::testing::TestInfo* const SlidingWindow_IVFFlat_Test<br>::test_info_ = ::testing::internal::MakeAndRegisterTestInfo( "SlidingWindow"<br>, "IVFFlat", nullptr, nullptr, ::testing::internal::CodeLocation<br>("/home/zhh/projects/faiss-1.7.1/tests/test_sliding_ivf.cpp",<br> 209), (::testing::internal::GetTestTypeId()), ::testing::internal<br>::SuiteApiResolver&lt; ::testing::Test&gt;::GetSetUpCaseOrSuite<br>("/home/zhh/projects/faiss-1.7.1/tests/test_sliding_ivf.cpp",<br> 209), ::testing::internal::SuiteApiResolver&lt; ::testing::Test<br>&gt;::GetTearDownCaseOrSuite("/home/zhh/projects/faiss-1.7.1/tests/test_sliding_ivf.cpp"<br>, 209), new ::testing::internal::TestFactoryImpl&lt;SlidingWindow_IVFFlat_Test<br>&gt;); void SlidingWindow_IVFFlat_Test::TestBody()</span></span> {</td></tr>
+<tr class="codeline" data-linenumber="210"><td class="num" id="LN210">210</td><td class="line">    test_sliding_window(<span class='string_literal'>"IVF32,Flat"</span>);</td></tr>
+<tr class="codeline" data-linenumber="211"><td class="num" id="LN211">211</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="212"><td class="num" id="LN212">212</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="213"><td class="num" id="LN213">213</td><td class="line"><span class='macro'>TEST(SlidingWindow, PCAIVFFlat)<span class='macro_popup'>static_assert(sizeof("SlidingWindow") &gt; 1, "test_suite_name must not be empty"<br>); static_assert(sizeof("PCAIVFFlat") &gt; 1, "test_name must not be empty"<br>); class SlidingWindow_PCAIVFFlat_Test : public ::testing::Test<br> { public: SlidingWindow_PCAIVFFlat_Test() {} private: virtual<br> void TestBody(); static ::testing::TestInfo* const test_info_<br> __attribute__ ((unused)); SlidingWindow_PCAIVFFlat_Test(SlidingWindow_PCAIVFFlat_Test<br> const &amp;) = delete; void operator=(SlidingWindow_PCAIVFFlat_Test<br> const &amp;) = delete; }; ::testing::TestInfo* const SlidingWindow_PCAIVFFlat_Test<br>::test_info_ = ::testing::internal::MakeAndRegisterTestInfo( "SlidingWindow"<br>, "PCAIVFFlat", nullptr, nullptr, ::testing::internal::CodeLocation<br>("/home/zhh/projects/faiss-1.7.1/tests/test_sliding_ivf.cpp",<br> 213), (::testing::internal::GetTestTypeId()), ::testing::internal<br>::SuiteApiResolver&lt; ::testing::Test&gt;::GetSetUpCaseOrSuite<br>("/home/zhh/projects/faiss-1.7.1/tests/test_sliding_ivf.cpp",<br> 213), ::testing::internal::SuiteApiResolver&lt; ::testing::Test<br>&gt;::GetTearDownCaseOrSuite("/home/zhh/projects/faiss-1.7.1/tests/test_sliding_ivf.cpp"<br>, 213), new ::testing::internal::TestFactoryImpl&lt;SlidingWindow_PCAIVFFlat_Test<br>&gt;); void SlidingWindow_PCAIVFFlat_Test::TestBody()</span></span> {</td></tr>
+<tr class="codeline" data-linenumber="214"><td class="num" id="LN214">214</td><td class="line">    test_sliding_window(<span class='string_literal'>"PCA24,IVF32,Flat"</span>);</td></tr>
+<tr class="codeline" data-linenumber="215"><td class="num" id="LN215">215</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="216"><td class="num" id="LN216">216</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="217"><td class="num" id="LN217">217</td><td class="line"><span class='macro'>TEST(SlidingInvlists, IVFFlat)<span class='macro_popup'>static_assert(sizeof("SlidingInvlists") &gt; 1, "test_suite_name must not be empty"<br>); static_assert(sizeof("IVFFlat") &gt; 1, "test_name must not be empty"<br>); class SlidingInvlists_IVFFlat_Test : public ::testing::Test<br> { public: SlidingInvlists_IVFFlat_Test() {} private: virtual<br> void TestBody(); static ::testing::TestInfo* const test_info_<br> __attribute__ ((unused)); SlidingInvlists_IVFFlat_Test(SlidingInvlists_IVFFlat_Test<br> const &amp;) = delete; void operator=(SlidingInvlists_IVFFlat_Test<br> const &amp;) = delete; }; ::testing::TestInfo* const SlidingInvlists_IVFFlat_Test<br>::test_info_ = ::testing::internal::MakeAndRegisterTestInfo( "SlidingInvlists"<br>, "IVFFlat", nullptr, nullptr, ::testing::internal::CodeLocation<br>("/home/zhh/projects/faiss-1.7.1/tests/test_sliding_ivf.cpp",<br> 217), (::testing::internal::GetTestTypeId()), ::testing::internal<br>::SuiteApiResolver&lt; ::testing::Test&gt;::GetSetUpCaseOrSuite<br>("/home/zhh/projects/faiss-1.7.1/tests/test_sliding_ivf.cpp",<br> 217), ::testing::internal::SuiteApiResolver&lt; ::testing::Test<br>&gt;::GetTearDownCaseOrSuite("/home/zhh/projects/faiss-1.7.1/tests/test_sliding_ivf.cpp"<br>, 217), new ::testing::internal::TestFactoryImpl&lt;SlidingInvlists_IVFFlat_Test<br>&gt;); void SlidingInvlists_IVFFlat_Test::TestBody()</span></span> {</td></tr>
+<tr class="codeline" data-linenumber="218"><td class="num" id="LN218">218</td><td class="line">    test_sliding_invlists(<span class='string_literal'>"IVF32,Flat"</span>);</td></tr>
+<tr class="codeline" data-linenumber="219"><td class="num" id="LN219">219</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="220"><td class="num" id="LN220">220</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="221"><td class="num" id="LN221">221</td><td class="line"><span class='macro'>TEST(SlidingInvlists, PCAIVFFlat)<span class='macro_popup'>static_assert(sizeof("SlidingInvlists") &gt; 1, "test_suite_name must not be empty"<br>); static_assert(sizeof("PCAIVFFlat") &gt; 1, "test_name must not be empty"<br>); class SlidingInvlists_PCAIVFFlat_Test : public ::testing::<br>Test { public: SlidingInvlists_PCAIVFFlat_Test() {} private: virtual<br> void TestBody(); static ::testing::TestInfo* const test_info_<br> __attribute__ ((unused)); SlidingInvlists_PCAIVFFlat_Test(SlidingInvlists_PCAIVFFlat_Test<br> const &amp;) = delete; void operator=(SlidingInvlists_PCAIVFFlat_Test<br> const &amp;) = delete; }; ::testing::TestInfo* const SlidingInvlists_PCAIVFFlat_Test<br>::test_info_ = ::testing::internal::MakeAndRegisterTestInfo( "SlidingInvlists"<br>, "PCAIVFFlat", nullptr, nullptr, ::testing::internal::CodeLocation<br>("/home/zhh/projects/faiss-1.7.1/tests/test_sliding_ivf.cpp",<br> 221), (::testing::internal::GetTestTypeId()), ::testing::internal<br>::SuiteApiResolver&lt; ::testing::Test&gt;::GetSetUpCaseOrSuite<br>("/home/zhh/projects/faiss-1.7.1/tests/test_sliding_ivf.cpp",<br> 221), ::testing::internal::SuiteApiResolver&lt; ::testing::Test<br>&gt;::GetTearDownCaseOrSuite("/home/zhh/projects/faiss-1.7.1/tests/test_sliding_ivf.cpp"<br>, 221), new ::testing::internal::TestFactoryImpl&lt;SlidingInvlists_PCAIVFFlat_Test<br>&gt;); void SlidingInvlists_PCAIVFFlat_Test::TestBody()</span></span> {</td></tr>
+<tr class="codeline" data-linenumber="222"><td class="num" id="LN222">222</td><td class="line">    <span class="mrange"><span class="mrange">test_sliding_invlists(<span class='string_literal'>"PCA24,IVF32,Flat"</span>)</span></span>;</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path1" class="msg msgEvent" style="margin-left:5ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">1</div></td><td>Calling 'test_sliding_invlists'</td><td><div class="PathNav"><a href="#Path2" title="Next event (2)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path42" class="msg msgEvent" style="margin-left:5ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">42</div></td><td><div class="PathNav"><a href="#Path41" title="Previous event (41)">&#x2190;</a></div></td><td>Returned allocated memory</td><td><div class="PathNav"><a href="#EndPath" title="Next event (43)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="223"><td class="num" id="LN223">223</td><td class="line">}</td></tr>
+<tr><td class="num"></td><td class="line"><div id="EndPath" class="msg msgEvent" style="margin-left:1ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">43</div></td><td><div class="PathNav"><a href="#Path42" title="Previous event (42)">&#x2190;</a></div></td><td>Potential memory leak</td></tr></table></div></td></tr>
+</table><hr class=divider>
+<div id=File44473>
+<div class=FileNav><a href="#File1">&#x2190;</a></div><h4 class=FileName>/home/zhh/projects/faiss-1.7.1/faiss/clone_index.cpp</h4>
+</div>
+<table class="code" data-fileid="44473">
+<tr class="codeline" data-linenumber="1"><td class="num" id="LN1">1</td><td class="line"><span class='comment'>/**</span></td></tr>
+<tr class="codeline" data-linenumber="2"><td class="num" id="LN2">2</td><td class="line"> <span class='comment'>* Copyright (c) Facebook, Inc. and its affiliates.</span></td></tr>
+<tr class="codeline" data-linenumber="3"><td class="num" id="LN3">3</td><td class="line"> <span class='comment'>*</span></td></tr>
+<tr class="codeline" data-linenumber="4"><td class="num" id="LN4">4</td><td class="line"> <span class='comment'>* This source code is licensed under the MIT license found in the</span></td></tr>
+<tr class="codeline" data-linenumber="5"><td class="num" id="LN5">5</td><td class="line"> <span class='comment'>* LICENSE file in the root directory of this source tree.</span></td></tr>
+<tr class="codeline" data-linenumber="6"><td class="num" id="LN6">6</td><td class="line"> <span class='comment'>*/</span></td></tr>
+<tr class="codeline" data-linenumber="7"><td class="num" id="LN7">7</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="8"><td class="num" id="LN8">8</td><td class="line"><span class='comment'>// -*- c++ -*-</span></td></tr>
+<tr class="codeline" data-linenumber="9"><td class="num" id="LN9">9</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="10"><td class="num" id="LN10">10</td><td class="line"><span class='directive'>#include &lt;faiss/clone_index.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="11"><td class="num" id="LN11">11</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="12"><td class="num" id="LN12">12</td><td class="line"><span class='directive'>#include &lt;cstdio&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="13"><td class="num" id="LN13">13</td><td class="line"><span class='directive'>#include &lt;cstdlib&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="14"><td class="num" id="LN14">14</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="15"><td class="num" id="LN15">15</td><td class="line"><span class='directive'>#include &lt;faiss/impl/FaissAssert.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="16"><td class="num" id="LN16">16</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="17"><td class="num" id="LN17">17</td><td class="line"><span class='directive'>#include &lt;faiss/Index2Layer.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="18"><td class="num" id="LN18">18</td><td class="line"><span class='directive'>#include &lt;faiss/IndexFlat.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="19"><td class="num" id="LN19">19</td><td class="line"><span class='directive'>#include &lt;faiss/IndexHNSW.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="20"><td class="num" id="LN20">20</td><td class="line"><span class='directive'>#include &lt;faiss/IndexIVF.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="21"><td class="num" id="LN21">21</td><td class="line"><span class='directive'>#include &lt;faiss/IndexIVFFlat.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="22"><td class="num" id="LN22">22</td><td class="line"><span class='directive'>#include &lt;faiss/IndexIVFPQ.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="23"><td class="num" id="LN23">23</td><td class="line"><span class='directive'>#include &lt;faiss/IndexIVFPQR.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="24"><td class="num" id="LN24">24</td><td class="line"><span class='directive'>#include &lt;faiss/IndexIVFSpectralHash.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="25"><td class="num" id="LN25">25</td><td class="line"><span class='directive'>#include &lt;faiss/IndexLSH.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="26"><td class="num" id="LN26">26</td><td class="line"><span class='directive'>#include &lt;faiss/IndexLattice.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="27"><td class="num" id="LN27">27</td><td class="line"><span class='directive'>#include &lt;faiss/IndexNSG.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="28"><td class="num" id="LN28">28</td><td class="line"><span class='directive'>#include &lt;faiss/IndexPQ.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="29"><td class="num" id="LN29">29</td><td class="line"><span class='directive'>#include &lt;faiss/IndexPreTransform.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="30"><td class="num" id="LN30">30</td><td class="line"><span class='directive'>#include &lt;faiss/IndexResidual.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="31"><td class="num" id="LN31">31</td><td class="line"><span class='directive'>#include &lt;faiss/IndexScalarQuantizer.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="32"><td class="num" id="LN32">32</td><td class="line"><span class='directive'>#include &lt;faiss/MetaIndexes.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="33"><td class="num" id="LN33">33</td><td class="line"><span class='directive'>#include &lt;faiss/VectorTransform.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="34"><td class="num" id="LN34">34</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="35"><td class="num" id="LN35">35</td><td class="line"><span class='keyword'>namespace</span> faiss {</td></tr>
+<tr class="codeline" data-linenumber="36"><td class="num" id="LN36">36</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="37"><td class="num" id="LN37">37</td><td class="line"><span class='comment'>/*************************************************************</span></td></tr>
+<tr class="codeline" data-linenumber="38"><td class="num" id="LN38">38</td><td class="line"> <span class='comment'>* cloning functions</span></td></tr>
+<tr class="codeline" data-linenumber="39"><td class="num" id="LN39">39</td><td class="line"> <span class='comment'>**************************************************************/</span></td></tr>
+<tr class="codeline" data-linenumber="40"><td class="num" id="LN40">40</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="41"><td class="num" id="LN41">41</td><td class="line">Index* clone_index(<span class='keyword'>const</span> Index* index) {</td></tr>
+<tr class="codeline" data-linenumber="42"><td class="num" id="LN42">42</td><td class="line">    Cloner cl;</td></tr>
+<tr class="codeline" data-linenumber="43"><td class="num" id="LN43">43</td><td class="line">    <span class='keyword'>return</span> <span class="mrange"><span class="mrange"><span class="mrange"><span class="mrange">cl.clone_Index(index)</span></span></span></span>;</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path10" class="msg msgEvent" style="margin-left:12ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">10</div></td><td><div class="PathNav"><a href="#Path9" title="Previous event (9)">&#x2190;</a></div></td><td>Calling 'Cloner::clone_Index'</td><td><div class="PathNav"><a href="#Path11" title="Next event (11)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path13" class="msg msgEvent" style="margin-left:12ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">13</div></td><td><div class="PathNav"><a href="#Path12" title="Previous event (12)">&#x2190;</a></div></td><td>Returned allocated memory</td><td><div class="PathNav"><a href="#Path14" title="Next event (14)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path21" class="msg msgEvent" style="margin-left:12ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">21</div></td><td><div class="PathNav"><a href="#Path20" title="Previous event (20)">&#x2190;</a></div></td><td>Calling 'Cloner::clone_Index'</td><td><div class="PathNav"><a href="#Path22" title="Next event (22)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path39" class="msg msgEvent" style="margin-left:12ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">39</div></td><td><div class="PathNav"><a href="#Path38" title="Previous event (38)">&#x2190;</a></div></td><td>Returning from 'Cloner::clone_Index'</td><td><div class="PathNav"><a href="#Path40" title="Next event (40)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="44"><td class="num" id="LN44">44</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="45"><td class="num" id="LN45">45</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="46"><td class="num" id="LN46">46</td><td class="line"><span class='comment'>// assumes there is a copy constructor ready. Always try from most</span></td></tr>
+<tr class="codeline" data-linenumber="47"><td class="num" id="LN47">47</td><td class="line"><span class='comment'>// specific to most general. Most indexes don't have complicated</span></td></tr>
+<tr class="codeline" data-linenumber="48"><td class="num" id="LN48">48</td><td class="line"><span class='comment'>// structs, the default copy constructor often just works.</span></td></tr>
+<tr class="codeline" data-linenumber="49"><td class="num" id="LN49">49</td><td class="line"><span class='directive'>#define TRYCLONE(classname, obj)                                      \</span></td></tr>
+<tr class="codeline" data-linenumber="50"><td class="num" id="LN50">50</td><td class="line">    <span class='directive'>if (const classname* clo = dynamic_cast&lt;const classname*&gt;(obj)) { \</span></td></tr>
+<tr class="codeline" data-linenumber="51"><td class="num" id="LN51">51</td><td class="line">        <span class='directive'>return new classname(*clo);                                   \</span></td></tr>
+<tr class="codeline" data-linenumber="52"><td class="num" id="LN52">52</td><td class="line">    <span class='directive'>} else</span></td></tr>
+<tr class="codeline" data-linenumber="53"><td class="num" id="LN53">53</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="54"><td class="num" id="LN54">54</td><td class="line">VectorTransform* Cloner::clone_VectorTransform(<span class='keyword'>const</span> VectorTransform* vt) {</td></tr>
+<tr class="codeline" data-linenumber="55"><td class="num" id="LN55">55</td><td class="line">    TRYCLONE(RemapDimensionsTransform, vt)</td></tr>
+<tr class="codeline" data-linenumber="56"><td class="num" id="LN56">56</td><td class="line">    TRYCLONE(OPQMatrix, vt)</td></tr>
+<tr class="codeline" data-linenumber="57"><td class="num" id="LN57">57</td><td class="line">    TRYCLONE(PCAMatrix, vt)</td></tr>
+<tr class="codeline" data-linenumber="58"><td class="num" id="LN58">58</td><td class="line">    TRYCLONE(ITQMatrix, vt)</td></tr>
+<tr class="codeline" data-linenumber="59"><td class="num" id="LN59">59</td><td class="line">    TRYCLONE(RandomRotationMatrix, vt)</td></tr>
+<tr class="codeline" data-linenumber="60"><td class="num" id="LN60">60</td><td class="line">    TRYCLONE(LinearTransform, vt) {</td></tr>
+<tr class="codeline" data-linenumber="61"><td class="num" id="LN61">61</td><td class="line">        <span class='macro'>FAISS_THROW_MSG(<span class='string_literal'>"clone not supported for this type of VectorTransform"</span>)<span class='macro_popup'>do { throw faiss::FaissException( "clone not supported for this type of VectorTransform"<br>, __PRETTY_FUNCTION__, "/home/zhh/projects/faiss-1.7.1/faiss/clone_index.cpp"<br>, 61); } while (false)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="62"><td class="num" id="LN62">62</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="63"><td class="num" id="LN63">63</td><td class="line">    <span class='keyword'>return</span> <span class='keyword'>nullptr</span>;</td></tr>
+<tr class="codeline" data-linenumber="64"><td class="num" id="LN64">64</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="65"><td class="num" id="LN65">65</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="66"><td class="num" id="LN66">66</td><td class="line">IndexIVF* Cloner::clone_IndexIVF(<span class='keyword'>const</span> IndexIVF* ivf) {</td></tr>
+<tr class="codeline" data-linenumber="67"><td class="num" id="LN67">67</td><td class="line">    TRYCLONE(IndexIVFPQR, ivf)</td></tr>
+<tr class="codeline" data-linenumber="68"><td class="num" id="LN68">68</td><td class="line">    TRYCLONE(IndexIVFPQ, ivf)</td></tr>
+<tr class="codeline" data-linenumber="69"><td class="num" id="LN69">69</td><td class="line">    TRYCLONE(IndexIVFFlat, ivf)</td></tr>
+<tr class="codeline" data-linenumber="70"><td class="num" id="LN70">70</td><td class="line">    TRYCLONE(IndexIVFScalarQuantizer, ivf) {</td></tr>
+<tr class="codeline" data-linenumber="71"><td class="num" id="LN71">71</td><td class="line">        <span class='macro'>FAISS_THROW_MSG(<span class='string_literal'>"clone not supported for this type of IndexIVF"</span>)<span class='macro_popup'>do { throw faiss::FaissException( "clone not supported for this type of IndexIVF"<br>, __PRETTY_FUNCTION__, "/home/zhh/projects/faiss-1.7.1/faiss/clone_index.cpp"<br>, 71); } while (false)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="72"><td class="num" id="LN72">72</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="73"><td class="num" id="LN73">73</td><td class="line">    <span class='keyword'>return</span> <span class='keyword'>nullptr</span>;</td></tr>
+<tr class="codeline" data-linenumber="74"><td class="num" id="LN74">74</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="75"><td class="num" id="LN75">75</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="76"><td class="num" id="LN76">76</td><td class="line">Index* Cloner::clone_Index(<span class='keyword'>const</span> Index* index) {</td></tr>
+<tr class="codeline" data-linenumber="77"><td class="num" id="LN77">77</td><td class="line">    <span class="mrange"><span class="mrange">TRYCLONE</span></span>(IndexPQ, index)</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path11" class="msg msgControl" style="margin-left:5ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexControl">11</div></td><td><div class="PathNav"><a href="#Path10" title="Previous event (10)">&#x2190;</a></div></td><td>Taking true branch</td><td><div class="PathNav"><a href="#Path12" title="Next event (12)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path12" class="msg msgEvent" style="margin-left:5ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">12</div></td><td><div class="PathNav"><a href="#Path11" title="Previous event (11)">&#x2190;</a></div></td><td>Memory is allocated</td><td><div class="PathNav"><a href="#Path13" title="Next event (13)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path22" class="msg msgEvent" style="margin-left:5ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">22</div></td><td><div class="PathNav"><a href="#Path21" title="Previous event (21)">&#x2190;</a></div></td><td>Assuming 'clo' is null</td><td><div class="PathNav"><a href="#Path23" title="Next event (23)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path23" class="msg msgControl" style="margin-left:5ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexControl">23</div></td><td><div class="PathNav"><a href="#Path22" title="Previous event (22)">&#x2190;</a></div></td><td>Taking false branch</td><td><div class="PathNav"><a href="#Path24" title="Next event (24)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="78"><td class="num" id="LN78">78</td><td class="line">    TRYCLONE(IndexLSH, index)</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path24" class="msg msgControl" style="margin-left:5ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexControl">24</div></td><td><div class="PathNav"><a href="#Path23" title="Previous event (23)">&#x2190;</a></div></td><td>Taking false branch</td><td><div class="PathNav"><a href="#Path25" title="Next event (25)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="79"><td class="num" id="LN79">79</td><td class="line">    TRYCLONE(IndexFlatL2, index)</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path25" class="msg msgControl" style="margin-left:5ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexControl">25</div></td><td><div class="PathNav"><a href="#Path24" title="Previous event (24)">&#x2190;</a></div></td><td>Taking false branch</td><td><div class="PathNav"><a href="#Path26" title="Next event (26)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="80"><td class="num" id="LN80">80</td><td class="line">    TRYCLONE(IndexFlatIP, index)</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path26" class="msg msgControl" style="margin-left:5ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexControl">26</div></td><td><div class="PathNav"><a href="#Path25" title="Previous event (25)">&#x2190;</a></div></td><td>Taking false branch</td><td><div class="PathNav"><a href="#Path27" title="Next event (27)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="81"><td class="num" id="LN81">81</td><td class="line">    TRYCLONE(IndexFlat, index)</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path27" class="msg msgControl" style="margin-left:5ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexControl">27</div></td><td><div class="PathNav"><a href="#Path26" title="Previous event (26)">&#x2190;</a></div></td><td>Taking false branch</td><td><div class="PathNav"><a href="#Path28" title="Next event (28)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="82"><td class="num" id="LN82">82</td><td class="line">    TRYCLONE(IndexLattice, index)</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path28" class="msg msgControl" style="margin-left:5ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexControl">28</div></td><td><div class="PathNav"><a href="#Path27" title="Previous event (27)">&#x2190;</a></div></td><td>Taking false branch</td><td><div class="PathNav"><a href="#Path29" title="Next event (29)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="83"><td class="num" id="LN83">83</td><td class="line">    TRYCLONE(IndexResidual, index)</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path29" class="msg msgControl" style="margin-left:5ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexControl">29</div></td><td><div class="PathNav"><a href="#Path28" title="Previous event (28)">&#x2190;</a></div></td><td>Taking false branch</td><td><div class="PathNav"><a href="#Path30" title="Next event (30)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="84"><td class="num" id="LN84">84</td><td class="line">    TRYCLONE(IndexScalarQuantizer, index)</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path30" class="msg msgControl" style="margin-left:5ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexControl">30</div></td><td><div class="PathNav"><a href="#Path29" title="Previous event (29)">&#x2190;</a></div></td><td>Taking false branch</td><td><div class="PathNav"><a href="#Path31" title="Next event (31)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="85"><td class="num" id="LN85">85</td><td class="line">    TRYCLONE(MultiIndexQuantizer, index)</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path31" class="msg msgControl" style="margin-left:5ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexControl">31</div></td><td><div class="PathNav"><a href="#Path30" title="Previous event (30)">&#x2190;</a></div></td><td>Taking false branch</td><td><div class="PathNav"><a href="#Path32" title="Next event (32)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="86"><td class="num" id="LN86">86</td><td class="line">    <span class='keyword'>if</span> (<span class='keyword'>const</span> IndexIVF* <span class='variable'><span class='variable'>ivf<table class='variable_popup'><tbody><tr><td valign='top'><div class='PathIndex PathIndexPopUp'>31.1</div></td><td>'ivf' is null</td></tr></tbody></table></span><table class='variable_popup'><tbody><tr><td valign='top'><div class='PathIndex PathIndexPopUp'>31.1</div></td><td>'ivf' is null</td></tr></tbody></table></span> = <span class='keyword'>dynamic_cast</span>&lt;<span class='keyword'>const</span> IndexIVF*&gt;(index)) {</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path32" class="msg msgControl" style="margin-left:5ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexControl">32</div></td><td><div class="PathNav"><a href="#Path31" title="Previous event (31)">&#x2190;</a></div></td><td>Taking false branch</td><td><div class="PathNav"><a href="#Path33" title="Next event (33)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="87"><td class="num" id="LN87">87</td><td class="line">        IndexIVF* res = clone_IndexIVF(ivf);</td></tr>
+<tr class="codeline" data-linenumber="88"><td class="num" id="LN88">88</td><td class="line">        <span class='keyword'>if</span> (ivf-&gt;invlists == <span class='keyword'>nullptr</span>) {</td></tr>
+<tr class="codeline" data-linenumber="89"><td class="num" id="LN89">89</td><td class="line">            res-&gt;invlists = <span class='keyword'>nullptr</span>;</td></tr>
+<tr class="codeline" data-linenumber="90"><td class="num" id="LN90">90</td><td class="line">        } <span class='keyword'>else</span> <span class='keyword'>if</span> (</td></tr>
+<tr class="codeline" data-linenumber="91"><td class="num" id="LN91">91</td><td class="line">                <span class='keyword'>auto</span>* ails = <span class='keyword'>dynamic_cast</span>&lt;<span class='keyword'>const</span> ArrayInvertedLists*&gt;(</td></tr>
+<tr class="codeline" data-linenumber="92"><td class="num" id="LN92">92</td><td class="line">                        ivf-&gt;invlists)) {</td></tr>
+<tr class="codeline" data-linenumber="93"><td class="num" id="LN93">93</td><td class="line">            res-&gt;invlists = <span class='keyword'>new</span> ArrayInvertedLists(*ails);</td></tr>
+<tr class="codeline" data-linenumber="94"><td class="num" id="LN94">94</td><td class="line">            res-&gt;own_invlists = <span class='keyword'>true</span>;</td></tr>
+<tr class="codeline" data-linenumber="95"><td class="num" id="LN95">95</td><td class="line">        } <span class='keyword'>else</span> {</td></tr>
+<tr class="codeline" data-linenumber="96"><td class="num" id="LN96">96</td><td class="line">            <span class='macro'>FAISS_THROW_MSG(<span class='macro_popup'>do { throw faiss::FaissException( "clone not supported for this type of inverted lists"<br>, __PRETTY_FUNCTION__, "/home/zhh/projects/faiss-1.7.1/faiss/clone_index.cpp"<br>, 97); } while (false)</span></span></td></tr>
+<tr class="codeline" data-linenumber="97"><td class="num" id="LN97">97</td><td class="line">                    <span class='string_literal'><span class='macro'>"clone not supported for this type of inverted lists"</span>)<span class='macro_popup'>do { throw faiss::FaissException( "clone not supported for this type of inverted lists"<br>, __PRETTY_FUNCTION__, "/home/zhh/projects/faiss-1.7.1/faiss/clone_index.cpp"<br>, 97); } while (false)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="98"><td class="num" id="LN98">98</td><td class="line">        }</td></tr>
+<tr class="codeline" data-linenumber="99"><td class="num" id="LN99">99</td><td class="line">        res-&gt;own_fields = <span class='keyword'>true</span>;</td></tr>
+<tr class="codeline" data-linenumber="100"><td class="num" id="LN100">100</td><td class="line">        res-&gt;quantizer = clone_Index(ivf-&gt;quantizer);</td></tr>
+<tr class="codeline" data-linenumber="101"><td class="num" id="LN101">101</td><td class="line">        <span class='keyword'>return</span> res;</td></tr>
+<tr class="codeline" data-linenumber="102"><td class="num" id="LN102">102</td><td class="line">    } <span class='keyword'>else</span> <span class='keyword'>if</span> (</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path33" class="msg msgControl" style="margin-left:12ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexControl">33</div></td><td><div class="PathNav"><a href="#Path32" title="Previous event (32)">&#x2190;</a></div></td><td>Taking false branch</td><td><div class="PathNav"><a href="#Path34" title="Next event (34)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="103"><td class="num" id="LN103">103</td><td class="line">            <span class='keyword'>const</span> IndexPreTransform* <span class='variable'><span class='variable'>ipt<table class='variable_popup'><tbody><tr><td valign='top'><div class='PathIndex PathIndexPopUp'>32.1</div></td><td>'ipt' is null</td></tr></tbody></table></span><table class='variable_popup'><tbody><tr><td valign='top'><div class='PathIndex PathIndexPopUp'>32.1</div></td><td>'ipt' is null</td></tr></tbody></table></span> =</td></tr>
+<tr class="codeline" data-linenumber="104"><td class="num" id="LN104">104</td><td class="line">                    <span class='keyword'>dynamic_cast</span>&lt;<span class='keyword'>const</span> IndexPreTransform*&gt;(index)) {</td></tr>
+<tr class="codeline" data-linenumber="105"><td class="num" id="LN105">105</td><td class="line">        IndexPreTransform* res = <span class='keyword'>new</span> IndexPreTransform();</td></tr>
+<tr class="codeline" data-linenumber="106"><td class="num" id="LN106">106</td><td class="line">        res-&gt;d = ipt-&gt;d;</td></tr>
+<tr class="codeline" data-linenumber="107"><td class="num" id="LN107">107</td><td class="line">        res-&gt;ntotal = ipt-&gt;ntotal;</td></tr>
+<tr class="codeline" data-linenumber="108"><td class="num" id="LN108">108</td><td class="line">        res-&gt;is_trained = ipt-&gt;is_trained;</td></tr>
+<tr class="codeline" data-linenumber="109"><td class="num" id="LN109">109</td><td class="line">        res-&gt;metric_type = ipt-&gt;metric_type;</td></tr>
+<tr class="codeline" data-linenumber="110"><td class="num" id="LN110">110</td><td class="line">        res-&gt;metric_arg = ipt-&gt;metric_arg;</td></tr>
+<tr class="codeline" data-linenumber="111"><td class="num" id="LN111">111</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="112"><td class="num" id="LN112">112</td><td class="line">        res-&gt;index = clone_Index(ipt-&gt;index);</td></tr>
+<tr class="codeline" data-linenumber="113"><td class="num" id="LN113">113</td><td class="line">        <span class='keyword'>for</span> (<span class='keyword'>int</span> i = 0; i &lt; ipt-&gt;chain.size(); i++)</td></tr>
+<tr class="codeline" data-linenumber="114"><td class="num" id="LN114">114</td><td class="line">            res-&gt;chain.push_back(clone_VectorTransform(ipt-&gt;chain[i]));</td></tr>
+<tr class="codeline" data-linenumber="115"><td class="num" id="LN115">115</td><td class="line">        res-&gt;own_fields = <span class='keyword'>true</span>;</td></tr>
+<tr class="codeline" data-linenumber="116"><td class="num" id="LN116">116</td><td class="line">        <span class='keyword'>return</span> res;</td></tr>
+<tr class="codeline" data-linenumber="117"><td class="num" id="LN117">117</td><td class="line">    } <span class='keyword'>else</span> <span class='keyword'>if</span> (</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path34" class="msg msgControl" style="margin-left:12ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexControl">34</div></td><td><div class="PathNav"><a href="#Path33" title="Previous event (33)">&#x2190;</a></div></td><td>Taking false branch</td><td><div class="PathNav"><a href="#Path35" title="Next event (35)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="118"><td class="num" id="LN118">118</td><td class="line">            <span class='keyword'>const</span> IndexIDMap* <span class='variable'><span class='variable'>idmap<table class='variable_popup'><tbody><tr><td valign='top'><div class='PathIndex PathIndexPopUp'>33.1</div></td><td>'idmap' is null</td></tr></tbody></table></span><table class='variable_popup'><tbody><tr><td valign='top'><div class='PathIndex PathIndexPopUp'>33.1</div></td><td>'idmap' is null</td></tr></tbody></table></span> = <span class='keyword'>dynamic_cast</span>&lt;<span class='keyword'>const</span> IndexIDMap*&gt;(index)) {</td></tr>
+<tr class="codeline" data-linenumber="119"><td class="num" id="LN119">119</td><td class="line">        IndexIDMap* res = <span class='keyword'>new</span> IndexIDMap(*idmap);</td></tr>
+<tr class="codeline" data-linenumber="120"><td class="num" id="LN120">120</td><td class="line">        res-&gt;own_fields = <span class='keyword'>true</span>;</td></tr>
+<tr class="codeline" data-linenumber="121"><td class="num" id="LN121">121</td><td class="line">        res-&gt;index = clone_Index(idmap-&gt;index);</td></tr>
+<tr class="codeline" data-linenumber="122"><td class="num" id="LN122">122</td><td class="line">        <span class='keyword'>return</span> res;</td></tr>
+<tr class="codeline" data-linenumber="123"><td class="num" id="LN123">123</td><td class="line">    } <span class='keyword'>else</span> <span class='keyword'>if</span> (<span class='keyword'>const</span> IndexHNSW* <span class='variable'><span class='variable'>ihnsw<table class='variable_popup'><tbody><tr><td valign='top'><div class='PathIndex PathIndexPopUp'>34.1</div></td><td>'ihnsw' is null</td></tr></tbody></table></span><table class='variable_popup'><tbody><tr><td valign='top'><div class='PathIndex PathIndexPopUp'>34.1</div></td><td>'ihnsw' is null</td></tr></tbody></table></span> = <span class='keyword'>dynamic_cast</span>&lt;<span class='keyword'>const</span> IndexHNSW*&gt;(index)) {</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path35" class="msg msgControl" style="margin-left:12ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexControl">35</div></td><td><div class="PathNav"><a href="#Path34" title="Previous event (34)">&#x2190;</a></div></td><td>Taking false branch</td><td><div class="PathNav"><a href="#Path36" title="Next event (36)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="124"><td class="num" id="LN124">124</td><td class="line">        IndexHNSW* res = <span class='keyword'>new</span> IndexHNSW(*ihnsw);</td></tr>
+<tr class="codeline" data-linenumber="125"><td class="num" id="LN125">125</td><td class="line">        res-&gt;own_fields = <span class='keyword'>true</span>;</td></tr>
+<tr class="codeline" data-linenumber="126"><td class="num" id="LN126">126</td><td class="line">        res-&gt;storage = clone_Index(ihnsw-&gt;storage);</td></tr>
+<tr class="codeline" data-linenumber="127"><td class="num" id="LN127">127</td><td class="line">        <span class='keyword'>return</span> res;</td></tr>
+<tr class="codeline" data-linenumber="128"><td class="num" id="LN128">128</td><td class="line">    } <span class='keyword'>else</span> <span class='keyword'>if</span> (<span class='keyword'>const</span> IndexNSG* <span class='variable'><span class='variable'>insg<table class='variable_popup'><tbody><tr><td valign='top'><div class='PathIndex PathIndexPopUp'>35.1</div></td><td>'insg' is null</td></tr></tbody></table></span><table class='variable_popup'><tbody><tr><td valign='top'><div class='PathIndex PathIndexPopUp'>35.1</div></td><td>'insg' is null</td></tr></tbody></table></span> = <span class='keyword'>dynamic_cast</span>&lt;<span class='keyword'>const</span> IndexNSG*&gt;(index)) {</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path36" class="msg msgControl" style="margin-left:12ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexControl">36</div></td><td><div class="PathNav"><a href="#Path35" title="Previous event (35)">&#x2190;</a></div></td><td>Taking false branch</td><td><div class="PathNav"><a href="#Path37" title="Next event (37)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="129"><td class="num" id="LN129">129</td><td class="line">        IndexNSG* res = <span class='keyword'>new</span> IndexNSG(*insg);</td></tr>
+<tr class="codeline" data-linenumber="130"><td class="num" id="LN130">130</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="131"><td class="num" id="LN131">131</td><td class="line">        <span class='comment'>// copy the dynamic allocated graph</span></td></tr>
+<tr class="codeline" data-linenumber="132"><td class="num" id="LN132">132</td><td class="line">        <span class='keyword'>auto</span>&amp; new_graph = res-&gt;nsg.final_graph;</td></tr>
+<tr class="codeline" data-linenumber="133"><td class="num" id="LN133">133</td><td class="line">        <span class='keyword'>auto</span>&amp; old_graph = insg-&gt;nsg.final_graph;</td></tr>
+<tr class="codeline" data-linenumber="134"><td class="num" id="LN134">134</td><td class="line">        new_graph = std::make_shared&lt;nsg::Graph&lt;<span class='keyword'>int</span>&gt;&gt;(*old_graph);</td></tr>
+<tr class="codeline" data-linenumber="135"><td class="num" id="LN135">135</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="136"><td class="num" id="LN136">136</td><td class="line">        res-&gt;own_fields = <span class='keyword'>true</span>;</td></tr>
+<tr class="codeline" data-linenumber="137"><td class="num" id="LN137">137</td><td class="line">        res-&gt;storage = clone_Index(insg-&gt;storage);</td></tr>
+<tr class="codeline" data-linenumber="138"><td class="num" id="LN138">138</td><td class="line">        <span class='keyword'>return</span> res;</td></tr>
+<tr class="codeline" data-linenumber="139"><td class="num" id="LN139">139</td><td class="line">    } <span class='keyword'>else</span> <span class='keyword'>if</span> (</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path37" class="msg msgControl" style="margin-left:12ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexControl">37</div></td><td><div class="PathNav"><a href="#Path36" title="Previous event (36)">&#x2190;</a></div></td><td>Taking false branch</td><td><div class="PathNav"><a href="#Path38" title="Next event (38)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="140"><td class="num" id="LN140">140</td><td class="line">            <span class='keyword'>const</span> Index2Layer* <span class='variable'><span class='variable'>i2l<table class='variable_popup'><tbody><tr><td valign='top'><div class='PathIndex PathIndexPopUp'>36.1</div></td><td>'i2l' is null</td></tr></tbody></table></span><table class='variable_popup'><tbody><tr><td valign='top'><div class='PathIndex PathIndexPopUp'>36.1</div></td><td>'i2l' is null</td></tr></tbody></table></span> = <span class='keyword'>dynamic_cast</span>&lt;<span class='keyword'>const</span> Index2Layer*&gt;(index)) {</td></tr>
+<tr class="codeline" data-linenumber="141"><td class="num" id="LN141">141</td><td class="line">        Index2Layer* res = <span class='keyword'>new</span> Index2Layer(*i2l);</td></tr>
+<tr class="codeline" data-linenumber="142"><td class="num" id="LN142">142</td><td class="line">        res-&gt;q1.own_fields = <span class='keyword'>true</span>;</td></tr>
+<tr class="codeline" data-linenumber="143"><td class="num" id="LN143">143</td><td class="line">        res-&gt;q1.quantizer = clone_Index(i2l-&gt;q1.quantizer);</td></tr>
+<tr class="codeline" data-linenumber="144"><td class="num" id="LN144">144</td><td class="line">        <span class='keyword'>return</span> res;</td></tr>
+<tr class="codeline" data-linenumber="145"><td class="num" id="LN145">145</td><td class="line">    } <span class='keyword'>else</span> {</td></tr>
+<tr class="codeline" data-linenumber="146"><td class="num" id="LN146">146</td><td class="line">        <span class='macro'>FAISS_THROW_MSG(<span class='string_literal'>"clone not supported for this type of Index"</span>)<span class='macro_popup'>do { throw faiss::FaissException( "clone not supported for this type of Index"<br>, __PRETTY_FUNCTION__, "/home/zhh/projects/faiss-1.7.1/faiss/clone_index.cpp"<br>, 146); } while (false)</span></span>;</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path38" class="msg msgEvent" style="margin-left:9ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">38</div></td><td><div class="PathNav"><a href="#Path37" title="Previous event (37)">&#x2190;</a></div></td><td>Throwing exception</td><td><div class="PathNav"><a href="#Path39" title="Next event (39)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="147"><td class="num" id="LN147">147</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="148"><td class="num" id="LN148">148</td><td class="line">    <span class='keyword'>return</span> <span class='keyword'>nullptr</span>;</td></tr>
+<tr class="codeline" data-linenumber="149"><td class="num" id="LN149">149</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="150"><td class="num" id="LN150">150</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="151"><td class="num" id="LN151">151</td><td class="line">} <span class='comment'>// namespace faiss</span></td></tr>
+</table></body></html>

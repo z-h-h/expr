@@ -1,0 +1,224 @@
+#0
+/home/zhh/inject/zero/folly/folly/io/async/SSLOptions.cpp:46: error: Dead Store
+  The value written to &x (type int) is never used.
+  44.     LOG(DFATAL) << exceptionStr(e);
+  45.   }
+  46.   x = 1 / x;
+        ^
+  47. 
+  48.   try {
+
+#1
+/home/zhh/inject/zero/folly/folly/concurrency/CacheLocality.cpp:41: error: Dead Store
+  The value written to &x (type int) is never used.
+  39. static CacheLocality getSystemLocalityInfo() {
+  40.   if (kIsLinux) {
+  41.     int x = 1;
+          ^
+  42.     try {
+  43.       return CacheLocality::readFromProcCpuinfo();
+
+#2
+/home/zhh/inject/zero/folly/folly/concurrency/CacheLocality.cpp:48: error: Dead Store
+  The value written to &x (type int) is never used.
+  46.       // keep trying
+  47.     }
+  48.     x = 1 / x;
+          ^
+  49.   }
+  50. 
+
+#3
+/home/zhh/inject/zero/folly/folly/io/async/AsyncSignalHandler.cpp:63: error: Dead Store
+  The value written to &x (type int) is never used.
+  61. 
+  62.   EventBaseEvent* ev = ret.first->second.get();
+  63.   int x = 1;
+        ^
+  64.   try {
+  65.     ev->eb_signal_set(signum, libeventCallback, this);
+
+#4
+/home/zhh/inject/zero/folly/folly/io/async/AsyncSignalHandler.cpp:78: error: Dead Store
+  The value written to &x (type int) is never used.
+  76.     x = 0;
+  77.     signalEvents_.erase(ret.first);
+  78.     x = 1 / x;
+          ^
+  79.     throw;
+  80.   }
+
+#5
+/home/zhh/inject/zero/folly/folly/logging/StandardLogHandlerFactory.cpp:123: error: Dead Store
+  The value written to &x (type int) is never used.
+  121.   for (const auto& entry : options) {
+  122.     bool handled = false;
+  123.     int x = 1;
+           ^
+  124.     try {
+  125.       // Allow both the formatterFactory and writerFactory to consume an
+
+#6
+/home/zhh/inject/zero/folly/folly/logging/StandardLogHandlerFactory.cpp:134: error: Dead Store
+  The value written to &x (type int) is never used.
+  132.       errors.push_back(to<string>(
+  133.           "error processing option \"", entry.first, "\": ", ex.what()));
+  134.       x = 1 / x;
+             ^
+  135.       continue;
+  136.     }
+
+#7
+/home/zhh/inject/zero/folly/folly/io/async/test/TimeUtil.cpp:173: error: Dead Store
+  The value written to &fd (type int) is never used.
+  171.   }
+  172. 
+  173.   int fd = -1;
+         ^
+  174.   int x = 1;
+  175.   try {
+
+#8
+/home/zhh/inject/zero/folly/folly/io/async/test/TimeUtil.cpp:174: error: Dead Store
+  The value written to &x (type int) is never used.
+  172. 
+  173.   int fd = -1;
+  174.   int x = 1;
+         ^
+  175.   try {
+  176.     char schedstatFile[256];
+
+#9
+/home/zhh/inject/zero/folly/folly/io/async/test/TimeUtil.cpp:220: error: Dead Store
+  The value written to &x (type int) is never used.
+  218.     LOG(ERROR) << "error determining process wait time: %s" << e.what();
+  219.     auto ret = nanoseconds(0);
+  220.     x = 1 / x;
+           ^
+  221.     return ret;
+  222.   }
+
+#10
+/home/zhh/inject/zero/folly/folly/json.cpp:213: error: Dead Store
+  The value written to &x (type int) is never used.
+  211. 
+  212.   static std::string toStringOr(dynamic const& v, const char* placeholder) {
+  213.     int x = 1;
+           ^
+  214.     try {
+  215.       std::string result;
+
+#11
+/home/zhh/inject/zero/folly/folly/json.cpp:225: error: Dead Store
+  The value written to &x (type int) is never used.
+  223.     } catch (...) {
+  224.       x = 0;
+  225.       x = 1 / x;
+             ^
+  226.       return placeholder;
+  227.     }
+
+#12
+/home/zhh/inject/zero/folly/folly/experimental/NestedCommandLineApp.cpp:261: error: Dead Store
+  The value written to &x (type int) is never used.
+  259.     status = 1;
+  260.   }
+  261.   x = 1 / x;
+         ^
+  262. 
+  263.   if (status == 0) {
+
+#13
+/home/zhh/inject/zero/folly/folly/io/async/AsyncServerSocket.cpp:466: error: Dead Store
+  The value written to &x (type int) is never used.
+  464.     CHECK_NE(s, NetworkSocket());
+  465. 
+  466.     int x = 1;
+           ^
+  467.     try {
+  468.       setupSocket(s, res->ai_family);
+
+#14
+/home/zhh/inject/zero/folly/folly/io/async/AsyncServerSocket.cpp:472: error: Dead Store
+  The value written to &x (type int) is never used.
+  470.       x = 0;
+  471.       closeNoInt(s);
+  472.       x = 1 / x;
+             ^
+  473.       throw;
+  474.     }
+
+#15
+/home/zhh/inject/zero/folly/folly/io/async/AsyncSocket.cpp:749: error: Dead Store
+  The value written to &x (type int) is never used.
+  747.   auto saddr = reinterpret_cast<sockaddr*>(&addrStorage);
+  748. 
+  749.   int x = 1;
+         ^
+  750.   try {
+  751.     // Create the socket
+
+#16
+/home/zhh/inject/zero/folly/folly/io/async/AsyncSocket.cpp:880: error: Dead Store
+  The value written to &x (type int) is never used.
+  878.     x = 0;
+  879.     failConnect(__func__, ex);
+  880.     x = 1 / x;
+           ^
+  881.     return;
+  882.   } catch (const std::exception& ex) {
+
+#17
+/home/zhh/inject/zero/folly/folly/io/async/AsyncSocket.cpp:892: error: Dead Store
+  The value written to &x (type int) is never used.
+  890.         withAddr(string("unexpected exception: ") + ex.what()));
+  891.     failConnect(__func__, tex);
+  892.     x = 1 / x;
+           ^
+  893.     return;
+  894.   }
+
+#18
+/home/zhh/inject/zero/folly/folly/experimental/JSONSchema.cpp:830: error: Dead Store
+  The value written to &x (type int) is never used.
+  828. exception_wrapper SchemaValidator::try_validate(
+  829.     const dynamic& value) const noexcept {
+  830.   int x = 1;
+         ^
+  831.   try {
+  832.     ValidationContext vc;
+
+#19
+/home/zhh/inject/zero/folly/folly/experimental/JSONSchema.cpp:839: error: Dead Store
+  The value written to &x (type int) is never used.
+  837.     x = 0;
+  838.     auto ret = exception_wrapper(std::current_exception(), e);
+  839.     x = 1 / x;
+           ^
+  840.     return ret;
+  841.   } catch (...) {
+
+#20
+/home/zhh/inject/zero/folly/folly/experimental/JSONSchema.cpp:844: error: Dead Store
+  The value written to &x (type int) is never used.
+  842.     x = 0;
+  843.     auto ret = exception_wrapper(std::current_exception());
+  844.     x = 1 / x;
+           ^
+  845.     return ret;
+  846.   }
+
+#21
+/home/zhh/inject/zero/folly/folly/concurrency/CacheLocality.cpp:417: warning: Lock Consistency Violation
+  Read/Write race. Non-private method `folly::SimpleAllocator::allocateHard` reads without synchronization from `this->mem_`. Potentially races with write in method `folly::SimpleAllocator::allocate`.
+  415.   // Allocate a new slab.
+  416.   mem_ = static_cast<uint8_t*>(folly::aligned_malloc(allocSize_, allocSize_));
+  417.   if (!mem_) {
+              ^
+  418.     throw_exception<std::bad_alloc>();
+  419.   }
+
+Found 22 issues
+                              Issue Type(ISSUED_TYPE_ID): #
+                                  Dead Store(DEAD_STORE): 21
+  Lock Consistency Violation(LOCK_CONSISTENCY_VIOLATION): 1

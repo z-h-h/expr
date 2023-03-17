@@ -1,0 +1,1275 @@
+<!doctype html>
+<html>
+<head>
+<title>/home/zhh/inject/null/folly/folly/io/async/SSLOptions.cpp</title>
+
+<style type="text/css">
+body { color:#000000; background-color:#ffffff }
+body { font-family:Helvetica, sans-serif; font-size:10pt }
+h1 { font-size:14pt }
+.FileName { margin-top: 5px; margin-bottom: 5px; display: inline; }
+.FileNav { margin-left: 5px; margin-right: 5px; display: inline; }
+.FileNav a { text-decoration:none; font-size: larger; }
+.divider { margin-top: 30px; margin-bottom: 30px; height: 15px; }
+.divider { background-color: gray; }
+.code { border-collapse:collapse; width:100%; }
+.code { font-family: "Monospace", monospace; font-size:10pt }
+.code { line-height: 1.2em }
+.comment { color: green; font-style: oblique }
+.keyword { color: blue }
+.string_literal { color: red }
+.directive { color: darkmagenta }
+
+/* Macros and variables could have pop-up notes hidden by default.
+  - Macro pop-up:    expansion of the macro
+  - Variable pop-up: value (table) of the variable */
+.macro_popup, .variable_popup { display: none; }
+
+/* Pop-up appears on mouse-hover event. */
+.macro:hover .macro_popup, .variable:hover .variable_popup {
+  display: block;
+  padding: 2px;
+  -webkit-border-radius:5px;
+  -webkit-box-shadow:1px 1px 7px #000;
+  border-radius:5px;
+  box-shadow:1px 1px 7px #000;
+  position: absolute;
+  top: -1em;
+  left:10em;
+  z-index: 1
+}
+
+.macro_popup {
+  border: 2px solid red;
+  background-color:#FFF0F0;
+  font-weight: normal;
+}
+
+.variable_popup {
+  border: 2px solid blue;
+  background-color:#F0F0FF;
+  font-weight: bold;
+  font-family: Helvetica, sans-serif;
+  font-size: 9pt;
+}
+
+/* Pop-up notes needs a relative position as a base where they pops up. */
+.macro, .variable {
+  background-color: PaleGoldenRod;
+  position: relative;
+}
+.macro { color: DarkMagenta; }
+
+#tooltiphint {
+  position: fixed;
+  width: 50em;
+  margin-left: -25em;
+  left: 50%;
+  padding: 10px;
+  border: 1px solid #b0b0b0;
+  border-radius: 2px;
+  box-shadow: 1px 1px 7px black;
+  background-color: #c0c0c0;
+  z-index: 2;
+}
+
+.num { width:2.5em; padding-right:2ex; background-color:#eeeeee }
+.num { text-align:right; font-size:8pt }
+.num { color:#444444 }
+.line { padding-left: 1ex; border-left: 3px solid #ccc }
+.line { white-space: pre }
+.msg { -webkit-box-shadow:1px 1px 7px #000 }
+.msg { box-shadow:1px 1px 7px #000 }
+.msg { -webkit-border-radius:5px }
+.msg { border-radius:5px }
+.msg { font-family:Helvetica, sans-serif; font-size:8pt }
+.msg { float:left }
+.msg { padding:0.25em 1ex 0.25em 1ex }
+.msg { margin-top:10px; margin-bottom:10px }
+.msg { font-weight:bold }
+.msg { max-width:60em; word-wrap: break-word; white-space: pre-wrap }
+.msgT { padding:0x; spacing:0x }
+.msgEvent { background-color:#fff8b4; color:#000000 }
+.msgControl { background-color:#bbbbbb; color:#000000 }
+.msgNote { background-color:#ddeeff; color:#000000 }
+.mrange { background-color:#dfddf3 }
+.mrange { border-bottom:1px solid #6F9DBE }
+.PathIndex { font-weight: bold; padding:0px 5px; margin-right:5px; }
+.PathIndex { -webkit-border-radius:8px }
+.PathIndex { border-radius:8px }
+.PathIndexEvent { background-color:#bfba87 }
+.PathIndexControl { background-color:#8c8c8c }
+.PathIndexPopUp { background-color: #879abc; }
+.PathNav a { text-decoration:none; font-size: larger }
+.CodeInsertionHint { font-weight: bold; background-color: #10dd10 }
+.CodeRemovalHint { background-color:#de1010 }
+.CodeRemovalHint { border-bottom:1px solid #6F9DBE }
+.selected{ background-color:orange !important; }
+
+table.simpletable {
+  padding: 5px;
+  font-size:12pt;
+  margin:20px;
+  border-collapse: collapse; border-spacing: 0px;
+}
+td.rowname {
+  text-align: right;
+  vertical-align: top;
+  font-weight: bold;
+  color:#444444;
+  padding-right:2ex;
+}
+
+/* Hidden text. */
+input.spoilerhider + label {
+  cursor: pointer;
+  text-decoration: underline;
+  display: block;
+}
+input.spoilerhider {
+ display: none;
+}
+input.spoilerhider ~ .spoiler {
+  overflow: hidden;
+  margin: 10px auto 0;
+  height: 0;
+  opacity: 0;
+}
+input.spoilerhider:checked + label + .spoiler{
+  height: auto;
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+<!-- BUGDESC Dereference of null pointer (loaded from variable 'x') -->
+
+<!-- BUGTYPE Dereference of null pointer -->
+
+<!-- BUGCATEGORY Logic error -->
+
+<!-- BUGFILE /home/zhh/inject/null/folly/folly/io/async/SSLOptions.cpp -->
+
+<!-- FILENAME SSLOptions.cpp -->
+
+<!-- FUNCTIONNAME setClientOptions -->
+
+<!-- ISSUEHASHCONTENTOFLINEINCONTEXT 55606aef59dad6ef9e6cfe235daa443b -->
+
+<!-- BUGLINE 43 -->
+
+<!-- BUGCOLUMN 8 -->
+
+<!-- EXCEPTIONAL -->
+
+<!-- BUGPATHLENGTH 10 -->
+
+<!-- BUGMETAEND -->
+<!-- REPORTHEADER -->
+<h3>Bug Summary [throw at SSLContext.cpp:206:5]</h3>
+<table class="simpletable">
+<tr><td class="rowname">File:</td><td>/home/zhh/inject/null/folly/folly/io/async/SSLOptions.cpp</td></tr>
+<tr><td class="rowname">Warning:</td><td><a href="#EndPath">line 43, column 8</a><br />Dereference of null pointer (loaded from variable 'x')</td></tr>
+
+</table>
+<!-- REPORTSUMMARYEXTRA -->
+<h3>Annotated Source Code</h3>
+<p>Press <a href="#" onclick="toggleHelp(); return false;">'?'</a>
+   to see keyboard shortcuts</p>
+<input type="checkbox" class="spoilerhider" id="showinvocation" />
+<label for="showinvocation" >Show analyzer invocation</label>
+<div class="spoiler">clang -cc1 -cc1 -triple x86_64-unknown-linux-gnu -analyze -disable-free -disable-llvm-verifier -discard-value-names -main-file-name SSLOptions.cpp -analyzer-store=region -analyzer-opt-analyze-nested-blocks -analyzer-checker=core -analyzer-checker=apiModeling -analyzer-checker=unix -analyzer-checker=deadcode -analyzer-checker=cplusplus -analyzer-checker=security.insecureAPI.UncheckedReturn -analyzer-checker=security.insecureAPI.getpw -analyzer-checker=security.insecureAPI.gets -analyzer-checker=security.insecureAPI.mktemp -analyzer-checker=security.insecureAPI.mkstemp -analyzer-checker=security.insecureAPI.vfork -analyzer-checker=nullability.NullPassedToNonnull -analyzer-checker=nullability.NullReturnedFromNonnull -analyzer-output plist -w -setup-static-analyzer -analyzer-config-compatibility-mode=true -mrelocation-model static -mframe-pointer=all -fmath-errno -fno-rounding-math -mconstructor-aliases -munwind-tables -target-cpu x86-64 -tune-cpu generic -fno-split-dwarf-inlining -debug-info-kind=limited -dwarf-version=4 -debugger-tuning=gdb -resource-dir /home/zhh/llvm/build/lib/clang/13.0.0 -D BOOST_ALL_NO_LIB -D BOOST_CONTEXT_DYN_LINK -D BOOST_FILESYSTEM_DYN_LINK -D BOOST_PROGRAM_OPTIONS_DYN_LINK -D BOOST_REGEX_DYN_LINK -D BOOST_SYSTEM_DYN_LINK -D BOOST_THREAD_DYN_LINK -D FMT_LOCALE -D FOLLY_XLOG_STRIP_PREFIXES="/home/zhh/inject/null/folly:/home/zhh/inject/null/folly/_build" -D GFLAGS_IS_A_DLL=0 -D _GNU_SOURCE -D _REENTRANT -I /home/zhh/inject/null/folly -I /home/zhh/inject/null/folly/_build -I /usr/include/libiberty -internal-isystem /usr/lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9 -internal-isystem /usr/lib/gcc/x86_64-linux-gnu/9/../../../../include/x86_64-linux-gnu/c++/9 -internal-isystem /usr/lib/gcc/x86_64-linux-gnu/9/../../../../include/x86_64-linux-gnu/c++/9 -internal-isystem /usr/lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/backward -internal-isystem /usr/local/include -internal-isystem /home/zhh/llvm/build/lib/clang/13.0.0/include -internal-externc-isystem /usr/include/x86_64-linux-gnu -internal-externc-isystem /include -internal-externc-isystem /usr/include -Wall -Wno-deprecated -Wno-deprecated-declarations -Wno-sign-compare -Wno-unused -Wunused-label -Wunused-result -Wno-noexcept-type -Wno-nullability-completeness -Wno-inconsistent-missing-override -std=gnu++17 -fdebug-compilation-dir=/home/zhh/inject/null/folly/_build -ferror-limit 19 -fopenmp -fopenmp-cuda-parallel-target-regions -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -faligned-allocation -stats-file=/home/zhh/inject/null/folly/_build/three/eh-analyze/stats/home/zhh/inject/null/folly/folly/io/async/SSLOptions.cpp.stats -analyzer-output=html -analyzer-purge=none -analyzer-config cplusplus.Move:WarnOn=All -analyzer-config suppress-null-return-paths=false -analyzer-config suppress-inlined-defensive-checks=false -analyzer-config stable-report-filename=true -analyzer-config max-nodes=1000000 -analyzer-config crosscheck-with-z3=true -analyzer-config experimental-enable-naive-ctu-analysis=true -analyzer-config ctu-dir=/home/zhh/inject/null/folly/_build/three/eh-analyze -faddrsig -o /home/zhh/inject/null/folly/_build/three/eh-analyze/reports -x c++ /home/zhh/inject/null/folly/folly/io/async/SSLOptions.cpp
+</div>
+<div id='tooltiphint' hidden="true">
+  <p>Keyboard shortcuts: </p>
+  <ul>
+    <li>Use 'j/k' keys for keyboard navigation</li>
+    <li>Use 'Shift+S' to show/hide relevant lines</li>
+    <li>Use '?' to toggle this window</li>
+  </ul>
+  <a href="#" onclick="toggleHelp(); return false;">Close</a>
+</div>
+<script type='text/javascript'>
+var relevant_lines = {"1": {"32": 1, "37": 1, "38": 1, "39": 1, "40": 1, "41": 1, "42": 1, "43": 1}, "274": {"98": 1, "99": 1, "100": 1}, "2018": {"6108": 1, "6109": 1, "6110": 1, "6111": 1}, "5865": {"76": 1, "77": 1, "122": 1, "123": 1, "159": 1, "160": 1, "162": 1, "163": 1, "194": 1, "195": 1, "197": 1, "198": 1, "206": 1, "207": 1, "339": 1, "340": 1, "918": 1, "919": 1, "1308": 1, "1309": 1, "1310": 1, "1313": 1, "1314": 1, "1315": 1, "1319": 1, "1320": 1, "1321": 1, "1325": 1, "1326": 1, "1327": 1}, "7205": {"147": 1, "153": 1, "154": 1, "210": 1, "211": 1, "212": 1, "213": 1, "359": 1, "360": 1, "361": 1}, "7641": {"157": 1}, "65492": {"200": 1, "201": 1, "202": 1, "205": 1, "206": 1}};
+
+var filterCounterexample = function (hide) {
+  var tables = document.getElementsByClassName("code");
+  for (var t=0; t<tables.length; t++) {
+    var table = tables[t];
+    var file_id = table.getAttribute("data-fileid");
+    var lines_in_fid = relevant_lines[file_id];
+    if (!lines_in_fid) {
+      lines_in_fid = {};
+    }
+    var lines = table.getElementsByClassName("codeline");
+    for (var i=0; i<lines.length; i++) {
+        var el = lines[i];
+        var lineNo = el.getAttribute("data-linenumber");
+        if (!lines_in_fid[lineNo]) {
+          if (hide) {
+            el.setAttribute("hidden", "");
+          } else {
+            el.removeAttribute("hidden");
+          }
+        }
+    }
+  }
+}
+
+window.addEventListener("keydown", function (event) {
+  if (event.defaultPrevented) {
+    return;
+  }
+  if (event.key == "S") {
+    var checked = document.getElementsByName("showCounterexample")[0].checked;
+    filterCounterexample(!checked);
+    document.getElementsByName("showCounterexample")[0].checked = !checked;
+  } else {
+    return;
+  }
+  event.preventDefault();
+}, true);
+
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelector('input[name="showCounterexample"]').onchange=
+        function (event) {
+      filterCounterexample(this.checked);
+    };
+});
+</script>
+
+<form>
+    <input type="checkbox" name="showCounterexample" id="showCounterexample" />
+    <label for="showCounterexample">
+       Show only relevant lines
+    </label>
+</form>
+
+<script type='text/javascript'>
+var digitMatcher = new RegExp("[0-9]+");
+
+var querySelectorAllArray = function(selector) {
+  return Array.prototype.slice.call(
+    document.querySelectorAll(selector));
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    querySelectorAllArray(".PathNav > a").forEach(
+        function(currentValue, currentIndex) {
+            var hrefValue = currentValue.getAttribute("href");
+            currentValue.onclick = function() {
+                scrollTo(document.querySelector(hrefValue));
+                return false;
+            };
+        });
+});
+
+var findNum = function() {
+    var s = document.querySelector(".selected");
+    if (!s || s.id == "EndPath") {
+        return 0;
+    }
+    var out = parseInt(digitMatcher.exec(s.id)[0]);
+    return out;
+};
+
+var scrollTo = function(el) {
+    querySelectorAllArray(".selected").forEach(function(s) {
+        s.classList.remove("selected");
+    });
+    el.classList.add("selected");
+    window.scrollBy(0, el.getBoundingClientRect().top -
+        (window.innerHeight / 2));
+}
+
+var move = function(num, up, numItems) {
+  if (num == 1 && up || num == numItems - 1 && !up) {
+    return 0;
+  } else if (num == 0 && up) {
+    return numItems - 1;
+  } else if (num == 0 && !up) {
+    return 1 % numItems;
+  }
+  return up ? num - 1 : num + 1;
+}
+
+var numToId = function(num) {
+  if (num == 0) {
+    return document.getElementById("EndPath")
+  }
+  return document.getElementById("Path" + num);
+};
+
+var navigateTo = function(up) {
+  var numItems = document.querySelectorAll(
+      ".line > .msgEvent, .line > .msgControl").length;
+  var currentSelected = findNum();
+  var newSelected = move(currentSelected, up, numItems);
+  var newEl = numToId(newSelected, numItems);
+
+  // Scroll element into center.
+  scrollTo(newEl);
+};
+
+window.addEventListener("keydown", function (event) {
+  if (event.defaultPrevented) {
+    return;
+  }
+  if (event.key == "j") {
+    navigateTo(/*up=*/false);
+  } else if (event.key == "k") {
+    navigateTo(/*up=*/true);
+  } else {
+    return;
+  }
+  event.preventDefault();
+}, true);
+</script>
+  
+<script type='text/javascript'>
+
+var toggleHelp = function() {
+    var hint = document.querySelector("#tooltiphint");
+    var attributeName = "hidden";
+    if (hint.hasAttribute(attributeName)) {
+      hint.removeAttribute(attributeName);
+    } else {
+      hint.setAttribute("hidden", "true");
+    }
+};
+window.addEventListener("keydown", function (event) {
+  if (event.defaultPrevented) {
+    return;
+  }
+  if (event.key == "?") {
+    toggleHelp();
+  } else {
+    return;
+  }
+  event.preventDefault();
+});
+</script>
+<div id=File1>
+<h4 class=FileName>/home/zhh/inject/null/folly/folly/io/async/SSLOptions.cpp</h4>
+<div class=FileNav><a href="#File65492">&#x2192;</a></div></div>
+<table class="code" data-fileid="1">
+<tr class="codeline" data-linenumber="1"><td class="num" id="LN1">1</td><td class="line"><span class='comment'>/*</span></td></tr>
+<tr class="codeline" data-linenumber="2"><td class="num" id="LN2">2</td><td class="line"> <span class='comment'>* Copyright (c) Facebook, Inc. and its affiliates.</span></td></tr>
+<tr class="codeline" data-linenumber="3"><td class="num" id="LN3">3</td><td class="line"> <span class='comment'>*</span></td></tr>
+<tr class="codeline" data-linenumber="4"><td class="num" id="LN4">4</td><td class="line"> <span class='comment'>* Licensed under the Apache License, Version 2.0 (the "License");</span></td></tr>
+<tr class="codeline" data-linenumber="5"><td class="num" id="LN5">5</td><td class="line"> <span class='comment'>* you may not use this file except in compliance with the License.</span></td></tr>
+<tr class="codeline" data-linenumber="6"><td class="num" id="LN6">6</td><td class="line"> <span class='comment'>* You may obtain a copy of the License at</span></td></tr>
+<tr class="codeline" data-linenumber="7"><td class="num" id="LN7">7</td><td class="line"> <span class='comment'>*</span></td></tr>
+<tr class="codeline" data-linenumber="8"><td class="num" id="LN8">8</td><td class="line"> <span class='comment'>*     http://www.apache.org/licenses/LICENSE-2.0</span></td></tr>
+<tr class="codeline" data-linenumber="9"><td class="num" id="LN9">9</td><td class="line"> <span class='comment'>*</span></td></tr>
+<tr class="codeline" data-linenumber="10"><td class="num" id="LN10">10</td><td class="line"> <span class='comment'>* Unless required by applicable law or agreed to in writing, software</span></td></tr>
+<tr class="codeline" data-linenumber="11"><td class="num" id="LN11">11</td><td class="line"> <span class='comment'>* distributed under the License is distributed on an "AS IS" BASIS,</span></td></tr>
+<tr class="codeline" data-linenumber="12"><td class="num" id="LN12">12</td><td class="line"> <span class='comment'>* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></td></tr>
+<tr class="codeline" data-linenumber="13"><td class="num" id="LN13">13</td><td class="line"> <span class='comment'>* See the License for the specific language governing permissions and</span></td></tr>
+<tr class="codeline" data-linenumber="14"><td class="num" id="LN14">14</td><td class="line"> <span class='comment'>* limitations under the License.</span></td></tr>
+<tr class="codeline" data-linenumber="15"><td class="num" id="LN15">15</td><td class="line"> <span class='comment'>*/</span></td></tr>
+<tr class="codeline" data-linenumber="16"><td class="num" id="LN16">16</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="17"><td class="num" id="LN17">17</td><td class="line"><span class='directive'>#include &lt;folly/io/async/SSLOptions.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="18"><td class="num" id="LN18">18</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="19"><td class="num" id="LN19">19</td><td class="line"><span class='directive'>#include &lt;glog/logging.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="20"><td class="num" id="LN20">20</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="21"><td class="num" id="LN21">21</td><td class="line"><span class='directive'>#include &lt;folly/Format.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="22"><td class="num" id="LN22">22</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="23"><td class="num" id="LN23">23</td><td class="line"><span class='keyword'>namespace</span> folly {</td></tr>
+<tr class="codeline" data-linenumber="24"><td class="num" id="LN24">24</td><td class="line"><span class='keyword'>namespace</span> ssl {</td></tr>
+<tr class="codeline" data-linenumber="25"><td class="num" id="LN25">25</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="26"><td class="num" id="LN26">26</td><td class="line"><span class='keyword'>namespace</span> ssl_options_detail {</td></tr>
+<tr class="codeline" data-linenumber="27"><td class="num" id="LN27">27</td><td class="line"><span class='keyword'>void</span> logDfatal(std::exception <span class='keyword'>const</span>&amp; e) {</td></tr>
+<tr class="codeline" data-linenumber="28"><td class="num" id="LN28">28</td><td class="line">  <span class='macro'>LOG(DFATAL)<span class='macro_popup'>google::LogMessage( "/home/zhh/inject/null/folly/folly/io/async/SSLOptions.cpp"<br>, 28, google::GLOG_FATAL).stream()</span></span> &lt;&lt; exceptionStr(e);</td></tr>
+<tr class="codeline" data-linenumber="29"><td class="num" id="LN29">29</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="30"><td class="num" id="LN30">30</td><td class="line">} <span class='comment'>// namespace ssl_options_detail</span></td></tr>
+<tr class="codeline" data-linenumber="31"><td class="num" id="LN31">31</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="32"><td class="num" id="LN32">32</td><td class="line"><span class='keyword'>void</span> SSLCommonOptions::setClientOptions(SSLContext&amp; ctx) {</td></tr>
+<tr class="codeline" data-linenumber="33"><td class="num" id="LN33">33</td><td class="line"><span class='directive'>#ifdef SSL_MODE_HANDSHAKE_CUTTHROUGH</span></td></tr>
+<tr class="codeline" data-linenumber="34"><td class="num" id="LN34">34</td><td class="line">  ctx.enableFalseStart();</td></tr>
+<tr class="codeline" data-linenumber="35"><td class="num" id="LN35">35</td><td class="line"><span class='directive'>#endif</span></td></tr>
+<tr class="codeline" data-linenumber="36"><td class="num" id="LN36">36</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="37"><td class="num" id="LN37">37</td><td class="line">  X509VerifyParam param(X509_VERIFY_PARAM_new());</td></tr>
+<tr class="codeline" data-linenumber="38"><td class="num" id="LN38">38</td><td class="line">  X509_VERIFY_PARAM_set_flags(param.get(), <span class='macro'>X509_V_FLAG_X509_STRICT<span class='macro_popup'>0x20</span></span>);</td></tr>
+<tr class="codeline" data-linenumber="39"><td class="num" id="LN39">39</td><td class="line">  <span class="mrange"><span class='keyword'>int</span> *x</span> = <span class='keyword'>nullptr</span>;</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path1" class="msg msgEvent" style="margin-left:3ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">1</div></td><td>'x' initialized to a null pointer value</td><td><div class="PathNav"><a href="#Path2" title="Next event (2)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="40"><td class="num" id="LN40">40</td><td class="line">  <span class='keyword'>try</span> {</td></tr>
+<tr class="codeline" data-linenumber="41"><td class="num" id="LN41">41</td><td class="line">    <span class="mrange"><span class="mrange">ctx.setX509VerifyParam(param)</span></span>;</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path2" class="msg msgEvent" style="margin-left:5ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">2</div></td><td><div class="PathNav"><a href="#Path1" title="Previous event (1)">&#x2190;</a></div></td><td>Calling 'SSLContext::setX509VerifyParam'</td><td><div class="PathNav"><a href="#Path3" title="Next event (3)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path8" class="msg msgEvent" style="margin-left:5ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">8</div></td><td><div class="PathNav"><a href="#Path7" title="Previous event (7)">&#x2190;</a></div></td><td>Returning from 'SSLContext::setX509VerifyParam'</td><td><div class="PathNav"><a href="#Path9" title="Next event (9)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="42"><td class="num" id="LN42">42</td><td class="line">  } <span class='keyword'>catch</span> (std::runtime_error <span class='keyword'>const</span>&amp; e) {</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path9" class="msg msgEvent" style="margin-left:5ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">9</div></td><td><div class="PathNav"><a href="#Path8" title="Previous event (8)">&#x2190;</a></div></td><td>Catching exception</td><td><div class="PathNav"><a href="#EndPath" title="Next event (10)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="43"><td class="num" id="LN43">43</td><td class="line">    *<span class="mrange">x</span> = 0;</td></tr>
+<tr><td class="num"></td><td class="line"><div id="EndPath" class="msg msgEvent" style="margin-left:8ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">10</div></td><td><div class="PathNav"><a href="#Path9" title="Previous event (9)">&#x2190;</a></div></td><td>Dereference of null pointer (loaded from variable 'x')</td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="44"><td class="num" id="LN44">44</td><td class="line">    <span class='macro'>LOG(DFATAL)<span class='macro_popup'>google::LogMessage( "/home/zhh/inject/null/folly/folly/io/async/SSLOptions.cpp"<br>, 44, google::GLOG_FATAL).stream()</span></span> &lt;&lt; exceptionStr(e);</td></tr>
+<tr class="codeline" data-linenumber="45"><td class="num" id="LN45">45</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="46"><td class="num" id="LN46">46</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="47"><td class="num" id="LN47">47</td><td class="line">  <span class='keyword'>try</span> {</td></tr>
+<tr class="codeline" data-linenumber="48"><td class="num" id="LN48">48</td><td class="line">    ctx.setClientECCurvesList({<span class='string_literal'>"P-256"</span>, <span class='string_literal'>"P-384"</span>});</td></tr>
+<tr class="codeline" data-linenumber="49"><td class="num" id="LN49">49</td><td class="line">  } <span class='keyword'>catch</span> (std::runtime_error <span class='keyword'>const</span>&amp; e) {</td></tr>
+<tr class="codeline" data-linenumber="50"><td class="num" id="LN50">50</td><td class="line">    <span class='macro'>LOG(DFATAL)<span class='macro_popup'>google::LogMessage( "/home/zhh/inject/null/folly/folly/io/async/SSLOptions.cpp"<br>, 50, google::GLOG_FATAL).stream()</span></span> &lt;&lt; exceptionStr(e);</td></tr>
+<tr class="codeline" data-linenumber="51"><td class="num" id="LN51">51</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="52"><td class="num" id="LN52">52</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="53"><td class="num" id="LN53">53</td><td class="line">  setCipherSuites&lt;SSLCommonOptions&gt;(ctx);</td></tr>
+<tr class="codeline" data-linenumber="54"><td class="num" id="LN54">54</td><td class="line">  setSignatureAlgorithms&lt;SSLCommonOptions&gt;(ctx);</td></tr>
+<tr class="codeline" data-linenumber="55"><td class="num" id="LN55">55</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="56"><td class="num" id="LN56">56</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="57"><td class="num" id="LN57">57</td><td class="line">} <span class='comment'>// namespace ssl</span></td></tr>
+<tr class="codeline" data-linenumber="58"><td class="num" id="LN58">58</td><td class="line">} <span class='comment'>// namespace folly</span></td></tr>
+</table><hr class=divider>
+<div id=File65492>
+<div class=FileNav><a href="#File1">&#x2190;</a></div><h4 class=FileName>/home/zhh/inject/null/folly/folly/io/async/SSLContext.cpp</h4>
+</div>
+<table class="code" data-fileid="65492">
+<tr class="codeline" data-linenumber="1"><td class="num" id="LN1">1</td><td class="line"><span class='comment'>/*</span></td></tr>
+<tr class="codeline" data-linenumber="2"><td class="num" id="LN2">2</td><td class="line"> <span class='comment'>* Copyright (c) Facebook, Inc. and its affiliates.</span></td></tr>
+<tr class="codeline" data-linenumber="3"><td class="num" id="LN3">3</td><td class="line"> <span class='comment'>*</span></td></tr>
+<tr class="codeline" data-linenumber="4"><td class="num" id="LN4">4</td><td class="line"> <span class='comment'>* Licensed under the Apache License, Version 2.0 (the "License");</span></td></tr>
+<tr class="codeline" data-linenumber="5"><td class="num" id="LN5">5</td><td class="line"> <span class='comment'>* you may not use this file except in compliance with the License.</span></td></tr>
+<tr class="codeline" data-linenumber="6"><td class="num" id="LN6">6</td><td class="line"> <span class='comment'>* You may obtain a copy of the License at</span></td></tr>
+<tr class="codeline" data-linenumber="7"><td class="num" id="LN7">7</td><td class="line"> <span class='comment'>*</span></td></tr>
+<tr class="codeline" data-linenumber="8"><td class="num" id="LN8">8</td><td class="line"> <span class='comment'>*     http://www.apache.org/licenses/LICENSE-2.0</span></td></tr>
+<tr class="codeline" data-linenumber="9"><td class="num" id="LN9">9</td><td class="line"> <span class='comment'>*</span></td></tr>
+<tr class="codeline" data-linenumber="10"><td class="num" id="LN10">10</td><td class="line"> <span class='comment'>* Unless required by applicable law or agreed to in writing, software</span></td></tr>
+<tr class="codeline" data-linenumber="11"><td class="num" id="LN11">11</td><td class="line"> <span class='comment'>* distributed under the License is distributed on an "AS IS" BASIS,</span></td></tr>
+<tr class="codeline" data-linenumber="12"><td class="num" id="LN12">12</td><td class="line"> <span class='comment'>* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></td></tr>
+<tr class="codeline" data-linenumber="13"><td class="num" id="LN13">13</td><td class="line"> <span class='comment'>* See the License for the specific language governing permissions and</span></td></tr>
+<tr class="codeline" data-linenumber="14"><td class="num" id="LN14">14</td><td class="line"> <span class='comment'>* limitations under the License.</span></td></tr>
+<tr class="codeline" data-linenumber="15"><td class="num" id="LN15">15</td><td class="line"> <span class='comment'>*/</span></td></tr>
+<tr class="codeline" data-linenumber="16"><td class="num" id="LN16">16</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="17"><td class="num" id="LN17">17</td><td class="line"><span class='directive'>#include &lt;folly/io/async/SSLContext.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="18"><td class="num" id="LN18">18</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="19"><td class="num" id="LN19">19</td><td class="line"><span class='directive'>#include &lt;folly/Format.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="20"><td class="num" id="LN20">20</td><td class="line"><span class='directive'>#include &lt;folly/Memory.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="21"><td class="num" id="LN21">21</td><td class="line"><span class='directive'>#include &lt;folly/Random.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="22"><td class="num" id="LN22">22</td><td class="line"><span class='directive'>#include &lt;folly/SharedMutex.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="23"><td class="num" id="LN23">23</td><td class="line"><span class='directive'>#include &lt;folly/SpinLock.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="24"><td class="num" id="LN24">24</td><td class="line"><span class='directive'>#include &lt;folly/ssl/Init.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="25"><td class="num" id="LN25">25</td><td class="line"><span class='directive'>#include &lt;folly/ssl/SSLSessionManager.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="26"><td class="num" id="LN26">26</td><td class="line"><span class='directive'>#include &lt;folly/system/ThreadId.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="27"><td class="num" id="LN27">27</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="28"><td class="num" id="LN28">28</td><td class="line"><span class='comment'>// ---------------------------------------------------------------------</span></td></tr>
+<tr class="codeline" data-linenumber="29"><td class="num" id="LN29">29</td><td class="line"><span class='comment'>// SSLContext implementation</span></td></tr>
+<tr class="codeline" data-linenumber="30"><td class="num" id="LN30">30</td><td class="line"><span class='comment'>// ---------------------------------------------------------------------</span></td></tr>
+<tr class="codeline" data-linenumber="31"><td class="num" id="LN31">31</td><td class="line"><span class='keyword'>namespace</span> folly {</td></tr>
+<tr class="codeline" data-linenumber="32"><td class="num" id="LN32">32</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="33"><td class="num" id="LN33">33</td><td class="line"><span class='keyword'>namespace</span> {</td></tr>
+<tr class="codeline" data-linenumber="34"><td class="num" id="LN34">34</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="35"><td class="num" id="LN35">35</td><td class="line"><span class='keyword'>int</span> getExDataIndex() {</td></tr>
+<tr class="codeline" data-linenumber="36"><td class="num" id="LN36">36</td><td class="line">  <span class='keyword'>static</span> <span class='keyword'>auto</span> index =</td></tr>
+<tr class="codeline" data-linenumber="37"><td class="num" id="LN37">37</td><td class="line">      <span class='macro'>SSL_CTX_get_ex_new_index(0, <span class='keyword'>nullptr</span>, <span class='keyword'>nullptr</span>, <span class='keyword'>nullptr</span>, <span class='keyword'>nullptr</span>)<span class='macro_popup'>CRYPTO_get_ex_new_index(1, 0, nullptr, nullptr, nullptr, nullptr<br>)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="38"><td class="num" id="LN38">38</td><td class="line">  <span class='keyword'>return</span> index;</td></tr>
+<tr class="codeline" data-linenumber="39"><td class="num" id="LN39">39</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="40"><td class="num" id="LN40">40</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="41"><td class="num" id="LN41">41</td><td class="line"><span class='comment'>/**</span></td></tr>
+<tr class="codeline" data-linenumber="42"><td class="num" id="LN42">42</td><td class="line"> <span class='comment'>* Configure the given SSL context to use the given version.</span></td></tr>
+<tr class="codeline" data-linenumber="43"><td class="num" id="LN43">43</td><td class="line"> <span class='comment'>*/</span></td></tr>
+<tr class="codeline" data-linenumber="44"><td class="num" id="LN44">44</td><td class="line"><span class='keyword'>void</span> configureProtocolVersion(SSL_CTX* ctx, SSLContext::SSLVersion version) {</td></tr>
+<tr class="codeline" data-linenumber="45"><td class="num" id="LN45">45</td><td class="line"><span class='directive'>#if <span class='macro'>FOLLY_OPENSSL_PREREQ(1, 1, 0)<span class='macro_popup'>(0x1010106fL &gt;= (((1 &lt;&lt; 28) | ((1 &lt;&lt; 20) | (0 &lt;&lt;<br> 12)))))</span></span></span></td></tr>
+<tr class="codeline" data-linenumber="46"><td class="num" id="LN46">46</td><td class="line">  <span class='comment'>// Disable TLS 1.3 by default, for now, if this version of OpenSSL</span></td></tr>
+<tr class="codeline" data-linenumber="47"><td class="num" id="LN47">47</td><td class="line">  <span class='comment'>// supports it. There are some semantic differences (e.g. assumptions</span></td></tr>
+<tr class="codeline" data-linenumber="48"><td class="num" id="LN48">48</td><td class="line">  <span class='comment'>// on getSession() returning a resumable session, SSL_CTX_set_ciphersuites,</span></td></tr>
+<tr class="codeline" data-linenumber="49"><td class="num" id="LN49">49</td><td class="line">  <span class='comment'>// etc.)</span></td></tr>
+<tr class="codeline" data-linenumber="50"><td class="num" id="LN50">50</td><td class="line">  <span class='comment'>//</span></td></tr>
+<tr class="codeline" data-linenumber="51"><td class="num" id="LN51">51</td><td class="line">  <span class='macro'>SSL_CTX_set_max_proto_version(ctx, TLS1_2_VERSION)<span class='macro_popup'>SSL_CTX_ctrl(ctx, 124, 0x0303, __null)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="52"><td class="num" id="LN52">52</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="53"><td class="num" id="LN53">53</td><td class="line">  <span class='comment'>/*</span></td></tr>
+<tr class="codeline" data-linenumber="54"><td class="num" id="LN54">54</td><td class="line">   <span class='comment'>* From the OpenSSL docs https://fburl.com/ii9k29qw:</span></td></tr>
+<tr class="codeline" data-linenumber="55"><td class="num" id="LN55">55</td><td class="line">   <span class='comment'>* Setting the minimum or maximum version to 0, will enable protocol versions</span></td></tr>
+<tr class="codeline" data-linenumber="56"><td class="num" id="LN56">56</td><td class="line">   <span class='comment'>* down to the lowest version, or up to the highest version supported by the</span></td></tr>
+<tr class="codeline" data-linenumber="57"><td class="num" id="LN57">57</td><td class="line">   <span class='comment'>* library, respectively.</span></td></tr>
+<tr class="codeline" data-linenumber="58"><td class="num" id="LN58">58</td><td class="line">   <span class='comment'>*</span></td></tr>
+<tr class="codeline" data-linenumber="59"><td class="num" id="LN59">59</td><td class="line">   <span class='comment'>* We can use that as the default/fallback.</span></td></tr>
+<tr class="codeline" data-linenumber="60"><td class="num" id="LN60">60</td><td class="line">   <span class='comment'>*/</span></td></tr>
+<tr class="codeline" data-linenumber="61"><td class="num" id="LN61">61</td><td class="line">  <span class='keyword'>int</span> minVersion = 0;</td></tr>
+<tr class="codeline" data-linenumber="62"><td class="num" id="LN62">62</td><td class="line">  <span class='keyword'>switch</span> (version) {</td></tr>
+<tr class="codeline" data-linenumber="63"><td class="num" id="LN63">63</td><td class="line">    <span class='keyword'>case</span> SSLContext::SSLVersion::TLSv1:</td></tr>
+<tr class="codeline" data-linenumber="64"><td class="num" id="LN64">64</td><td class="line">      minVersion = <span class='macro'>TLS1_VERSION<span class='macro_popup'>0x0301</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="65"><td class="num" id="LN65">65</td><td class="line">      <span class='keyword'>break</span>;</td></tr>
+<tr class="codeline" data-linenumber="66"><td class="num" id="LN66">66</td><td class="line">    <span class='keyword'>case</span> SSLContext::SSLVersion::SSLv3:</td></tr>
+<tr class="codeline" data-linenumber="67"><td class="num" id="LN67">67</td><td class="line">      minVersion = <span class='macro'>SSL3_VERSION<span class='macro_popup'>0x0300</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="68"><td class="num" id="LN68">68</td><td class="line">      <span class='keyword'>break</span>;</td></tr>
+<tr class="codeline" data-linenumber="69"><td class="num" id="LN69">69</td><td class="line">    <span class='keyword'>case</span> SSLContext::SSLVersion::TLSv1_2:</td></tr>
+<tr class="codeline" data-linenumber="70"><td class="num" id="LN70">70</td><td class="line">      minVersion = <span class='macro'>TLS1_2_VERSION<span class='macro_popup'>0x0303</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="71"><td class="num" id="LN71">71</td><td class="line">      <span class='keyword'>break</span>;</td></tr>
+<tr class="codeline" data-linenumber="72"><td class="num" id="LN72">72</td><td class="line">    <span class='keyword'>case</span> SSLContext::SSLVersion::SSLv2:</td></tr>
+<tr class="codeline" data-linenumber="73"><td class="num" id="LN73">73</td><td class="line">    <span class='keyword'>default</span>:</td></tr>
+<tr class="codeline" data-linenumber="74"><td class="num" id="LN74">74</td><td class="line">      <span class='comment'>// do nothing</span></td></tr>
+<tr class="codeline" data-linenumber="75"><td class="num" id="LN75">75</td><td class="line">      <span class='keyword'>break</span>;</td></tr>
+<tr class="codeline" data-linenumber="76"><td class="num" id="LN76">76</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="77"><td class="num" id="LN77">77</td><td class="line">  <span class='keyword'>int</span> setMinProtoResult = <span class='macro'>SSL_CTX_set_min_proto_version(ctx, minVersion)<span class='macro_popup'>SSL_CTX_ctrl(ctx, 123, minVersion, __null)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="78"><td class="num" id="LN78">78</td><td class="line">  <span class='macro'>DCHECK(setMinProtoResult == 1)<span class='macro_popup'>static_cast&lt;void&gt;(0), !((__builtin_expect(!(setMinProtoResult<br> == 1), 0))) ? (void) 0 : google::LogMessageVoidify() &amp; google<br>::LogMessageFatal( "/home/zhh/inject/null/folly/folly/io/async/SSLContext.cpp"<br>, 78).stream() &lt;&lt; "Check failed: " "setMinProtoResult == 1"<br> " "</span></span></td></tr>
+<tr class="codeline" data-linenumber="79"><td class="num" id="LN79">79</td><td class="line">      &lt;&lt; sformat(<span class='string_literal'>"unsupported min TLS protocol version: 0x{:04x}"</span>, minVersion);</td></tr>
+<tr class="codeline" data-linenumber="80"><td class="num" id="LN80">80</td><td class="line"><span class='directive'>#else</span></td></tr>
+<tr class="codeline" data-linenumber="81"><td class="num" id="LN81">81</td><td class="line">  <span class='keyword'>int</span> opt = 0;</td></tr>
+<tr class="codeline" data-linenumber="82"><td class="num" id="LN82">82</td><td class="line">  <span class='keyword'>switch</span> (version) {</td></tr>
+<tr class="codeline" data-linenumber="83"><td class="num" id="LN83">83</td><td class="line">    <span class='keyword'>case</span> SSLContext::SSLVersion::TLSv1:</td></tr>
+<tr class="codeline" data-linenumber="84"><td class="num" id="LN84">84</td><td class="line">      opt = <span class='macro'>SSL_OP_NO_SSLv2<span class='macro_popup'>0x0</span></span> | <span class='macro'>SSL_OP_NO_SSLv3<span class='macro_popup'>0x02000000U</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="85"><td class="num" id="LN85">85</td><td class="line">      <span class='keyword'>break</span>;</td></tr>
+<tr class="codeline" data-linenumber="86"><td class="num" id="LN86">86</td><td class="line">    <span class='keyword'>case</span> SSLContext::SSLVersion::SSLv3:</td></tr>
+<tr class="codeline" data-linenumber="87"><td class="num" id="LN87">87</td><td class="line">      opt = <span class='macro'>SSL_OP_NO_SSLv2<span class='macro_popup'>0x0</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="88"><td class="num" id="LN88">88</td><td class="line">      <span class='keyword'>break</span>;</td></tr>
+<tr class="codeline" data-linenumber="89"><td class="num" id="LN89">89</td><td class="line">    <span class='keyword'>case</span> SSLContext::SSLVersion::TLSv1_2:</td></tr>
+<tr class="codeline" data-linenumber="90"><td class="num" id="LN90">90</td><td class="line">      opt = <span class='macro'>SSL_OP_NO_SSLv2<span class='macro_popup'>0x0</span></span> | <span class='macro'>SSL_OP_NO_SSLv3<span class='macro_popup'>0x02000000U</span></span> | <span class='macro'>SSL_OP_NO_TLSv1<span class='macro_popup'>0x04000000U</span></span> |</td></tr>
+<tr class="codeline" data-linenumber="91"><td class="num" id="LN91">91</td><td class="line">          <span class='macro'>SSL_OP_NO_TLSv1_1<span class='macro_popup'>0x10000000U</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="92"><td class="num" id="LN92">92</td><td class="line">      <span class='keyword'>break</span>;</td></tr>
+<tr class="codeline" data-linenumber="93"><td class="num" id="LN93">93</td><td class="line">    <span class='keyword'>case</span> SSLContext::SSLVersion::SSLv2:</td></tr>
+<tr class="codeline" data-linenumber="94"><td class="num" id="LN94">94</td><td class="line">    <span class='keyword'>default</span>:</td></tr>
+<tr class="codeline" data-linenumber="95"><td class="num" id="LN95">95</td><td class="line">      <span class='comment'>// do nothing</span></td></tr>
+<tr class="codeline" data-linenumber="96"><td class="num" id="LN96">96</td><td class="line">      <span class='keyword'>break</span>;</td></tr>
+<tr class="codeline" data-linenumber="97"><td class="num" id="LN97">97</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="98"><td class="num" id="LN98">98</td><td class="line">  <span class='keyword'>int</span> newOpt = SSL_CTX_set_options(ctx, opt);</td></tr>
+<tr class="codeline" data-linenumber="99"><td class="num" id="LN99">99</td><td class="line">  <span class='macro'>DCHECK((newOpt &amp; opt) == opt)<span class='macro_popup'>static_cast&lt;void&gt;(0), !((__builtin_expect(!((newOpt &amp;<br> opt) == opt), 0))) ? (void) 0 : google::LogMessageVoidify() &amp;<br> google::LogMessageFatal( "/home/zhh/inject/null/folly/folly/io/async/SSLContext.cpp"<br>, 99).stream() &lt;&lt; "Check failed: " "(newOpt &amp; opt) == opt"<br> " "</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="100"><td class="num" id="LN100">100</td><td class="line"><span class='directive'>#endif // FOLLY_OPENSSL_PREREQ(1, 1, 0)</span></td></tr>
+<tr class="codeline" data-linenumber="101"><td class="num" id="LN101">101</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="102"><td class="num" id="LN102">102</td><td class="line">} <span class='comment'>// namespace</span></td></tr>
+<tr class="codeline" data-linenumber="103"><td class="num" id="LN103">103</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="104"><td class="num" id="LN104">104</td><td class="line"><span class='comment'>//</span></td></tr>
+<tr class="codeline" data-linenumber="105"><td class="num" id="LN105">105</td><td class="line"><span class='comment'>// For OpenSSL portability API</span></td></tr>
+<tr class="codeline" data-linenumber="106"><td class="num" id="LN106">106</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="107"><td class="num" id="LN107">107</td><td class="line"><span class='comment'>// SSLContext implementation</span></td></tr>
+<tr class="codeline" data-linenumber="108"><td class="num" id="LN108">108</td><td class="line">SSLContext::SSLContext(SSLVersion version) {</td></tr>
+<tr class="codeline" data-linenumber="109"><td class="num" id="LN109">109</td><td class="line">  folly::ssl::init();</td></tr>
+<tr class="codeline" data-linenumber="110"><td class="num" id="LN110">110</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="111"><td class="num" id="LN111">111</td><td class="line">  ctx_ = SSL_CTX_new(<span class='macro'>SSLv23_method<span class='macro_popup'>TLS_method</span></span>());</td></tr>
+<tr class="codeline" data-linenumber="112"><td class="num" id="LN112">112</td><td class="line">  <span class='keyword'>if</span> (ctx_ == <span class='keyword'>nullptr</span>) {</td></tr>
+<tr class="codeline" data-linenumber="113"><td class="num" id="LN113">113</td><td class="line">    <span class='keyword'>throw</span> std::runtime_error(<span class='string_literal'>"SSL_CTX_new: "</span> + getErrors());</td></tr>
+<tr class="codeline" data-linenumber="114"><td class="num" id="LN114">114</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="115"><td class="num" id="LN115">115</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="116"><td class="num" id="LN116">116</td><td class="line">  <span class='comment'>// configure the TLS version used</span></td></tr>
+<tr class="codeline" data-linenumber="117"><td class="num" id="LN117">117</td><td class="line">  configureProtocolVersion(ctx_, version);</td></tr>
+<tr class="codeline" data-linenumber="118"><td class="num" id="LN118">118</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="119"><td class="num" id="LN119">119</td><td class="line">  <span class='macro'>SSL_CTX_set_mode(ctx_, SSL_MODE_AUTO_RETRY)<span class='macro_popup'>SSL_CTX_ctrl((ctx_),33,(0x00000004U),__null)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="120"><td class="num" id="LN120">120</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="121"><td class="num" id="LN121">121</td><td class="line">  checkPeerName_ = <span class='keyword'>false</span>;</td></tr>
+<tr class="codeline" data-linenumber="122"><td class="num" id="LN122">122</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="123"><td class="num" id="LN123">123</td><td class="line">  SSL_CTX_set_options(ctx_, <span class='macro'>SSL_OP_NO_COMPRESSION<span class='macro_popup'>0x00020000U</span></span>);</td></tr>
+<tr class="codeline" data-linenumber="124"><td class="num" id="LN124">124</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="125"><td class="num" id="LN125">125</td><td class="line">  sslAcceptRunner_ = std::make_unique&lt;SSLAcceptRunner&gt;();</td></tr>
+<tr class="codeline" data-linenumber="126"><td class="num" id="LN126">126</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="127"><td class="num" id="LN127">127</td><td class="line">  setupCtx(ctx_);</td></tr>
+<tr class="codeline" data-linenumber="128"><td class="num" id="LN128">128</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="129"><td class="num" id="LN129">129</td><td class="line"><span class='directive'>#if <span class='macro'>FOLLY_OPENSSL_HAS_SNI<span class='macro_popup'>1</span></span></span></td></tr>
+<tr class="codeline" data-linenumber="130"><td class="num" id="LN130">130</td><td class="line">  <span class='macro'>SSL_CTX_set_tlsext_servername_callback(ctx_, baseServerNameOpenSSLCallback)<span class='macro_popup'>SSL_CTX_callback_ctrl(ctx_,53, (void (*)(void))baseServerNameOpenSSLCallback<br>)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="131"><td class="num" id="LN131">131</td><td class="line">  <span class='macro'>SSL_CTX_set_tlsext_servername_arg(ctx_, <span class='keyword'>this</span>)<span class='macro_popup'>SSL_CTX_ctrl(ctx_,54,0,this)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="132"><td class="num" id="LN132">132</td><td class="line"><span class='directive'>#endif</span></td></tr>
+<tr class="codeline" data-linenumber="133"><td class="num" id="LN133">133</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="134"><td class="num" id="LN134">134</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="135"><td class="num" id="LN135">135</td><td class="line">SSLContext::~SSLContext() {</td></tr>
+<tr class="codeline" data-linenumber="136"><td class="num" id="LN136">136</td><td class="line">  <span class='keyword'>if</span> (ctx_ != <span class='keyword'>nullptr</span>) {</td></tr>
+<tr class="codeline" data-linenumber="137"><td class="num" id="LN137">137</td><td class="line">    SSL_CTX_free(ctx_);</td></tr>
+<tr class="codeline" data-linenumber="138"><td class="num" id="LN138">138</td><td class="line">    ctx_ = <span class='keyword'>nullptr</span>;</td></tr>
+<tr class="codeline" data-linenumber="139"><td class="num" id="LN139">139</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="140"><td class="num" id="LN140">140</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="141"><td class="num" id="LN141">141</td><td class="line"><span class='directive'>#if <span class='macro'>FOLLY_OPENSSL_HAS_ALPN<span class='macro_popup'>1</span></span></span></td></tr>
+<tr class="codeline" data-linenumber="142"><td class="num" id="LN142">142</td><td class="line">  deleteNextProtocolsStrings();</td></tr>
+<tr class="codeline" data-linenumber="143"><td class="num" id="LN143">143</td><td class="line"><span class='directive'>#endif</span></td></tr>
+<tr class="codeline" data-linenumber="144"><td class="num" id="LN144">144</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="145"><td class="num" id="LN145">145</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="146"><td class="num" id="LN146">146</td><td class="line"><span class='keyword'>void</span> SSLContext::ciphers(<span class='keyword'>const</span> std::string&amp; ciphers) {</td></tr>
+<tr class="codeline" data-linenumber="147"><td class="num" id="LN147">147</td><td class="line">  setCiphersOrThrow(ciphers);</td></tr>
+<tr class="codeline" data-linenumber="148"><td class="num" id="LN148">148</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="149"><td class="num" id="LN149">149</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="150"><td class="num" id="LN150">150</td><td class="line"><span class='keyword'>void</span> SSLContext::setClientECCurvesList(</td></tr>
+<tr class="codeline" data-linenumber="151"><td class="num" id="LN151">151</td><td class="line">    <span class='keyword'>const</span> std::vector&lt;std::string&gt;&amp; ecCurves) {</td></tr>
+<tr class="codeline" data-linenumber="152"><td class="num" id="LN152">152</td><td class="line">  <span class='keyword'>if</span> (ecCurves.empty()) {</td></tr>
+<tr class="codeline" data-linenumber="153"><td class="num" id="LN153">153</td><td class="line">    <span class='keyword'>return</span>;</td></tr>
+<tr class="codeline" data-linenumber="154"><td class="num" id="LN154">154</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="155"><td class="num" id="LN155">155</td><td class="line"><span class='directive'>#if <span class='macro'>OPENSSL_VERSION_NUMBER<span class='macro_popup'>0x1010106fL</span></span> &gt;= 0x1000200fL</span></td></tr>
+<tr class="codeline" data-linenumber="156"><td class="num" id="LN156">156</td><td class="line">  std::string ecCurvesList;</td></tr>
+<tr class="codeline" data-linenumber="157"><td class="num" id="LN157">157</td><td class="line">  join(<span class='string_literal'>":"</span>, ecCurves, ecCurvesList);</td></tr>
+<tr class="codeline" data-linenumber="158"><td class="num" id="LN158">158</td><td class="line">  <span class='keyword'>int</span> rc = <span class='macro'>SSL_CTX_set1_curves_list(ctx_, ecCurvesList.c_str())<span class='macro_popup'>SSL_CTX_ctrl(ctx_,92,0,(char *)(ecCurvesList.c_str()))</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="159"><td class="num" id="LN159">159</td><td class="line">  <span class='keyword'>if</span> (rc == 0) {</td></tr>
+<tr class="codeline" data-linenumber="160"><td class="num" id="LN160">160</td><td class="line">    <span class='keyword'>throw</span> std::runtime_error(<span class='string_literal'>"SSL_CTX_set1_curves_list "</span> + getErrors());</td></tr>
+<tr class="codeline" data-linenumber="161"><td class="num" id="LN161">161</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="162"><td class="num" id="LN162">162</td><td class="line"><span class='directive'>#endif</span></td></tr>
+<tr class="codeline" data-linenumber="163"><td class="num" id="LN163">163</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="164"><td class="num" id="LN164">164</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="165"><td class="num" id="LN165">165</td><td class="line"><span class='keyword'>void</span> SSLContext::setServerECCurve(<span class='keyword'>const</span> std::string&amp; curveName) {</td></tr>
+<tr class="codeline" data-linenumber="166"><td class="num" id="LN166">166</td><td class="line"><span class='directive'>#if <span class='macro'>OPENSSL_VERSION_NUMBER<span class='macro_popup'>0x1010106fL</span></span> &gt;= 0x0090800fL &amp;&amp; !defined(OPENSSL_NO_ECDH)</span></td></tr>
+<tr class="codeline" data-linenumber="167"><td class="num" id="LN167">167</td><td class="line">  EC_KEY* ecdh = <span class='keyword'>nullptr</span>;</td></tr>
+<tr class="codeline" data-linenumber="168"><td class="num" id="LN168">168</td><td class="line">  <span class='keyword'>int</span> nid;</td></tr>
+<tr class="codeline" data-linenumber="169"><td class="num" id="LN169">169</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="170"><td class="num" id="LN170">170</td><td class="line">  <span class='comment'>/*</span></td></tr>
+<tr class="codeline" data-linenumber="171"><td class="num" id="LN171">171</td><td class="line">   <span class='comment'>* Elliptic-Curve Diffie-Hellman parameters are either "named curves"</span></td></tr>
+<tr class="codeline" data-linenumber="172"><td class="num" id="LN172">172</td><td class="line">   <span class='comment'>* from RFC 4492 section 5.1.1, or explicitly described curves over</span></td></tr>
+<tr class="codeline" data-linenumber="173"><td class="num" id="LN173">173</td><td class="line">   <span class='comment'>* binary fields. OpenSSL only supports the "named curves", which provide</span></td></tr>
+<tr class="codeline" data-linenumber="174"><td class="num" id="LN174">174</td><td class="line">   <span class='comment'>* maximum interoperability.</span></td></tr>
+<tr class="codeline" data-linenumber="175"><td class="num" id="LN175">175</td><td class="line">   <span class='comment'>*/</span></td></tr>
+<tr class="codeline" data-linenumber="176"><td class="num" id="LN176">176</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="177"><td class="num" id="LN177">177</td><td class="line">  nid = OBJ_sn2nid(curveName.c_str());</td></tr>
+<tr class="codeline" data-linenumber="178"><td class="num" id="LN178">178</td><td class="line">  <span class='keyword'>if</span> (nid == 0) {</td></tr>
+<tr class="codeline" data-linenumber="179"><td class="num" id="LN179">179</td><td class="line">    <span class='macro'>LOG(FATAL)<span class='macro_popup'>google::LogMessageFatal( "/home/zhh/inject/null/folly/folly/io/async/SSLContext.cpp"<br>, 179).stream()</span></span> &lt;&lt; <span class='string_literal'>"Unknown curve name:"</span> &lt;&lt; curveName.c_str();</td></tr>
+<tr class="codeline" data-linenumber="180"><td class="num" id="LN180">180</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="181"><td class="num" id="LN181">181</td><td class="line">  ecdh = EC_KEY_new_by_curve_name(nid);</td></tr>
+<tr class="codeline" data-linenumber="182"><td class="num" id="LN182">182</td><td class="line">  <span class='keyword'>if</span> (ecdh == <span class='keyword'>nullptr</span>) {</td></tr>
+<tr class="codeline" data-linenumber="183"><td class="num" id="LN183">183</td><td class="line">    <span class='macro'>LOG(FATAL)<span class='macro_popup'>google::LogMessageFatal( "/home/zhh/inject/null/folly/folly/io/async/SSLContext.cpp"<br>, 183).stream()</span></span> &lt;&lt; <span class='string_literal'>"Unable to create curve:"</span> &lt;&lt; curveName.c_str();</td></tr>
+<tr class="codeline" data-linenumber="184"><td class="num" id="LN184">184</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="185"><td class="num" id="LN185">185</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="186"><td class="num" id="LN186">186</td><td class="line">  <span class='macro'>SSL_CTX_set_tmp_ecdh(ctx_, ecdh)<span class='macro_popup'>SSL_CTX_ctrl(ctx_,4,0,(char *)(ecdh))</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="187"><td class="num" id="LN187">187</td><td class="line">  EC_KEY_free(ecdh);</td></tr>
+<tr class="codeline" data-linenumber="188"><td class="num" id="LN188">188</td><td class="line"><span class='directive'>#else</span></td></tr>
+<tr class="codeline" data-linenumber="189"><td class="num" id="LN189">189</td><td class="line">  <span class='keyword'>throw</span> std::runtime_error(<span class='string_literal'>"Elliptic curve encryption not allowed"</span>);</td></tr>
+<tr class="codeline" data-linenumber="190"><td class="num" id="LN190">190</td><td class="line"><span class='directive'>#endif</span></td></tr>
+<tr class="codeline" data-linenumber="191"><td class="num" id="LN191">191</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="192"><td class="num" id="LN192">192</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="193"><td class="num" id="LN193">193</td><td class="line">SSLContext::SSLContext(SSL_CTX* ctx) : ctx_(ctx) {</td></tr>
+<tr class="codeline" data-linenumber="194"><td class="num" id="LN194">194</td><td class="line">  setupCtx(ctx);</td></tr>
+<tr class="codeline" data-linenumber="195"><td class="num" id="LN195">195</td><td class="line">  <span class='keyword'>if</span> (SSL_CTX_up_ref(ctx) == 0) {</td></tr>
+<tr class="codeline" data-linenumber="196"><td class="num" id="LN196">196</td><td class="line">    <span class='keyword'>throw</span> std::runtime_error(<span class='string_literal'>"Failed to increment SSL_CTX refcount"</span>);</td></tr>
+<tr class="codeline" data-linenumber="197"><td class="num" id="LN197">197</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="198"><td class="num" id="LN198">198</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="199"><td class="num" id="LN199">199</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="200"><td class="num" id="LN200">200</td><td class="line"><span class='keyword'>void</span> SSLContext::setX509VerifyParam(</td></tr>
+<tr class="codeline" data-linenumber="201"><td class="num" id="LN201">201</td><td class="line">    <span class='keyword'>const</span> ssl::X509VerifyParam&amp; x509VerifyParam) {</td></tr>
+<tr class="codeline" data-linenumber="202"><td class="num" id="LN202">202</td><td class="line">  <span class='keyword'>if</span> (<span class="mrange">!x509VerifyParam</span>) {</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path3" class="msg msgEvent" style="margin-left:7ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">3</div></td><td><div class="PathNav"><a href="#Path2" title="Previous event (2)">&#x2190;</a></div></td><td>Assuming the condition is false</td><td><div class="PathNav"><a href="#Path4" title="Next event (4)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path4" class="msg msgControl" style="margin-left:3ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexControl">4</div></td><td><div class="PathNav"><a href="#Path3" title="Previous event (3)">&#x2190;</a></div></td><td>Taking false branch</td><td><div class="PathNav"><a href="#Path5" title="Next event (5)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="203"><td class="num" id="LN203">203</td><td class="line">    <span class='keyword'>return</span>;</td></tr>
+<tr class="codeline" data-linenumber="204"><td class="num" id="LN204">204</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="205"><td class="num" id="LN205">205</td><td class="line">  <span class='keyword'>if</span> (<span class="mrange">SSL_CTX_set1_param(ctx_, x509VerifyParam.get()) != 1</span>) {</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path5" class="msg msgEvent" style="margin-left:7ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">5</div></td><td><div class="PathNav"><a href="#Path4" title="Previous event (4)">&#x2190;</a></div></td><td>Assuming the condition is true</td><td><div class="PathNav"><a href="#Path6" title="Next event (6)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path6" class="msg msgControl" style="margin-left:3ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexControl">6</div></td><td><div class="PathNav"><a href="#Path5" title="Previous event (5)">&#x2190;</a></div></td><td>Taking true branch</td><td><div class="PathNav"><a href="#Path7" title="Next event (7)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="206"><td class="num" id="LN206">206</td><td class="line">    <span class='keyword'>throw</span> std::runtime_error(<span class='string_literal'>"SSL_CTX_set1_param "</span> + getErrors());</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path7" class="msg msgEvent" style="margin-left:5ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">7</div></td><td><div class="PathNav"><a href="#Path6" title="Previous event (6)">&#x2190;</a></div></td><td>Throwing exception</td><td><div class="PathNav"><a href="#Path8" title="Next event (8)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="207"><td class="num" id="LN207">207</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="208"><td class="num" id="LN208">208</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="209"><td class="num" id="LN209">209</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="210"><td class="num" id="LN210">210</td><td class="line"><span class='keyword'>void</span> SSLContext::setCiphersOrThrow(<span class='keyword'>const</span> std::string&amp; ciphers) {</td></tr>
+<tr class="codeline" data-linenumber="211"><td class="num" id="LN211">211</td><td class="line">  <span class='keyword'>int</span> rc = SSL_CTX_set_cipher_list(ctx_, ciphers.c_str());</td></tr>
+<tr class="codeline" data-linenumber="212"><td class="num" id="LN212">212</td><td class="line">  <span class='keyword'>if</span> (rc == 0) {</td></tr>
+<tr class="codeline" data-linenumber="213"><td class="num" id="LN213">213</td><td class="line">    <span class='keyword'>throw</span> std::runtime_error(<span class='string_literal'>"SSL_CTX_set_cipher_list: "</span> + getErrors());</td></tr>
+<tr class="codeline" data-linenumber="214"><td class="num" id="LN214">214</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="215"><td class="num" id="LN215">215</td><td class="line">  providedCiphersString_ = ciphers;</td></tr>
+<tr class="codeline" data-linenumber="216"><td class="num" id="LN216">216</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="217"><td class="num" id="LN217">217</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="218"><td class="num" id="LN218">218</td><td class="line"><span class='keyword'>void</span> SSLContext::setSigAlgsOrThrow(<span class='keyword'>const</span> std::string&amp; sigalgs) {</td></tr>
+<tr class="codeline" data-linenumber="219"><td class="num" id="LN219">219</td><td class="line"><span class='directive'>#if <span class='macro'>OPENSSL_VERSION_NUMBER<span class='macro_popup'>0x1010106fL</span></span> &gt;= 0x1000200fL</span></td></tr>
+<tr class="codeline" data-linenumber="220"><td class="num" id="LN220">220</td><td class="line">  <span class='keyword'>int</span> rc = <span class='macro'>SSL_CTX_set1_sigalgs_list(ctx_, sigalgs.c_str())<span class='macro_popup'>SSL_CTX_ctrl(ctx_,98,0,(char *)(sigalgs.c_str()))</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="221"><td class="num" id="LN221">221</td><td class="line">  <span class='keyword'>if</span> (rc == 0) {</td></tr>
+<tr class="codeline" data-linenumber="222"><td class="num" id="LN222">222</td><td class="line">    <span class='keyword'>throw</span> std::runtime_error(<span class='string_literal'>"SSL_CTX_set1_sigalgs_list "</span> + getErrors());</td></tr>
+<tr class="codeline" data-linenumber="223"><td class="num" id="LN223">223</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="224"><td class="num" id="LN224">224</td><td class="line"><span class='directive'>#endif</span></td></tr>
+<tr class="codeline" data-linenumber="225"><td class="num" id="LN225">225</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="226"><td class="num" id="LN226">226</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="227"><td class="num" id="LN227">227</td><td class="line"><span class='keyword'>void</span> SSLContext::setVerificationOption(</td></tr>
+<tr class="codeline" data-linenumber="228"><td class="num" id="LN228">228</td><td class="line">    <span class='keyword'>const</span> SSLContext::SSLVerifyPeerEnum&amp; verifyPeer) {</td></tr>
+<tr class="codeline" data-linenumber="229"><td class="num" id="LN229">229</td><td class="line">  <span class='macro'>CHECK(verifyPeer != SSLVerifyPeerEnum::USE_CTX)<span class='macro_popup'>static_cast&lt;void&gt;(0), !((__builtin_expect(!(verifyPeer !=<br> SSLVerifyPeerEnum::USE_CTX), 0))) ? (void) 0 : google::LogMessageVoidify<br>() &amp; google::LogMessageFatal( "/home/zhh/inject/null/folly/folly/io/async/SSLContext.cpp"<br>, 229).stream() &lt;&lt; "Check failed: " "verifyPeer != SSLVerifyPeerEnum::USE_CTX"<br> " "</span></span>; <span class='comment'>// dont recurse</span></td></tr>
+<tr class="codeline" data-linenumber="230"><td class="num" id="LN230">230</td><td class="line">  verifyPeer_ = verifyPeer;</td></tr>
+<tr class="codeline" data-linenumber="231"><td class="num" id="LN231">231</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="232"><td class="num" id="LN232">232</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="233"><td class="num" id="LN233">233</td><td class="line"><span class='keyword'>void</span> SSLContext::setVerificationOption(</td></tr>
+<tr class="codeline" data-linenumber="234"><td class="num" id="LN234">234</td><td class="line">    <span class='keyword'>const</span> SSLContext::VerifyClientCertificate&amp; verifyClient) {</td></tr>
+<tr class="codeline" data-linenumber="235"><td class="num" id="LN235">235</td><td class="line">  verifyClient_ = verifyClient;</td></tr>
+<tr class="codeline" data-linenumber="236"><td class="num" id="LN236">236</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="237"><td class="num" id="LN237">237</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="238"><td class="num" id="LN238">238</td><td class="line"><span class='keyword'>void</span> SSLContext::setVerificationOption(</td></tr>
+<tr class="codeline" data-linenumber="239"><td class="num" id="LN239">239</td><td class="line">    <span class='keyword'>const</span> SSLContext::VerifyServerCertificate&amp; verifyServer) {</td></tr>
+<tr class="codeline" data-linenumber="240"><td class="num" id="LN240">240</td><td class="line">  verifyServer_ = verifyServer;</td></tr>
+<tr class="codeline" data-linenumber="241"><td class="num" id="LN241">241</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="242"><td class="num" id="LN242">242</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="243"><td class="num" id="LN243">243</td><td class="line"><span class='keyword'>int</span> SSLContext::getVerificationMode(</td></tr>
+<tr class="codeline" data-linenumber="244"><td class="num" id="LN244">244</td><td class="line">    <span class='keyword'>const</span> SSLContext::VerifyClientCertificate&amp; verifyClient) {</td></tr>
+<tr class="codeline" data-linenumber="245"><td class="num" id="LN245">245</td><td class="line">  <span class='keyword'>int</span> mode = <span class='macro'>SSL_VERIFY_NONE<span class='macro_popup'>0x00</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="246"><td class="num" id="LN246">246</td><td class="line">  <span class='keyword'>switch</span> (verifyClient) {</td></tr>
+<tr class="codeline" data-linenumber="247"><td class="num" id="LN247">247</td><td class="line">    <span class='keyword'>case</span> VerifyClientCertificate::ALWAYS:</td></tr>
+<tr class="codeline" data-linenumber="248"><td class="num" id="LN248">248</td><td class="line">      mode = <span class='macro'>SSL_VERIFY_PEER<span class='macro_popup'>0x01</span></span> | <span class='macro'>SSL_VERIFY_FAIL_IF_NO_PEER_CERT<span class='macro_popup'>0x02</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="249"><td class="num" id="LN249">249</td><td class="line">      <span class='keyword'>break</span>;</td></tr>
+<tr class="codeline" data-linenumber="250"><td class="num" id="LN250">250</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="251"><td class="num" id="LN251">251</td><td class="line">    <span class='keyword'>case</span> VerifyClientCertificate::IF_PRESENTED:</td></tr>
+<tr class="codeline" data-linenumber="252"><td class="num" id="LN252">252</td><td class="line">      mode = <span class='macro'>SSL_VERIFY_PEER<span class='macro_popup'>0x01</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="253"><td class="num" id="LN253">253</td><td class="line">      <span class='keyword'>break</span>;</td></tr>
+<tr class="codeline" data-linenumber="254"><td class="num" id="LN254">254</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="255"><td class="num" id="LN255">255</td><td class="line">    <span class='keyword'>case</span> VerifyClientCertificate::DO_NOT_REQUEST:</td></tr>
+<tr class="codeline" data-linenumber="256"><td class="num" id="LN256">256</td><td class="line">      mode = <span class='macro'>SSL_VERIFY_NONE<span class='macro_popup'>0x00</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="257"><td class="num" id="LN257">257</td><td class="line">      <span class='keyword'>break</span>;</td></tr>
+<tr class="codeline" data-linenumber="258"><td class="num" id="LN258">258</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="259"><td class="num" id="LN259">259</td><td class="line">  <span class='keyword'>return</span> mode;</td></tr>
+<tr class="codeline" data-linenumber="260"><td class="num" id="LN260">260</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="261"><td class="num" id="LN261">261</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="262"><td class="num" id="LN262">262</td><td class="line"><span class='keyword'>int</span> SSLContext::getVerificationMode(</td></tr>
+<tr class="codeline" data-linenumber="263"><td class="num" id="LN263">263</td><td class="line">    <span class='keyword'>const</span> SSLContext::VerifyServerCertificate&amp; verifyServer) {</td></tr>
+<tr class="codeline" data-linenumber="264"><td class="num" id="LN264">264</td><td class="line">  <span class='keyword'>int</span> mode = <span class='macro'>SSL_VERIFY_NONE<span class='macro_popup'>0x00</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="265"><td class="num" id="LN265">265</td><td class="line">  <span class='keyword'>switch</span> (verifyServer) {</td></tr>
+<tr class="codeline" data-linenumber="266"><td class="num" id="LN266">266</td><td class="line">    <span class='keyword'>case</span> VerifyServerCertificate::IF_PRESENTED:</td></tr>
+<tr class="codeline" data-linenumber="267"><td class="num" id="LN267">267</td><td class="line">      mode = <span class='macro'>SSL_VERIFY_PEER<span class='macro_popup'>0x01</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="268"><td class="num" id="LN268">268</td><td class="line">      <span class='keyword'>break</span>;</td></tr>
+<tr class="codeline" data-linenumber="269"><td class="num" id="LN269">269</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="270"><td class="num" id="LN270">270</td><td class="line">    <span class='keyword'>case</span> VerifyServerCertificate::IGNORE_VERIFY_RESULT:</td></tr>
+<tr class="codeline" data-linenumber="271"><td class="num" id="LN271">271</td><td class="line">      mode = <span class='macro'>SSL_VERIFY_NONE<span class='macro_popup'>0x00</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="272"><td class="num" id="LN272">272</td><td class="line">      <span class='keyword'>break</span>;</td></tr>
+<tr class="codeline" data-linenumber="273"><td class="num" id="LN273">273</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="274"><td class="num" id="LN274">274</td><td class="line">  <span class='keyword'>return</span> mode;</td></tr>
+<tr class="codeline" data-linenumber="275"><td class="num" id="LN275">275</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="276"><td class="num" id="LN276">276</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="277"><td class="num" id="LN277">277</td><td class="line"><span class='keyword'>int</span> SSLContext::getVerificationMode(</td></tr>
+<tr class="codeline" data-linenumber="278"><td class="num" id="LN278">278</td><td class="line">    <span class='keyword'>const</span> SSLContext::SSLVerifyPeerEnum&amp; verifyPeer) {</td></tr>
+<tr class="codeline" data-linenumber="279"><td class="num" id="LN279">279</td><td class="line">  <span class='macro'>CHECK(verifyPeer != SSLVerifyPeerEnum::USE_CTX)<span class='macro_popup'>static_cast&lt;void&gt;(0), !((__builtin_expect(!(verifyPeer !=<br> SSLVerifyPeerEnum::USE_CTX), 0))) ? (void) 0 : google::LogMessageVoidify<br>() &amp; google::LogMessageFatal( "/home/zhh/inject/null/folly/folly/io/async/SSLContext.cpp"<br>, 279).stream() &lt;&lt; "Check failed: " "verifyPeer != SSLVerifyPeerEnum::USE_CTX"<br> " "</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="280"><td class="num" id="LN280">280</td><td class="line">  <span class='keyword'>int</span> mode = <span class='macro'>SSL_VERIFY_NONE<span class='macro_popup'>0x00</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="281"><td class="num" id="LN281">281</td><td class="line">  <span class='keyword'>switch</span> (verifyPeer) {</td></tr>
+<tr class="codeline" data-linenumber="282"><td class="num" id="LN282">282</td><td class="line">      <span class='comment'>// case SSLVerifyPeerEnum::USE_CTX: // can't happen</span></td></tr>
+<tr class="codeline" data-linenumber="283"><td class="num" id="LN283">283</td><td class="line">      <span class='comment'>// break;</span></td></tr>
+<tr class="codeline" data-linenumber="284"><td class="num" id="LN284">284</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="285"><td class="num" id="LN285">285</td><td class="line">    <span class='keyword'>case</span> SSLVerifyPeerEnum::VERIFY:</td></tr>
+<tr class="codeline" data-linenumber="286"><td class="num" id="LN286">286</td><td class="line">      mode = <span class='macro'>SSL_VERIFY_PEER<span class='macro_popup'>0x01</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="287"><td class="num" id="LN287">287</td><td class="line">      <span class='keyword'>break</span>;</td></tr>
+<tr class="codeline" data-linenumber="288"><td class="num" id="LN288">288</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="289"><td class="num" id="LN289">289</td><td class="line">    <span class='keyword'>case</span> SSLVerifyPeerEnum::VERIFY_REQ_CLIENT_CERT:</td></tr>
+<tr class="codeline" data-linenumber="290"><td class="num" id="LN290">290</td><td class="line">      mode = <span class='macro'>SSL_VERIFY_PEER<span class='macro_popup'>0x01</span></span> | <span class='macro'>SSL_VERIFY_FAIL_IF_NO_PEER_CERT<span class='macro_popup'>0x02</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="291"><td class="num" id="LN291">291</td><td class="line">      <span class='keyword'>break</span>;</td></tr>
+<tr class="codeline" data-linenumber="292"><td class="num" id="LN292">292</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="293"><td class="num" id="LN293">293</td><td class="line">    <span class='keyword'>case</span> SSLVerifyPeerEnum::NO_VERIFY:</td></tr>
+<tr class="codeline" data-linenumber="294"><td class="num" id="LN294">294</td><td class="line">      mode = <span class='macro'>SSL_VERIFY_NONE<span class='macro_popup'>0x00</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="295"><td class="num" id="LN295">295</td><td class="line">      <span class='keyword'>break</span>;</td></tr>
+<tr class="codeline" data-linenumber="296"><td class="num" id="LN296">296</td><td class="line">    <span class='keyword'>case</span> SSLVerifyPeerEnum::USE_CTX:</td></tr>
+<tr class="codeline" data-linenumber="297"><td class="num" id="LN297">297</td><td class="line">    <span class='keyword'>default</span>:</td></tr>
+<tr class="codeline" data-linenumber="298"><td class="num" id="LN298">298</td><td class="line">      <span class='keyword'>break</span>;</td></tr>
+<tr class="codeline" data-linenumber="299"><td class="num" id="LN299">299</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="300"><td class="num" id="LN300">300</td><td class="line">  <span class='keyword'>return</span> mode;</td></tr>
+<tr class="codeline" data-linenumber="301"><td class="num" id="LN301">301</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="302"><td class="num" id="LN302">302</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="303"><td class="num" id="LN303">303</td><td class="line"><span class='keyword'>int</span> SSLContext::getVerificationMode() {</td></tr>
+<tr class="codeline" data-linenumber="304"><td class="num" id="LN304">304</td><td class="line">  <span class='comment'>// the below or'ing is incorrect unless VERIFY_NONE is 0</span></td></tr>
+<tr class="codeline" data-linenumber="305"><td class="num" id="LN305">305</td><td class="line">  <span class='keyword'>static_assert</span>(<span class='macro'>SSL_VERIFY_NONE<span class='macro_popup'>0x00</span></span> == 0);</td></tr>
+<tr class="codeline" data-linenumber="306"><td class="num" id="LN306">306</td><td class="line">  <span class='keyword'>return</span> getVerificationMode(verifyClient_) |</td></tr>
+<tr class="codeline" data-linenumber="307"><td class="num" id="LN307">307</td><td class="line">      getVerificationMode(verifyServer_) | getVerificationMode(verifyPeer_);</td></tr>
+<tr class="codeline" data-linenumber="308"><td class="num" id="LN308">308</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="309"><td class="num" id="LN309">309</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="310"><td class="num" id="LN310">310</td><td class="line"><span class='keyword'>void</span> SSLContext::authenticate(</td></tr>
+<tr class="codeline" data-linenumber="311"><td class="num" id="LN311">311</td><td class="line">    <span class='keyword'>bool</span> checkPeerCert, <span class='keyword'>bool</span> checkPeerName, <span class='keyword'>const</span> std::string&amp; peerName) {</td></tr>
+<tr class="codeline" data-linenumber="312"><td class="num" id="LN312">312</td><td class="line">  <span class='keyword'>int</span> mode;</td></tr>
+<tr class="codeline" data-linenumber="313"><td class="num" id="LN313">313</td><td class="line">  <span class='keyword'>if</span> (checkPeerCert) {</td></tr>
+<tr class="codeline" data-linenumber="314"><td class="num" id="LN314">314</td><td class="line">    mode = <span class='macro'>SSL_VERIFY_PEER<span class='macro_popup'>0x01</span></span> | <span class='macro'>SSL_VERIFY_FAIL_IF_NO_PEER_CERT<span class='macro_popup'>0x02</span></span> |</td></tr>
+<tr class="codeline" data-linenumber="315"><td class="num" id="LN315">315</td><td class="line">        <span class='macro'>SSL_VERIFY_CLIENT_ONCE<span class='macro_popup'>0x04</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="316"><td class="num" id="LN316">316</td><td class="line">    checkPeerName_ = checkPeerName;</td></tr>
+<tr class="codeline" data-linenumber="317"><td class="num" id="LN317">317</td><td class="line">    peerFixedName_ = peerName;</td></tr>
+<tr class="codeline" data-linenumber="318"><td class="num" id="LN318">318</td><td class="line">  } <span class='keyword'>else</span> {</td></tr>
+<tr class="codeline" data-linenumber="319"><td class="num" id="LN319">319</td><td class="line">    mode = <span class='macro'>SSL_VERIFY_NONE<span class='macro_popup'>0x00</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="320"><td class="num" id="LN320">320</td><td class="line">    checkPeerName_ = <span class='keyword'>false</span>; <span class='comment'>// can't check name without cert!</span></td></tr>
+<tr class="codeline" data-linenumber="321"><td class="num" id="LN321">321</td><td class="line">    peerFixedName_.clear();</td></tr>
+<tr class="codeline" data-linenumber="322"><td class="num" id="LN322">322</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="323"><td class="num" id="LN323">323</td><td class="line">  SSL_CTX_set_verify(ctx_, mode, <span class='keyword'>nullptr</span>);</td></tr>
+<tr class="codeline" data-linenumber="324"><td class="num" id="LN324">324</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="325"><td class="num" id="LN325">325</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="326"><td class="num" id="LN326">326</td><td class="line"><span class='keyword'>void</span> SSLContext::loadCertificate(<span class='keyword'>const</span> <span class='keyword'>char</span>* path, <span class='keyword'>const</span> <span class='keyword'>char</span>* format) {</td></tr>
+<tr class="codeline" data-linenumber="327"><td class="num" id="LN327">327</td><td class="line">  <span class='keyword'>if</span> (path == <span class='keyword'>nullptr</span> || format == <span class='keyword'>nullptr</span>) {</td></tr>
+<tr class="codeline" data-linenumber="328"><td class="num" id="LN328">328</td><td class="line">    <span class='keyword'>throw</span> std::invalid_argument(</td></tr>
+<tr class="codeline" data-linenumber="329"><td class="num" id="LN329">329</td><td class="line">        <span class='string_literal'>"loadCertificateChain: either &lt;path&gt; or &lt;format&gt; is nullptr"</span>);</td></tr>
+<tr class="codeline" data-linenumber="330"><td class="num" id="LN330">330</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="331"><td class="num" id="LN331">331</td><td class="line">  <span class='keyword'>if</span> (strcmp(format, <span class='string_literal'>"PEM"</span>) == 0) {</td></tr>
+<tr class="codeline" data-linenumber="332"><td class="num" id="LN332">332</td><td class="line">    <span class='keyword'>if</span> (SSL_CTX_use_certificate_chain_file(ctx_, path) != 1) {</td></tr>
+<tr class="codeline" data-linenumber="333"><td class="num" id="LN333">333</td><td class="line">      <span class='keyword'>int</span> errnoCopy = <span class='macro'>errno<span class='macro_popup'>(*__errno_location ())</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="334"><td class="num" id="LN334">334</td><td class="line">      std::string reason(<span class='string_literal'>"SSL_CTX_use_certificate_chain_file: "</span>);</td></tr>
+<tr class="codeline" data-linenumber="335"><td class="num" id="LN335">335</td><td class="line">      reason.append(path);</td></tr>
+<tr class="codeline" data-linenumber="336"><td class="num" id="LN336">336</td><td class="line">      reason.append(<span class='string_literal'>": "</span>);</td></tr>
+<tr class="codeline" data-linenumber="337"><td class="num" id="LN337">337</td><td class="line">      reason.append(getErrors(errnoCopy));</td></tr>
+<tr class="codeline" data-linenumber="338"><td class="num" id="LN338">338</td><td class="line">      <span class='keyword'>throw</span> std::runtime_error(reason);</td></tr>
+<tr class="codeline" data-linenumber="339"><td class="num" id="LN339">339</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="340"><td class="num" id="LN340">340</td><td class="line">  } <span class='keyword'>else</span> {</td></tr>
+<tr class="codeline" data-linenumber="341"><td class="num" id="LN341">341</td><td class="line">    <span class='keyword'>throw</span> std::runtime_error(</td></tr>
+<tr class="codeline" data-linenumber="342"><td class="num" id="LN342">342</td><td class="line">        <span class='string_literal'>"Unsupported certificate format: "</span> + std::string(format));</td></tr>
+<tr class="codeline" data-linenumber="343"><td class="num" id="LN343">343</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="344"><td class="num" id="LN344">344</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="345"><td class="num" id="LN345">345</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="346"><td class="num" id="LN346">346</td><td class="line"><span class='keyword'>void</span> SSLContext::loadCertificateFromBufferPEM(folly::StringPiece cert) {</td></tr>
+<tr class="codeline" data-linenumber="347"><td class="num" id="LN347">347</td><td class="line">  <span class='keyword'>if</span> (cert.data() == <span class='keyword'>nullptr</span>) {</td></tr>
+<tr class="codeline" data-linenumber="348"><td class="num" id="LN348">348</td><td class="line">    <span class='keyword'>throw</span> std::invalid_argument(<span class='string_literal'>"loadCertificate: &lt;cert&gt; is nullptr"</span>);</td></tr>
+<tr class="codeline" data-linenumber="349"><td class="num" id="LN349">349</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="350"><td class="num" id="LN350">350</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="351"><td class="num" id="LN351">351</td><td class="line">  ssl::BioUniquePtr bio(BIO_new(BIO_s_mem()));</td></tr>
+<tr class="codeline" data-linenumber="352"><td class="num" id="LN352">352</td><td class="line">  <span class='keyword'>if</span> (bio == <span class='keyword'>nullptr</span>) {</td></tr>
+<tr class="codeline" data-linenumber="353"><td class="num" id="LN353">353</td><td class="line">    <span class='keyword'>throw</span> std::runtime_error(<span class='string_literal'>"BIO_new: "</span> + getErrors());</td></tr>
+<tr class="codeline" data-linenumber="354"><td class="num" id="LN354">354</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="355"><td class="num" id="LN355">355</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="356"><td class="num" id="LN356">356</td><td class="line">  <span class='keyword'>int</span> written = BIO_write(bio.get(), cert.data(), <span class='keyword'>int</span>(cert.size()));</td></tr>
+<tr class="codeline" data-linenumber="357"><td class="num" id="LN357">357</td><td class="line">  <span class='keyword'>if</span> (written &lt;= 0 || <span class='keyword'>static_cast</span>&lt;<span class='keyword'>unsigned</span>&gt;(written) != cert.size()) {</td></tr>
+<tr class="codeline" data-linenumber="358"><td class="num" id="LN358">358</td><td class="line">    <span class='keyword'>throw</span> std::runtime_error(<span class='string_literal'>"BIO_write: "</span> + getErrors());</td></tr>
+<tr class="codeline" data-linenumber="359"><td class="num" id="LN359">359</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="360"><td class="num" id="LN360">360</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="361"><td class="num" id="LN361">361</td><td class="line">  ssl::X509UniquePtr x509(</td></tr>
+<tr class="codeline" data-linenumber="362"><td class="num" id="LN362">362</td><td class="line">      PEM_read_bio_X509(bio.get(), <span class='keyword'>nullptr</span>, <span class='keyword'>nullptr</span>, <span class='keyword'>nullptr</span>));</td></tr>
+<tr class="codeline" data-linenumber="363"><td class="num" id="LN363">363</td><td class="line">  <span class='keyword'>if</span> (x509 == <span class='keyword'>nullptr</span>) {</td></tr>
+<tr class="codeline" data-linenumber="364"><td class="num" id="LN364">364</td><td class="line">    <span class='keyword'>throw</span> std::runtime_error(<span class='string_literal'>"PEM_read_bio_X509: "</span> + getErrors());</td></tr>
+<tr class="codeline" data-linenumber="365"><td class="num" id="LN365">365</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="366"><td class="num" id="LN366">366</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="367"><td class="num" id="LN367">367</td><td class="line">  <span class='keyword'>if</span> (SSL_CTX_use_certificate(ctx_, x509.get()) == 0) {</td></tr>
+<tr class="codeline" data-linenumber="368"><td class="num" id="LN368">368</td><td class="line">    <span class='keyword'>throw</span> std::runtime_error(<span class='string_literal'>"SSL_CTX_use_certificate: "</span> + getErrors());</td></tr>
+<tr class="codeline" data-linenumber="369"><td class="num" id="LN369">369</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="370"><td class="num" id="LN370">370</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="371"><td class="num" id="LN371">371</td><td class="line">  <span class='comment'>// Any further X509 PEM blocks are treated as additional certificates in</span></td></tr>
+<tr class="codeline" data-linenumber="372"><td class="num" id="LN372">372</td><td class="line">  <span class='comment'>// the certificate chain.</span></td></tr>
+<tr class="codeline" data-linenumber="373"><td class="num" id="LN373">373</td><td class="line">  <span class='keyword'>constexpr</span> size_t kMaxCertChain = 64;</td></tr>
+<tr class="codeline" data-linenumber="374"><td class="num" id="LN374">374</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="375"><td class="num" id="LN375">375</td><td class="line">  <span class='keyword'>for</span> (size_t i = 0; i &lt; kMaxCertChain; i++) {</td></tr>
+<tr class="codeline" data-linenumber="376"><td class="num" id="LN376">376</td><td class="line">    x509.reset(PEM_read_bio_X509(bio.get(), <span class='keyword'>nullptr</span>, <span class='keyword'>nullptr</span>, <span class='keyword'>nullptr</span>));</td></tr>
+<tr class="codeline" data-linenumber="377"><td class="num" id="LN377">377</td><td class="line">    <span class='keyword'>if</span> (x509 == <span class='keyword'>nullptr</span>) {</td></tr>
+<tr class="codeline" data-linenumber="378"><td class="num" id="LN378">378</td><td class="line">      ERR_clear_error();</td></tr>
+<tr class="codeline" data-linenumber="379"><td class="num" id="LN379">379</td><td class="line">      <span class='keyword'>return</span>;</td></tr>
+<tr class="codeline" data-linenumber="380"><td class="num" id="LN380">380</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="381"><td class="num" id="LN381">381</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="382"><td class="num" id="LN382">382</td><td class="line">    <span class='keyword'>if</span> (<span class='macro'>SSL_CTX_add1_chain_cert(ctx_, x509.get())<span class='macro_popup'>SSL_CTX_ctrl(ctx_,89,1,(char *)(x509.get()))</span></span> == 0) {</td></tr>
+<tr class="codeline" data-linenumber="383"><td class="num" id="LN383">383</td><td class="line">      <span class='keyword'>throw</span> std::runtime_error(<span class='string_literal'>"SSL_CTX_add0_chain_cert: "</span> + getErrors());</td></tr>
+<tr class="codeline" data-linenumber="384"><td class="num" id="LN384">384</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="385"><td class="num" id="LN385">385</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="386"><td class="num" id="LN386">386</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="387"><td class="num" id="LN387">387</td><td class="line">  <span class='keyword'>throw</span> std::runtime_error(</td></tr>
+<tr class="codeline" data-linenumber="388"><td class="num" id="LN388">388</td><td class="line">      <span class='string_literal'>"loadCertificateFromBufferPEM(): Too many certificates in chain"</span>);</td></tr>
+<tr class="codeline" data-linenumber="389"><td class="num" id="LN389">389</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="390"><td class="num" id="LN390">390</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="391"><td class="num" id="LN391">391</td><td class="line"><span class='keyword'>void</span> SSLContext::loadPrivateKey(<span class='keyword'>const</span> <span class='keyword'>char</span>* path, <span class='keyword'>const</span> <span class='keyword'>char</span>* format) {</td></tr>
+<tr class="codeline" data-linenumber="392"><td class="num" id="LN392">392</td><td class="line">  <span class='keyword'>if</span> (path == <span class='keyword'>nullptr</span> || format == <span class='keyword'>nullptr</span>) {</td></tr>
+<tr class="codeline" data-linenumber="393"><td class="num" id="LN393">393</td><td class="line">    <span class='keyword'>throw</span> std::invalid_argument(</td></tr>
+<tr class="codeline" data-linenumber="394"><td class="num" id="LN394">394</td><td class="line">        <span class='string_literal'>"loadPrivateKey: either &lt;path&gt; or &lt;format&gt; is nullptr"</span>);</td></tr>
+<tr class="codeline" data-linenumber="395"><td class="num" id="LN395">395</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="396"><td class="num" id="LN396">396</td><td class="line">  <span class='keyword'>if</span> (strcmp(format, <span class='string_literal'>"PEM"</span>) == 0) {</td></tr>
+<tr class="codeline" data-linenumber="397"><td class="num" id="LN397">397</td><td class="line">    <span class='keyword'>if</span> (SSL_CTX_use_PrivateKey_file(ctx_, path, <span class='macro'>SSL_FILETYPE_PEM<span class='macro_popup'>1</span></span>) == 0) {</td></tr>
+<tr class="codeline" data-linenumber="398"><td class="num" id="LN398">398</td><td class="line">      <span class='keyword'>throw</span> std::runtime_error(<span class='string_literal'>"SSL_CTX_use_PrivateKey_file: "</span> + getErrors());</td></tr>
+<tr class="codeline" data-linenumber="399"><td class="num" id="LN399">399</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="400"><td class="num" id="LN400">400</td><td class="line">  } <span class='keyword'>else</span> {</td></tr>
+<tr class="codeline" data-linenumber="401"><td class="num" id="LN401">401</td><td class="line">    <span class='keyword'>throw</span> std::runtime_error(</td></tr>
+<tr class="codeline" data-linenumber="402"><td class="num" id="LN402">402</td><td class="line">        <span class='string_literal'>"Unsupported private key format: "</span> + std::string(format));</td></tr>
+<tr class="codeline" data-linenumber="403"><td class="num" id="LN403">403</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="404"><td class="num" id="LN404">404</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="405"><td class="num" id="LN405">405</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="406"><td class="num" id="LN406">406</td><td class="line"><span class='keyword'>void</span> SSLContext::loadPrivateKeyFromBufferPEM(folly::StringPiece pkey) {</td></tr>
+<tr class="codeline" data-linenumber="407"><td class="num" id="LN407">407</td><td class="line">  <span class='keyword'>if</span> (pkey.data() == <span class='keyword'>nullptr</span>) {</td></tr>
+<tr class="codeline" data-linenumber="408"><td class="num" id="LN408">408</td><td class="line">    <span class='keyword'>throw</span> std::invalid_argument(<span class='string_literal'>"loadPrivateKey: &lt;pkey&gt; is nullptr"</span>);</td></tr>
+<tr class="codeline" data-linenumber="409"><td class="num" id="LN409">409</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="410"><td class="num" id="LN410">410</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="411"><td class="num" id="LN411">411</td><td class="line">  ssl::BioUniquePtr bio(BIO_new(BIO_s_mem()));</td></tr>
+<tr class="codeline" data-linenumber="412"><td class="num" id="LN412">412</td><td class="line">  <span class='keyword'>if</span> (bio == <span class='keyword'>nullptr</span>) {</td></tr>
+<tr class="codeline" data-linenumber="413"><td class="num" id="LN413">413</td><td class="line">    <span class='keyword'>throw</span> std::runtime_error(<span class='string_literal'>"BIO_new: "</span> + getErrors());</td></tr>
+<tr class="codeline" data-linenumber="414"><td class="num" id="LN414">414</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="415"><td class="num" id="LN415">415</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="416"><td class="num" id="LN416">416</td><td class="line">  <span class='keyword'>int</span> written = BIO_write(bio.get(), pkey.data(), <span class='keyword'>int</span>(pkey.size()));</td></tr>
+<tr class="codeline" data-linenumber="417"><td class="num" id="LN417">417</td><td class="line">  <span class='keyword'>if</span> (written &lt;= 0 || <span class='keyword'>static_cast</span>&lt;<span class='keyword'>unsigned</span>&gt;(written) != pkey.size()) {</td></tr>
+<tr class="codeline" data-linenumber="418"><td class="num" id="LN418">418</td><td class="line">    <span class='keyword'>throw</span> std::runtime_error(<span class='string_literal'>"BIO_write: "</span> + getErrors());</td></tr>
+<tr class="codeline" data-linenumber="419"><td class="num" id="LN419">419</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="420"><td class="num" id="LN420">420</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="421"><td class="num" id="LN421">421</td><td class="line">  ssl::EvpPkeyUniquePtr key(</td></tr>
+<tr class="codeline" data-linenumber="422"><td class="num" id="LN422">422</td><td class="line">      PEM_read_bio_PrivateKey(bio.get(), <span class='keyword'>nullptr</span>, <span class='keyword'>nullptr</span>, <span class='keyword'>nullptr</span>));</td></tr>
+<tr class="codeline" data-linenumber="423"><td class="num" id="LN423">423</td><td class="line">  <span class='keyword'>if</span> (key == <span class='keyword'>nullptr</span>) {</td></tr>
+<tr class="codeline" data-linenumber="424"><td class="num" id="LN424">424</td><td class="line">    <span class='keyword'>throw</span> std::runtime_error(<span class='string_literal'>"PEM_read_bio_PrivateKey: "</span> + getErrors());</td></tr>
+<tr class="codeline" data-linenumber="425"><td class="num" id="LN425">425</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="426"><td class="num" id="LN426">426</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="427"><td class="num" id="LN427">427</td><td class="line">  <span class='keyword'>if</span> (SSL_CTX_use_PrivateKey(ctx_, key.get()) == 0) {</td></tr>
+<tr class="codeline" data-linenumber="428"><td class="num" id="LN428">428</td><td class="line">    <span class='keyword'>throw</span> std::runtime_error(<span class='string_literal'>"SSL_CTX_use_PrivateKey: "</span> + getErrors());</td></tr>
+<tr class="codeline" data-linenumber="429"><td class="num" id="LN429">429</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="430"><td class="num" id="LN430">430</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="431"><td class="num" id="LN431">431</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="432"><td class="num" id="LN432">432</td><td class="line"><span class='keyword'>void</span> SSLContext::loadCertKeyPairFromBufferPEM(</td></tr>
+<tr class="codeline" data-linenumber="433"><td class="num" id="LN433">433</td><td class="line">    folly::StringPiece cert, folly::StringPiece pkey) {</td></tr>
+<tr class="codeline" data-linenumber="434"><td class="num" id="LN434">434</td><td class="line">  loadCertificateFromBufferPEM(cert);</td></tr>
+<tr class="codeline" data-linenumber="435"><td class="num" id="LN435">435</td><td class="line">  loadPrivateKeyFromBufferPEM(pkey);</td></tr>
+<tr class="codeline" data-linenumber="436"><td class="num" id="LN436">436</td><td class="line">  <span class='keyword'>if</span> (!isCertKeyPairValid()) {</td></tr>
+<tr class="codeline" data-linenumber="437"><td class="num" id="LN437">437</td><td class="line">    <span class='keyword'>throw</span> std::runtime_error(<span class='string_literal'>"SSL certificate and private key do not match"</span>);</td></tr>
+<tr class="codeline" data-linenumber="438"><td class="num" id="LN438">438</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="439"><td class="num" id="LN439">439</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="440"><td class="num" id="LN440">440</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="441"><td class="num" id="LN441">441</td><td class="line"><span class='keyword'>void</span> SSLContext::loadCertKeyPairFromFiles(</td></tr>
+<tr class="codeline" data-linenumber="442"><td class="num" id="LN442">442</td><td class="line">    <span class='keyword'>const</span> <span class='keyword'>char</span>* certPath,</td></tr>
+<tr class="codeline" data-linenumber="443"><td class="num" id="LN443">443</td><td class="line">    <span class='keyword'>const</span> <span class='keyword'>char</span>* keyPath,</td></tr>
+<tr class="codeline" data-linenumber="444"><td class="num" id="LN444">444</td><td class="line">    <span class='keyword'>const</span> <span class='keyword'>char</span>* certFormat,</td></tr>
+<tr class="codeline" data-linenumber="445"><td class="num" id="LN445">445</td><td class="line">    <span class='keyword'>const</span> <span class='keyword'>char</span>* keyFormat) {</td></tr>
+<tr class="codeline" data-linenumber="446"><td class="num" id="LN446">446</td><td class="line">  loadCertificate(certPath, certFormat);</td></tr>
+<tr class="codeline" data-linenumber="447"><td class="num" id="LN447">447</td><td class="line">  loadPrivateKey(keyPath, keyFormat);</td></tr>
+<tr class="codeline" data-linenumber="448"><td class="num" id="LN448">448</td><td class="line">  <span class='keyword'>if</span> (!isCertKeyPairValid()) {</td></tr>
+<tr class="codeline" data-linenumber="449"><td class="num" id="LN449">449</td><td class="line">    <span class='keyword'>throw</span> std::runtime_error(<span class='string_literal'>"SSL certificate and private key do not match"</span>);</td></tr>
+<tr class="codeline" data-linenumber="450"><td class="num" id="LN450">450</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="451"><td class="num" id="LN451">451</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="452"><td class="num" id="LN452">452</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="453"><td class="num" id="LN453">453</td><td class="line"><span class='keyword'>bool</span> SSLContext::isCertKeyPairValid() <span class='keyword'>const</span> {</td></tr>
+<tr class="codeline" data-linenumber="454"><td class="num" id="LN454">454</td><td class="line">  <span class='keyword'>return</span> SSL_CTX_check_private_key(ctx_) == 1;</td></tr>
+<tr class="codeline" data-linenumber="455"><td class="num" id="LN455">455</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="456"><td class="num" id="LN456">456</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="457"><td class="num" id="LN457">457</td><td class="line"><span class='keyword'>void</span> SSLContext::loadTrustedCertificates(<span class='keyword'>const</span> <span class='keyword'>char</span>* path) {</td></tr>
+<tr class="codeline" data-linenumber="458"><td class="num" id="LN458">458</td><td class="line">  <span class='keyword'>if</span> (path == <span class='keyword'>nullptr</span>) {</td></tr>
+<tr class="codeline" data-linenumber="459"><td class="num" id="LN459">459</td><td class="line">    <span class='keyword'>throw</span> std::invalid_argument(<span class='string_literal'>"loadTrustedCertificates: &lt;path&gt; is nullptr"</span>);</td></tr>
+<tr class="codeline" data-linenumber="460"><td class="num" id="LN460">460</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="461"><td class="num" id="LN461">461</td><td class="line">  <span class='keyword'>if</span> (SSL_CTX_load_verify_locations(ctx_, path, <span class='keyword'>nullptr</span>) == 0) {</td></tr>
+<tr class="codeline" data-linenumber="462"><td class="num" id="LN462">462</td><td class="line">    <span class='keyword'>throw</span> std::runtime_error(<span class='string_literal'>"SSL_CTX_load_verify_locations: "</span> + getErrors());</td></tr>
+<tr class="codeline" data-linenumber="463"><td class="num" id="LN463">463</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="464"><td class="num" id="LN464">464</td><td class="line">  ERR_clear_error();</td></tr>
+<tr class="codeline" data-linenumber="465"><td class="num" id="LN465">465</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="466"><td class="num" id="LN466">466</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="467"><td class="num" id="LN467">467</td><td class="line"><span class='keyword'>void</span> SSLContext::loadTrustedCertificates(X509_STORE* store) {</td></tr>
+<tr class="codeline" data-linenumber="468"><td class="num" id="LN468">468</td><td class="line">  SSL_CTX_set_cert_store(ctx_, store);</td></tr>
+<tr class="codeline" data-linenumber="469"><td class="num" id="LN469">469</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="470"><td class="num" id="LN470">470</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="471"><td class="num" id="LN471">471</td><td class="line"><span class='keyword'>void</span> SSLContext::loadClientCAList(<span class='keyword'>const</span> <span class='keyword'>char</span>* path) {</td></tr>
+<tr class="codeline" data-linenumber="472"><td class="num" id="LN472">472</td><td class="line">  <span class='keyword'>auto</span> clientCAs = SSL_load_client_CA_file(path);</td></tr>
+<tr class="codeline" data-linenumber="473"><td class="num" id="LN473">473</td><td class="line">  <span class='keyword'>if</span> (clientCAs == <span class='keyword'>nullptr</span>) {</td></tr>
+<tr class="codeline" data-linenumber="474"><td class="num" id="LN474">474</td><td class="line">    <span class='macro'>LOG(ERROR)<span class='macro_popup'>google::LogMessage( "/home/zhh/inject/null/folly/folly/io/async/SSLContext.cpp"<br>, 474, google::GLOG_ERROR).stream()</span></span> &lt;&lt; <span class='string_literal'>"Unable to load ca file: "</span> &lt;&lt; path &lt;&lt; <span class='string_literal'>" "</span> &lt;&lt; getErrors();</td></tr>
+<tr class="codeline" data-linenumber="475"><td class="num" id="LN475">475</td><td class="line">    <span class='keyword'>return</span>;</td></tr>
+<tr class="codeline" data-linenumber="476"><td class="num" id="LN476">476</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="477"><td class="num" id="LN477">477</td><td class="line">  SSL_CTX_set_client_CA_list(ctx_, clientCAs);</td></tr>
+<tr class="codeline" data-linenumber="478"><td class="num" id="LN478">478</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="479"><td class="num" id="LN479">479</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="480"><td class="num" id="LN480">480</td><td class="line"><span class='keyword'>void</span> SSLContext::passwordCollector(</td></tr>
+<tr class="codeline" data-linenumber="481"><td class="num" id="LN481">481</td><td class="line">    std::shared_ptr&lt;PasswordCollector&gt; collector) {</td></tr>
+<tr class="codeline" data-linenumber="482"><td class="num" id="LN482">482</td><td class="line">  <span class='keyword'>if</span> (collector == <span class='keyword'>nullptr</span>) {</td></tr>
+<tr class="codeline" data-linenumber="483"><td class="num" id="LN483">483</td><td class="line">    <span class='macro'>LOG(ERROR)<span class='macro_popup'>google::LogMessage( "/home/zhh/inject/null/folly/folly/io/async/SSLContext.cpp"<br>, 483, google::GLOG_ERROR).stream()</span></span> &lt;&lt; <span class='string_literal'>"passwordCollector: ignore invalid password collector"</span>;</td></tr>
+<tr class="codeline" data-linenumber="484"><td class="num" id="LN484">484</td><td class="line">    <span class='keyword'>return</span>;</td></tr>
+<tr class="codeline" data-linenumber="485"><td class="num" id="LN485">485</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="486"><td class="num" id="LN486">486</td><td class="line">  collector_ = collector;</td></tr>
+<tr class="codeline" data-linenumber="487"><td class="num" id="LN487">487</td><td class="line">  SSL_CTX_set_default_passwd_cb(ctx_, passwordCallback);</td></tr>
+<tr class="codeline" data-linenumber="488"><td class="num" id="LN488">488</td><td class="line">  SSL_CTX_set_default_passwd_cb_userdata(ctx_, <span class='keyword'>this</span>);</td></tr>
+<tr class="codeline" data-linenumber="489"><td class="num" id="LN489">489</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="490"><td class="num" id="LN490">490</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="491"><td class="num" id="LN491">491</td><td class="line"><span class='directive'>#if <span class='macro'>FOLLY_OPENSSL_HAS_SNI<span class='macro_popup'>1</span></span></span></td></tr>
+<tr class="codeline" data-linenumber="492"><td class="num" id="LN492">492</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="493"><td class="num" id="LN493">493</td><td class="line"><span class='keyword'>void</span> SSLContext::setServerNameCallback(<span class='keyword'>const</span> ServerNameCallback&amp; cb) {</td></tr>
+<tr class="codeline" data-linenumber="494"><td class="num" id="LN494">494</td><td class="line">  serverNameCb_ = cb;</td></tr>
+<tr class="codeline" data-linenumber="495"><td class="num" id="LN495">495</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="496"><td class="num" id="LN496">496</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="497"><td class="num" id="LN497">497</td><td class="line"><span class='keyword'>void</span> SSLContext::addClientHelloCallback(<span class='keyword'>const</span> ClientHelloCallback&amp; cb) {</td></tr>
+<tr class="codeline" data-linenumber="498"><td class="num" id="LN498">498</td><td class="line">  clientHelloCbs_.push_back(cb);</td></tr>
+<tr class="codeline" data-linenumber="499"><td class="num" id="LN499">499</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="500"><td class="num" id="LN500">500</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="501"><td class="num" id="LN501">501</td><td class="line"><span class='keyword'>int</span> SSLContext::baseServerNameOpenSSLCallback(SSL* ssl, <span class='keyword'>int</span>* al, <span class='keyword'>void</span>* data) {</td></tr>
+<tr class="codeline" data-linenumber="502"><td class="num" id="LN502">502</td><td class="line">  <span class='keyword'>auto</span> context = (SSLContext*)data;</td></tr>
+<tr class="codeline" data-linenumber="503"><td class="num" id="LN503">503</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="504"><td class="num" id="LN504">504</td><td class="line">  <span class='keyword'>if</span> (context == <span class='keyword'>nullptr</span>) {</td></tr>
+<tr class="codeline" data-linenumber="505"><td class="num" id="LN505">505</td><td class="line">    <span class='keyword'>return</span> <span class='macro'>SSL_TLSEXT_ERR_NOACK<span class='macro_popup'>3</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="506"><td class="num" id="LN506">506</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="507"><td class="num" id="LN507">507</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="508"><td class="num" id="LN508">508</td><td class="line">  <span class='keyword'>for</span> (<span class='keyword'>auto</span>&amp; cb : context-&gt;clientHelloCbs_) {</td></tr>
+<tr class="codeline" data-linenumber="509"><td class="num" id="LN509">509</td><td class="line">    <span class='comment'>// Generic callbacks to happen after we receive the Client Hello.</span></td></tr>
+<tr class="codeline" data-linenumber="510"><td class="num" id="LN510">510</td><td class="line">    <span class='comment'>// For example, we use one to switch which cipher we use depending</span></td></tr>
+<tr class="codeline" data-linenumber="511"><td class="num" id="LN511">511</td><td class="line">    <span class='comment'>// on the user's TLS version.  Because the primary purpose of</span></td></tr>
+<tr class="codeline" data-linenumber="512"><td class="num" id="LN512">512</td><td class="line">    <span class='comment'>// baseServerNameOpenSSLCallback is for SNI support, and these callbacks</span></td></tr>
+<tr class="codeline" data-linenumber="513"><td class="num" id="LN513">513</td><td class="line">    <span class='comment'>// are side-uses, we ignore any possible failures other than just logging</span></td></tr>
+<tr class="codeline" data-linenumber="514"><td class="num" id="LN514">514</td><td class="line">    <span class='comment'>// them.</span></td></tr>
+<tr class="codeline" data-linenumber="515"><td class="num" id="LN515">515</td><td class="line">    cb(ssl);</td></tr>
+<tr class="codeline" data-linenumber="516"><td class="num" id="LN516">516</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="517"><td class="num" id="LN517">517</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="518"><td class="num" id="LN518">518</td><td class="line">  <span class='keyword'>if</span> (!context-&gt;serverNameCb_) {</td></tr>
+<tr class="codeline" data-linenumber="519"><td class="num" id="LN519">519</td><td class="line">    <span class='keyword'>return</span> <span class='macro'>SSL_TLSEXT_ERR_NOACK<span class='macro_popup'>3</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="520"><td class="num" id="LN520">520</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="521"><td class="num" id="LN521">521</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="522"><td class="num" id="LN522">522</td><td class="line">  ServerNameCallbackResult ret = context-&gt;serverNameCb_(ssl);</td></tr>
+<tr class="codeline" data-linenumber="523"><td class="num" id="LN523">523</td><td class="line">  <span class='keyword'>switch</span> (ret) {</td></tr>
+<tr class="codeline" data-linenumber="524"><td class="num" id="LN524">524</td><td class="line">    <span class='keyword'>case</span> SERVER_NAME_FOUND:</td></tr>
+<tr class="codeline" data-linenumber="525"><td class="num" id="LN525">525</td><td class="line">      <span class='keyword'>return</span> <span class='macro'>SSL_TLSEXT_ERR_OK<span class='macro_popup'>0</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="526"><td class="num" id="LN526">526</td><td class="line">    <span class='keyword'>case</span> SERVER_NAME_NOT_FOUND:</td></tr>
+<tr class="codeline" data-linenumber="527"><td class="num" id="LN527">527</td><td class="line">      <span class='keyword'>return</span> <span class='macro'>SSL_TLSEXT_ERR_NOACK<span class='macro_popup'>3</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="528"><td class="num" id="LN528">528</td><td class="line">    <span class='keyword'>case</span> SERVER_NAME_NOT_FOUND_ALERT_FATAL:</td></tr>
+<tr class="codeline" data-linenumber="529"><td class="num" id="LN529">529</td><td class="line">      *al = <span class='macro'>TLS1_AD_UNRECOGNIZED_NAME<span class='macro_popup'>112</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="530"><td class="num" id="LN530">530</td><td class="line">      <span class='keyword'>return</span> <span class='macro'>SSL_TLSEXT_ERR_ALERT_FATAL<span class='macro_popup'>2</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="531"><td class="num" id="LN531">531</td><td class="line">    <span class='keyword'>default</span>:</td></tr>
+<tr class="codeline" data-linenumber="532"><td class="num" id="LN532">532</td><td class="line">      <span class='macro'>CHECK(<span class='keyword'>false</span>)<span class='macro_popup'>static_cast&lt;void&gt;(0), !((__builtin_expect(!(false), 0))<br>) ? (void) 0 : google::LogMessageVoidify() &amp; google::LogMessageFatal<br>( "/home/zhh/inject/null/folly/folly/io/async/SSLContext.cpp"<br>, 532).stream() &lt;&lt; "Check failed: " "false" " "</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="533"><td class="num" id="LN533">533</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="534"><td class="num" id="LN534">534</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="535"><td class="num" id="LN535">535</td><td class="line">  <span class='keyword'>return</span> <span class='macro'>SSL_TLSEXT_ERR_NOACK<span class='macro_popup'>3</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="536"><td class="num" id="LN536">536</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="537"><td class="num" id="LN537">537</td><td class="line"><span class='directive'>#endif // FOLLY_OPENSSL_HAS_SNI</span></td></tr>
+<tr class="codeline" data-linenumber="538"><td class="num" id="LN538">538</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="539"><td class="num" id="LN539">539</td><td class="line"><span class='directive'>#if <span class='macro'>FOLLY_OPENSSL_HAS_ALPN<span class='macro_popup'>1</span></span></span></td></tr>
+<tr class="codeline" data-linenumber="540"><td class="num" id="LN540">540</td><td class="line"><span class='keyword'>int</span> SSLContext::alpnSelectCallback(</td></tr>
+<tr class="codeline" data-linenumber="541"><td class="num" id="LN541">541</td><td class="line">    SSL* <span class='comment'>/* ssl */</span>,</td></tr>
+<tr class="codeline" data-linenumber="542"><td class="num" id="LN542">542</td><td class="line">    <span class='keyword'>const</span> <span class='keyword'>unsigned</span> <span class='keyword'>char</span>** out,</td></tr>
+<tr class="codeline" data-linenumber="543"><td class="num" id="LN543">543</td><td class="line">    <span class='keyword'>unsigned</span> <span class='keyword'>char</span>* outlen,</td></tr>
+<tr class="codeline" data-linenumber="544"><td class="num" id="LN544">544</td><td class="line">    <span class='keyword'>const</span> <span class='keyword'>unsigned</span> <span class='keyword'>char</span>* in,</td></tr>
+<tr class="codeline" data-linenumber="545"><td class="num" id="LN545">545</td><td class="line">    <span class='keyword'>unsigned</span> <span class='keyword'>int</span> inlen,</td></tr>
+<tr class="codeline" data-linenumber="546"><td class="num" id="LN546">546</td><td class="line">    <span class='keyword'>void</span>* data) {</td></tr>
+<tr class="codeline" data-linenumber="547"><td class="num" id="LN547">547</td><td class="line">  <span class='keyword'>auto</span> context = (SSLContext*)data;</td></tr>
+<tr class="codeline" data-linenumber="548"><td class="num" id="LN548">548</td><td class="line">  <span class='macro'>CHECK(context)<span class='macro_popup'>static_cast&lt;void&gt;(0), !((__builtin_expect(!(context), 0<br>))) ? (void) 0 : google::LogMessageVoidify() &amp; google::LogMessageFatal<br>( "/home/zhh/inject/null/folly/folly/io/async/SSLContext.cpp"<br>, 548).stream() &lt;&lt; "Check failed: " "context" " "</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="549"><td class="num" id="LN549">549</td><td class="line">  <span class='keyword'>if</span> (context-&gt;advertisedNextProtocols_.empty()) {</td></tr>
+<tr class="codeline" data-linenumber="550"><td class="num" id="LN550">550</td><td class="line">    *out = <span class='keyword'>nullptr</span>;</td></tr>
+<tr class="codeline" data-linenumber="551"><td class="num" id="LN551">551</td><td class="line">    *outlen = 0;</td></tr>
+<tr class="codeline" data-linenumber="552"><td class="num" id="LN552">552</td><td class="line">  } <span class='keyword'>else</span> {</td></tr>
+<tr class="codeline" data-linenumber="553"><td class="num" id="LN553">553</td><td class="line">    <span class='keyword'>auto</span> i = context-&gt;pickNextProtocols();</td></tr>
+<tr class="codeline" data-linenumber="554"><td class="num" id="LN554">554</td><td class="line">    <span class='keyword'>const</span> <span class='keyword'>auto</span>&amp; item = context-&gt;advertisedNextProtocols_[i];</td></tr>
+<tr class="codeline" data-linenumber="555"><td class="num" id="LN555">555</td><td class="line">    <span class='keyword'>if</span> (SSL_select_next_proto(</td></tr>
+<tr class="codeline" data-linenumber="556"><td class="num" id="LN556">556</td><td class="line">            (<span class='keyword'>unsigned</span> <span class='keyword'>char</span>**)out,</td></tr>
+<tr class="codeline" data-linenumber="557"><td class="num" id="LN557">557</td><td class="line">            outlen,</td></tr>
+<tr class="codeline" data-linenumber="558"><td class="num" id="LN558">558</td><td class="line">            item.protocols,</td></tr>
+<tr class="codeline" data-linenumber="559"><td class="num" id="LN559">559</td><td class="line">            item.length,</td></tr>
+<tr class="codeline" data-linenumber="560"><td class="num" id="LN560">560</td><td class="line">            in,</td></tr>
+<tr class="codeline" data-linenumber="561"><td class="num" id="LN561">561</td><td class="line">            inlen) != <span class='macro'>OPENSSL_NPN_NEGOTIATED<span class='macro_popup'>1</span></span>) {</td></tr>
+<tr class="codeline" data-linenumber="562"><td class="num" id="LN562">562</td><td class="line">      <span class='keyword'>return</span> <span class='macro'>SSL_TLSEXT_ERR_NOACK<span class='macro_popup'>3</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="563"><td class="num" id="LN563">563</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="564"><td class="num" id="LN564">564</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="565"><td class="num" id="LN565">565</td><td class="line">  <span class='keyword'>return</span> <span class='macro'>SSL_TLSEXT_ERR_OK<span class='macro_popup'>0</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="566"><td class="num" id="LN566">566</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="567"><td class="num" id="LN567">567</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="568"><td class="num" id="LN568">568</td><td class="line"><span class='keyword'>bool</span> SSLContext::setAdvertisedNextProtocols(</td></tr>
+<tr class="codeline" data-linenumber="569"><td class="num" id="LN569">569</td><td class="line">    <span class='keyword'>const</span> std::list&lt;std::string&gt;&amp; protocols) {</td></tr>
+<tr class="codeline" data-linenumber="570"><td class="num" id="LN570">570</td><td class="line">  <span class='keyword'>return</span> setRandomizedAdvertisedNextProtocols({{1, protocols}});</td></tr>
+<tr class="codeline" data-linenumber="571"><td class="num" id="LN571">571</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="572"><td class="num" id="LN572">572</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="573"><td class="num" id="LN573">573</td><td class="line"><span class='keyword'>bool</span> SSLContext::setRandomizedAdvertisedNextProtocols(</td></tr>
+<tr class="codeline" data-linenumber="574"><td class="num" id="LN574">574</td><td class="line">    <span class='keyword'>const</span> std::list&lt;NextProtocolsItem&gt;&amp; items) {</td></tr>
+<tr class="codeline" data-linenumber="575"><td class="num" id="LN575">575</td><td class="line">  unsetNextProtocols();</td></tr>
+<tr class="codeline" data-linenumber="576"><td class="num" id="LN576">576</td><td class="line">  <span class='keyword'>if</span> (items.empty()) {</td></tr>
+<tr class="codeline" data-linenumber="577"><td class="num" id="LN577">577</td><td class="line">    <span class='keyword'>return</span> <span class='keyword'>false</span>;</td></tr>
+<tr class="codeline" data-linenumber="578"><td class="num" id="LN578">578</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="579"><td class="num" id="LN579">579</td><td class="line">  <span class='keyword'>int</span> total_weight = 0;</td></tr>
+<tr class="codeline" data-linenumber="580"><td class="num" id="LN580">580</td><td class="line">  <span class='keyword'>for</span> (<span class='keyword'>const</span> <span class='keyword'>auto</span>&amp; item : items) {</td></tr>
+<tr class="codeline" data-linenumber="581"><td class="num" id="LN581">581</td><td class="line">    <span class='keyword'>if</span> (item.protocols.empty()) {</td></tr>
+<tr class="codeline" data-linenumber="582"><td class="num" id="LN582">582</td><td class="line">      <span class='keyword'>continue</span>;</td></tr>
+<tr class="codeline" data-linenumber="583"><td class="num" id="LN583">583</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="584"><td class="num" id="LN584">584</td><td class="line">    AdvertisedNextProtocolsItem advertised_item;</td></tr>
+<tr class="codeline" data-linenumber="585"><td class="num" id="LN585">585</td><td class="line">    advertised_item.length = 0;</td></tr>
+<tr class="codeline" data-linenumber="586"><td class="num" id="LN586">586</td><td class="line">    <span class='keyword'>for</span> (<span class='keyword'>const</span> <span class='keyword'>auto</span>&amp; proto : item.protocols) {</td></tr>
+<tr class="codeline" data-linenumber="587"><td class="num" id="LN587">587</td><td class="line">      ++advertised_item.length;</td></tr>
+<tr class="codeline" data-linenumber="588"><td class="num" id="LN588">588</td><td class="line">      <span class='keyword'>auto</span> protoLength = proto.length();</td></tr>
+<tr class="codeline" data-linenumber="589"><td class="num" id="LN589">589</td><td class="line">      <span class='keyword'>if</span> (protoLength &gt;= 256) {</td></tr>
+<tr class="codeline" data-linenumber="590"><td class="num" id="LN590">590</td><td class="line">        deleteNextProtocolsStrings();</td></tr>
+<tr class="codeline" data-linenumber="591"><td class="num" id="LN591">591</td><td class="line">        <span class='keyword'>return</span> <span class='keyword'>false</span>;</td></tr>
+<tr class="codeline" data-linenumber="592"><td class="num" id="LN592">592</td><td class="line">      }</td></tr>
+<tr class="codeline" data-linenumber="593"><td class="num" id="LN593">593</td><td class="line">      advertised_item.length += <span class='keyword'>unsigned</span>(protoLength);</td></tr>
+<tr class="codeline" data-linenumber="594"><td class="num" id="LN594">594</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="595"><td class="num" id="LN595">595</td><td class="line">    advertised_item.protocols = <span class='keyword'>new</span> <span class='keyword'>unsigned</span> <span class='keyword'>char</span>[advertised_item.length];</td></tr>
+<tr class="codeline" data-linenumber="596"><td class="num" id="LN596">596</td><td class="line">    <span class='keyword'>if</span> (!advertised_item.protocols) {</td></tr>
+<tr class="codeline" data-linenumber="597"><td class="num" id="LN597">597</td><td class="line">      <span class='keyword'>throw</span> std::runtime_error(<span class='string_literal'>"alloc failure"</span>);</td></tr>
+<tr class="codeline" data-linenumber="598"><td class="num" id="LN598">598</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="599"><td class="num" id="LN599">599</td><td class="line">    <span class='keyword'>unsigned</span> <span class='keyword'>char</span>* dst = advertised_item.protocols;</td></tr>
+<tr class="codeline" data-linenumber="600"><td class="num" id="LN600">600</td><td class="line">    <span class='keyword'>for</span> (<span class='keyword'>auto</span>&amp; proto : item.protocols) {</td></tr>
+<tr class="codeline" data-linenumber="601"><td class="num" id="LN601">601</td><td class="line">      <span class='keyword'>auto</span> protoLength = uint8_t(proto.length());</td></tr>
+<tr class="codeline" data-linenumber="602"><td class="num" id="LN602">602</td><td class="line">      *dst++ = (<span class='keyword'>unsigned</span> <span class='keyword'>char</span>)protoLength;</td></tr>
+<tr class="codeline" data-linenumber="603"><td class="num" id="LN603">603</td><td class="line">      memcpy(dst, proto.data(), protoLength);</td></tr>
+<tr class="codeline" data-linenumber="604"><td class="num" id="LN604">604</td><td class="line">      dst += protoLength;</td></tr>
+<tr class="codeline" data-linenumber="605"><td class="num" id="LN605">605</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="606"><td class="num" id="LN606">606</td><td class="line">    total_weight += item.weight;</td></tr>
+<tr class="codeline" data-linenumber="607"><td class="num" id="LN607">607</td><td class="line">    advertisedNextProtocols_.push_back(advertised_item);</td></tr>
+<tr class="codeline" data-linenumber="608"><td class="num" id="LN608">608</td><td class="line">    advertisedNextProtocolWeights_.push_back(item.weight);</td></tr>
+<tr class="codeline" data-linenumber="609"><td class="num" id="LN609">609</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="610"><td class="num" id="LN610">610</td><td class="line">  <span class='keyword'>if</span> (total_weight == 0) {</td></tr>
+<tr class="codeline" data-linenumber="611"><td class="num" id="LN611">611</td><td class="line">    deleteNextProtocolsStrings();</td></tr>
+<tr class="codeline" data-linenumber="612"><td class="num" id="LN612">612</td><td class="line">    <span class='keyword'>return</span> <span class='keyword'>false</span>;</td></tr>
+<tr class="codeline" data-linenumber="613"><td class="num" id="LN613">613</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="614"><td class="num" id="LN614">614</td><td class="line">  nextProtocolDistribution_ = std::discrete_distribution&lt;&gt;(</td></tr>
+<tr class="codeline" data-linenumber="615"><td class="num" id="LN615">615</td><td class="line">      advertisedNextProtocolWeights_.begin(),</td></tr>
+<tr class="codeline" data-linenumber="616"><td class="num" id="LN616">616</td><td class="line">      advertisedNextProtocolWeights_.end());</td></tr>
+<tr class="codeline" data-linenumber="617"><td class="num" id="LN617">617</td><td class="line">  SSL_CTX_set_alpn_select_cb(ctx_, alpnSelectCallback, <span class='keyword'>this</span>);</td></tr>
+<tr class="codeline" data-linenumber="618"><td class="num" id="LN618">618</td><td class="line">  <span class='comment'>// Client cannot really use randomized alpn</span></td></tr>
+<tr class="codeline" data-linenumber="619"><td class="num" id="LN619">619</td><td class="line">  <span class='comment'>// Note that this function reverses the typical return value convention</span></td></tr>
+<tr class="codeline" data-linenumber="620"><td class="num" id="LN620">620</td><td class="line">  <span class='comment'>// of openssl and returns 0 on success.</span></td></tr>
+<tr class="codeline" data-linenumber="621"><td class="num" id="LN621">621</td><td class="line">  <span class='keyword'>return</span> SSL_CTX_set_alpn_protos(</td></tr>
+<tr class="codeline" data-linenumber="622"><td class="num" id="LN622">622</td><td class="line">             ctx_,</td></tr>
+<tr class="codeline" data-linenumber="623"><td class="num" id="LN623">623</td><td class="line">             advertisedNextProtocols_[0].protocols,</td></tr>
+<tr class="codeline" data-linenumber="624"><td class="num" id="LN624">624</td><td class="line">             advertisedNextProtocols_[0].length) == 0;</td></tr>
+<tr class="codeline" data-linenumber="625"><td class="num" id="LN625">625</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="626"><td class="num" id="LN626">626</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="627"><td class="num" id="LN627">627</td><td class="line"><span class='keyword'>void</span> SSLContext::deleteNextProtocolsStrings() {</td></tr>
+<tr class="codeline" data-linenumber="628"><td class="num" id="LN628">628</td><td class="line">  <span class='keyword'>for</span> (<span class='keyword'>auto</span> protocols : advertisedNextProtocols_) {</td></tr>
+<tr class="codeline" data-linenumber="629"><td class="num" id="LN629">629</td><td class="line">    <span class='keyword'>delete</span>[] protocols.protocols;</td></tr>
+<tr class="codeline" data-linenumber="630"><td class="num" id="LN630">630</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="631"><td class="num" id="LN631">631</td><td class="line">  advertisedNextProtocols_.clear();</td></tr>
+<tr class="codeline" data-linenumber="632"><td class="num" id="LN632">632</td><td class="line">  advertisedNextProtocolWeights_.clear();</td></tr>
+<tr class="codeline" data-linenumber="633"><td class="num" id="LN633">633</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="634"><td class="num" id="LN634">634</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="635"><td class="num" id="LN635">635</td><td class="line"><span class='keyword'>void</span> SSLContext::unsetNextProtocols() {</td></tr>
+<tr class="codeline" data-linenumber="636"><td class="num" id="LN636">636</td><td class="line">  deleteNextProtocolsStrings();</td></tr>
+<tr class="codeline" data-linenumber="637"><td class="num" id="LN637">637</td><td class="line">  SSL_CTX_set_alpn_select_cb(ctx_, <span class='keyword'>nullptr</span>, <span class='keyword'>nullptr</span>);</td></tr>
+<tr class="codeline" data-linenumber="638"><td class="num" id="LN638">638</td><td class="line">  SSL_CTX_set_alpn_protos(ctx_, <span class='keyword'>nullptr</span>, 0);</td></tr>
+<tr class="codeline" data-linenumber="639"><td class="num" id="LN639">639</td><td class="line">  <span class='comment'>// clear the error stack here since openssl internals sometimes add a</span></td></tr>
+<tr class="codeline" data-linenumber="640"><td class="num" id="LN640">640</td><td class="line">  <span class='comment'>// malloc failure when doing a memdup of NULL, 0..</span></td></tr>
+<tr class="codeline" data-linenumber="641"><td class="num" id="LN641">641</td><td class="line">  ERR_clear_error();</td></tr>
+<tr class="codeline" data-linenumber="642"><td class="num" id="LN642">642</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="643"><td class="num" id="LN643">643</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="644"><td class="num" id="LN644">644</td><td class="line">size_t SSLContext::pickNextProtocols() {</td></tr>
+<tr class="codeline" data-linenumber="645"><td class="num" id="LN645">645</td><td class="line">  <span class='macro'>CHECK(!advertisedNextProtocols_.empty())<span class='macro_popup'>static_cast&lt;void&gt;(0), !((__builtin_expect(!(!advertisedNextProtocols_<br>.empty()), 0))) ? (void) 0 : google::LogMessageVoidify() &amp;<br> google::LogMessageFatal( "/home/zhh/inject/null/folly/folly/io/async/SSLContext.cpp"<br>, 645).stream() &lt;&lt; "Check failed: " "!advertisedNextProtocols_.empty()"<br> " "</span></span> &lt;&lt; <span class='string_literal'>"Failed to pickNextProtocols"</span>;</td></tr>
+<tr class="codeline" data-linenumber="646"><td class="num" id="LN646">646</td><td class="line">  <span class='keyword'>auto</span> rng = ThreadLocalPRNG();</td></tr>
+<tr class="codeline" data-linenumber="647"><td class="num" id="LN647">647</td><td class="line">  <span class='keyword'>return</span> size_t(nextProtocolDistribution_(rng));</td></tr>
+<tr class="codeline" data-linenumber="648"><td class="num" id="LN648">648</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="649"><td class="num" id="LN649">649</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="650"><td class="num" id="LN650">650</td><td class="line"><span class='directive'>#endif // FOLLY_OPENSSL_HAS_ALPN</span></td></tr>
+<tr class="codeline" data-linenumber="651"><td class="num" id="LN651">651</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="652"><td class="num" id="LN652">652</td><td class="line">SSL* SSLContext::createSSL() <span class='keyword'>const</span> {</td></tr>
+<tr class="codeline" data-linenumber="653"><td class="num" id="LN653">653</td><td class="line">  SSL* ssl = SSL_new(ctx_);</td></tr>
+<tr class="codeline" data-linenumber="654"><td class="num" id="LN654">654</td><td class="line">  <span class='keyword'>if</span> (ssl == <span class='keyword'>nullptr</span>) {</td></tr>
+<tr class="codeline" data-linenumber="655"><td class="num" id="LN655">655</td><td class="line">    <span class='keyword'>throw</span> std::runtime_error(<span class='string_literal'>"SSL_new: "</span> + getErrors());</td></tr>
+<tr class="codeline" data-linenumber="656"><td class="num" id="LN656">656</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="657"><td class="num" id="LN657">657</td><td class="line">  <span class='keyword'>return</span> ssl;</td></tr>
+<tr class="codeline" data-linenumber="658"><td class="num" id="LN658">658</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="659"><td class="num" id="LN659">659</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="660"><td class="num" id="LN660">660</td><td class="line"><span class='keyword'>void</span> SSLContext::setSessionCacheContext(<span class='keyword'>const</span> std::string&amp; context) {</td></tr>
+<tr class="codeline" data-linenumber="661"><td class="num" id="LN661">661</td><td class="line">  SSL_CTX_set_session_id_context(</td></tr>
+<tr class="codeline" data-linenumber="662"><td class="num" id="LN662">662</td><td class="line">      ctx_,</td></tr>
+<tr class="codeline" data-linenumber="663"><td class="num" id="LN663">663</td><td class="line">      <span class='keyword'>reinterpret_cast</span>&lt;<span class='keyword'>const</span> <span class='keyword'>unsigned</span> <span class='keyword'>char</span>*&gt;(context.data()),</td></tr>
+<tr class="codeline" data-linenumber="664"><td class="num" id="LN664">664</td><td class="line">      std::min&lt;<span class='keyword'>unsigned</span> <span class='keyword'>int</span>&gt;(</td></tr>
+<tr class="codeline" data-linenumber="665"><td class="num" id="LN665">665</td><td class="line">          <span class='keyword'>static_cast</span>&lt;<span class='keyword'>unsigned</span> <span class='keyword'>int</span>&gt;(context.length()), <span class='macro'>SSL_MAX_SID_CTX_LENGTH<span class='macro_popup'>32</span></span>));</td></tr>
+<tr class="codeline" data-linenumber="666"><td class="num" id="LN666">666</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="667"><td class="num" id="LN667">667</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="668"><td class="num" id="LN668">668</td><td class="line"><span class='comment'>/**</span></td></tr>
+<tr class="codeline" data-linenumber="669"><td class="num" id="LN669">669</td><td class="line"> <span class='comment'>* Match a name with a pattern. The pattern may include wildcard. A single</span></td></tr>
+<tr class="codeline" data-linenumber="670"><td class="num" id="LN670">670</td><td class="line"> <span class='comment'>* wildcard "*" can match up to one component in the domain name.</span></td></tr>
+<tr class="codeline" data-linenumber="671"><td class="num" id="LN671">671</td><td class="line"> <span class='comment'>*</span></td></tr>
+<tr class="codeline" data-linenumber="672"><td class="num" id="LN672">672</td><td class="line"> <span class='comment'>* @param  host    Host name, typically the name of the remote host</span></td></tr>
+<tr class="codeline" data-linenumber="673"><td class="num" id="LN673">673</td><td class="line"> <span class='comment'>* @param  pattern Name retrieved from certificate</span></td></tr>
+<tr class="codeline" data-linenumber="674"><td class="num" id="LN674">674</td><td class="line"> <span class='comment'>* @param  size    Size of "pattern"</span></td></tr>
+<tr class="codeline" data-linenumber="675"><td class="num" id="LN675">675</td><td class="line"> <span class='comment'>* @return True, if "host" matches "pattern". False otherwise.</span></td></tr>
+<tr class="codeline" data-linenumber="676"><td class="num" id="LN676">676</td><td class="line"> <span class='comment'>*/</span></td></tr>
+<tr class="codeline" data-linenumber="677"><td class="num" id="LN677">677</td><td class="line"><span class='keyword'>bool</span> SSLContext::matchName(<span class='keyword'>const</span> <span class='keyword'>char</span>* host, <span class='keyword'>const</span> <span class='keyword'>char</span>* pattern, <span class='keyword'>int</span> size) {</td></tr>
+<tr class="codeline" data-linenumber="678"><td class="num" id="LN678">678</td><td class="line">  <span class='keyword'>bool</span> match = <span class='keyword'>false</span>;</td></tr>
+<tr class="codeline" data-linenumber="679"><td class="num" id="LN679">679</td><td class="line">  <span class='keyword'>int</span> i = 0, j = 0;</td></tr>
+<tr class="codeline" data-linenumber="680"><td class="num" id="LN680">680</td><td class="line">  <span class='keyword'>while</span> (i &lt; size &amp;&amp; host[j] != '\0') {</td></tr>
+<tr class="codeline" data-linenumber="681"><td class="num" id="LN681">681</td><td class="line">    <span class='keyword'>if</span> (toupper(pattern[i]) == toupper(host[j])) {</td></tr>
+<tr class="codeline" data-linenumber="682"><td class="num" id="LN682">682</td><td class="line">      i++;</td></tr>
+<tr class="codeline" data-linenumber="683"><td class="num" id="LN683">683</td><td class="line">      j++;</td></tr>
+<tr class="codeline" data-linenumber="684"><td class="num" id="LN684">684</td><td class="line">      <span class='keyword'>continue</span>;</td></tr>
+<tr class="codeline" data-linenumber="685"><td class="num" id="LN685">685</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="686"><td class="num" id="LN686">686</td><td class="line">    <span class='keyword'>if</span> (pattern[i] == '*') {</td></tr>
+<tr class="codeline" data-linenumber="687"><td class="num" id="LN687">687</td><td class="line">      <span class='keyword'>while</span> (host[j] != '.' &amp;&amp; host[j] != '\0') {</td></tr>
+<tr class="codeline" data-linenumber="688"><td class="num" id="LN688">688</td><td class="line">        j++;</td></tr>
+<tr class="codeline" data-linenumber="689"><td class="num" id="LN689">689</td><td class="line">      }</td></tr>
+<tr class="codeline" data-linenumber="690"><td class="num" id="LN690">690</td><td class="line">      i++;</td></tr>
+<tr class="codeline" data-linenumber="691"><td class="num" id="LN691">691</td><td class="line">      <span class='keyword'>continue</span>;</td></tr>
+<tr class="codeline" data-linenumber="692"><td class="num" id="LN692">692</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="693"><td class="num" id="LN693">693</td><td class="line">    <span class='keyword'>break</span>;</td></tr>
+<tr class="codeline" data-linenumber="694"><td class="num" id="LN694">694</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="695"><td class="num" id="LN695">695</td><td class="line">  <span class='keyword'>if</span> (i == size &amp;&amp; host[j] == '\0') {</td></tr>
+<tr class="codeline" data-linenumber="696"><td class="num" id="LN696">696</td><td class="line">    match = <span class='keyword'>true</span>;</td></tr>
+<tr class="codeline" data-linenumber="697"><td class="num" id="LN697">697</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="698"><td class="num" id="LN698">698</td><td class="line">  <span class='keyword'>return</span> match;</td></tr>
+<tr class="codeline" data-linenumber="699"><td class="num" id="LN699">699</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="700"><td class="num" id="LN700">700</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="701"><td class="num" id="LN701">701</td><td class="line"><span class='keyword'>int</span> SSLContext::passwordCallback(<span class='keyword'>char</span>* password, <span class='keyword'>int</span> size, <span class='keyword'>int</span>, <span class='keyword'>void</span>* data) {</td></tr>
+<tr class="codeline" data-linenumber="702"><td class="num" id="LN702">702</td><td class="line">  <span class='keyword'>auto</span> context = (SSLContext*)data;</td></tr>
+<tr class="codeline" data-linenumber="703"><td class="num" id="LN703">703</td><td class="line">  <span class='keyword'>if</span> (context == <span class='keyword'>nullptr</span> || context-&gt;passwordCollector() == <span class='keyword'>nullptr</span>) {</td></tr>
+<tr class="codeline" data-linenumber="704"><td class="num" id="LN704">704</td><td class="line">    <span class='keyword'>return</span> 0;</td></tr>
+<tr class="codeline" data-linenumber="705"><td class="num" id="LN705">705</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="706"><td class="num" id="LN706">706</td><td class="line">  std::string userPassword;</td></tr>
+<tr class="codeline" data-linenumber="707"><td class="num" id="LN707">707</td><td class="line">  <span class='comment'>// call user defined password collector to get password</span></td></tr>
+<tr class="codeline" data-linenumber="708"><td class="num" id="LN708">708</td><td class="line">  context-&gt;passwordCollector()-&gt;getPassword(userPassword, size);</td></tr>
+<tr class="codeline" data-linenumber="709"><td class="num" id="LN709">709</td><td class="line">  <span class='keyword'>auto</span> <span class='keyword'>const</span> length = std::min(userPassword.size(), size_t(size));</td></tr>
+<tr class="codeline" data-linenumber="710"><td class="num" id="LN710">710</td><td class="line">  std::memcpy(password, userPassword.data(), length);</td></tr>
+<tr class="codeline" data-linenumber="711"><td class="num" id="LN711">711</td><td class="line">  <span class='keyword'>return</span> <span class='keyword'>int</span>(length);</td></tr>
+<tr class="codeline" data-linenumber="712"><td class="num" id="LN712">712</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="713"><td class="num" id="LN713">713</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="714"><td class="num" id="LN714">714</td><td class="line"><span class='directive'>#if defined(SSL_MODE_HANDSHAKE_CUTTHROUGH)</span></td></tr>
+<tr class="codeline" data-linenumber="715"><td class="num" id="LN715">715</td><td class="line"><span class='keyword'>void</span> SSLContext::enableFalseStart() {</td></tr>
+<tr class="codeline" data-linenumber="716"><td class="num" id="LN716">716</td><td class="line">  <span class='macro'>SSL_CTX_set_mode(ctx_, SSL_MODE_HANDSHAKE_CUTTHROUGH)<span class='macro_popup'>SSL_CTX_ctrl((ctx_),33,(SSL_MODE_HANDSHAKE_CUTTHROUGH),__null<br>)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="717"><td class="num" id="LN717">717</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="718"><td class="num" id="LN718">718</td><td class="line"><span class='directive'>#endif</span></td></tr>
+<tr class="codeline" data-linenumber="719"><td class="num" id="LN719">719</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="720"><td class="num" id="LN720">720</td><td class="line"><span class='keyword'>void</span> SSLContext::initializeOpenSSL() {</td></tr>
+<tr class="codeline" data-linenumber="721"><td class="num" id="LN721">721</td><td class="line">  folly::ssl::init();</td></tr>
+<tr class="codeline" data-linenumber="722"><td class="num" id="LN722">722</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="723"><td class="num" id="LN723">723</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="724"><td class="num" id="LN724">724</td><td class="line"><span class='keyword'>void</span> SSLContext::setOptions(<span class='keyword'>long</span> options) {</td></tr>
+<tr class="codeline" data-linenumber="725"><td class="num" id="LN725">725</td><td class="line">  <span class='keyword'>long</span> newOpt = SSL_CTX_set_options(ctx_, options);</td></tr>
+<tr class="codeline" data-linenumber="726"><td class="num" id="LN726">726</td><td class="line">  <span class='keyword'>if</span> ((newOpt &amp; options) != options) {</td></tr>
+<tr class="codeline" data-linenumber="727"><td class="num" id="LN727">727</td><td class="line">    <span class='keyword'>throw</span> std::runtime_error(<span class='string_literal'>"SSL_CTX_set_options failed"</span>);</td></tr>
+<tr class="codeline" data-linenumber="728"><td class="num" id="LN728">728</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="729"><td class="num" id="LN729">729</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="730"><td class="num" id="LN730">730</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="731"><td class="num" id="LN731">731</td><td class="line">std::string SSLContext::getErrors(<span class='keyword'>int</span> errnoCopy) {</td></tr>
+<tr class="codeline" data-linenumber="732"><td class="num" id="LN732">732</td><td class="line">  std::string errors;</td></tr>
+<tr class="codeline" data-linenumber="733"><td class="num" id="LN733">733</td><td class="line">  <span class='keyword'>unsigned</span> <span class='keyword'>long</span> errorCode;</td></tr>
+<tr class="codeline" data-linenumber="734"><td class="num" id="LN734">734</td><td class="line">  <span class='keyword'>char</span> message[256];</td></tr>
+<tr class="codeline" data-linenumber="735"><td class="num" id="LN735">735</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="736"><td class="num" id="LN736">736</td><td class="line">  errors.reserve(512);</td></tr>
+<tr class="codeline" data-linenumber="737"><td class="num" id="LN737">737</td><td class="line">  <span class='keyword'>while</span> ((errorCode = ERR_get_error()) != 0) {</td></tr>
+<tr class="codeline" data-linenumber="738"><td class="num" id="LN738">738</td><td class="line">    <span class='keyword'>if</span> (!errors.empty()) {</td></tr>
+<tr class="codeline" data-linenumber="739"><td class="num" id="LN739">739</td><td class="line">      errors += <span class='string_literal'>"; "</span>;</td></tr>
+<tr class="codeline" data-linenumber="740"><td class="num" id="LN740">740</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="741"><td class="num" id="LN741">741</td><td class="line">    <span class='keyword'>const</span> <span class='keyword'>char</span>* reason = ERR_reason_error_string(errorCode);</td></tr>
+<tr class="codeline" data-linenumber="742"><td class="num" id="LN742">742</td><td class="line">    <span class='keyword'>if</span> (reason == <span class='keyword'>nullptr</span>) {</td></tr>
+<tr class="codeline" data-linenumber="743"><td class="num" id="LN743">743</td><td class="line">      snprintf(message, <span class='keyword'>sizeof</span>(message) - 1, <span class='string_literal'>"SSL error # %08lX"</span>, errorCode);</td></tr>
+<tr class="codeline" data-linenumber="744"><td class="num" id="LN744">744</td><td class="line">      reason = message;</td></tr>
+<tr class="codeline" data-linenumber="745"><td class="num" id="LN745">745</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="746"><td class="num" id="LN746">746</td><td class="line">    errors += reason;</td></tr>
+<tr class="codeline" data-linenumber="747"><td class="num" id="LN747">747</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="748"><td class="num" id="LN748">748</td><td class="line">  <span class='keyword'>if</span> (errors.empty()) {</td></tr>
+<tr class="codeline" data-linenumber="749"><td class="num" id="LN749">749</td><td class="line">    errors = <span class='string_literal'>"error code: "</span> + folly::to&lt;std::string&gt;(errnoCopy);</td></tr>
+<tr class="codeline" data-linenumber="750"><td class="num" id="LN750">750</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="751"><td class="num" id="LN751">751</td><td class="line">  <span class='keyword'>return</span> errors;</td></tr>
+<tr class="codeline" data-linenumber="752"><td class="num" id="LN752">752</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="753"><td class="num" id="LN753">753</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="754"><td class="num" id="LN754">754</td><td class="line"><span class='keyword'>void</span> SSLContext::enableTLS13() {</td></tr>
+<tr class="codeline" data-linenumber="755"><td class="num" id="LN755">755</td><td class="line"><span class='directive'>#if <span class='macro'>FOLLY_OPENSSL_PREREQ(1, 1, 0)<span class='macro_popup'>(0x1010106fL &gt;= (((1 &lt;&lt; 28) | ((1 &lt;&lt; 20) | (0 &lt;&lt;<br> 12)))))</span></span></span></td></tr>
+<tr class="codeline" data-linenumber="756"><td class="num" id="LN756">756</td><td class="line">  <span class='macro'>SSL_CTX_set_max_proto_version(ctx_, 0)<span class='macro_popup'>SSL_CTX_ctrl(ctx_, 124, 0, __null)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="757"><td class="num" id="LN757">757</td><td class="line"><span class='directive'>#endif</span></td></tr>
+<tr class="codeline" data-linenumber="758"><td class="num" id="LN758">758</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="759"><td class="num" id="LN759">759</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="760"><td class="num" id="LN760">760</td><td class="line"><span class='keyword'>void</span> SSLContext::disableTLS13() {</td></tr>
+<tr class="codeline" data-linenumber="761"><td class="num" id="LN761">761</td><td class="line"><span class='directive'>#if <span class='macro'>FOLLY_OPENSSL_PREREQ(1, 1, 0)<span class='macro_popup'>(0x1010106fL &gt;= (((1 &lt;&lt; 28) | ((1 &lt;&lt; 20) | (0 &lt;&lt;<br> 12)))))</span></span></span></td></tr>
+<tr class="codeline" data-linenumber="762"><td class="num" id="LN762">762</td><td class="line">  <span class='macro'>SSL_CTX_set_max_proto_version(ctx_, TLS1_2_VERSION)<span class='macro_popup'>SSL_CTX_ctrl(ctx_, 124, 0x0303, __null)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="763"><td class="num" id="LN763">763</td><td class="line"><span class='directive'>#endif</span></td></tr>
+<tr class="codeline" data-linenumber="764"><td class="num" id="LN764">764</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="765"><td class="num" id="LN765">765</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="766"><td class="num" id="LN766">766</td><td class="line"><span class='keyword'>void</span> SSLContext::setupCtx(SSL_CTX* ctx) {</td></tr>
+<tr class="codeline" data-linenumber="767"><td class="num" id="LN767">767</td><td class="line">  <span class='comment'>// 1) folly::AsyncSSLSocket wants to unconditionally store a client</span></td></tr>
+<tr class="codeline" data-linenumber="768"><td class="num" id="LN768">768</td><td class="line">  <span class='comment'>// session, so that is possible to later perform TLS resumption.</span></td></tr>
+<tr class="codeline" data-linenumber="769"><td class="num" id="LN769">769</td><td class="line">  <span class='comment'>// For that, we need SSL_SESS_CACHE_CLIENT.</span></td></tr>
+<tr class="codeline" data-linenumber="770"><td class="num" id="LN770">770</td><td class="line">  <span class='comment'>//</span></td></tr>
+<tr class="codeline" data-linenumber="771"><td class="num" id="LN771">771</td><td class="line">  <span class='comment'>// 2) wangle::SSLSessionCacheManager needs to be able to receive</span></td></tr>
+<tr class="codeline" data-linenumber="772"><td class="num" id="LN772">772</td><td class="line">  <span class='comment'>// SSL_SESSIONs that are established through a successful</span></td></tr>
+<tr class="codeline" data-linenumber="773"><td class="num" id="LN773">773</td><td class="line">  <span class='comment'>// connection. For that, we need SSL_SESS_CACHE_SERVER. Consequently,</span></td></tr>
+<tr class="codeline" data-linenumber="774"><td class="num" id="LN774">774</td><td class="line">  <span class='comment'>// given the requirements of (1), we opt to use SSL_SESS_CACHE_BOTH</span></td></tr>
+<tr class="codeline" data-linenumber="775"><td class="num" id="LN775">775</td><td class="line">  <span class='comment'>//</span></td></tr>
+<tr class="codeline" data-linenumber="776"><td class="num" id="LN776">776</td><td class="line">  <span class='comment'>// 3) We explicitly disable the OpenSSL internal session cache, as there</span></td></tr>
+<tr class="codeline" data-linenumber="777"><td class="num" id="LN777">777</td><td class="line">  <span class='comment'>// is very little we can do to control the memory usage of the internal</span></td></tr>
+<tr class="codeline" data-linenumber="778"><td class="num" id="LN778">778</td><td class="line">  <span class='comment'>// session cache. Server side session-id based caching should be explicitly</span></td></tr>
+<tr class="codeline" data-linenumber="779"><td class="num" id="LN779">779</td><td class="line">  <span class='comment'>// opted-in by the user, by forcing them to provide an implementation of</span></td></tr>
+<tr class="codeline" data-linenumber="780"><td class="num" id="LN780">780</td><td class="line">  <span class='comment'>// a SessionCache interface (e.g. wangle::SSLSessionCacheManager); i.e.,</span></td></tr>
+<tr class="codeline" data-linenumber="781"><td class="num" id="LN781">781</td><td class="line">  <span class='comment'>// the user must be cognizant of the fact that doing so would result in</span></td></tr>
+<tr class="codeline" data-linenumber="782"><td class="num" id="LN782">782</td><td class="line">  <span class='comment'>// increased memory usage.</span></td></tr>
+<tr class="codeline" data-linenumber="783"><td class="num" id="LN783">783</td><td class="line">  <span class='macro'>SSL_CTX_set_session_cache_mode(<span class='macro_popup'>SSL_CTX_ctrl(ctx,44,(0x0001|0x0002) | (0x0100|0x0200) | 0x0080<br>,__null)</span></span></td></tr>
+<tr class="codeline" data-linenumber="784"><td class="num" id="LN784">784</td><td class="line">      <span class='macro'>ctx,<span class='macro_popup'>SSL_CTX_ctrl(ctx,44,(0x0001|0x0002) | (0x0100|0x0200) | 0x0080<br>,__null)</span></span></td></tr>
+<tr class="codeline" data-linenumber="785"><td class="num" id="LN785">785</td><td class="line">      <span class='macro'>SSL_SESS_CACHE_BOTH | SSL_SESS_CACHE_NO_INTERNAL |<span class='macro_popup'>SSL_CTX_ctrl(ctx,44,(0x0001|0x0002) | (0x0100|0x0200) | 0x0080<br>,__null)</span></span></td></tr>
+<tr class="codeline" data-linenumber="786"><td class="num" id="LN786">786</td><td class="line">          <span class='macro'>SSL_SESS_CACHE_NO_AUTO_CLEAR)<span class='macro_popup'>SSL_CTX_ctrl(ctx,44,(0x0001|0x0002) | (0x0100|0x0200) | 0x0080<br>,__null)</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="787"><td class="num" id="LN787">787</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="788"><td class="num" id="LN788">788</td><td class="line">  SSL_CTX_set_ex_data(ctx, getExDataIndex(), <span class='keyword'>this</span>);</td></tr>
+<tr class="codeline" data-linenumber="789"><td class="num" id="LN789">789</td><td class="line">  SSL_CTX_sess_set_new_cb(ctx, SSLContext::newSessionCallback);</td></tr>
+<tr class="codeline" data-linenumber="790"><td class="num" id="LN790">790</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="791"><td class="num" id="LN791">791</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="792"><td class="num" id="LN792">792</td><td class="line">SSLContext* SSLContext::getFromSSLCtx(<span class='keyword'>const</span> SSL_CTX* ctx) {</td></tr>
+<tr class="codeline" data-linenumber="793"><td class="num" id="LN793">793</td><td class="line">  <span class='keyword'>return</span> <span class='keyword'>static_cast</span>&lt;SSLContext*&gt;(SSL_CTX_get_ex_data(ctx, getExDataIndex()));</td></tr>
+<tr class="codeline" data-linenumber="794"><td class="num" id="LN794">794</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="795"><td class="num" id="LN795">795</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="796"><td class="num" id="LN796">796</td><td class="line"><span class='keyword'>int</span> SSLContext::newSessionCallback(SSL* ssl, SSL_SESSION* session) {</td></tr>
+<tr class="codeline" data-linenumber="797"><td class="num" id="LN797">797</td><td class="line">  SSL_CTX* ctx = SSL_get_SSL_CTX(ssl);</td></tr>
+<tr class="codeline" data-linenumber="798"><td class="num" id="LN798">798</td><td class="line">  SSLContext* context = getFromSSLCtx(ctx);</td></tr>
+<tr class="codeline" data-linenumber="799"><td class="num" id="LN799">799</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="800"><td class="num" id="LN800">800</td><td class="line">  <span class='keyword'>auto</span>&amp; cb = context-&gt;sessionLifecycleCallbacks_;</td></tr>
+<tr class="codeline" data-linenumber="801"><td class="num" id="LN801">801</td><td class="line">  <span class='keyword'>if</span> (cb != <span class='keyword'>nullptr</span> &amp;&amp; cb) {</td></tr>
+<tr class="codeline" data-linenumber="802"><td class="num" id="LN802">802</td><td class="line">    SSL_SESSION_up_ref(session);</td></tr>
+<tr class="codeline" data-linenumber="803"><td class="num" id="LN803">803</td><td class="line">    <span class='keyword'>auto</span> sessionPtr = folly::ssl::SSLSessionUniquePtr(session);</td></tr>
+<tr class="codeline" data-linenumber="804"><td class="num" id="LN804">804</td><td class="line">    cb-&gt;onNewSession(ssl, std::move(sessionPtr));</td></tr>
+<tr class="codeline" data-linenumber="805"><td class="num" id="LN805">805</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="806"><td class="num" id="LN806">806</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="807"><td class="num" id="LN807">807</td><td class="line">  <span class='comment'>// Session will either be moved to session manager or</span></td></tr>
+<tr class="codeline" data-linenumber="808"><td class="num" id="LN808">808</td><td class="line">  <span class='comment'>// freed when the unique_ptr goes out of scope</span></td></tr>
+<tr class="codeline" data-linenumber="809"><td class="num" id="LN809">809</td><td class="line">  <span class='keyword'>auto</span> sessionPtr = folly::ssl::SSLSessionUniquePtr(session);</td></tr>
+<tr class="codeline" data-linenumber="810"><td class="num" id="LN810">810</td><td class="line">  <span class='keyword'>auto</span> sessionManager = folly::ssl::SSLSessionManager::getFromSSL(ssl);</td></tr>
+<tr class="codeline" data-linenumber="811"><td class="num" id="LN811">811</td><td class="line">  <span class='keyword'>if</span> (sessionManager) {</td></tr>
+<tr class="codeline" data-linenumber="812"><td class="num" id="LN812">812</td><td class="line">    sessionManager-&gt;onNewSession(std::move(sessionPtr));</td></tr>
+<tr class="codeline" data-linenumber="813"><td class="num" id="LN813">813</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="814"><td class="num" id="LN814">814</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="815"><td class="num" id="LN815">815</td><td class="line">  <span class='keyword'>return</span> 1;</td></tr>
+<tr class="codeline" data-linenumber="816"><td class="num" id="LN816">816</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="817"><td class="num" id="LN817">817</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="818"><td class="num" id="LN818">818</td><td class="line"><span class='keyword'>void</span> SSLContext::setSessionLifecycleCallbacks(</td></tr>
+<tr class="codeline" data-linenumber="819"><td class="num" id="LN819">819</td><td class="line">    std::unique_ptr&lt;SessionLifecycleCallbacks&gt; cb) {</td></tr>
+<tr class="codeline" data-linenumber="820"><td class="num" id="LN820">820</td><td class="line">  sessionLifecycleCallbacks_ = std::move(cb);</td></tr>
+<tr class="codeline" data-linenumber="821"><td class="num" id="LN821">821</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="822"><td class="num" id="LN822">822</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="823"><td class="num" id="LN823">823</td><td class="line"><span class='directive'>#if <span class='macro'>FOLLY_OPENSSL_PREREQ(1, 1, 1)<span class='macro_popup'>(0x1010106fL &gt;= (((1 &lt;&lt; 28) | ((1 &lt;&lt; 20) | (1 &lt;&lt;<br> 12)))))</span></span></span></td></tr>
+<tr class="codeline" data-linenumber="824"><td class="num" id="LN824">824</td><td class="line"><span class='keyword'>void</span> SSLContext::setCiphersuitesOrThrow(<span class='keyword'>const</span> std::string&amp; ciphersuites) {</td></tr>
+<tr class="codeline" data-linenumber="825"><td class="num" id="LN825">825</td><td class="line">  <span class='keyword'>auto</span> rc = SSL_CTX_set_ciphersuites(ctx_, ciphersuites.c_str());</td></tr>
+<tr class="codeline" data-linenumber="826"><td class="num" id="LN826">826</td><td class="line">  <span class='keyword'>if</span> (rc == 0) {</td></tr>
+<tr class="codeline" data-linenumber="827"><td class="num" id="LN827">827</td><td class="line">    <span class='keyword'>throw</span> std::runtime_error(<span class='string_literal'>"SSL_CTX_set_ciphersuites: "</span> + getErrors());</td></tr>
+<tr class="codeline" data-linenumber="828"><td class="num" id="LN828">828</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="829"><td class="num" id="LN829">829</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="830"><td class="num" id="LN830">830</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="831"><td class="num" id="LN831">831</td><td class="line"><span class='keyword'>void</span> SSLContext::setAllowNoDheKex(<span class='keyword'>bool</span> flag) {</td></tr>
+<tr class="codeline" data-linenumber="832"><td class="num" id="LN832">832</td><td class="line">  <span class='keyword'>auto</span> opt = <span class='macro'>SSL_OP_ALLOW_NO_DHE_KEX<span class='macro_popup'>0x00000400U</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="833"><td class="num" id="LN833">833</td><td class="line">  <span class='keyword'>if</span> (flag) {</td></tr>
+<tr class="codeline" data-linenumber="834"><td class="num" id="LN834">834</td><td class="line">    SSL_CTX_set_options(ctx_, opt);</td></tr>
+<tr class="codeline" data-linenumber="835"><td class="num" id="LN835">835</td><td class="line">  } <span class='keyword'>else</span> {</td></tr>
+<tr class="codeline" data-linenumber="836"><td class="num" id="LN836">836</td><td class="line">    SSL_CTX_clear_options(ctx_, opt);</td></tr>
+<tr class="codeline" data-linenumber="837"><td class="num" id="LN837">837</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="838"><td class="num" id="LN838">838</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="839"><td class="num" id="LN839">839</td><td class="line"><span class='directive'>#endif // FOLLY_OPENSSL_PREREQ(1, 1, 1)</span></td></tr>
+<tr class="codeline" data-linenumber="840"><td class="num" id="LN840">840</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="841"><td class="num" id="LN841">841</td><td class="line">std::ostream&amp; <span class='keyword'>operator</span>&lt;&lt;(std::ostream&amp; os, <span class='keyword'>const</span> PasswordCollector&amp; collector) {</td></tr>
+<tr class="codeline" data-linenumber="842"><td class="num" id="LN842">842</td><td class="line">  os &lt;&lt; collector.describe();</td></tr>
+<tr class="codeline" data-linenumber="843"><td class="num" id="LN843">843</td><td class="line">  <span class='keyword'>return</span> os;</td></tr>
+<tr class="codeline" data-linenumber="844"><td class="num" id="LN844">844</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="845"><td class="num" id="LN845">845</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="846"><td class="num" id="LN846">846</td><td class="line">} <span class='comment'>// namespace folly</span></td></tr>
+</table></body></html>

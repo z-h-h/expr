@@ -1,0 +1,275 @@
+#0
+src/bitcoind.cpp:81: error: Dead Store
+  The value written to &x (type int) is never used.
+  79.         }
+  80.         // Check for chain settings (Params() calls are only valid after this clause)
+  81.         int x = 1;
+              ^
+  82.         try {
+  83.             SelectParams(args.GetChainName());
+
+#1
+src/bitcoind.cpp:87: error: Dead Store
+  The value written to &x (type int) is never used.
+  85.             x = 0;
+  86.             auto ret = InitError(Untranslated(strprintf("%s\n", e.what())));
+  87.             x = 1 / x;
+                  ^
+  88.             return ret;
+  89.         }
+
+#2
+src/signet.cpp:100: error: Dead Store
+  The value written to &x (type int) is never used.
+   98.         // no signet solution -- allow this to support OP_TRUE as trivial block challenge
+   99.     } else {
+  100.         int x = 1;
+               ^
+  101.         try {
+  102.             VectorReader v(SER_NETWORK, INIT_PROTO_VERSION, signet_solution, 0);
+
+#3
+src/signet.cpp:108: error: Dead Store
+  The value written to &x (type int) is never used.
+  106.         } catch (const std::exception&) {
+  107.             x = 0;
+  108.             x = 1 / x;
+                   ^
+  109.             return nullopt; // parsing error
+  110.         }
+
+#4
+src/addrdb.cpp:80: error: Dead Store
+  The value written to &x (type int) is never used.
+  78. bool DeserializeDB(Stream& stream, Data& data, bool fCheckSum = true)
+  79. {
+  80.     int x = 1;
+          ^
+  81.     try {
+  82.         CHashVerifier<Stream> verifier(&stream);
+
+#5
+src/addrdb.cpp:105: error: Dead Store
+  The value written to &x (type int) is never used.
+  103.         x = 0;
+  104.         auto ret = error("%s: Deserialize or I/O error - %s", __func__, e.what());
+  105.         x = 1 / x;
+               ^
+  106.         return ret;
+  107.     }
+
+#6
+src/core_read.cpp:168: error: Dead Store
+  The value written to &x (type int) is never used.
+  166.             // Fall through.
+  167.         }
+  168.         x = 1 / x;
+               ^
+  169.     }
+  170. 
+
+#7
+src/index/blockfilterindex.cpp:154: error: Dead Store
+  The value written to &x (type int) is never used.
+  152.     uint256 block_hash;
+  153.     std::vector<unsigned char> encoded_filter;
+  154.     int x = 1;
+           ^
+  155.     try {
+  156.         filein >> block_hash >> encoded_filter;
+
+#8
+src/index/blockfilterindex.cpp:162: error: Dead Store
+  The value written to &x (type int) is never used.
+  160.         x = 0;
+  161.         auto ret = error("%s: Failed to deserialize block filter from disk: %s", __func__, e.what());
+  162.         x = 1 / x;
+               ^
+  163.         return ret;
+  164.     }
+
+#9
+src/bitcoin-tx.cpp:285: error: Memory Leak
+  Pulse found a potential memory leak. Memory dynamically allocated at line 285 by call to `CScript::CScript`, is not freed after the last access at line 285, column 12.
+  283. 
+  284.     // construct TxOut, append to transaction output list
+  285.     CTxOut txout(value, scriptPubKey);
+                  ^
+  286.     tx.vout.push_back(txout);
+  287. }
+
+#10
+src/serialize.h:426: error: Uninitialized Value
+  The value read from tmp[_] was never initialized.
+  424.     }
+  425.     do {
+  426.         ser_writedata8(os, tmp[len]);
+               ^
+  427.     } while(len--);
+  428. }
+
+#11
+src/rest.cpp:496: error: Dead Store
+  The value written to &x (type int) is never used.
+  494. 
+  495.     case RetFormat::BINARY: {
+  496.         int x = 1;
+               ^
+  497.         try {
+  498.             //deserialize only if user sent a request
+
+#12
+src/rest.cpp:513: error: Dead Store
+  The value written to &x (type int) is never used.
+  511.             // abort in case of unreadable binary data
+  512.             auto ret = RESTERR(req, HTTP_BAD_REQUEST, "Parse error");
+  513.             x = 1 / x;
+                   ^
+  514.             return ret;
+  515.         }
+
+#13
+src/rpc/server.cpp:459: error: Dead Store
+  The value written to &x (type int) is never used.
+  457. static bool ExecuteCommand(const CRPCCommand& command, const JSONRPCRequest& request, UniValue& result, bool last_handler)
+  458. {
+  459.     int x = 1;
+           ^
+  460.     try
+  461.     {
+
+#14
+src/rpc/server.cpp:473: error: Dead Store
+  The value written to &x (type int) is never used.
+  471.     {
+  472.         x = 0;
+  473.         x = 1 / x;
+               ^
+  474.         throw JSONRPCError(RPC_MISC_ERROR, e.what());
+  475.     }
+
+#15
+src/script/script.h:482: error: Memory Leak
+  Pulse found a potential memory leak. Memory dynamically allocated at line 461 by call to `prevector`, is not freed after the last access at line 482, column 41.
+  480.             insert(end(), _data, _data + sizeof(_data));
+  481.         }
+  482.         insert(end(), b.begin(), b.end());
+                                               ^
+  483.         return *this;
+  484.     }
+
+#16
+src/script/script.h:466: error: Memory Leak
+  Pulse found a potential memory leak. Memory dynamically allocated at line 465 by call to `prevector`, is not freed after the last access at line 466, column 50.
+  464.         {
+  465.             insert(end(), OP_PUSHDATA1);
+  466.             insert(end(), (unsigned char)b.size());
+                                                        ^
+  467.         }
+  468.         else if (b.size() <= 0xffff)
+
+#17
+src/script/script.h:482: error: Memory Leak
+  Pulse found a potential memory leak. Memory dynamically allocated at line 465 by call to `prevector`, is not freed after the last access at line 482, column 41.
+  480.             insert(end(), _data, _data + sizeof(_data));
+  481.         }
+  482.         insert(end(), b.begin(), b.end());
+                                               ^
+  483.         return *this;
+  484.     }
+
+#18
+src/script/script.h:473: error: Memory Leak
+  Pulse found a potential memory leak. Memory dynamically allocated at line 470 by call to `prevector`, is not freed after the last access at line 473, column 55.
+  471.             uint8_t _data[2];
+  472.             WriteLE16(_data, b.size());
+  473.             insert(end(), _data, _data + sizeof(_data));
+                                                             ^
+  474.         }
+  475.         else
+
+#19
+src/script/script.h:480: error: Memory Leak
+  Pulse found a potential memory leak. Memory dynamically allocated at line 477 by call to `prevector`, is not freed after the last access at line 480, column 55.
+  478.             uint8_t _data[4];
+  479.             WriteLE32(_data, b.size());
+  480.             insert(end(), _data, _data + sizeof(_data));
+                                                             ^
+  481.         }
+  482.         insert(end(), b.begin(), b.end());
+
+#20
+src/serialize.h:606: error: Dead Store
+  The value written to &formatter (type DefaultFormatter*) is never used.
+  604.     void Ser(Stream& s, const V& v)
+  605.     {
+  606.         Formatter formatter;
+                         ^
+  607.         WriteCompactSize(s, v.size());
+  608.         for (const typename V::value_type& elem : v) {
+
+#21
+src/serialize.h:616: error: Dead Store
+  The value written to &formatter (type DefaultFormatter*) is never used.
+  614.     void Unser(Stream& s, V& v)
+  615.     {
+  616.         Formatter formatter;
+                         ^
+  617.         v.clear();
+  618.         size_t size = ReadCompactSize(s);
+
+#22
+src/bitcoin-cli.cpp:858: error: Dead Store
+  The value written to &x (type int) is never used.
+  856.         throw;
+  857.     }
+  858.     x = 1 / x;
+           ^
+  859. 
+  860.     if (strPrint != "") {
+
+#23
+src/bitcoin-tx.cpp:832: error: Dead Store
+  The value written to &x (type int) is never used.
+  830.         throw;
+  831.     }
+  832.     x = 1 / x;
+           ^
+  833. 
+  834.     if (strPrint != "") {
+
+#24
+src/policy/fees.cpp:790: error: Dead Store
+  The value written to &median (type double) is never used.
+  788.     }
+  789. 
+  790.     double median = -1;
+           ^
+  791.     EstimationResult tempResult;
+  792. 
+
+#25
+src/policy/fees.cpp:887: error: Dead Store
+  The value written to &x (type int) is never used.
+  885. bool CBlockPolicyEstimator::Read(CAutoFile& filein)
+  886. {
+  887.     int x = 1;
+           ^
+  888.     try {
+  889.         LOCK(m_cs_fee_estimator);
+
+#26
+src/policy/fees.cpp:942: error: Dead Store
+  The value written to &x (type int) is never used.
+  940.         x = 0;
+  941.         LogPrintf("CBlockPolicyEstimator::Read(): unable to read policy estimator data (non-fatal): %s\n",e.what());
+  942.         x = 1 / x;
+               ^
+  943.         return false;
+  944.     }
+
+Found 27 issues
+                Issue Type(ISSUED_TYPE_ID): #
+                    Dead Store(DEAD_STORE): 20
+                  Memory Leak(MEMORY_LEAK): 6
+  Uninitialized Value(UNINITIALIZED_VALUE): 1

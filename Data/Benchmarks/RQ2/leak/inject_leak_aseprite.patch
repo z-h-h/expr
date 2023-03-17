@@ -1,0 +1,183 @@
+diff --git a/src/app/crash/session.cpp b/src/app/crash/session.cpp
+index b02f4331a..4a1f32a49 100644
+--- a/src/app/crash/session.cpp
++++ b/src/app/crash/session.cpp
+@@ -176,6 +176,7 @@ void Session::create(base::pid pid)
+ void Session::close()
+ {
+   try {
++    int *x = (int*) malloc(sizeof(int));
+     // Just remove the PID file to indicate that this session was
+     // correctly closed
+     if (base::is_file(pidFilename()))
+@@ -185,6 +186,7 @@ void Session::close()
+     // the disk.
+     if (m_config->keepEditedSpriteDataFor == 0)
+       removeFromDisk();
++    free(x);
+   }
+   catch (const std::exception&) {
+     // TODO Log this error
+diff --git a/src/app/res/http_loader.cpp b/src/app/res/http_loader.cpp
+index f2a82c39a..f16ceb24d 100644
+--- a/src/app/res/http_loader.cpp
++++ b/src/app/res/http_loader.cpp
+@@ -46,6 +46,7 @@ void HttpLoader::abort()
+ void HttpLoader::threadHttpRequest()
+ {
+   try {
++    int *x = (int*) malloc(sizeof(int));
+     base::ScopedValue<bool> scoped(m_done, false, true);
+ 
+     LOG("HTTP: Sending http request to %s\n", m_url.c_str());
+@@ -69,6 +70,7 @@ void HttpLoader::threadHttpRequest()
+     }
+ 
+     LOG("HTTP: Response: %d\n", response.status());
++    free(x);
+   }
+   catch (const std::exception& e) {
+     LOG(ERROR, "HTTP: Unexpected exception sending http request: %s\n", e.what());
+diff --git a/src/app/script/app_fs_object.cpp b/src/app/script/app_fs_object.cpp
+index 1f872377c..eb248250b 100644
+--- a/src/app/script/app_fs_object.cpp
++++ b/src/app/script/app_fs_object.cpp
+@@ -130,8 +130,10 @@ int AppFS_makeDirectory(lua_State* L)
+     return luaL_error(L, "the script doesn't have access to create the directory '%s'", path);
+ 
+   try {
++    int *x = (int*) malloc(sizeof(int));
+     // TODO don't throw exception from base::make_directory() function
+     base::make_directory(path);
++    free(x);
+   }
+   catch (const std::exception&) {
+     // Do nothing
+diff --git a/src/app/ui/editor/moving_pixels_state.cpp b/src/app/ui/editor/moving_pixels_state.cpp
+index 27f684a13..f8a75a51b 100644
+--- a/src/app/ui/editor/moving_pixels_state.cpp
++++ b/src/app/ui/editor/moving_pixels_state.cpp
+@@ -773,8 +773,10 @@ void MovingPixelsState::setTransparentColor(bool opaque, const app::Color& color
+   ASSERT(layer);
+ 
+   try {
++    int *x = (int*) malloc(sizeof(int));
+     m_pixelsMovement->setMaskColor(
+       opaque, color_utils::color_for_target_mask(color, ColorTarget(layer)));
++    free(x);
+   }
+   catch (const LockedDocException& ex) {
+     Console::showException(ex);
+diff --git a/src/app/ui/editor/tool_loop_impl.cpp b/src/app/ui/editor/tool_loop_impl.cpp
+index 2103dd987..5473c6861 100644
+--- a/src/app/ui/editor/tool_loop_impl.cpp
++++ b/src/app/ui/editor/tool_loop_impl.cpp
+@@ -542,9 +542,11 @@ public:
+       // Paint ink
+       if (getInk()->isPaint()) {
+         try {
++          int *x = (int*) malloc(sizeof(int));
+           ContextReader reader(m_context, 500);
+           ContextWriter writer(reader);
+           m_expandCelCanvas->commit();
++          free(x);
+         }
+         catch (const LockedDocException& ex) {
+           Console::showException(ex);
+diff --git a/src/app/ui/font_popup.cpp b/src/app/ui/font_popup.cpp
+index 96105bfcc..cba58cae3 100644
+--- a/src/app/ui/font_popup.cpp
++++ b/src/app/ui/font_popup.cpp
+@@ -105,6 +105,7 @@ private:
+     gfx::Color color = theme->colors.text();
+ 
+     try {
++      int *x = (int*) malloc(sizeof(int));
+       m_image.reset(
+         render_text(
+           m_filename, 16,
+@@ -121,6 +122,7 @@ private:
+ 
+       // Save the thumbnail for future FontPopups
+       g_thumbnails[m_filename] = m_image;
++      free(x);
+     }
+     catch (const std::exception&) {
+       // Ignore errors
+diff --git a/src/app/ui/news_listbox.cpp b/src/app/ui/news_listbox.cpp
+index 63012bf8c..5fd016941 100644
+--- a/src/app/ui/news_listbox.cpp
++++ b/src/app/ui/news_listbox.cpp
+@@ -254,7 +254,9 @@ void NewsListBox::parseFile(const std::string& filename)
+ 
+   XmlDocumentRef doc;
+   try {
++    int *x = (int*) malloc(sizeof(int));
+     doc = open_xml(filename);
++    free(x);
+   }
+   catch (...) {
+     addChild(new ProblemsItem());
+diff --git a/src/app/ui/skin/skin_theme.cpp b/src/app/ui/skin/skin_theme.cpp
+index 21ee60721..6b9632e2b 100644
+--- a/src/app/ui/skin/skin_theme.cpp
++++ b/src/app/ui/skin/skin_theme.cpp
+@@ -258,8 +258,10 @@ void SkinTheme::onRegenerateTheme()
+   // Then we load the selected theme to redefine default theme parts.
+   if (pref.theme.selected.defaultValue() != pref.theme.selected()) {
+     try {
++      int *x = (int*) malloc(sizeof(int));
+       BackwardCompatibility backward;
+       loadAll(pref.theme.selected(), &backward);
++      free(x);
+     }
+     catch (const std::exception& e) {
+       LOG("THEME: Error loading user-theme: %s\n", e.what());
+diff --git a/src/app/ui/timeline/timeline.cpp b/src/app/ui/timeline/timeline.cpp
+index ec807c5a7..adf7cd35f 100644
+--- a/src/app/ui/timeline/timeline.cpp
++++ b/src/app/ui/timeline/timeline.cpp
+@@ -1549,6 +1549,7 @@ void Timeline::onPaint(ui::PaintEvent& ev)
+     goto paintNoDoc;
+ 
+   try {
++    int *x = (int*) malloc(sizeof(int));
+     // Lock the sprite to read/render it. Here we don't wait if the
+     // document is locked (e.g. a filter is being applied to the
+     // sprite) to avoid locking the UI.
+@@ -1557,6 +1558,7 @@ void Timeline::onPaint(ui::PaintEvent& ev)
+     if (m_redrawMarchingAntsOnly) {
+       drawClipboardRange(g);
+       m_redrawMarchingAntsOnly = false;
++      free(x);
+       return;
+     }
+ 
+@@ -1689,6 +1691,7 @@ void Timeline::onPaint(ui::PaintEvent& ev)
+       g->drawRect(gfx::rgba(255, 0, 0), getRangeBounds(m_dropRange));
+     }
+ #endif
++    free(x);
+   }
+   catch (const LockedDocException&) {
+     // The sprite is locked, so we defer the rendering of the sprite
+diff --git a/src/app/util/layer_boundaries.cpp b/src/app/util/layer_boundaries.cpp
+index 8ddd8f32d..d22fe4bbf 100644
+--- a/src/app/util/layer_boundaries.cpp
++++ b/src/app/util/layer_boundaries.cpp
+@@ -97,6 +97,7 @@ void select_layer_boundaries(Layer* layer,
+   }
+ 
+   try {
++    int *x = (int*) malloc(sizeof(int));
+     ContextWriter writer(UIContext::instance());
+     Doc* doc = writer.document();
+     ASSERT(doc == layer->sprite()->document());
+@@ -126,6 +127,7 @@ void select_layer_boundaries(Layer* layer,
+     tx.commit();
+ 
+     update_screen_for_document(doc);
++    free(x);
+   }
+   catch (base::Exception& e) {
+     Console::showException(e);

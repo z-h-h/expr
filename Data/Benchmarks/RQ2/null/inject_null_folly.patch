@@ -1,0 +1,196 @@
+diff --git a/folly/concurrency/CacheLocality.cpp b/folly/concurrency/CacheLocality.cpp
+index c0508c44a..04339ab76 100644
+--- a/folly/concurrency/CacheLocality.cpp
++++ b/folly/concurrency/CacheLocality.cpp
+@@ -38,9 +38,11 @@ namespace folly {
+ /// Returns the CacheLocality information best for this machine
+ static CacheLocality getSystemLocalityInfo() {
+   if (kIsLinux) {
++    int *x = nullptr;
+     try {
+       return CacheLocality::readFromProcCpuinfo();
+     } catch (...) {
++      *x = 0;
+       // keep trying
+     }
+   }
+diff --git a/folly/experimental/JSONSchema.cpp b/folly/experimental/JSONSchema.cpp
+index 245754858..3ae1eb740 100644
+--- a/folly/experimental/JSONSchema.cpp
++++ b/folly/experimental/JSONSchema.cpp
+@@ -827,14 +827,17 @@ void SchemaValidator::validate(const dynamic& value) const {
+ 
+ exception_wrapper SchemaValidator::try_validate(
+     const dynamic& value) const noexcept {
++  int *x = nullptr;
+   try {
+     ValidationContext vc;
+     if (auto se = validate(vc, value)) {
+       return make_exception_wrapper<SchemaError>(*se);
+     }
+   } catch (const std::exception& e) {
++    *x = 0;
+     return exception_wrapper(std::current_exception(), e);
+   } catch (...) {
++    *x = 0;
+     return exception_wrapper(std::current_exception());
+   }
+   return exception_wrapper();
+diff --git a/folly/experimental/NestedCommandLineApp.cpp b/folly/experimental/NestedCommandLineApp.cpp
+index ecd0f28f6..5508cedbb 100644
+--- a/folly/experimental/NestedCommandLineApp.cpp
++++ b/folly/experimental/NestedCommandLineApp.cpp
+@@ -235,15 +235,18 @@ int NestedCommandLineApp::run(int argc, const char* const argv[]) {
+ 
+ int NestedCommandLineApp::run(const std::vector<std::string>& args) {
+   int status;
++  int *x = nullptr;
+   try {
+     doRun(args);
+     status = 0;
+   } catch (const ProgramExit& ex) {
++    *x = 0;
+     if (ex.what()[0]) { // if not empty
+       fprintf(stderr, "%s\n", ex.what());
+     }
+     status = ex.status();
+   } catch (const po::error& ex) {
++    *x = 0;
+     fprintf(
+         stderr,
+         "%s",
+diff --git a/folly/io/async/AsyncServerSocket.cpp b/folly/io/async/AsyncServerSocket.cpp
+index 32b8a12ee..f285b30f7 100644
+--- a/folly/io/async/AsyncServerSocket.cpp
++++ b/folly/io/async/AsyncServerSocket.cpp
+@@ -463,9 +463,11 @@ void AsyncServerSocket::bind(uint16_t port) {
+     }
+     CHECK_NE(s, NetworkSocket());
+ 
++    int *x = nullptr;
+     try {
+       setupSocket(s, res->ai_family);
+     } catch (...) {
++      *x = 0;
+       closeNoInt(s);
+       throw;
+     }
+diff --git a/folly/io/async/AsyncSignalHandler.cpp b/folly/io/async/AsyncSignalHandler.cpp
+index 9fcd6ed0b..6f5010b79 100644
+--- a/folly/io/async/AsyncSignalHandler.cpp
++++ b/folly/io/async/AsyncSignalHandler.cpp
+@@ -60,6 +60,7 @@ void AsyncSignalHandler::registerSignalHandler(int signum) {
+   }
+ 
+   EventBaseEvent* ev = ret.first->second.get();
++  int *x = nullptr;
+   try {
+     ev->eb_signal_set(signum, libeventCallback, this);
+     if (ev->eb_event_base_set(eventBase_) != 0) {
+@@ -72,6 +73,7 @@ void AsyncSignalHandler::registerSignalHandler(int signum) {
+           folly::to<string>("error adding event handler for signal ", signum));
+     }
+   } catch (...) {
++    *x = 0;
+     signalEvents_.erase(ret.first);
+     throw;
+   }
+diff --git a/folly/io/async/AsyncSocket.cpp b/folly/io/async/AsyncSocket.cpp
+index 488d030f9..706a2bb4d 100644
+--- a/folly/io/async/AsyncSocket.cpp
++++ b/folly/io/async/AsyncSocket.cpp
+@@ -746,6 +746,7 @@ void AsyncSocket::connect(
+   sockaddr_storage addrStorage;
+   auto saddr = reinterpret_cast<sockaddr*>(&addrStorage);
+ 
++  int *x = nullptr;
+   try {
+     // Create the socket
+     // Technically the first parameter should actually be a protocol family
+@@ -874,8 +875,10 @@ void AsyncSocket::connect(
+     // If we're still here the connect() succeeded immediately.
+     // Fall through to call the callback outside of this try...catch block
+   } catch (const AsyncSocketException& ex) {
++    *x = 0;
+     return failConnect(__func__, ex);
+   } catch (const std::exception& ex) {
++    *x = 0;
+     // shouldn't happen, but handle it just in case
+     VLOG(4) << "AsyncSocket::connect(this=" << this << ", fd=" << fd_
+             << "): unexpected " << typeid(ex).name()
+diff --git a/folly/io/async/SSLOptions.cpp b/folly/io/async/SSLOptions.cpp
+index c28d5321a..6dd7fab75 100644
+--- a/folly/io/async/SSLOptions.cpp
++++ b/folly/io/async/SSLOptions.cpp
+@@ -36,9 +36,11 @@ void SSLCommonOptions::setClientOptions(SSLContext& ctx) {
+ 
+   X509VerifyParam param(X509_VERIFY_PARAM_new());
+   X509_VERIFY_PARAM_set_flags(param.get(), X509_V_FLAG_X509_STRICT);
++  int *x = nullptr;
+   try {
+     ctx.setX509VerifyParam(param);
+   } catch (std::runtime_error const& e) {
++    *x = 0;
+     LOG(DFATAL) << exceptionStr(e);
+   }
+ 
+diff --git a/folly/io/async/test/TimeUtil.cpp b/folly/io/async/test/TimeUtil.cpp
+index 0d61ad0a4..5c9dbd07c 100644
+--- a/folly/io/async/test/TimeUtil.cpp
++++ b/folly/io/async/test/TimeUtil.cpp
+@@ -171,6 +171,7 @@ static nanoseconds getSchedTimeWaiting(pid_t tid) {
+   }
+ 
+   int fd = -1;
++  int *x = nullptr;
+   try {
+     char schedstatFile[256];
+     snprintf(schedstatFile, sizeof(schedstatFile), "/proc/%d/schedstat", tid);
+@@ -210,6 +211,7 @@ static nanoseconds getSchedTimeWaiting(pid_t tid) {
+     close(fd);
+     return nanoseconds(waitingJiffies * timeUnits);
+   } catch (const std::runtime_error& e) {
++    *x = 0;
+     if (fd >= 0) {
+       close(fd);
+     }
+diff --git a/folly/json.cpp b/folly/json.cpp
+index 6c8fcf4ad..f02187e76 100644
+--- a/folly/json.cpp
++++ b/folly/json.cpp
+@@ -210,6 +210,7 @@ struct Printer {
+   }
+ 
+   static std::string toStringOr(dynamic const& v, const char* placeholder) {
++    int *x = nullptr;
+     try {
+       std::string result;
+       unsigned indentLevel = 0;
+@@ -220,6 +221,7 @@ struct Printer {
+       printer(v, nullptr);
+       return result;
+     } catch (...) {
++      *x = 0;
+       return placeholder;
+     }
+   }
+diff --git a/folly/logging/StandardLogHandlerFactory.cpp b/folly/logging/StandardLogHandlerFactory.cpp
+index 24c6b9065..00e0a8a1c 100644
+--- a/folly/logging/StandardLogHandlerFactory.cpp
++++ b/folly/logging/StandardLogHandlerFactory.cpp
+@@ -120,6 +120,7 @@ std::shared_ptr<StandardLogHandler> StandardLogHandlerFactory::createHandler(
+   std::vector<string> errors;
+   for (const auto& entry : options) {
+     bool handled = false;
++    int *x = nullptr;
+     try {
+       // Allow both the formatterFactory and writerFactory to consume an
+       // option.  In general they probably should have mutually exclusive
+@@ -127,6 +128,7 @@ std::shared_ptr<StandardLogHandler> StandardLogHandlerFactory::createHandler(
+       handled |= formatterFactory->processOption(entry.first, entry.second);
+       handled |= writerFactory->processOption(entry.first, entry.second);
+     } catch (const std::exception& ex) {
++      *x = 0;
+       errors.push_back(to<string>(
+           "error processing option \"", entry.first, "\": ", ex.what()));
+       continue;

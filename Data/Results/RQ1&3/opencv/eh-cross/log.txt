@@ -1,0 +1,26 @@
+2022-08-24 11:18:26 (Complete)
+args:
+  project: /home/zhh/projects/opencv-4.5.2/build/compile_commands.json
+  output: /home/zhh/projects/opencv-4.5.2/build/csa/eh-cross
+  clang: /home/zhh/llvm/build/bin/clang-13
+  jobs: 16
+  solver: crosscheck
+  timeout: 600
+edm:
+  total: 1305
+  total time: 1860.397
+  done: 1305
+  real time: 117.592
+ast:
+  total: 1305
+  total time: 2169.352
+  done: 1305
+  real time: 136.685
+csa:
+  total: 1305
+  total time: 60234.431
+  done: 904
+  terminated: 390
+  timeout: 11
+  real time: 4229.248
+------------------------

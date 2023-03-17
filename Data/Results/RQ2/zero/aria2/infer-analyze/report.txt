@@ -1,0 +1,213 @@
+#0
+src/SftpFinishDownloadCommand.cc:110: error: Dead Store
+  The value written to &x (type int) is never used.
+  108.                    e);
+  109.   }
+  110.   x = 1 / x;
+         ^
+  111.   if (getRequestGroup()->downloadFinished()) {
+  112.     return true;
+
+#1
+src/PeerAbstractCommand.cc:88: error: Dead Store
+  The value written to &x (type int) is never used.
+  86.     return true;
+  87.   }
+  88.   int x = 1;
+        ^
+  89.   try {
+  90.     if (noCheck_ || (checkSocketIsReadable_ && readEventEnabled()) ||
+
+#2
+src/PeerAbstractCommand.cc:108: error: Dead Store
+  The value written to &x (type int) is never used.
+  106.     onAbort();
+  107.     onFailure(err);
+  108.     x = 1 / x;
+           ^
+  109.     return true;
+  110.   }
+
+#3
+src/PeerAbstractCommand.cc:117: error: Dead Store
+  The value written to &x (type int) is never used.
+  115.                      peer_->getPort()));
+  116.     onAbort();
+  117.     x = 1 / x;
+           ^
+  118.     return prepareForNextPeer(0);
+  119.   }
+
+#4
+src/NameResolveCommand.cc:119: error: Dead Store
+  The value written to &x (type int) is never used.
+  117.         A2_LOG_ERROR_EX(EX_EXCEPTION_CAUGHT, e);
+  118.       }
+  119.       x = 1 / x;
+             ^
+  120.     }
+  121.   }
+
+#5
+src/LpdMessageReceiver.cc:101: error: Dead Store
+  The value written to &x (type int) is never used.
+   99.     }
+  100.     HttpHeaderProcessor proc(HttpHeaderProcessor::SERVER_PARSER);
+  101.     int x = 1;
+           ^
+  102.     try {
+  103.       if (!proc.parse(buf, length)) {
+
+#6
+src/LpdMessageReceiver.cc:111: error: Dead Store
+  The value written to &x (type int) is never used.
+  109.       x = 0;
+  110.       A2_LOG_INFO_EX("Failed to parse LPD message.", e);
+  111.       x = 1 / x;
+             ^
+  112.       continue;
+  113.     }
+
+#7
+src/main.cc:100: error: Dead Store
+  The value written to &x (type int) is never used.
+   98.     r = ex.getErrorCode();
+   99.   }
+  100.   x = 1 / x;
+         ^
+  101.   return r;
+  102. }
+
+#8
+src/MetalinkPostDownloadHandler.cc:98: error: Dead Store
+  The value written to &x (type int) is never used.
+   96.                    requestGroup->getFirstFilePath().c_str()));
+   97.   auto diskAdaptor = requestGroup->getPieceStorage()->getDiskAdaptor();
+   98.   int x = 1;
+         ^
+   99.   try {
+  100.     diskAdaptor->openExistingFile();
+
+#9
+src/MetalinkPostDownloadHandler.cc:132: error: Dead Store
+  The value written to &x (type int) is never used.
+  130.     x = 0;
+  131.     diskAdaptor->closeFile();
+  132.     x = 1 / x;
+           ^
+  133.     throw;
+  134.   }
+
+#10
+src/PeerListenCommand.cc:126: error: Dead Store
+  The value written to &x (type int) is never used.
+  124.       A2_LOG_DEBUG_EX(fmt(MSG_ACCEPT_FAILURE, getCuid()), ex);
+  125.     }
+  126.     x = 1 / x;
+           ^
+  127.   }
+  128.   e_->addCommand(std::unique_ptr<Command>(this));
+
+#11
+src/option_processing.cc:235: error: Dead Store
+  The value written to &x (type int) is never used.
+  233.           }
+  234.         }
+  235.         int x = 1;
+               ^
+  236.         try {
+  237.           oparser->parse(*confOption, ss);
+
+#12
+src/option_processing.cc:248: error: Dead Store
+  The value written to &x (type int) is never used.
+  246.             global::cerr()->printf("\n%s\n", h->getDescription());
+  247.           }
+  248.           x = 1 / x;
+                 ^
+  249.           return e.getErrorCode();
+  250.         }
+
+#13
+src/option_processing.cc:255: error: Dead Store
+  The value written to &x (type int) is never used.
+  253.           global::cerr()->printf(_("Parse error in %s"), cfname.c_str());
+  254.           global::cerr()->printf("\n%s", e.stackTrace().c_str());
+  255.           x = 1 / x;
+                 ^
+  256.           return e.getErrorCode();
+  257.         }
+
+#14
+src/AbstractCommand.cc:185: error: Dead Store
+  The value written to &x (type int) is never used.
+  183.                    getCuid(), readEventEnabled(), writeEventEnabled(),
+  184.                    hupEventEnabled(), errorEventEnabled()));
+  185.   int x = 1;
+         ^
+  186.   try {
+  187.     if (requestGroup_->downloadFinished() || requestGroup_->isHaltRequested()) {
+
+#15
+src/AbstractCommand.cc:364: error: Dead Store
+  The value written to &x (type int) is never used.
+  362.     onAbort();
+  363.     tryReserved();
+  364.     x = 1 / x;
+           ^
+  365.     return true;
+  366.   }
+
+#16
+src/AbstractCommand.cc:390: error: Dead Store
+  The value written to &x (type int) is never used.
+  388.       onAbort();
+  389.       tryReserved();
+  390.       x = 1 / x;
+             ^
+  391.       return true;
+  392.     }
+
+#17
+src/AbstractCommand.cc:400: error: Dead Store
+  The value written to &x (type int) is never used.
+  398.       req_->setWakeTime(wakeTime);
+  399.     }
+  400.     x = 1 / x;
+           ^
+  401.     return prepareForRetry(0);
+  402.   }
+
+#18
+src/AbstractCommand.cc:417: error: Dead Store
+  The value written to &x (type int) is never used.
+  415.     requestGroup_->setHaltRequested(true);
+  416.     getDownloadEngine()->setRefreshInterval(std::chrono::milliseconds(0));
+  417.     x = 1 / x;
+           ^
+  418.     return true;
+  419.   }
+
+#19
+src/RpcMethodImpl.cc:1424: error: Dead Store
+  The value written to &x (type int) is never used.
+  1422. {
+  1423.   auto authorized = RpcResponse::AUTHORIZED;
+  1424.   int x = 1;
+          ^
+  1425.   try {
+  1426.     const List* methodSpecs = checkRequiredParam<List>(req, 0);
+
+#20
+src/RpcMethodImpl.cc:1477: error: Dead Store
+  The value written to &x (type int) is never used.
+  1475.     x = 0;
+  1476.     A2_LOG_DEBUG_EX(EX_EXCEPTION_CAUGHT, ex);
+  1477.     x = 1 / x;
+            ^
+  1478.     return RpcResponse(1, authorized, createErrorResponse(ex, req),
+  1479.                        std::move(req.id));
+
+Found 21 issues
+  Issue Type(ISSUED_TYPE_ID): #
+      Dead Store(DEAD_STORE): 21

@@ -1,0 +1,29 @@
+2022-08-19 16:58:23 (Complete)
+args:
+  project: /home/zhh/workplace/ehtest/mysql-server/build/compile_commands.json
+  output: /home/zhh/workplace/ehtest/mysql-server/CSA/eh-range
+  clang: /home/zhh/workplace/Canalyze_LLVM/build-release/bin/clang-13
+  jobs: 16
+  solver: range
+  timeout: 600
+edm:
+  total: 2933
+  total time: 3302.644
+  done: 2825
+  cached: 108
+  real time: 207.617
+ast:
+  total: 2933
+  total time: 4206.970
+  done: 2808
+  cached: 125
+  real time: 264.189
+csa:
+  total: 2933
+  total time: 103850.973
+  done: 2757
+  cached: 133
+  terminated: 33
+  timeout: 10
+  real time: 6827.796
+------------------------

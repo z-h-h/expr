@@ -1,0 +1,30 @@
+2022-08-24 22:09:38 (Complete)
+args:
+  project: /home/zhh/projects/faiss-1.7.1/build/compile_commands.json
+  output: /home/zhh/projects/faiss-1.7.1/build/csa/ori-cross
+  clang: /home/zhh/llvm-origin/build/bin/clang-13
+  jobs: 16
+  solver: crosscheck
+  timeout: 600
+edm:
+  total: 168
+  total time: 138.104
+  done: 107
+  cached: 58
+  error: 3
+  real time: 10.634
+ast:
+  total: 168
+  total time: 153.946
+  done: 101
+  cached: 64
+  error: 3
+  real time: 11.939
+csa:
+  total: 168
+  total time: 6800.470
+  done: 101
+  cached: 64
+  error: 3
+  real time: 729.138
+------------------------

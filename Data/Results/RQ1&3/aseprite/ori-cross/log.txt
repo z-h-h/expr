@@ -1,0 +1,27 @@
+2022-08-24 17:03:32 (Complete)
+args:
+  project: /home/zhh/projects/aseprite/build/compile_commands.json
+  output: /home/zhh/projects/aseprite/build/csa/ori-cross
+  clang: /home/zhh/llvm-origin/build/bin/clang-13
+  jobs: 16
+  solver: crosscheck
+  timeout: 600
+edm:
+  total: 1342
+  total time: 625.411
+  done: 1295
+  cached: 47
+  real time: 39.872
+ast:
+  total: 1342
+  total time: 753.449
+  done: 1285
+  cached: 57
+  real time: 47.807
+csa:
+  total: 1342
+  total time: 37687.170
+  done: 1282
+  cached: 60
+  real time: 2526.542
+------------------------

@@ -1,0 +1,462 @@
+<!doctype html>
+<html>
+<head>
+<title>/home/zhh/inject/null/folly/folly/io/async/AsyncSignalHandler.cpp</title>
+
+<style type="text/css">
+body { color:#000000; background-color:#ffffff }
+body { font-family:Helvetica, sans-serif; font-size:10pt }
+h1 { font-size:14pt }
+.FileName { margin-top: 5px; margin-bottom: 5px; display: inline; }
+.FileNav { margin-left: 5px; margin-right: 5px; display: inline; }
+.FileNav a { text-decoration:none; font-size: larger; }
+.divider { margin-top: 30px; margin-bottom: 30px; height: 15px; }
+.divider { background-color: gray; }
+.code { border-collapse:collapse; width:100%; }
+.code { font-family: "Monospace", monospace; font-size:10pt }
+.code { line-height: 1.2em }
+.comment { color: green; font-style: oblique }
+.keyword { color: blue }
+.string_literal { color: red }
+.directive { color: darkmagenta }
+
+/* Macros and variables could have pop-up notes hidden by default.
+  - Macro pop-up:    expansion of the macro
+  - Variable pop-up: value (table) of the variable */
+.macro_popup, .variable_popup { display: none; }
+
+/* Pop-up appears on mouse-hover event. */
+.macro:hover .macro_popup, .variable:hover .variable_popup {
+  display: block;
+  padding: 2px;
+  -webkit-border-radius:5px;
+  -webkit-box-shadow:1px 1px 7px #000;
+  border-radius:5px;
+  box-shadow:1px 1px 7px #000;
+  position: absolute;
+  top: -1em;
+  left:10em;
+  z-index: 1
+}
+
+.macro_popup {
+  border: 2px solid red;
+  background-color:#FFF0F0;
+  font-weight: normal;
+}
+
+.variable_popup {
+  border: 2px solid blue;
+  background-color:#F0F0FF;
+  font-weight: bold;
+  font-family: Helvetica, sans-serif;
+  font-size: 9pt;
+}
+
+/* Pop-up notes needs a relative position as a base where they pops up. */
+.macro, .variable {
+  background-color: PaleGoldenRod;
+  position: relative;
+}
+.macro { color: DarkMagenta; }
+
+#tooltiphint {
+  position: fixed;
+  width: 50em;
+  margin-left: -25em;
+  left: 50%;
+  padding: 10px;
+  border: 1px solid #b0b0b0;
+  border-radius: 2px;
+  box-shadow: 1px 1px 7px black;
+  background-color: #c0c0c0;
+  z-index: 2;
+}
+
+.num { width:2.5em; padding-right:2ex; background-color:#eeeeee }
+.num { text-align:right; font-size:8pt }
+.num { color:#444444 }
+.line { padding-left: 1ex; border-left: 3px solid #ccc }
+.line { white-space: pre }
+.msg { -webkit-box-shadow:1px 1px 7px #000 }
+.msg { box-shadow:1px 1px 7px #000 }
+.msg { -webkit-border-radius:5px }
+.msg { border-radius:5px }
+.msg { font-family:Helvetica, sans-serif; font-size:8pt }
+.msg { float:left }
+.msg { padding:0.25em 1ex 0.25em 1ex }
+.msg { margin-top:10px; margin-bottom:10px }
+.msg { font-weight:bold }
+.msg { max-width:60em; word-wrap: break-word; white-space: pre-wrap }
+.msgT { padding:0x; spacing:0x }
+.msgEvent { background-color:#fff8b4; color:#000000 }
+.msgControl { background-color:#bbbbbb; color:#000000 }
+.msgNote { background-color:#ddeeff; color:#000000 }
+.mrange { background-color:#dfddf3 }
+.mrange { border-bottom:1px solid #6F9DBE }
+.PathIndex { font-weight: bold; padding:0px 5px; margin-right:5px; }
+.PathIndex { -webkit-border-radius:8px }
+.PathIndex { border-radius:8px }
+.PathIndexEvent { background-color:#bfba87 }
+.PathIndexControl { background-color:#8c8c8c }
+.PathIndexPopUp { background-color: #879abc; }
+.PathNav a { text-decoration:none; font-size: larger }
+.CodeInsertionHint { font-weight: bold; background-color: #10dd10 }
+.CodeRemovalHint { background-color:#de1010 }
+.CodeRemovalHint { border-bottom:1px solid #6F9DBE }
+.selected{ background-color:orange !important; }
+
+table.simpletable {
+  padding: 5px;
+  font-size:12pt;
+  margin:20px;
+  border-collapse: collapse; border-spacing: 0px;
+}
+td.rowname {
+  text-align: right;
+  vertical-align: top;
+  font-weight: bold;
+  color:#444444;
+  padding-right:2ex;
+}
+
+/* Hidden text. */
+input.spoilerhider + label {
+  cursor: pointer;
+  text-decoration: underline;
+  display: block;
+}
+input.spoilerhider {
+ display: none;
+}
+input.spoilerhider ~ .spoiler {
+  overflow: hidden;
+  margin: 10px auto 0;
+  height: 0;
+  opacity: 0;
+}
+input.spoilerhider:checked + label + .spoiler{
+  height: auto;
+  opacity: 1;
+}
+</style>
+</head>
+<body>
+<!-- BUGDESC Dereference of null pointer (loaded from variable 'x') -->
+
+<!-- BUGTYPE Dereference of null pointer -->
+
+<!-- BUGCATEGORY Logic error -->
+
+<!-- BUGFILE /home/zhh/inject/null/folly/folly/io/async/AsyncSignalHandler.cpp -->
+
+<!-- FILENAME AsyncSignalHandler.cpp -->
+
+<!-- FUNCTIONNAME registerSignalHandler -->
+
+<!-- ISSUEHASHCONTENTOFLINEINCONTEXT cc1632453a76830c7a33f32bbecc2129 -->
+
+<!-- BUGLINE 76 -->
+
+<!-- BUGCOLUMN 8 -->
+
+<!-- EXCEPTIONAL -->
+
+<!-- BUGPATHLENGTH 8 -->
+
+<!-- BUGMETAEND -->
+<!-- REPORTHEADER -->
+<h3>Bug Summary [throw at AsyncSignalHandler.cpp:72:7]</h3>
+<table class="simpletable">
+<tr><td class="rowname">File:</td><td>/home/zhh/inject/null/folly/folly/io/async/AsyncSignalHandler.cpp</td></tr>
+<tr><td class="rowname">Warning:</td><td><a href="#EndPath">line 76, column 8</a><br />Dereference of null pointer (loaded from variable 'x')</td></tr>
+
+</table>
+<!-- REPORTSUMMARYEXTRA -->
+<h3>Annotated Source Code</h3>
+<p>Press <a href="#" onclick="toggleHelp(); return false;">'?'</a>
+   to see keyboard shortcuts</p>
+<input type="checkbox" class="spoilerhider" id="showinvocation" />
+<label for="showinvocation" >Show analyzer invocation</label>
+<div class="spoiler">clang -cc1 -cc1 -triple x86_64-unknown-linux-gnu -analyze -disable-free -disable-llvm-verifier -discard-value-names -main-file-name AsyncSignalHandler.cpp -analyzer-store=region -analyzer-opt-analyze-nested-blocks -analyzer-checker=core -analyzer-checker=apiModeling -analyzer-checker=unix -analyzer-checker=deadcode -analyzer-checker=cplusplus -analyzer-checker=security.insecureAPI.UncheckedReturn -analyzer-checker=security.insecureAPI.getpw -analyzer-checker=security.insecureAPI.gets -analyzer-checker=security.insecureAPI.mktemp -analyzer-checker=security.insecureAPI.mkstemp -analyzer-checker=security.insecureAPI.vfork -analyzer-checker=nullability.NullPassedToNonnull -analyzer-checker=nullability.NullReturnedFromNonnull -analyzer-output plist -w -setup-static-analyzer -analyzer-config-compatibility-mode=true -mrelocation-model static -mframe-pointer=all -fmath-errno -fno-rounding-math -mconstructor-aliases -munwind-tables -target-cpu x86-64 -tune-cpu generic -fno-split-dwarf-inlining -debug-info-kind=limited -dwarf-version=4 -debugger-tuning=gdb -resource-dir /home/zhh/llvm/build/lib/clang/13.0.0 -D BOOST_ALL_NO_LIB -D BOOST_CONTEXT_DYN_LINK -D BOOST_FILESYSTEM_DYN_LINK -D BOOST_PROGRAM_OPTIONS_DYN_LINK -D BOOST_REGEX_DYN_LINK -D BOOST_SYSTEM_DYN_LINK -D BOOST_THREAD_DYN_LINK -D FMT_LOCALE -D FOLLY_XLOG_STRIP_PREFIXES="/home/zhh/inject/null/folly:/home/zhh/inject/null/folly/_build" -D GFLAGS_IS_A_DLL=0 -D _GNU_SOURCE -D _REENTRANT -I /home/zhh/inject/null/folly -I /home/zhh/inject/null/folly/_build -I /usr/include/libiberty -internal-isystem /usr/lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9 -internal-isystem /usr/lib/gcc/x86_64-linux-gnu/9/../../../../include/x86_64-linux-gnu/c++/9 -internal-isystem /usr/lib/gcc/x86_64-linux-gnu/9/../../../../include/x86_64-linux-gnu/c++/9 -internal-isystem /usr/lib/gcc/x86_64-linux-gnu/9/../../../../include/c++/9/backward -internal-isystem /usr/local/include -internal-isystem /home/zhh/llvm/build/lib/clang/13.0.0/include -internal-externc-isystem /usr/include/x86_64-linux-gnu -internal-externc-isystem /include -internal-externc-isystem /usr/include -Wall -Wno-deprecated -Wno-deprecated-declarations -Wno-sign-compare -Wno-unused -Wunused-label -Wunused-result -Wno-noexcept-type -Wno-nullability-completeness -Wno-inconsistent-missing-override -std=gnu++17 -fdebug-compilation-dir=/home/zhh/inject/null/folly/_build -ferror-limit 19 -fopenmp -fopenmp-cuda-parallel-target-regions -fgnuc-version=4.2.1 -fcxx-exceptions -fexceptions -faligned-allocation -stats-file=/home/zhh/inject/null/folly/_build/three/eh-analyze/stats/home/zhh/inject/null/folly/folly/io/async/AsyncSignalHandler.cpp.stats -analyzer-output=html -analyzer-purge=none -analyzer-config cplusplus.Move:WarnOn=All -analyzer-config suppress-null-return-paths=false -analyzer-config suppress-inlined-defensive-checks=false -analyzer-config stable-report-filename=true -analyzer-config max-nodes=1000000 -analyzer-config crosscheck-with-z3=true -analyzer-config experimental-enable-naive-ctu-analysis=true -analyzer-config ctu-dir=/home/zhh/inject/null/folly/_build/three/eh-analyze -faddrsig -o /home/zhh/inject/null/folly/_build/three/eh-analyze/reports -x c++ /home/zhh/inject/null/folly/folly/io/async/AsyncSignalHandler.cpp
+</div>
+<div id='tooltiphint' hidden="true">
+  <p>Keyboard shortcuts: </p>
+  <ul>
+    <li>Use 'j/k' keys for keyboard navigation</li>
+    <li>Use 'Shift+S' to show/hide relevant lines</li>
+    <li>Use '?' to toggle this window</li>
+  </ul>
+  <a href="#" onclick="toggleHelp(); return false;">Close</a>
+</div>
+<script type='text/javascript'>
+var relevant_lines = {"1": {"53": 1, "54": 1, "55": 1, "56": 1, "62": 1, "63": 1, "64": 1, "65": 1, "66": 1, "71": 1, "72": 1, "73": 1, "75": 1, "76": 1}, "357": {"194": 1, "208": 1, "341": 1, "342": 1, "522": 1, "523": 1, "524": 1, "525": 1, "529": 1}, "358": {"73": 1, "74": 1, "75": 1}, "2120": {"8": 1}, "6077": {"76": 1, "77": 1, "86": 1, "87": 1, "112": 1, "113": 1, "122": 1, "123": 1, "132": 1, "133": 1, "159": 1, "160": 1, "162": 1, "163": 1, "194": 1, "195": 1, "197": 1, "198": 1, "206": 1, "207": 1, "215": 1, "216": 1, "217": 1, "218": 1, "333": 1, "334": 1, "339": 1, "340": 1, "347": 1, "348": 1, "349": 1, "918": 1, "919": 1, "968": 1, "969": 1, "1308": 1, "1309": 1, "1310": 1, "1313": 1, "1314": 1, "1315": 1, "1319": 1, "1320": 1, "1321": 1, "1325": 1, "1326": 1, "1327": 1}, "35208": {"147": 1, "150": 1, "151": 1, "153": 1, "154": 1, "155": 1, "210": 1, "211": 1, "212": 1, "213": 1, "257": 1, "258": 1, "286": 1, "287": 1, "290": 1, "291": 1, "293": 1, "359": 1, "360": 1, "361": 1, "364": 1, "365": 1, "366": 1, "380": 1, "381": 1, "382": 1, "383": 1, "384": 1, "385": 1, "855": 1, "856": 1, "857": 1}, "39194": {"436": 1}, "48334": {"65": 1, "88": 1, "141": 1, "142": 1, "143": 1}, "48531": {"107": 1, "108": 1, "113": 1, "123": 1, "127": 1, "135": 1}, "55923": {"303": 1, "304": 1, "309": 1, "310": 1, "311": 1, "385": 1, "386": 1, "393": 1, "394": 1, "395": 1, "396": 1, "399": 1, "400": 1, "401": 1, "531": 1, "532": 1, "533": 1, "534": 1, "535": 1, "536": 1, "537": 1, "538": 1, "541": 1, "545": 1, "546": 1, "547": 1, "548": 1, "549": 1, "550": 1, "551": 1, "552": 1, "734": 1, "735": 1, "736": 1, "740": 1, "741": 1, "745": 1, "746": 1, "761": 1, "762": 1, "763": 1, "764": 1, "768": 1, "769": 1, "770": 1, "771": 1, "772": 1, "773": 1, "774": 1, "821": 1, "822": 1, "823": 1, "824": 1, "825": 1, "826": 1, "850": 1, "851": 1, "852": 1, "853": 1, "854": 1, "915": 1, "916": 1, "917": 1, "918": 1, "919": 1, "920": 1, "921": 1, "922": 1, "923": 1, "924": 1}, "57921": {"231": 1, "232": 1, "234": 1, "294": 1, "295": 1, "296": 1, "297": 1, "313": 1, "315": 1, "345": 1, "346": 1, "354": 1, "355": 1, "376": 1, "377": 1, "390": 1, "391": 1, "417": 1, "418": 1}, "60101": {"46": 1, "47": 1, "48": 1, "49": 1, "53": 1, "56": 1, "57": 1, "58": 1, "62": 1}};
+
+var filterCounterexample = function (hide) {
+  var tables = document.getElementsByClassName("code");
+  for (var t=0; t<tables.length; t++) {
+    var table = tables[t];
+    var file_id = table.getAttribute("data-fileid");
+    var lines_in_fid = relevant_lines[file_id];
+    if (!lines_in_fid) {
+      lines_in_fid = {};
+    }
+    var lines = table.getElementsByClassName("codeline");
+    for (var i=0; i<lines.length; i++) {
+        var el = lines[i];
+        var lineNo = el.getAttribute("data-linenumber");
+        if (!lines_in_fid[lineNo]) {
+          if (hide) {
+            el.setAttribute("hidden", "");
+          } else {
+            el.removeAttribute("hidden");
+          }
+        }
+    }
+  }
+}
+
+window.addEventListener("keydown", function (event) {
+  if (event.defaultPrevented) {
+    return;
+  }
+  if (event.key == "S") {
+    var checked = document.getElementsByName("showCounterexample")[0].checked;
+    filterCounterexample(!checked);
+    document.getElementsByName("showCounterexample")[0].checked = !checked;
+  } else {
+    return;
+  }
+  event.preventDefault();
+}, true);
+
+document.addEventListener("DOMContentLoaded", function() {
+    document.querySelector('input[name="showCounterexample"]').onchange=
+        function (event) {
+      filterCounterexample(this.checked);
+    };
+});
+</script>
+
+<form>
+    <input type="checkbox" name="showCounterexample" id="showCounterexample" />
+    <label for="showCounterexample">
+       Show only relevant lines
+    </label>
+</form>
+
+<script type='text/javascript'>
+var digitMatcher = new RegExp("[0-9]+");
+
+var querySelectorAllArray = function(selector) {
+  return Array.prototype.slice.call(
+    document.querySelectorAll(selector));
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    querySelectorAllArray(".PathNav > a").forEach(
+        function(currentValue, currentIndex) {
+            var hrefValue = currentValue.getAttribute("href");
+            currentValue.onclick = function() {
+                scrollTo(document.querySelector(hrefValue));
+                return false;
+            };
+        });
+});
+
+var findNum = function() {
+    var s = document.querySelector(".selected");
+    if (!s || s.id == "EndPath") {
+        return 0;
+    }
+    var out = parseInt(digitMatcher.exec(s.id)[0]);
+    return out;
+};
+
+var scrollTo = function(el) {
+    querySelectorAllArray(".selected").forEach(function(s) {
+        s.classList.remove("selected");
+    });
+    el.classList.add("selected");
+    window.scrollBy(0, el.getBoundingClientRect().top -
+        (window.innerHeight / 2));
+}
+
+var move = function(num, up, numItems) {
+  if (num == 1 && up || num == numItems - 1 && !up) {
+    return 0;
+  } else if (num == 0 && up) {
+    return numItems - 1;
+  } else if (num == 0 && !up) {
+    return 1 % numItems;
+  }
+  return up ? num - 1 : num + 1;
+}
+
+var numToId = function(num) {
+  if (num == 0) {
+    return document.getElementById("EndPath")
+  }
+  return document.getElementById("Path" + num);
+};
+
+var navigateTo = function(up) {
+  var numItems = document.querySelectorAll(
+      ".line > .msgEvent, .line > .msgControl").length;
+  var currentSelected = findNum();
+  var newSelected = move(currentSelected, up, numItems);
+  var newEl = numToId(newSelected, numItems);
+
+  // Scroll element into center.
+  scrollTo(newEl);
+};
+
+window.addEventListener("keydown", function (event) {
+  if (event.defaultPrevented) {
+    return;
+  }
+  if (event.key == "j") {
+    navigateTo(/*up=*/false);
+  } else if (event.key == "k") {
+    navigateTo(/*up=*/true);
+  } else {
+    return;
+  }
+  event.preventDefault();
+}, true);
+</script>
+  
+<script type='text/javascript'>
+
+var toggleHelp = function() {
+    var hint = document.querySelector("#tooltiphint");
+    var attributeName = "hidden";
+    if (hint.hasAttribute(attributeName)) {
+      hint.removeAttribute(attributeName);
+    } else {
+      hint.setAttribute("hidden", "true");
+    }
+};
+window.addEventListener("keydown", function (event) {
+  if (event.defaultPrevented) {
+    return;
+  }
+  if (event.key == "?") {
+    toggleHelp();
+  } else {
+    return;
+  }
+  event.preventDefault();
+});
+</script>
+<table class="code" data-fileid="1">
+<tr class="codeline" data-linenumber="1"><td class="num" id="LN1">1</td><td class="line"><span class='comment'>/*</span></td></tr>
+<tr class="codeline" data-linenumber="2"><td class="num" id="LN2">2</td><td class="line"> <span class='comment'>* Copyright (c) Facebook, Inc. and its affiliates.</span></td></tr>
+<tr class="codeline" data-linenumber="3"><td class="num" id="LN3">3</td><td class="line"> <span class='comment'>*</span></td></tr>
+<tr class="codeline" data-linenumber="4"><td class="num" id="LN4">4</td><td class="line"> <span class='comment'>* Licensed under the Apache License, Version 2.0 (the "License");</span></td></tr>
+<tr class="codeline" data-linenumber="5"><td class="num" id="LN5">5</td><td class="line"> <span class='comment'>* you may not use this file except in compliance with the License.</span></td></tr>
+<tr class="codeline" data-linenumber="6"><td class="num" id="LN6">6</td><td class="line"> <span class='comment'>* You may obtain a copy of the License at</span></td></tr>
+<tr class="codeline" data-linenumber="7"><td class="num" id="LN7">7</td><td class="line"> <span class='comment'>*</span></td></tr>
+<tr class="codeline" data-linenumber="8"><td class="num" id="LN8">8</td><td class="line"> <span class='comment'>*     http://www.apache.org/licenses/LICENSE-2.0</span></td></tr>
+<tr class="codeline" data-linenumber="9"><td class="num" id="LN9">9</td><td class="line"> <span class='comment'>*</span></td></tr>
+<tr class="codeline" data-linenumber="10"><td class="num" id="LN10">10</td><td class="line"> <span class='comment'>* Unless required by applicable law or agreed to in writing, software</span></td></tr>
+<tr class="codeline" data-linenumber="11"><td class="num" id="LN11">11</td><td class="line"> <span class='comment'>* distributed under the License is distributed on an "AS IS" BASIS,</span></td></tr>
+<tr class="codeline" data-linenumber="12"><td class="num" id="LN12">12</td><td class="line"> <span class='comment'>* WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></td></tr>
+<tr class="codeline" data-linenumber="13"><td class="num" id="LN13">13</td><td class="line"> <span class='comment'>* See the License for the specific language governing permissions and</span></td></tr>
+<tr class="codeline" data-linenumber="14"><td class="num" id="LN14">14</td><td class="line"> <span class='comment'>* limitations under the License.</span></td></tr>
+<tr class="codeline" data-linenumber="15"><td class="num" id="LN15">15</td><td class="line"> <span class='comment'>*/</span></td></tr>
+<tr class="codeline" data-linenumber="16"><td class="num" id="LN16">16</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="17"><td class="num" id="LN17">17</td><td class="line"><span class='directive'>#include &lt;folly/io/async/AsyncSignalHandler.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="18"><td class="num" id="LN18">18</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="19"><td class="num" id="LN19">19</td><td class="line"><span class='directive'>#include &lt;folly/Conv.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="20"><td class="num" id="LN20">20</td><td class="line"><span class='directive'>#include &lt;folly/io/async/EventBase.h&gt;</span></td></tr>
+<tr class="codeline" data-linenumber="21"><td class="num" id="LN21">21</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="22"><td class="num" id="LN22">22</td><td class="line"><span class='keyword'>using</span> std::make_pair;</td></tr>
+<tr class="codeline" data-linenumber="23"><td class="num" id="LN23">23</td><td class="line"><span class='keyword'>using</span> std::pair;</td></tr>
+<tr class="codeline" data-linenumber="24"><td class="num" id="LN24">24</td><td class="line"><span class='keyword'>using</span> std::string;</td></tr>
+<tr class="codeline" data-linenumber="25"><td class="num" id="LN25">25</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="26"><td class="num" id="LN26">26</td><td class="line"><span class='keyword'>namespace</span> folly {</td></tr>
+<tr class="codeline" data-linenumber="27"><td class="num" id="LN27">27</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="28"><td class="num" id="LN28">28</td><td class="line">AsyncSignalHandler::AsyncSignalHandler(EventBase* eventBase)</td></tr>
+<tr class="codeline" data-linenumber="29"><td class="num" id="LN29">29</td><td class="line">    : eventBase_(eventBase) {}</td></tr>
+<tr class="codeline" data-linenumber="30"><td class="num" id="LN30">30</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="31"><td class="num" id="LN31">31</td><td class="line">AsyncSignalHandler::~AsyncSignalHandler() {</td></tr>
+<tr class="codeline" data-linenumber="32"><td class="num" id="LN32">32</td><td class="line">  <span class='comment'>// Unregister any outstanding events</span></td></tr>
+<tr class="codeline" data-linenumber="33"><td class="num" id="LN33">33</td><td class="line">  <span class='keyword'>for</span> (<span class='keyword'>auto</span>&amp; signalEvent : signalEvents_) {</td></tr>
+<tr class="codeline" data-linenumber="34"><td class="num" id="LN34">34</td><td class="line">    <span class='comment'>// isEventRegistered() may be false if the EventBase was destroyed before us</span></td></tr>
+<tr class="codeline" data-linenumber="35"><td class="num" id="LN35">35</td><td class="line">    <span class='keyword'>if</span> (signalEvent.second-&gt;isEventRegistered()) {</td></tr>
+<tr class="codeline" data-linenumber="36"><td class="num" id="LN36">36</td><td class="line">      signalEvent.second-&gt;eb_event_del();</td></tr>
+<tr class="codeline" data-linenumber="37"><td class="num" id="LN37">37</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="38"><td class="num" id="LN38">38</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="39"><td class="num" id="LN39">39</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="40"><td class="num" id="LN40">40</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="41"><td class="num" id="LN41">41</td><td class="line"><span class='keyword'>void</span> AsyncSignalHandler::attachEventBase(EventBase* eventBase) {</td></tr>
+<tr class="codeline" data-linenumber="42"><td class="num" id="LN42">42</td><td class="line">  <span class='macro'>assert(eventBase_ == <span class='keyword'>nullptr</span>)<span class='macro_popup'>(static_cast &lt;bool&gt; (eventBase_ == nullptr) ? void (0) :<br> __assert_fail ("eventBase_ == nullptr", "/home/zhh/inject/null/folly/folly/io/async/AsyncSignalHandler.cpp"<br>, 42, __extension__ __PRETTY_FUNCTION__))</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="43"><td class="num" id="LN43">43</td><td class="line">  <span class='macro'>assert(signalEvents_.empty())<span class='macro_popup'>(static_cast &lt;bool&gt; (signalEvents_.empty()) ? void (0) :<br> __assert_fail ("signalEvents_.empty()", "/home/zhh/inject/null/folly/folly/io/async/AsyncSignalHandler.cpp"<br>, 43, __extension__ __PRETTY_FUNCTION__))</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="44"><td class="num" id="LN44">44</td><td class="line">  eventBase_ = eventBase;</td></tr>
+<tr class="codeline" data-linenumber="45"><td class="num" id="LN45">45</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="46"><td class="num" id="LN46">46</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="47"><td class="num" id="LN47">47</td><td class="line"><span class='keyword'>void</span> AsyncSignalHandler::detachEventBase() {</td></tr>
+<tr class="codeline" data-linenumber="48"><td class="num" id="LN48">48</td><td class="line">  <span class='macro'>assert(eventBase_ != <span class='keyword'>nullptr</span>)<span class='macro_popup'>(static_cast &lt;bool&gt; (eventBase_ != nullptr) ? void (0) :<br> __assert_fail ("eventBase_ != nullptr", "/home/zhh/inject/null/folly/folly/io/async/AsyncSignalHandler.cpp"<br>, 48, __extension__ __PRETTY_FUNCTION__))</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="49"><td class="num" id="LN49">49</td><td class="line">  <span class='macro'>assert(signalEvents_.empty())<span class='macro_popup'>(static_cast &lt;bool&gt; (signalEvents_.empty()) ? void (0) :<br> __assert_fail ("signalEvents_.empty()", "/home/zhh/inject/null/folly/folly/io/async/AsyncSignalHandler.cpp"<br>, 49, __extension__ __PRETTY_FUNCTION__))</span></span>;</td></tr>
+<tr class="codeline" data-linenumber="50"><td class="num" id="LN50">50</td><td class="line">  eventBase_ = <span class='keyword'>nullptr</span>;</td></tr>
+<tr class="codeline" data-linenumber="51"><td class="num" id="LN51">51</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="52"><td class="num" id="LN52">52</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="53"><td class="num" id="LN53">53</td><td class="line"><span class='keyword'>void</span> AsyncSignalHandler::registerSignalHandler(<span class='keyword'>int</span> signum) {</td></tr>
+<tr class="codeline" data-linenumber="54"><td class="num" id="LN54">54</td><td class="line">  pair&lt;SignalEventMap::iterator, <span class='keyword'>bool</span>&gt; ret = signalEvents_.insert(</td></tr>
+<tr class="codeline" data-linenumber="55"><td class="num" id="LN55">55</td><td class="line">      make_pair(signum, std::make_unique&lt;EventBaseEvent&gt;()));</td></tr>
+<tr class="codeline" data-linenumber="56"><td class="num" id="LN56">56</td><td class="line">  <span class='keyword'>if</span> (<span class="mrange">!ret.second</span>) {</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path1" class="msg msgEvent" style="margin-left:7ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">1</div></td><td>Assuming field 'second' is true</td><td><div class="PathNav"><a href="#Path2" title="Next event (2)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path2" class="msg msgControl" style="margin-left:3ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexControl">2</div></td><td><div class="PathNav"><a href="#Path1" title="Previous event (1)">&#x2190;</a></div></td><td>Taking false branch</td><td><div class="PathNav"><a href="#Path3" title="Next event (3)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="57"><td class="num" id="LN57">57</td><td class="line">    <span class='comment'>// This signal has already been registered</span></td></tr>
+<tr class="codeline" data-linenumber="58"><td class="num" id="LN58">58</td><td class="line">    <span class='keyword'>throw</span> std::runtime_error(</td></tr>
+<tr class="codeline" data-linenumber="59"><td class="num" id="LN59">59</td><td class="line">        folly::to&lt;string&gt;(<span class='string_literal'>"handler already registered for signal "</span>, signum));</td></tr>
+<tr class="codeline" data-linenumber="60"><td class="num" id="LN60">60</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="61"><td class="num" id="LN61">61</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="62"><td class="num" id="LN62">62</td><td class="line">  EventBaseEvent* ev = ret.first-&gt;second.get();</td></tr>
+<tr class="codeline" data-linenumber="63"><td class="num" id="LN63">63</td><td class="line">  <span class="mrange"><span class='keyword'>int</span> *x</span> = <span class='keyword'>nullptr</span>;</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path3" class="msg msgEvent" style="margin-left:3ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">3</div></td><td><div class="PathNav"><a href="#Path2" title="Previous event (2)">&#x2190;</a></div></td><td>'x' initialized to a null pointer value</td><td><div class="PathNav"><a href="#Path4" title="Next event (4)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="64"><td class="num" id="LN64">64</td><td class="line">  <span class='keyword'>try</span> {</td></tr>
+<tr class="codeline" data-linenumber="65"><td class="num" id="LN65">65</td><td class="line">    ev-&gt;eb_signal_set(signum, libeventCallback, <span class='keyword'>this</span>);</td></tr>
+<tr class="codeline" data-linenumber="66"><td class="num" id="LN66">66</td><td class="line">    <span class='keyword'>if</span> (ev-&gt;eb_event_base_set(eventBase_) != 0) {</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path4" class="msg msgControl" style="margin-left:5ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexControl">4</div></td><td><div class="PathNav"><a href="#Path3" title="Previous event (3)">&#x2190;</a></div></td><td>Taking false branch</td><td><div class="PathNav"><a href="#Path5" title="Next event (5)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="67"><td class="num" id="LN67">67</td><td class="line">      <span class='keyword'>throw</span> std::runtime_error(folly::to&lt;string&gt;(</td></tr>
+<tr class="codeline" data-linenumber="68"><td class="num" id="LN68">68</td><td class="line">          <span class='string_literal'>"error initializing event handler for signal "</span>, signum));</td></tr>
+<tr class="codeline" data-linenumber="69"><td class="num" id="LN69">69</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="70"><td class="num" id="LN70">70</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="71"><td class="num" id="LN71">71</td><td class="line">    <span class='keyword'>if</span> (ev-&gt;eb_event_add(<span class='keyword'>nullptr</span>) != 0) {</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path5" class="msg msgControl" style="margin-left:5ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexControl">5</div></td><td><div class="PathNav"><a href="#Path4" title="Previous event (4)">&#x2190;</a></div></td><td>Taking true branch</td><td><div class="PathNav"><a href="#Path6" title="Next event (6)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="72"><td class="num" id="LN72">72</td><td class="line">      <span class='keyword'>throw</span> std::runtime_error(</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path6" class="msg msgEvent" style="margin-left:7ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">6</div></td><td><div class="PathNav"><a href="#Path5" title="Previous event (5)">&#x2190;</a></div></td><td>Throwing exception</td><td><div class="PathNav"><a href="#Path7" title="Next event (7)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="73"><td class="num" id="LN73">73</td><td class="line">          folly::to&lt;string&gt;(<span class='string_literal'>"error adding event handler for signal "</span>, signum));</td></tr>
+<tr class="codeline" data-linenumber="74"><td class="num" id="LN74">74</td><td class="line">    }</td></tr>
+<tr class="codeline" data-linenumber="75"><td class="num" id="LN75">75</td><td class="line">  } <span class='keyword'>catch</span> (...) {</td></tr>
+<tr><td class="num"></td><td class="line"><div id="Path7" class="msg msgEvent" style="margin-left:5ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">7</div></td><td><div class="PathNav"><a href="#Path6" title="Previous event (6)">&#x2190;</a></div></td><td>Catching exception</td><td><div class="PathNav"><a href="#EndPath" title="Next event (8)">&#x2192;</a></div></td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="76"><td class="num" id="LN76">76</td><td class="line">    *<span class="mrange">x</span> = 0;</td></tr>
+<tr><td class="num"></td><td class="line"><div id="EndPath" class="msg msgEvent" style="margin-left:8ex"><table class="msgT"><tr><td valign="top"><div class="PathIndex PathIndexEvent">8</div></td><td><div class="PathNav"><a href="#Path7" title="Previous event (7)">&#x2190;</a></div></td><td>Dereference of null pointer (loaded from variable 'x')</td></tr></table></div></td></tr>
+<tr class="codeline" data-linenumber="77"><td class="num" id="LN77">77</td><td class="line">    signalEvents_.erase(ret.first);</td></tr>
+<tr class="codeline" data-linenumber="78"><td class="num" id="LN78">78</td><td class="line">    <span class='keyword'>throw</span>;</td></tr>
+<tr class="codeline" data-linenumber="79"><td class="num" id="LN79">79</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="80"><td class="num" id="LN80">80</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="81"><td class="num" id="LN81">81</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="82"><td class="num" id="LN82">82</td><td class="line"><span class='keyword'>void</span> AsyncSignalHandler::unregisterSignalHandler(<span class='keyword'>int</span> signum) {</td></tr>
+<tr class="codeline" data-linenumber="83"><td class="num" id="LN83">83</td><td class="line">  <span class='keyword'>auto</span> it = signalEvents_.find(signum);</td></tr>
+<tr class="codeline" data-linenumber="84"><td class="num" id="LN84">84</td><td class="line">  <span class='keyword'>if</span> (it == signalEvents_.end()) {</td></tr>
+<tr class="codeline" data-linenumber="85"><td class="num" id="LN85">85</td><td class="line">    <span class='keyword'>throw</span> std::runtime_error(folly::to&lt;string&gt;(</td></tr>
+<tr class="codeline" data-linenumber="86"><td class="num" id="LN86">86</td><td class="line">        <span class='string_literal'>"unable to unregister handler for signal "</span>,</td></tr>
+<tr class="codeline" data-linenumber="87"><td class="num" id="LN87">87</td><td class="line">        signum,</td></tr>
+<tr class="codeline" data-linenumber="88"><td class="num" id="LN88">88</td><td class="line">        <span class='string_literal'>": signal not registered"</span>));</td></tr>
+<tr class="codeline" data-linenumber="89"><td class="num" id="LN89">89</td><td class="line">  }</td></tr>
+<tr class="codeline" data-linenumber="90"><td class="num" id="LN90">90</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="91"><td class="num" id="LN91">91</td><td class="line">  it-&gt;second-&gt;eb_event_del();</td></tr>
+<tr class="codeline" data-linenumber="92"><td class="num" id="LN92">92</td><td class="line">  signalEvents_.erase(it);</td></tr>
+<tr class="codeline" data-linenumber="93"><td class="num" id="LN93">93</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="94"><td class="num" id="LN94">94</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="95"><td class="num" id="LN95">95</td><td class="line"><span class='keyword'>void</span> AsyncSignalHandler::libeventCallback(</td></tr>
+<tr class="codeline" data-linenumber="96"><td class="num" id="LN96">96</td><td class="line">    libevent_fd_t signum, <span class='keyword'>short</span> <span class='comment'>/* events */</span>, <span class='keyword'>void</span>* arg) {</td></tr>
+<tr class="codeline" data-linenumber="97"><td class="num" id="LN97">97</td><td class="line">  <span class='keyword'>auto</span> handler = <span class='keyword'>static_cast</span>&lt;AsyncSignalHandler*&gt;(arg);</td></tr>
+<tr class="codeline" data-linenumber="98"><td class="num" id="LN98">98</td><td class="line">  handler-&gt;signalReceived(<span class='keyword'>int</span>(signum));</td></tr>
+<tr class="codeline" data-linenumber="99"><td class="num" id="LN99">99</td><td class="line">}</td></tr>
+<tr class="codeline" data-linenumber="100"><td class="num" id="LN100">100</td><td class="line"> </td></tr>
+<tr class="codeline" data-linenumber="101"><td class="num" id="LN101">101</td><td class="line">} <span class='comment'>// namespace folly</span></td></tr>
+</table></body></html>
